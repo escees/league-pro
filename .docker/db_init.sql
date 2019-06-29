@@ -1,0 +1,4 @@
+CREATE DATABASE test_sts24;
+CREATE USER 'test'@'%' IDENTIFIED BY 'test';
+GRANT ALL PRIVILEGES on test_sts24.* to 'test'@'%' IDENTIFIED BY 'test';
+FLUSH PRIVILEGES;
