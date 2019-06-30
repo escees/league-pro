@@ -11,7 +11,7 @@ require('../css/bootstrap/bootstrap.css');
 require('../css/bootstrap/bootstrap-grid.css');
 require('../css/bootstrap/bootstrap-reboot.css');
 require('../css/main.css');
-require('../css/1main.css');
+// require('../css/1main.css');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 const $ = require('jquery');
