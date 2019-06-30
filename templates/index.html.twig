@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <body>
-
         <!-- layout-->
         <div id="layout">
             <!-- Header-->
@@ -13,7 +12,7 @@
                             <!-- Logo-->
                             <div class="col">
                                <div class="logo">
-                                   <a href="index.html" title="Return Home">
+                                   <a href="{{ path('app.homepage') }}" title="Return Home">
                                         <img src="img/logo.png" alt="Logo" class="logo_img">
                                     </a>
                                </div>
@@ -46,7 +45,7 @@
                     <!-- Menu-->
                     <ul class="sf-menu" id="menu">
                         <li class="current">
-                            <a href="index.html">Home</a>
+                            <a href="{{ path('app.homepage') }}">Strona główna</a>
                             <ul class="sub-current">
                                 <li>
                                     <a href="index.html">Home 1</a>
@@ -68,45 +67,44 @@
                                 </li>
                             </ul>
                         </li>
-
                         <li>
-                            <a href="#">World Cup</a>
+                            <a href="#">Liga</a>
                             <div class="sf-mega">
                                 <div class="row">
-                                     <div class="col-md-3">
-                                        <h5><i class="fa fa-trophy" aria-hidden="true"></i>World Cup</h5>
+                                     <div class="col-md-12">
+                                        <h5 class="text-center"><i class="fa fa-trophy" aria-hidden="true"></i>Liga</h5>
                                         <ul>
-                                            <li><a href="table-point.html">Point Table</a></li>
-                                            <li><a href="fixtures.html.twig">Fixtures</a></li>
-                                            <li><a href="groups.html">Groups</a></li>
-                                            <li><a href="news-left-sidebar.html">News</a></li>
-                                            <li><a href="contact.html.twig">Contact Us</a></li>
+                                            <li><a href="table-point.html" class="text-center">Tabela</a></li>
+                                            <li><a href="fixtures.html.twig" class="text-center">Terminarz</a></li>
+                                            {#<li><a href="groups.html">Groups</a></li>#}
+                                            <li><a href="news-left-sidebar.html" class="text-center">Newsy</a></li>
+                                            <li><a href="contact.html.twig" class="text-center">Kontakt</a></li>
                                         </ul>
                                     </div>
 
-                                    <div class="col-md-3">
-                                      <h5><i class="fa fa-users" aria-hidden="true"></i> Teams List</h5>
-                                      <div class="img-hover">
-                                         <img src="img/blog/1.jpg" alt="" class="img-responsive">
-                                         <div class="overlay"><a href="teams.html">+</a></div>
-                                      </div>
-                                    </div>
+                                    {#<div class="col-md-3">#}
+                                      {#<h5><i class="fa fa-users" aria-hidden="true"></i> Teams List</h5>#}
+                                      {#<div class="img-hover">#}
+                                         {#<img src="img/blog/1.jpg" alt="" class="img-responsive">#}
+                                         {#<div class="overlay"><a href="teams.html">+</a></div>#}
+                                      {#</div>#}
+                                    {#</div>#}
 
-                                    <div class="col-md-3">
-                                      <h5><i class="fa fa-futbol-o" aria-hidden="true"></i> Players List</h5>
-                                      <div class="img-hover">
-                                         <img src="img/blog/2.jpg" alt="" class="img-responsive">
-                                         <div class="overlay"><a href="players.html">+</a></div>
-                                      </div>
-                                    </div>
+                                    {#<div class="col-md-3">#}
+                                      {#<h5><i class="fa fa-futbol-o" aria-hidden="true"></i> Players List</h5>#}
+                                      {#<div class="img-hover">#}
+                                         {#<img src="img/blog/2.jpg" alt="" class="img-responsive">#}
+                                         {#<div class="overlay"><a href="players.html">+</a></div>#}
+                                      {#</div>#}
+                                    {#</div>#}
 
-                                    <div class="col-md-3">
-                                      <h5><i class="fa fa-gamepad" aria-hidden="true"></i> Results Info</h5>
-                                      <div class="img-hover">
-                                         <img src="img/blog/3.jpg" alt="" class="img-responsive">
-                                         <div class="overlay"><a href="results.html">+</a></div>
-                                      </div>
-                                    </div>
+                                    {#<div class="col-md-3">#}
+                                      {#<h5><i class="fa fa-gamepad" aria-hidden="true"></i> Results Info</h5>#}
+                                      {#<div class="img-hover">#}
+                                         {#<img src="img/blog/3.jpg" alt="" class="img-responsive">#}
+                                         {#<div class="overlay"><a href="results.html">+</a></div>#}
+                                      {#</div>#}
+                                    {#</div>#}
                                 </div>
                             </div>
                         </li>

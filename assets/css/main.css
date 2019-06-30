@@ -10061,7 +10061,7 @@ a.text-dark:focus, a.text-dark:hover {
 /* line 89, ../sass/_partials/_main_nav.scss */
 .sf-menu .sf-mega {
   box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.2);
-  width: 100%;
+  width: 25%;
   /* allow long menu items to determine submenu width */
 }
 
