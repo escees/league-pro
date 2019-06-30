@@ -28,7 +28,7 @@ class Card
     private $minute;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Match", inversedBy="cards")
+     * @ORM\ManyToOne(targetEntity="App\Entity\FootballMatch", inversedBy="cards")
      * @ORM\JoinColumn(nullable=false)
      */
     private $footballMatch;
@@ -67,12 +67,12 @@ class Card
         return $this;
     }
 
-    public function getFootballMatch(): ?Match
+    public function getFootballMatch(): ?FootballMatch
     {
         return $this->footballMatch;
     }
 
-    public function setFootballMatch(?Match $footballMatch): self
+    public function setFootballMatch(?FootballMatch $footballMatch): self
     {
         $this->footballMatch = $footballMatch;
 

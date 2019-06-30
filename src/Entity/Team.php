@@ -140,12 +140,12 @@ class Team
         return $this;
     }
 
-    public function getDraw(): ?int
+    public function getDraws(): ?int
     {
         return $this->draws;
     }
 
-    public function setDraw(?int $draws): self
+    public function setDraws(?int $draws): self
     {
         $this->draws = $draws;
 

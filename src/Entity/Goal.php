@@ -27,7 +27,7 @@ class Goal
     private $assistant;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Match", inversedBy="homeTeamGoals")
+     * @ORM\ManyToOne(targetEntity="App\Entity\FootballMatch")
      * @ORM\JoinColumn(nullable=false)
      */
     private $footballMatch;
@@ -67,12 +67,12 @@ class Goal
         return $this;
     }
 
-    public function getFootballMatch(): ?Match
+    public function getFootballMatch(): ?FootballMatch
     {
         return $this->footballMatch;
     }
 
-    public function setFootballMatch(?Match $footballMatch): self
+    public function setFootballMatch(?FootballMatch $footballMatch): self
     {
         $this->footballMatch = $footballMatch;
 
