@@ -1,0 +1,18 @@
+easy_admin:
+    user:
+        display_name: true
+        name_property_path: 'name'
+    site_name: 'My6aside'
+    entities:
+        FootballMatch:
+            label: menu.match
+            class: App\Entity\FootballMatch
+        Player:
+            label: menu.players
+            class: App\Entity\Player
+        Team:
+            label: menu.teams
+            class: App\Entity\Team
+        News:
+            label: menu.news
+            class: App\Entity\News
