@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            {#<link rel="stylesheet" href="{{ asset('build/semantic_styles.css') }}">#}
             <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+            <link rel="stylesheet" href="{{ asset('build/custom_backend.css') }}">
             <link rel="shortcut icon" href="img/icons/favicon.ico">
             <link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png">
             <link rel="apple-touch-icon" sizes="72x72" href="img/icons/apple-touch-icon-72x72.png">
@@ -17,13 +17,7 @@
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset('build/runtime.js') }}"></script>
-            {#{{ encore_entry_script_tags('app') }}#}
-            {#{{ encore_entry_script_tags('bootstrap') }}#}
-            {#<script src="{{ asset('build/semantic_styles.js') }}"></script>#}
-            {#<script src="{{ asset('build/semantic_javascripts.js') }}"></script>#}
             <script src="{{ asset('build/app.js') }}"></script>
-            <script src="{{ asset('build/bootstrap.js') }}"></script>
-            <script src="{{ asset('build/popper.js') }}"></script>
             <script src="{{ asset('build/main.js') }}"></script>
             <script src="{{ asset('build/scripts.js') }}"></script>
         {% endblock %}

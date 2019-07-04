@@ -1,4 +1,8 @@
-@import 'bootstrap/bootstrap';
+//@import 'bootstrap/bootstrap';
+//@import "~bootstrap-4.0.0/scss/_functions.scss";
+//@import "~bootstrap-4.0.0/scss/_variables.scss";
+//@import "~bootstrap-4.0.0/scss/mixins/_breakpoints.scss";
+@import "~bootstrap/scss/bootstrap";
 @import "_partials/_main_nav";
 @import "_partials/_mobile_nav";
 @import "_partials/_slick";
@@ -7,10 +11,9 @@
 @import "_partials/_swipebox";
 @import "_partials/_animations";
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css);
-@import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700");
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,500');
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
-
 
 .paddings{
 	padding: 100px 0;
@@ -1664,7 +1667,7 @@ footer{
 	font-size: 13px;
 	line-height: 20px;
     &.footer-2{
-        background: url('../../img/slide/3.jpg');
+        background: url('../img/slide/3.jpg');
         background-size: cover;
         background-position: top center;
         position: relative;
@@ -1868,10 +1871,10 @@ footer{
 	border:none;
 	text-indent:100%;
 	z-index: 9999;
-	background:url("../../img/img-theme/ui.totop.png") no-repeat left top;
+	background:url("../img/img-theme/ui.totop.png") no-repeat left top;
 }
 #toTopHover {
-	background:url("../../img/img-theme/ui.totop.png") no-repeat left -51px;
+	background:url("../img/img-theme/ui.totop.png") no-repeat left -51px;
 	width:51px;
 	height:51px;
 	display:block;
@@ -1889,7 +1892,7 @@ footer{
 .acc-trigger { cursor: pointer;  margin: 0 0 0 0; width: 100%;	}
 .no-js .acc-trigger:last-of-type { border-bottom: none; }
 .acc-trigger a {
-	background: url("../../img/img-theme/accordion-ico.png") no-repeat 14px 13px;
+	background: url("../img/img-theme/accordion-ico.png") no-repeat 14px 13px;
 	display: block;
 	padding: 11px 20px 11px 44px;
 	text-decoration: none;
@@ -2124,7 +2127,7 @@ footer{
 	margin-right:2px;
 	font-size: 14px;
 	padding:10px 0 0 0;
-	background:url("../../img/img-theme/line_tree1.gif") left repeat-y;
+	background:url("../img/img-theme/line_tree1.gif") left repeat-y;
     @include media-breakpoint-down(md){
         width: auto;
     }
@@ -2134,13 +2137,13 @@ footer{
 	width:347px;
 	padding-left:25px;
 	line-height: 35px;
-	background:url("../../img/img-theme/line_tree2.gif") 0 center no-repeat;
+	background:url("../img/img-theme/line_tree2.gif") 0 center no-repeat;
     @include media-breakpoint-down(md){
         width: auto;
     }
 }
 .sitemap li.has_sub{
-	background:url("../../img/img-theme/line_tree2.gif") 0 17px no-repeat;
+	background:url("../img/img-theme/line_tree2.gif") 0 17px no-repeat;
 }
 .sitemap li a{
 	color:#666;
@@ -2179,7 +2182,7 @@ footer{
 .post-item{
 	margin-bottom: 40px;
     padding: 0 10px 40px 10px;
-	background: url("../../img/img-theme/border-pattern.gif") bottom left repeat-x;
+	background: url("../img/img-theme/border-pattern.gif") bottom left repeat-x;
     &:last-child{
         background:none;
     }
@@ -3470,7 +3473,7 @@ table{
     }
     &:after {
         content: "";
-        background: url(../../img/img-theme/plan-shadow.png) no-repeat center top;
+        background: url(../img/img-theme/plan-shadow.png) no-repeat center top;
         background-size: 100% 38px;
         position: absolute;
         left: 0;
