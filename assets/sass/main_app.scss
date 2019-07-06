@@ -3,6 +3,9 @@
 //@import "~bootstrap-4.0.0/scss/_variables.scss";
 //@import "~bootstrap-4.0.0/scss/mixins/_breakpoints.scss";
 @import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/breakpoints";
 @import "_partials/_main_nav";
 @import "_partials/_mobile_nav";
 @import "_partials/_slick";

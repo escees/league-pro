@@ -1,25 +1,26 @@
 menu:
-  match: Matches
-  players: Players
-  teams: Teams
-  news: News
+  matches: 'Matches'
+  players: 'Players'
+  teams: 'Teams'
+  news: 'News'
+  logout: 'Logout'
 
 list:
-  match: Match list
-  player: Players list
-  team: Team list
-  news: News list
+  match: 'Match list'
+  player: 'Players list'
+  team: 'Team list'
+  news: 'News list'
 
 action:
-  save: Save
-  edit: Edit
-  delete: Delete
-  show: Show
+  save: 'Save'
+  edit: 'Edit'
+  delete: 'Delete'
+  show: 'Show'
 
 player:
-  name: Name
-  appearances: Appearances
-  dateOfBirth: Date of birth
-  team: Team
-  cards: Cards
-  goals: Goals
+  name: 'Name'
+  appearances: 'Appearances'
+  dateOfBirth: 'Date of birth'
+  team: 'Team'
+  cards: 'Cards'
+  goals: 'Goals'
