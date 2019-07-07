@@ -7,8 +7,6 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
             {{ encore_entry_link_tags('custom_backend') }}
-            {#<link rel="stylesheet" href="{{ asset('build/app.css') }}">#}
-            {#<link rel="stylesheet" href="{{ asset('build/custom_backend.css') }}">#}
             <link rel="shortcut icon" href="img/icons/favicon.ico">
             <link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png">
             <link rel="apple-touch-icon" sizes="72x72" href="img/icons/apple-touch-icon-72x72.png">
@@ -18,16 +16,11 @@
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}
-            {#{{ encore_entry_script_tags('runtime') }}#}
             {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('login') }}
             {{ encore_entry_script_tags('main') }}
             {{ encore_entry_script_tags('scripts') }}
-
-            {#<script src="{{ asset('build/runtime.js') }}"></script>#}
-            {#<script src="{{ asset('build/app.js') }}"></script>#}
-            {#<script src="{{ asset('build/main.js') }}"></script>#}
-            {#<script src="{{ asset('build/scripts.js') }}"></script>#}
-            <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+            {{ encore_entry_script_tags('semantic_javascripts') }}
         {% endblock %}
     </body>
 </html>

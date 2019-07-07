@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('semantic_styles') }}
+            {#<link rel="shortcut icon" href="img/icons/favicon.ico">#}
+            {#<link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png">#}
+            {#<link rel="apple-touch-icon" sizes="72x72" href="img/icons/apple-touch-icon-72x72.png">#}
+            {#<link rel="apple-touch-icon" sizes="114x114" href="img/icons/apple-touch-icon-114x114.png">#}
+        {% endblock %}
+    </head>
+    <body class="pusher">
+        {% include 'admin/menu/desktop_menu.html.twig' %}
+        {#{% include 'admin/menu/mobile_menu.html.twig' %}#}
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('semantic_javascripts') }}
+            {{ encore_entry_script_tags('admin_menu') }}
+        {% endblock %}
+    </body>
+</html>

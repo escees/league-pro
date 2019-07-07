@@ -1,6 +1,6 @@
 'use strict';
 
-import $ from 'jquery';
+const $ = require('jquery');
 
 require('../css/app.css');
 require('../css/main.css');
@@ -10,7 +10,6 @@ require('../css/1main.css');
 
 require('bootstrap');
 require('popper.js');
-require('isotope-layout');
 
 // global.$ = global.jQuery = $;
 

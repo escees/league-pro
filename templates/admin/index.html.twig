@@ -1,110 +1,92 @@
-{% extends 'base.html.twig' %}
-
-{% block stylesheets %}
-
-        {{ encore_entry_link_tags('semantic_styles') }}
-        {{ encore_entry_link_tags('custom_backend') }}
-    {#{% endblock %}#}
-    {#<link rel="stylesheet" href="{{ asset('build/semantic_styles.css') }}">#}
-    {#<link rel="stylesheet" href="{{ asset('build/custom_backend.css') }}">#}
-{% endblock %}
-
+{% extends 'admin/admin_base.html.twig' %}
 {% block body %}
-    <div class="ui inverted container top-menu stackable menu computer only">
-        {#<div class="ui ">#}
-            <div class="ui dropdown item matches">
-                {{ 'menu.matches'|trans }}
-                <i class="dropdown icon"></i>
-                <div class="menu">
-                    <a class="item">Kalendarz</a>
-                    <a class="item">Dodaj mecz</a>
-                    <a class="item">Edytuj mecz</a>
+    <h2 class="ui dividing header">Ostatnie newsy</h2>
+    <div class="ui four doubling stackable cards">
+        <div class="ui card">
+            <div class="content">
+                <div class="header">
+                    <img src="../assets/images/wireframe/square-image.png" class="ui avatar right spaced image">
+                    Abbreviated Header
+                </div>
+                <div class="description">
+                    <img src="../assets/images/wireframe/paragraph.png" class="ui wireframe image">
                 </div>
             </div>
-            <div class="ui dropdown item">
-                {{ 'menu.teams'|trans }}
-                <i class="dropdown icon"></i>
-                <div class="menu">
-                    <a class="item">Lista drużyn</a>
-                    {#<a class="item">Dodaj drużynę</a>#}
-                    {#<a class="item">Edytuj drużynę</a>#}
+            <div class="ui two bottom attached buttons">
+                <div class="ui button">
+                    Action 1
                 </div>
-            </div>
-            <div class="ui dropdown item">
-                {{ 'menu.players'|trans }}
-                <i class="dropdown icon"></i>
-                <div class="menu">
-                    <a class="item">Lista zawodników</a>
-                    <a class="item">Dodaj zawodnika</a>
-                    {#<a class="item">Edytuj drużynę</a>#}
-                </div>
-            </div>
-            <div class="right menu">
-                <div class="item">
-                    <div class="ui icon input">
-                        <input type="text" placeholder="Wyszukaj">
-                        <i class="search link icon"></i>
-                    </div>
-                </div>
-                <a class="ui item">
-                    {{ 'menu.logout'|trans }}
-                </a>
-            </div>
-        {#</div>#}
-    </div>
-
-
-    <div class="ui top attached demo menu inverted">
-        <a class="item">
-            <i class="sidebar icon"></i>
-            Menu
-        </a>
-    </div>
-    <div class="ui bottom attached segment pushable">
-        <div class="ui inverted labeled icon left inline vertical sidebar menu" style="">
-            <div class="item">
-                <i class="futbol icon"></i>
-                {{ 'menu.matches'|trans }}
-                <div class="menu">
-                    <a class="item">Kalendarz</a>
-                    <a class="item">Dodaj mecz</a>
-                    <a class="item">Edytuj mecz</a>
-                </div>
-            </div>
-            <div class="item">
-                <i class="users icon"></i>
-                {{ 'menu.teams'|trans }}
-                <div class="menu">
-                    <a class="item">Lista drużyn</a>
-                    {#<a class="item">Dodaj drużynę</a>#}
-                    {#<a class="item">Edytuj drużynę</a>#}
-                </div>
-            </div>
-            <div class="item">
-                <i class="user icon"></i>
-                {{ 'menu.players'|trans }}
-                <div class="menu">
-                    <a class="item">Lista zawodników</a>
-                    <a class="item">Dodaj zawodnika</a>
-                    {#<a class="item">Edytuj drużynę</a>#}
+                <div class="ui button">
+                    Action 2
                 </div>
             </div>
         </div>
+        <div class="ui card">
+            <div class="content">
+                <div class="header">
+                    <img src="../assets/images/wireframe/square-image.png" class="ui avatar right spaced image">
+                    Abbreviated Header
+                </div>
+                <div class="description">
+                    <img src="../assets/images/wireframe/paragraph.png" class="ui wireframe image">
+                </div>
+            </div>
+            <div class="ui two bottom attached buttons">
+                <div class="ui button">
+                    Action 1
+                </div>
+                <div class="ui button">
+                    Action 2
+                </div>
+            </div>
+        </div>
+        <div class="ui card">
+            <div class="content">
+                <div class="header">
+                    <img src="../assets/images/wireframe/square-image.png" class="ui avatar right spaced image">
+                    Abbreviated Header
+                </div>
+                <div class="description">
+                    <img src="../assets/images/wireframe/paragraph.png" class="ui wireframe image">
+                </div>
+            </div>
+            <div class="ui two bottom attached buttons">
+                <div class="ui button">
+                    Action 1
+                </div>
+                <div class="ui button">
+                    Action 2
+                </div>
+            </div>
+        </div>
+        <div class="ui card">
+            <div class="content">
+                <div class="header">
+                    <img src="../assets/images/wireframe/square-image.png" class="ui avatar right spaced image">
+                    Abbreviated Header
+                </div>
+                <div class="description">
+                    <img src="../assets/images/wireframe/paragraph.png" class="ui wireframe image">
+                </div>
+            </div>
+            <div class="ui two bottom attached buttons">
+                <div class="ui button">
+                    Action 1
+                </div>
+                <div class="ui button">
+                    Action 2
+                </div>
+            </div>
+        </div>
+        {#{{> card}}#}
+        {#{{> card}}#}
+        {#{{> card}}#}
     </div>
 
+    {#<div class="ui four cards">#}
 
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
 
-    {#{{ encore_entry_script_tags('semantic_styles') }}#}
-    {{ encore_entry_script_tags('semantic_javascripts') }}
-    {{ encore_entry_script_tags('admin_menu') }}
-    {#<script src="{{ asset('build/semantic_styles.js') }}"></script>#}
-    {#<script src="{{ asset('build/semantic_javascripts.js') }}"></script>#}
-    {#<script src="{{ asset('build/admin_menu.js') }}"></script>#}
-    {#<script src="{{ asset('build/app.js') }}"></script>#}
-    {#<script src="{{ asset('build/app.js') }}"></script>#}
-    {#<script src="{{ asset('build/main.js') }}"></script>#}
-    {#<script src="{{ asset('build/scripts.js') }}"></script>#}
+
+
+    {#</div>#}
 {% endblock %}

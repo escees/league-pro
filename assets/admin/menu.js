@@ -6,8 +6,6 @@ $(document).ready(function () {
         menuItem.addClass("active");
     };
 
-    setDefaultActive();
-
     $('.ui.dropdown.item').dropdown({
         on: 'hover',
     });
@@ -17,9 +15,38 @@ $(document).ready(function () {
     });
 
     $('.ui.sidebar')
-        .sidebar({
-            context: $('body')
-        })
-        .sidebar('attach events', '.menu .item')
+        .sidebar('attach events', '.hamburger')
     ;
+
+    var checkWidth = function () {
+        var $window = $(window),
+            // $mobileMenu = $('.mobile-menu'),
+            $desktopMenu = $('.desktop-menu-items');
+
+        const getMobile = function () {
+            console.log($window.width());
+            if ($window.width() < 768) {
+                $desktopMenu.addClass('hide');
+                // $mobileMenu.removeClass('hide');
+            }
+        };
+
+        const getDesktop = function () {
+            if ($window.width() >= 768 && $desktopMenu.hasClass('hide')) {
+                $desktopMenu.removeClass('hide');
+                // $mobileMenu.addClass('hide');
+            }
+        };
+
+        getMobile();
+        getDesktop()
+    };
+
+    const init = function () {
+        // $(window).resize(checkWidth);
+        checkWidth();
+        setDefaultActive();
+    };
+
+    init();
 });
