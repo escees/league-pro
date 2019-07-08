@@ -90,7 +90,7 @@ class MainAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('easyadmin'));
+        return new RedirectResponse($this->urlGenerator->generate('app.admin'));
     }
 
     protected function getLoginUrl()

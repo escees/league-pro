@@ -1,0 +1,47 @@
+<div class="ui inverted container top-menu stackable menu desktop-menu">
+    <a class="item hamburger hide">
+        <i class="sidebar icon"></i>
+        Menu
+    </a>
+        <div class="ui dropdown item matches">
+            <i class="futbol icon"></i>
+            {{ 'menu.matches'|trans }}
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item">Kalendarz</a>
+                <a class="item">Dodaj mecz</a>
+                <a class="item">Edytuj mecz</a>
+            </div>
+        </div>
+        <div class="ui dropdown item">
+            <i class="users icon"></i>
+            {{ 'menu.teams'|trans }}
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item">Lista drużyn</a>
+                <a class="item">Dodaj drużynę</a>
+                <a class="item">Edytuj drużynę</a>
+            </div>
+        </div>
+        <div class="ui dropdown item">
+            <i class="user icon"></i>
+            {{ 'menu.players'|trans }}
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item">Lista zawodników</a>
+                <a class="item">Dodaj zawodnika</a>
+                <a class="item">Edytuj zawodnika</a>
+            </div>
+        </div>
+        <div class="right menu">
+            <div class="item">
+                <div class="ui icon input">
+                    <input type="text" placeholder="Wyszukaj">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+            <a class="ui item" href="{{ path('app_logout') }}">
+                {{ 'menu.logout'|trans }}
+            </a>
+        </div>
+</div>

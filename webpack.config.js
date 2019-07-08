@@ -24,13 +24,13 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
-    // .addEntry('main_app', './assets/js/app.js')
-    // .addEntry('bootstrap', './assets/js/bootstrap.min.js')
-    // .addEntry('bootstrap_css', './assets/js/bootstrap_css.js')
+    .addEntry('login', './assets/js/login.js')
+    .addEntry('admin_menu', './assets/admin/menu.js')
     .addEntry('custom_backend', './assets/js/custom_backend.js')
-    // .addEntry('popper', './assets/js/popper.min.js')
     .addEntry('main', './assets/js/theme-main.js')
     .addEntry('scripts', './assets/js/theme-scripts.js')
+    .addEntry('semantic_styles', './semantic/out/semantic.min.css')
+    .addEntry('semantic_javascripts', './semantic/out/semantic.min.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -40,7 +40,7 @@ Encore
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
-
+    // .disableSingleRuntimeChunk()
     /*
      * FEATURE CONFIG
      *
