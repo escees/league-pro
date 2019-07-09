@@ -1784,6 +1784,11 @@ chardet@^0.4.0:
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.4.2.tgz#b5473b33dc97c424e5d98dc87d55d4d8a29c8bf2"
   integrity sha1-tUc7M9yXxCTl2Y3IfVXU2KKci/I=
 
+chartist@^0.11.3:
+  version "0.11.3"
+  resolved "https://registry.yarnpkg.com/chartist/-/chartist-0.11.3.tgz#939d525669d9bffdb0dbcd0f38e7416d2bf0a93a"
+  integrity sha512-ENqCECh7iu0Mm36NNKqeECdGQ9dIcHXmf8fqSWmcmt/XDtl0mqpVNNC9aChoyrJYrlFBOlLGOeAb7fIHFDMNvg==
+
 chokidar@^2.0.0, chokidar@^2.0.2, chokidar@^2.1.6:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.6.tgz#b6cad653a929e244ce8a834244164d241fa954c5"
@@ -6213,6 +6218,11 @@ normalize-url@^3.0.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
+
+nouislider@^14.0.2:
+  version "14.0.2"
+  resolved "https://registry.yarnpkg.com/nouislider/-/nouislider-14.0.2.tgz#673e7e7362345d938db9d74f84bea5f3c31505de"
+  integrity sha512-N4AQStV4frh+XcLUwMI/hZpBP6tRboDE/4LZ7gzfxMVXFi/2J9URphnm40Ff4KEyrAVGSGaWApvljoMzTNWBlA==
 
 now-and-later@^2.0.0:
   version "2.0.1"

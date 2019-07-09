@@ -13,6 +13,6 @@ class AdminController extends AbstractController
      */
     public function index(Request $request)
     {
-        return $this->render('admin/index.html.twig');
+        return $this->render('admin/light/dashboard.html.twig');
     }
 }

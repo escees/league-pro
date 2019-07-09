@@ -24,6 +24,7 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
+    .addEntry('admin', './assets/admin/admin.js')
     .addEntry('login', './assets/js/login.js')
     .addEntry('admin_menu', './assets/admin/menu.js')
     .addEntry('custom_backend', './assets/js/custom_backend.js')
@@ -75,6 +76,10 @@ Encore
     .copyFiles({
         from: './assets/img',
         to: 'img/[path][name].[ext]'
+    })
+    .copyFiles({
+        from: './assets/admin/img',
+        to: 'light/img/[path][name].[ext]'
     })
 
     // uncomment if you use API Platform Admin (composer req api-admin)

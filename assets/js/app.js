@@ -11,6 +11,4 @@ require('../css/1main.css');
 require('bootstrap');
 require('popper.js');
 
-// global.$ = global.jQuery = $;
-
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
