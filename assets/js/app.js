@@ -1,15 +1,15 @@
 'use strict';
 
-const $ = require('jquery');
+// const $ = require('jquery');
+// require('popper.js');
 
 require('../css/app.css');
 require('../css/main.css');
 require('../sass/main_app.scss');
-
 require('../css/1main.css');
 
 require('bootstrap');
-require('popper.js');
+
 
 // global.$ = global.jQuery = $;
 

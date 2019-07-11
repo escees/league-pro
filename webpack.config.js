@@ -23,10 +23,12 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
+    .addEntry('core', './assets/core.js')
     .addEntry('app', './assets/js/app.js')
+    .addEntry('admin', './assets/admin/admin.js')
     .addEntry('login', './assets/js/login.js')
     .addEntry('admin_menu', './assets/admin/menu.js')
-    .addEntry('custom_backend', './assets/js/custom_backend.js')
+    // .addEntry('custom_backend', './assets/js/custom_backend.js')
     .addEntry('main', './assets/js/theme-main.js')
     .addEntry('scripts', './assets/js/theme-scripts.js')
     .addEntry('semantic_styles', './semantic/out/semantic.min.css')
@@ -76,7 +78,14 @@ Encore
         from: './assets/img',
         to: 'img/[path][name].[ext]'
     })
-
+    .copyFiles({
+        from: './assets/admin/images',
+        to: 'admin/images/[path][name].[ext]'
+    })
+    .copyFiles({
+        from: './assets/admin/fonts',
+        to: 'admin/fonts/[path][name].[ext]'
+    })
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
