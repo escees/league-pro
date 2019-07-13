@@ -39,19 +39,13 @@ class Player
     private $team;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="player", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\MatchEvent", mappedBy="player")
      */
-    private $cards;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="scorer")
-     */
-    private $goals;
+    private $matchEvents;
 
     public function __construct()
     {
-        $this->cards = new ArrayCollection();
-        $this->goals = new ArrayCollection();
+        $this->matchEvents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -108,61 +102,30 @@ class Player
     }
 
     /**
-     * @return Collection|Card[]
+     * @return Collection|MatchEvent[]
      */
-    public function getCards(): Collection
+    public function getMatchEvents(): Collection
     {
-        return $this->cards;
+        return $this->matchEvents;
     }
 
-    public function addCard(Card $card): self
+    public function addMatchEvent(MatchEvent $matchEvent): self
     {
-        if (!$this->cards->contains($card)) {
-            $this->cards->add($card);
-            $card->setPlayer($this);
+        if (!$this->matchEvents->contains($matchEvent)) {
+            $this->matchEvents[] = $matchEvent;
+            $matchEvent->setPlayer($this);
         }
 
         return $this;
     }
 
-    public function removeCard(Card $card): self
+    public function removeMatchEvent(MatchEvent $matchEvent): self
     {
-        if ($this->cards->contains($card)) {
-            $this->cards->removeElement($card);
+        if ($this->matchEvents->contains($matchEvent)) {
+            $this->matchEvents->removeElement($matchEvent);
             // set the owning side to null (unless already changed)
-            if ($card->getPlayer() === $this) {
-                $card->setPlayer(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Goal[]
-     */
-    public function getGoals(): Collection
-    {
-        return $this->goals;
-    }
-
-    public function addGoal(Goal $goal): self
-    {
-        if (!$this->goals->contains($goal)) {
-            $this->goals->add($goal);
-            $goal->setScorer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGoal(Goal $goal): self
-    {
-        if ($this->goals->contains($goal)) {
-            $this->goals->removeElement($goal);
-            // set the owning side to null (unless already changed)
-            if ($goal->getScorer() === $this) {
-                $goal->setScorer(null);
+            if ($matchEvent->getPlayer() === $this) {
+                $matchEvent->setPlayer(null);
             }
         }
 

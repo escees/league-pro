@@ -31,21 +31,6 @@ class FootballMatch
     private $awayTeam;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $result;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="footballMatch", orphanRemoval=true)
-     */
-    private $homeTeamGoals;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="footballMatch", orphanRemoval=true)
-     */
-    private $awayTeamGoals;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $startDate;
@@ -61,15 +46,12 @@ class FootballMatch
     private $video;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="footballMatch", orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\MatchDetails", inversedBy="footballMatch", cascade={"persist", "remove"})
      */
-    private $cards;
+    private $matchDetails;
 
     public function __construct()
     {
-        $this->homeTeamGoals = new ArrayCollection();
-        $this->awayTeamGoals = new ArrayCollection();
-        $this->cards = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -97,80 +79,6 @@ class FootballMatch
     public function setAwayTeam(Team $awayTeam): self
     {
         $this->awayTeam = $awayTeam;
-
-        return $this;
-    }
-
-    public function getResult(): ?string
-    {
-        return $this->result;
-    }
-
-    public function setResult(?string $result): self
-    {
-        $this->result = $result;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Goal[]
-     */
-    public function getHomeTeamGoals(): Collection
-    {
-        return $this->homeTeamGoals;
-    }
-
-    public function addHomeTeamGoal(Goal $homeTeamGoal): self
-    {
-        if (!$this->homeTeamGoals->contains($homeTeamGoal)) {
-            $this->homeTeamGoals[] = $homeTeamGoal;
-            $homeTeamGoal->setFootballMatch($this);
-        }
-
-        return $this;
-    }
-
-    public function removeHomeTeamGoal(Goal $homeTeamGoal): self
-    {
-        if ($this->homeTeamGoals->contains($homeTeamGoal)) {
-            $this->homeTeamGoals->removeElement($homeTeamGoal);
-            // set the owning side to null (unless already changed)
-            if ($homeTeamGoal->getFootballMatch() === $this) {
-                $homeTeamGoal->setFootballMatch(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Goal[]
-     */
-    public function getAwayTeamGoals(): Collection
-    {
-        return $this->awayTeamGoals;
-    }
-
-    public function addAwayTeamGoal(Goal $awayTeamGoal): self
-    {
-        if (!$this->awayTeamGoals->contains($awayTeamGoal)) {
-            $this->awayTeamGoals[] = $awayTeamGoal;
-            $awayTeamGoal->setFootballMatch($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAwayTeamGoal(Goal $awayTeamGoal): self
-    {
-        if ($this->awayTeamGoals->contains($awayTeamGoal)) {
-            $this->awayTeamGoals->removeElement($awayTeamGoal);
-            // set the owning side to null (unless already changed)
-            if ($awayTeamGoal->getFootballMatch() === $this) {
-                $awayTeamGoal->setFootballMatch(null);
-            }
-        }
 
         return $this;
     }
@@ -211,33 +119,14 @@ class FootballMatch
         return $this;
     }
 
-    /**
-     * @return Collection|Card[]
-     */
-    public function getCards(): Collection
+    public function getMatchDetails(): ?MatchDetails
     {
-        return $this->cards;
+        return $this->matchDetails;
     }
 
-    public function addCard(Card $card): self
+    public function setMatchDetails(?MatchDetails $matchDetails): self
     {
-        if (!$this->cards->contains($card)) {
-            $this->cards[] = $card;
-            $card->setFootballMatch($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCard(Card $card): self
-    {
-        if ($this->cards->contains($card)) {
-            $this->cards->removeElement($card);
-            // set the owning side to null (unless already changed)
-            if ($card->getFootballMatch() === $this) {
-                $card->setFootballMatch(null);
-            }
-        }
+        $this->matchDetails = $matchDetails;
 
         return $this;
     }
