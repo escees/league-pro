@@ -26,6 +26,8 @@ Encore
     .addEntry('core', './assets/core.js')
     .addEntry('app', './assets/js/app.js')
     .addEntry('admin', './assets/admin/admin.js')
+    // .addEntry('admin_core_css', './assets/admin/admin_core_css.js')
+    // .addEntry('admin_core_js', './assets/admin/admin_js.js')
     .addEntry('login', './assets/js/login.js')
     .addEntry('admin_menu', './assets/admin/menu.js')
     // .addEntry('custom_backend', './assets/js/custom_backend.js')

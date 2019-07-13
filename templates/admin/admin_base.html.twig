@@ -6,20 +6,21 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('core') }}
-            {#{{ encore_entry_link_tags('semantic_styles') }}#}
-            {#<link rel="shortcut icon" href="img/icons/favicon.ico">#}
-            {#<link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png">#}
-            {#<link rel="apple-touch-icon" sizes="72x72" href="img/icons/apple-touch-icon-72x72.png">#}
-            {#<link rel="apple-touch-icon" sizes="114x114" href="img/icons/apple-touch-icon-114x114.png">#}
+            {{ encore_entry_link_tags('admin') }}
         {% endblock %}
     </head>
-    <body class="pusher">
-        {#{% include 'admin/menu/desktop_menu.html.twig' %}#}
-        {#{% include 'admin/menu/mobile_menu.html.twig' %}#}
-        {% block body %}{% endblock %}
+    <body>
+        {% include 'admin/header.html.twig' %}
+        <div id="main">
+            <div class="wrapper">
+                {% include 'admin/menu/left_menu.html.twig' %}
+                {% block body %}{% endblock %}
+                {% include 'admin/menu/right_menu.html.twig' %}
+            </div>
+        </div>
         {% block javascripts %}
             {{ encore_entry_script_tags('core') }}
-            {#{{ encore_entry_script_tags('semantic_javascripts') }}#}
+            {{ encore_entry_link_tags('admin') }}
             {{ encore_entry_script_tags('admin_menu') }}
         {% endblock %}
     </body>
