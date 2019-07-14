@@ -17,14 +17,6 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/matches", name="app.matches")
-     */
-    public function matches(Request $request)
-    {
-        return $this->render('admin/matches/dashboard.html.twig');
-    }
-
-    /**
      * @Route("/css-color", name="app.css_color")
      */
     public function cssColor(Request $request)
