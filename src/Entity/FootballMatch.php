@@ -19,18 +19,6 @@ class FootballMatch
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Team", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $homeTeam;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Team", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $awayTeam;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $startDate;
@@ -50,37 +38,20 @@ class FootballMatch
      */
     private $matchDetails;
 
-    public function __construct()
-    {
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="homeFootballMatch")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $homeTeam;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="awayFootballMatch")
+     */
+    private $awayTeam;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getHomeTeam(): ?Team
-    {
-        return $this->homeTeam;
-    }
-
-    public function setHomeTeam(Team $homeTeam): self
-    {
-        $this->homeTeam = $homeTeam;
-
-        return $this;
-    }
-
-    public function getAwayTeam(): ?Team
-    {
-        return $this->awayTeam;
-    }
-
-    public function setAwayTeam(Team $awayTeam): self
-    {
-        $this->awayTeam = $awayTeam;
-
-        return $this;
     }
 
     public function getStartDate(): ?\DateTimeInterface
@@ -127,6 +98,30 @@ class FootballMatch
     public function setMatchDetails(?MatchDetails $matchDetails): self
     {
         $this->matchDetails = $matchDetails;
+
+        return $this;
+    }
+
+    public function getHomeTeam(): ?Team
+    {
+        return $this->homeTeam;
+    }
+
+    public function setHomeTeam(?Team $homeTeam): self
+    {
+        $this->homeTeam = $homeTeam;
+
+        return $this;
+    }
+
+    public function getAwayTeam(): ?Team
+    {
+        return $this->awayTeam;
+    }
+
+    public function setAwayTeam(?Team $awayTeam): self
+    {
+        $this->awayTeam = $awayTeam;
 
         return $this;
     }

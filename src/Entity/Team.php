@@ -63,9 +63,22 @@ class Team
      */
     private $photo;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FootballMatch", mappedBy="homeTeam")
+     */
+    private $homeFootballMatch;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FootballMatch", mappedBy="awayTeam")
+     */
+    private $awayFootballMatch;
+
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
+        $this->homeFootballMatch = new ArrayCollection();
+        $this->awayFootballMatch = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,6 +209,73 @@ class Team
     public function setPhoto($photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return Collection|FootballMatch[]
+     */
+    public function getHomeFootballMatch(): Collection
+    {
+        return $this->homeFootballMatch;
+    }
+
+    public function addHomeFootballMatch(FootballMatch $homeFootballMatch): self
+    {
+        if (!$this->homeFootballMatch->contains($homeFootballMatch)) {
+            $this->homeFootballMatch[] = $homeFootballMatch;
+            $homeFootballMatch->setHomeTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHomeFootballMatch(FootballMatch $homeFootballMatch): self
+    {
+        if ($this->homeFootballMatch->contains($homeFootballMatch)) {
+            $this->homeFootballMatch->removeElement($homeFootballMatch);
+            // set the owning side to null (unless already changed)
+            if ($homeFootballMatch->getHomeTeam() === $this) {
+                $homeFootballMatch->setHomeTeam(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FootballMatch[]
+     */
+    public function getAwayFootballMatch(): Collection
+    {
+        return $this->awayFootballMatch;
+    }
+
+    public function addAwayFootballMatch(FootballMatch $awayFootballMatch): self
+    {
+        if (!$this->awayFootballMatch->contains($awayFootballMatch)) {
+            $this->awayFootballMatch[] = $awayFootballMatch;
+            $awayFootballMatch->setAwayTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAwayFootballMatch(FootballMatch $awayFootballMatch): self
+    {
+        if ($this->awayFootballMatch->contains($awayFootballMatch)) {
+            $this->awayFootballMatch->removeElement($awayFootballMatch);
+            // set the owning side to null (unless already changed)
+            if ($awayFootballMatch->getAwayTeam() === $this) {
+                $awayFootballMatch->setAwayTeam(null);
+            }
+        }
 
         return $this;
     }
