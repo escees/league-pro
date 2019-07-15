@@ -1,16 +1,32 @@
-/*================================================================================
-	Item Name: Materialize - Material Design Admin Template
-	Version: 4.0
-	Author: PIXINVENT
-	Author URL: https://themeforest.net/user/pixinvent/portfolio
-================================================================================
+// require('./materialize.min');
 
-NOTE:
-------
-PLACE HERE YOUR OWN JS CODES AND IF NEEDED.
-WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR CUSTOM SCRIPT IT'S BETTER LIKE THIS. */
-$(document).ready(function () {
+$(document).ready( function (){
+
+    console.log('DOM fully loaded and parsed');
+
     $('.datepicker').on('mousedown', function(event) {
         event.preventDefault();
     });
+
+    $('.datepicker').pickadate({
+        format: 'Y-m-d'
+    });
+
+    $('.timepicker').pickatime({
+        default: 'now',
+        twelvehour: false,
+        donetext: 'OK',
+        autoclose: false,
+        vibrate: true
+    });
+
+    $('.select-dropdown').on('mousedown', function(event) {
+        event.preventDefault();
+    });
+
+    $('.dropdown-content > li').on('click', function(event) {
+        $('.select-dropdown').removeClass('active');
+        $(this).parent().css('display', 'none');
+    });
+
 });

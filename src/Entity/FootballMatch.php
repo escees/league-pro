@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FootballMatchRepository")
@@ -19,7 +20,8 @@ class FootballMatch
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @Assert\Date()
+     * @ORM\Column(type="date")
      */
     private $startDate;
 
@@ -48,6 +50,11 @@ class FootballMatch
      * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="awayFootballMatch")
      */
     private $awayTeam;
+
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $startTime;
 
     public function getId(): ?int
     {
@@ -122,6 +129,18 @@ class FootballMatch
     public function setAwayTeam(?Team $awayTeam): self
     {
         $this->awayTeam = $awayTeam;
+
+        return $this;
+    }
+
+    public function getStartTime(): ?\DateTimeInterface
+    {
+        return $this->startTime;
+    }
+
+    public function setStartTime(\DateTimeInterface $startTime): self
+    {
+        $this->startTime = $startTime;
 
         return $this;
     }
