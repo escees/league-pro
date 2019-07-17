@@ -20,8 +20,7 @@ class FootballMatch
     private $id;
 
     /**
-     * @Assert\Date()
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $startDate;
 
@@ -50,11 +49,6 @@ class FootballMatch
      * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="awayFootballMatch")
      */
     private $awayTeam;
-
-    /**
-     * @ORM\Column(type="time")
-     */
-    private $startTime;
 
     public function getId(): ?int
     {
@@ -129,18 +123,6 @@ class FootballMatch
     public function setAwayTeam(?Team $awayTeam): self
     {
         $this->awayTeam = $awayTeam;
-
-        return $this;
-    }
-
-    public function getStartTime(): ?\DateTimeInterface
-    {
-        return $this->startTime;
-    }
-
-    public function setStartTime(\DateTimeInterface $startTime): self
-    {
-        $this->startTime = $startTime;
 
         return $this;
     }

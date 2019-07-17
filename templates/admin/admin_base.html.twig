@@ -3,22 +3,38 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('core') }}
             {{ encore_entry_link_tags('admin') }}
         {% endblock %}
     </head>
-    <body>
-        {% include 'admin/header.html.twig' %}
-        <div id="main">
-            <div class="wrapper">
+    <body class="h-100">
+        <div class="container-fluid">
+            <div class="row">
                 {% include 'admin/menu/left_menu.html.twig' %}
-                {% block body %}{% endblock %}
-                {% include 'admin/menu/right_menu.html.twig' %}
+                <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+                    <div class="main-navbar sticky-top bg-white">
+                        {% include 'admin/header.html.twig' %}
+                    </div>
+                    <div class="alert alert-accent alert-dismissible fade show mb-0" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <i class="fa fa-info mx-2"></i>
+                        <strong>How you doin'?</strong> I'm just a friendly, good-looking notification message and I come in all the colors you can see below. Pretty cool, huh?
+                    </div>
+                    <div class="main-content-container container-fluid px-4">
+                        {% block body %}{% endblock %}
+                    </div>
+                    {% include 'admin/footer.html.twig' %}
+                </main>
             </div>
         </div>
         {% block javascripts %}
+            <script async defer src="https://buttons.github.io/buttons.js"></script>
             {{ encore_entry_script_tags('core') }}
             {{ encore_entry_link_tags('admin') }}
             {{ encore_entry_script_tags('admin_menu') }}
