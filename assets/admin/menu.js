@@ -1,7 +1,6 @@
 import $ from "jquery";
 import Chart from "chart.js";
 require('../admin2/js/jquery.datetimepicker.full.min');
-require('bootstrap-datepicker');
 
 window.ShardsDashboards = window.ShardsDashboards ? window.ShardsDashboards : {};
 
@@ -41,6 +40,9 @@ Chart.controllers.LineWithLine = Chart.controllers.line.extend({
 
 
 $(document).ready(function () {
+    var LPRO = LPRO || {};
+
+    LPRO.MatchDashboard = {};
 
     //@todo fix active class in menu
     var setDefaultActive = function() {
@@ -77,4 +79,67 @@ $(document).ready(function () {
     $(':not(.main-sidebar--icons-only) .dropdown').on('hide.bs.dropdown', function () {
         $(this).find('.dropdown-menu').first().stop(true, true).slideUp(slideConfig);
     });
+
+
+    LPRO.MatchDashboard.handleSetScoreForm = function () {
+
+        $('.set-score').on('click', function (e) {
+            let $matchId = $(this).data('match-id');
+            let setScoreSelector = '#score-form-body';
+            $(setScoreSelector).load($(this).data('href'));
+
+            $('#edit-score-modal').on('show.bs.modal', function(e) {
+                $(this).find('#save-score').attr({
+                    'data-href': $(e.relatedTarget).data('href'),
+                    'data-match-id': $(e.relatedTarget).data('match-id')
+                });
+            });
+        });
+    };
+
+    LPRO.MatchDashboard.handleAjax = function () {
+        var modalClose = true;
+        $('body').on('click', '#save-score', function (e) {
+            e.preventDefault();
+
+            var $button = $(this);
+            if ($button.hasClass('disabled')) {
+                return;
+            }
+
+            var $form = $('form[name=simple_match_details]');
+            var section = '#match-' + $(this).data('match-id');
+            var $serializedForm = $form.serialize();
+            var $section = $(section);
+            var ajaxUrl = $(this).data('href');
+
+            $.ajax({
+                method: 'POST',
+                url: ajaxUrl,
+                data: $serializedForm
+            }).done(function(data) {
+                $button.removeClass('disabled');
+                if (data.status === true) {
+                    var $newSection = $(data.body).find(section);
+                    $section.replaceWith($newSection);
+
+                }
+                if (typeof data.status === 'undefined') {
+                    $('form[name=simple_match_details]').replaceWith(data);
+                    modalClose = false;
+                }
+            }).always(function () {
+                if(modalClose) {
+                    $('.modal').modal('hide');
+                }
+            })
+        });
+    };
+
+    LPRO.MatchDashboard.init = function () {
+        LPRO.MatchDashboard.handleAjax();
+        LPRO.MatchDashboard.handleSetScoreForm();
+    };
+
+    LPRO.MatchDashboard.init();
 });

@@ -6,4 +6,3 @@ require('bootstrap/scss/bootstrap-grid.scss');
 require('bootstrap/scss/bootstrap-reboot.scss');
 require('moment');
 require('chart.js');
-require('node-waves/dist/waves.min.css');

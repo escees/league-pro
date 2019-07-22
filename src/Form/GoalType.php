@@ -2,25 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\FootballMatch;
+use App\Entity\Goal;
+use App\Entity\Player;
 use App\Entity\Team;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MatchType extends AbstractType
+class GoalType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
         $builder->add(
-            'homeTeam',
+            'scorer',
             EntityType::class,
             [
-                'class' => Team::class,
+                'class' => Player::class,
                 'choice_label' => 'name',
                 'attr' => [
                     'class' => 'form-control'
@@ -30,7 +30,7 @@ class MatchType extends AbstractType
         );
 
         $builder->add(
-            'awayTeam',
+            'minute',
             EntityType::class,
             [
                 'class' => Team::class,
@@ -38,22 +38,17 @@ class MatchType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'placeholder' => 'Wybierz drużynę przyjezdną'
             ]
         );
 
-
         $builder->add(
-            'startDate',
-            DateTimeType::class,
+            'assistant',
+            EntityType::class,
             [
-                'widget' => 'single_text',
-                'html5' => false,
-                'format' => 'dd/MM/yyyy HH:mm',
+                'class' => Player::class,
+                'choice_label' => 'name',
                 'attr' => [
-                    'class' => 'form-control datepicker',
-                    'autocomplete' => 'off',
-                    'placeholder' => 'Data i godzina rozgrywania meczu'
+                    'class' => 'form-control'
                 ],
             ]
         );
@@ -62,7 +57,7 @@ class MatchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' =>  FootballMatch::class
+            'data_class' =>  Goal::class
         ]);
     }
 }

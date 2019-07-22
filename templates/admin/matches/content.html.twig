@@ -1,42 +1,8 @@
-                            {#{{ form_start(form, {'attr': { 'class': 'col s12'}}) }}#}
-                            {#<form class="col s12">#}
-                                {#<h4 class="header2">Dodaj mecz</h4>#}
-                                {#{{ form_errors(form) }}#}
-                                {#<div class="row">#}
-                                    {#<div class="input-field col s12 m3 l3">#}
-                                        {#<i class="material-icons prefix">account_circle</i>#}
-                                        {#{{ form_widget(form.homeTeam) }}#}
-                                        {#<input id="icon_prefix" type="text" class="validate">#}
-                                        {#<label for="icon_prefix">Drużyna domowa</label>#}
-                                    {#</div>#}
-                                    {#<div class="input-field col s12 m3 l3">#}
-                                        {#<i class="material-icons prefix">lock_outline</i>#}
-                                        {#{{ form_widget(form.awayTeam) }}#}
-                                        {#<input id="icon_password" type="password" class="validate">#}
-                                        {#<label for="icon_password">Drużyna przyjezdna</label>#}
-                                    {#</div>#}
-                                    {#<div class="input-field col s12 m2 l2">#}
-                                        {#<i class="material-icons prefix">insert_invitation</i>#}
-                                        {#{{ form_widget(form.startDate) }}#}
-                                    {#</div>#}
-                                    {#<div class="input-field col s12 m2 l2">#}
-                                        {#<i class="material-icons prefix">insert_invitation</i>#}
-                                        {#{{ form_widget(form.startTime) }}#}
-                                    {#</div>#}
-                                    {#<div class="input-field col s12 m2 l2 ">#}
-                                        {#<button class="btn waves-effect waves-light" type="submit" name="action">#}
-                                            {#<span class="">Dodaj mecz</span>#}
-                                            {#<i class="material-icons right">add_box</i>#}
-                                        {#</button>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#{{ form_end(form) }}#}
-
 <div class="row">
     <div class="col-sm-12">
         <div class="card card-small mb-4">
             <div class="card-header border-bottom">
-                <h3 class="m-0"><strong>Dodaj mecz</strong></h3>
+                <h3 class="m-0 text-center"><strong>Dodaj mecz</strong></h3>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item p-3">
@@ -45,54 +11,18 @@
                             {{ form_start(form) }}
                                 <div class="form-row">
                                     <div class="form-group col-sm-12 col-md-4">
-                                        {#<label for="feFirstName">First Name</label>#}
                                         {{ form_widget(form.homeTeam) }}
                                     </div>
                                     <div class="form-group col-sm-12 col-md-4">
-                                        {#<label for="feLastName">Last Name</label>#}
                                         {{ form_widget(form.awayTeam) }}
                                     </div>
                                     <div class="form-group col-sm-12 col-md-2">
-                                        {#<label for="feLastName">Last Name</label>#}
                                         {{ form_widget(form.startDate) }}
                                     </div>
                                     <div class="form-group col-sm-12 col-md-2">
-                                        <button type="submit" class="btn btn-accent dupa">Update Account</button>
+                                        <button type="submit" class="btn btn-outline-info">Dodaj mecz</button>
                                     </div>
                                 </div>
-                                {#<div class="form-row">#}
-                                    {#<div class="form-group col-md-6">#}
-                                        {#<label for="feEmailAddress">Email</label>#}
-                                        {#<input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="sierra@example.com"> </div>#}
-                                    {#<div class="form-group col-md-6">#}
-                                        {#<label for="fePassword">Password</label>#}
-                                        {#<input type="password" class="form-control" id="fePassword" placeholder="Password"> </div>#}
-                                {#</div>#}
-                                {#<div class="form-group">#}
-                                    {#<label for="feInputAddress">Address</label>#}
-                                    {#<input type="text" class="form-control" id="feInputAddress" placeholder="1234 Main St"> </div>#}
-                                {#<div class="form-row">#}
-                                    {#<div class="form-group col-md-6">#}
-                                        {#<label for="feInputCity">City</label>#}
-                                        {#<input type="text" class="form-control" id="feInputCity"> </div>#}
-                                    {#<div class="form-group col-md-4">#}
-                                        {#<label for="feInputState">State</label>#}
-                                        {#<select id="feInputState" class="form-control">#}
-                                            {#<option selected>Choose...</option>#}
-                                            {#<option>...</option>#}
-                                        {#</select>#}
-                                    {#</div>#}
-                                    {#<div class="form-group col-md-2">#}
-                                        {#<label for="inputZip">Zip</label>#}
-                                        {#<input type="text" class="form-control" id="inputZip"> </div>#}
-                                {#</div>#}
-                                {#<div class="form-row">#}
-                                    {#<div class="form-group col-md-12">#}
-                                        {#<label for="feDescription">Description</label>#}
-                                        {#<textarea class="form-control" name="feDescription" rows="5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?</textarea>#}
-                                    {#</div>#}
-                                {#</div>#}
-                                {#<button type="submit" class="btn btn-accent">Update Account</button>#}
                             {{ form_end(form) }}
                         </div>
                     </div>
@@ -100,32 +30,139 @@
             </ul>
         </div>
     </div>
-    <div class="col-lg-4">
-        <div class="card card-small mb-4 pt-3">
-            <div class="card-header border-bottom text-center">
-                <div class="mb-3 mx-auto">
-                    <img class="rounded-circle" src="images/avatars/0.jpg" alt="User Avatar" width="110"> </div>
-                <h4 class="mb-0">Sierra Brooks</h4>
-                <span class="text-muted d-block mb-2">Project Manager</span>
-                <button type="button" class="mb-2 btn btn-sm btn-pill btn-outline-primary mr-2">
-                    <i class="material-icons mr-1">person_add</i>Follow</button>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
+        <div class="card card-small blog-comments">
+            <div class="card-header border-bottom">
+                <h5 class="m-0 text-center">Nadchodzące mecze</h5>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item px-4">
-                    <div class="progress-wrapper">
-                        <strong class="text-muted d-block mb-2">Workload</strong>
-                        <div class="progress progress-sm">
-                            <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100" style="width: 74%;">
-                                <span class="progress-value">74%</span>
-                            </div>
-                        </div>
+            <div class="card-body p-0">
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-small list-group-flush">
+                        {% for match in matches %}
+                            {% if match.isFixture %}
+                                <li class="list-group-item d-flex px-3">
+                                    <div class="col-sm-1 col-md col-lg-1 loop-index">
+                                        <span class="collections-content left-align">{{ loop.index }}</span>
+                                    </div>
+                                    <div class="col-sm-4 col-md col-lg-4 text-right">
+                                        <span class="collections-content ">{{ match.homeTeam.name }}</span>
+                                    </div>
+                                    <div class="col-sm-1 col-md col-lg-1 text-center text-nowrap">
+                                        <span class="">
+                                            - : -
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-4 col-md col-lg-4 text-left">
+                                        <span class="collections-content">{{ match.awayTeam.name }}</span>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2 col-lg-2 text-center">
+                                        <span class="">{{ match.startDate|date('Y-m-d H:i') }}</span>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
+        <div class="card card-small blog-comments">
+            <div class="card-header border-bottom">
+                <h5 class="text-center m-b-5">Zakończone mecze</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-small list-group-flush">
+                        {% for match in matches %}
+                            {% set matchId = match.id  %}
+                            {% set setScorePath = path('app.match.score', {'match': matchId }) %}
+                            {% set setScoreButton = '<a class="btn btn-outline-info btn-sm set-score" data-href="' ~ setScorePath ~ '" data-match-id="'~matchId~'" data-toggle="modal" data-target="#edit-score-modal">+</a>' %}
+                            {% if not match.isFixture %}
+                                <li class="list-group-item d-flex px-3" id="match-{{ match.id }}">
+                                    <div class="col-sm-1 col-md col-lg-1 loop-index">
+                                        <span class="collections-content left-align">{{ loop.index }}</span>
+                                    </div>
+                                    <div class="col-sm-2 col-md col-lg-4 text-right">
+                                        <span class="collections-content ">{{ match.homeTeam.name }}</span>
+                                    </div>
+                                    <div class="col-sm-1 col-md col-lg-1 text-center text-nowrap">
+                                        {{ match.matchDetails ? (match.matchDetails.homeTeamGoals ~ ' : ' ~ match.matchDetails.awayTeamGoals) : setScoreButton|raw }}
+                                    </div>
+                                    <div class="col-sm-2 col-md col-lg-4 text-left">
+                                        <span class="collections-content">{{ match.awayTeam.name }}</span>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2 col-lg-2 text-center">
+                                        <span class="">{{ match.startDate|date('Y-m-d H:i') }}</span>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-12 col-sm-12 mb-4">
+        <div class="card card-small">
+            <div class="card-header border-bottom">
+                <h6 class="m-0">Top Referrals</h6>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-small list-group-flush">
+                    <li class="list-group-item d-flex px-3">
+                        <span class="text-semibold text-fiord-blue">GitHub</span>
+                        <span class="ml-auto text-right text-semibold text-reagent-gray">19,291</span>
+                    </li>
+                    <li class="list-group-item d-flex px-3">
+                        <span class="text-semibold text-fiord-blue">Stack Overflow</span>
+                        <span class="ml-auto text-right text-semibold text-reagent-gray">11,201</span>
+                    </li>
+                    <li class="list-group-item d-flex px-3">
+                        <span class="text-semibold text-fiord-blue">Hacker News</span>
+                        <span class="ml-auto text-right text-semibold text-reagent-gray">9,291</span>
+                    </li>
+                    <li class="list-group-item d-flex px-3">
+                        <span class="text-semibold text-fiord-blue">Reddit</span>
+                        <span class="ml-auto text-right text-semibold text-reagent-gray">8,281</span>
+                    </li>
+                    <li class="list-group-item d-flex px-3">
+                        <span class="text-semibold text-fiord-blue">The Next Web</span>
+                        <span class="ml-auto text-right text-semibold text-reagent-gray">7,128</span>
+                    </li>
+                    <li class="list-group-item d-flex px-3">
+                        <span class="text-semibold text-fiord-blue">Tech Crunch</span>
+                        <span class="ml-auto text-right text-semibold text-reagent-gray">6,218</span>
+                    </li>
+                    <li class="list-group-item d-flex px-3">
+                        <span class="text-semibold text-fiord-blue">YouTube</span>
+                        <span class="ml-auto text-right text-semibold text-reagent-gray">1,218</span>
+                    </li>
+                    <li class="list-group-item d-flex px-3">
+                        <span class="text-semibold text-fiord-blue">Adobe</span>
+                        <span class="ml-auto text-right text-semibold text-reagent-gray">827</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer border-top">
+                <div class="row">
+                    <div class="col">
+                        <select class="custom-select custom-select-sm">
+                            <option selected>Last Week</option>
+                            <option value="1">Today</option>
+                            <option value="2">Last Month</option>
+                            <option value="3">Last Year</option>
+                        </select>
                     </div>
-                </li>
-                <li class="list-group-item p-4">
-                    <strong class="text-muted d-block mb-2">Description</strong>
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?</span>
-                </li>
-            </ul>
+                    <div class="col text-right view-report">
+                        <a href="#">Full report &rarr;</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+{% include '/admin/modal/simple_edit_score.html.twig' %}

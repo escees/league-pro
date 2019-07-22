@@ -19,6 +19,14 @@ class FootballMatchRepository extends ServiceEntityRepository
         parent::__construct($registry, FootballMatch::class);
     }
 
+    public function findAllFixtures()
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.startDate > NOW()')
+            ->getQuery()
+            ->execute();
+    }
+
     // /**
     //  * @return FootballMatch[] Returns an array of FootballMatch objects
     //  */

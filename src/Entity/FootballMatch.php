@@ -35,6 +35,7 @@ class FootballMatch
     private $video;
 
     /**
+     * @Assert\Valid()
      * @ORM\OneToOne(targetEntity="App\Entity\MatchDetails", inversedBy="footballMatch", cascade={"persist", "remove"})
      */
     private $matchDetails;
@@ -125,5 +126,10 @@ class FootballMatch
         $this->awayTeam = $awayTeam;
 
         return $this;
+    }
+
+    public function isFixture(): bool
+    {
+        return $this->startDate > new \DateTime();
     }
 }
