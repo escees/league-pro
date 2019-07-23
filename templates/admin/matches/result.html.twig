@@ -1,0 +1,12 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('match_details') }}
+{% endblock %}
+{% block body %}
+    {% include 'admin/matches/edit_result.html.twig' %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('match_details') }}
+{% endblock %}

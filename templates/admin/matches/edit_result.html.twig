@@ -1,0 +1,138 @@
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <h3 class="page-title">Uzupełnij szczegóły meczu</h3>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <div class="row">
+        <div class="col-lg-9 col-md-12">
+            <!-- Add New Post Form -->
+            <div class="card card-small mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        {{ form_start(form, {
+                            'attr': {
+                                'class': 'form-inline'
+                            },
+                        }) }}
+                        <div class="col text-right">
+                            <span class="collections-content ">{{ match.homeTeam.name }}</span>
+                        </div>
+                        <div class="col text-center">
+                            {{ form_widget(form.matchDetails.homeTeamGoals) }}  :  {{ form_widget(form.matchDetails.awayTeamGoals) }}
+                        </div>
+                        <div class="col text-left">
+                            <span class="collections-content">{{ match.awayTeam.name }}</span>
+                        </div>
+                        <div class="col text-center">
+                            <span class="">{{ match.startDate|date('Y-m-d H:i') }}</span>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ form_errors(form.matchDetails.homeTeamGoals) }}
+                            </div>
+                            <div class="col">
+                                {{ form_errors(form.matchDetails.awayTeamGoals) }}
+                            </div>
+                        </div>
+
+                        <div class="scorers col-sm-12"
+                             data-add-session-condition-link="{{ '<br /><button type="button" class="btn btn-outline-info">' ~ 'Dodaj strzelca' ~ '</button><br /><br/><br />' }}"
+                             data-delete-session-condition-link='<a href="#" class="btn btn-sm btn-danger delete-scorer"><i class="fas fa-trash-alt"></i></a>'
+                             data-prototype="{{ form_widget(form.matchDetails.goals.vars.prototype)|e }}"
+                        >
+                            {% for goal in form.matchDetails.goals %}
+                                <div class="scorer form-inline col-sm-12">
+                                    {{ form_errors(goal) }}
+                                    {{ form_widget(goal) }}
+                                    <a href="#" class="btn btn-sm btn-danger delete-scorer">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                                <hr>
+                                <hr>
+                            {% endfor %}
+
+                        </div>
+                        <div class="match-cards col-sm-12"
+                             data-add-card-link="{{ '<br /><button type="button" class="btn btn-outline-info">' ~ 'Dodaj kartkę' ~ '</button><br /><br/><br />' }}"
+                             data-delete-card-link='<a href="#" class="btn btn-sm btn-danger delete-card"><i class="fas fa-trash-alt"></i></a>'
+                             data-prototype="{{ form_widget(form.matchDetails.cards.vars.prototype)|e }}"
+                        >
+                            {% for card in form.matchDetails.cards %}
+                                <div class="match-card form-inline col-sm-12">
+                                    {{ form_errors(card) }}
+                                    {{ form_widget(card) }}
+                                    <a href="#" class="btn btn-sm btn-danger delete-card">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                                <hr>
+                                <hr>
+                            {% endfor %}
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary">Zapisz</button>
+                        </div>
+                        {{ form_end(form)}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-12">
+            <div class='card card-small mb-3'>
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Actions</h6>
+                </div>
+                <div class='card-body p-0'>
+
+                </div>
+            </div>
+            <div class='card card-small mb-3'>
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Categories</h6>
+                </div>
+                <div class='card-body p-0'>
+                    <form>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item px-3 pb-2">
+                                <div class="custom-control custom-checkbox mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="category1" checked>
+                                    <label class="custom-control-label" for="category1">Uncategorized</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="category2" checked>
+                                    <label class="custom-control-label" for="category2">Design</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="category3">
+                                    <label class="custom-control-label" for="category3">Development</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="category4">
+                                    <label class="custom-control-label" for="category4">Writing</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="category5">
+                                    <label class="custom-control-label" for="category5">Books</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex px-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="New category" aria-label="Add new category" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-white px-2" type="button">
+                                            <i class="material-icons">add</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+

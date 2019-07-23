@@ -79,20 +79,31 @@
                         {% for match in matches %}
                             {% set matchId = match.id  %}
                             {% set setScorePath = path('app.match.score', {'match': matchId }) %}
-                            {% set setScoreButton = '<a class="btn btn-outline-info btn-sm set-score" data-href="' ~ setScorePath ~ '" data-match-id="'~matchId~'" data-toggle="modal" data-target="#edit-score-modal">+</a>' %}
+                            {% set setScoreButton = '
+                                    <a class="btn btn-outline-info btn-sm set-score" data-href="' ~ setScorePath ~ '" data-match-id="'~matchId~'" data-toggle="modal" data-target="#edit-score-modal">
+                                        <i class="far fa-plus-square"></i>
+                                    </a>
+                                '
+                            %}
                             {% if not match.isFixture %}
                                 <li class="list-group-item d-flex px-3" id="match-{{ match.id }}">
                                     <div class="col-sm-1 col-md col-lg-1 loop-index">
                                         <span class="collections-content left-align">{{ loop.index }}</span>
                                     </div>
-                                    <div class="col-sm-2 col-md col-lg-4 text-right">
+                                    <div class="col-sm-4 col-md col-lg-4 text-right">
                                         <span class="collections-content ">{{ match.homeTeam.name }}</span>
                                     </div>
                                     <div class="col-sm-1 col-md col-lg-1 text-center text-nowrap">
                                         {{ match.matchDetails ? (match.matchDetails.homeTeamGoals ~ ' : ' ~ match.matchDetails.awayTeamGoals) : setScoreButton|raw }}
                                     </div>
-                                    <div class="col-sm-2 col-md col-lg-4 text-left">
+                                    <div class="col-sm-3 col-md col-lg-3 text-left">
                                         <span class="collections-content">{{ match.awayTeam.name }}</span>
+                                    </div>
+                                    <div class="col-sm-1 col-md col-lg-1">
+                                        <a href="{{ path('app.match.edit_result', {'match': match.id}) }}" class="btn btn-outline-info btn-sm match-details" data-toggle="tooltip" data-placement="left" title="Uzupełnij wynik, strzelców, kartki i asystentów">
+                                            {#Szczegóły#}
+                                            <i class="fas fa-edit"></i>
+                                        </a>
                                     </div>
                                     <div class="col-sm-2 col-md-2 col-lg-2 text-center">
                                         <span class="">{{ match.startDate|date('Y-m-d H:i') }}</span>

@@ -4,9 +4,9 @@ namespace App\Form;
 
 use App\Entity\Goal;
 use App\Entity\Player;
-use App\Entity\Team;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,23 +20,25 @@ class GoalType extends AbstractType
             'scorer',
             EntityType::class,
             [
+                'label' => 'Strzelec',
                 'class' => Player::class,
                 'choice_label' => 'name',
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'placeholder' => 'Wybierz gospodarza'
+                'placeholder' => 'Wybierz strzelca'
             ]
         );
 
         $builder->add(
             'minute',
-            EntityType::class,
+            IntegerType::class,
             [
-                'class' => Team::class,
-                'choice_label' => 'name',
+                'label' => 'Minuta',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Minuta strzelonej bramki'
+
                 ],
             ]
         );
@@ -45,11 +47,14 @@ class GoalType extends AbstractType
             'assistant',
             EntityType::class,
             [
+                'label' => 'Asystujący',
+                'required' => false,
                 'class' => Player::class,
                 'choice_label' => 'name',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
+                'placeholder' => 'Asystent(opcjonalnie)'
             ]
         );
     }

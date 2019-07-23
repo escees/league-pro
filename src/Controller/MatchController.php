@@ -3,12 +3,17 @@
 namespace App\Controller;
 
 use App\Dictionary\FlashType;
+use App\Entity\Card;
 use App\Entity\FootballMatch;
+use App\Entity\Goal;
 use App\Entity\MatchDetails;
+use App\Form\MatchDetailsType;
+use App\Form\MatchResultType;
 use App\Form\MatchType;
 use App\Form\SimpleMatchDetailsType;
 use App\Repository\FootballMatchRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\Object_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,28 +59,27 @@ class MatchController extends AbstractController
     }
 
     /**
-     * @Route("/edit-scores", name="app.match.edit_scores")
+     * @Route("/{match}/edit-result", name="app.match.edit_result")
      */
-    public function editScores(Request $request, FootballMatchRepository $footballMatchRepository)
+    public function editResult(Request $request, FootballMatch $match)
     {
-//        $form = $this->createForm(MatchType::class, $match = new FootballMatch());
-//
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
+        $form = $this->createForm(MatchResultType::class, $match);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
 //            $this->entityManager->persist($match);
-//            $this->entityManager->flush();
-//
-//            $this->addFlash(FlashType::SUCCESS, 'Mecz został poprawnie dodany');
-//
-//            return $this->redirectToRoute('app.match.dashboard');
-//        }
+            $this->entityManager->flush();
+
+            $this->addFlash(FlashType::SUCCESS, 'Zapisano szczegóły meczu');
+
+            return $this->redirectToRoute('app.match.dashboard');
+        }
 
         return $this->render(
-            'admin/matches/edit_score.html.twig',
+            'admin/matches/result.html.twig',
             [
-                'matches' => $footballMatchRepository->findAll(),
-//                'form' => $form->createView()
+                'match' => $match,
+                'form' => $form->createView()
             ]
         );
     }
@@ -124,4 +128,59 @@ class MatchController extends AbstractController
             ]
         );
     }
+
+    /**
+     * @Route(
+     *     "/{match}/details/add-scorer",
+     *     name="app.match.scorer.add",
+     *     condition="request.isXmlHttpRequest()"
+     * )
+     */
+    public function addScorer(Request $request, FootballMatch $match)
+    {
+        return $this->addMatchEvent($request, new Goal(), $match);
+    }
+
+    /**
+     * @Route(
+     *     "/{match}/details/add-card",
+     *     name="app.match.card.add",
+     *     condition="request.isXmlHttpRequest()"
+     * )
+     */
+    public function addCard(Request $request, FootballMatch $match)
+    {
+        return $this->addMatchEvent($request, new Card(), $match);
+    }
+
+    private function addMatchEvent(Request $request, object $matchEvent, FootballMatch $match)
+    {
+        $form = $this->createForm(MatchDetailsType::class, $matchDetails = new MatchDetailsType());
+        $form->handleRequest($request);
+
+        /** @var MatchDetails $matchDetails */
+        $matchDetails = $form->getData();
+        if($matchEvent instanceof Goal) {
+            $matchDetails->addGoal($matchEvent);
+        }
+        if($matchEvent instanceof Card) {
+            $matchDetails->addCard($matchEvent);
+        }
+
+        $form = $this->createForm(MatchDetailsType::class, $matchDetails);
+
+        $body = $this->renderView(
+            'admin/matches/edit_result.html.twig',
+            [
+                'match' => $match,
+                'form' => $form->createView()
+            ]
+        );
+
+        return new JsonResponse([
+            'status' => true,
+            'body' => $body,
+        ]);
+    }
+
 }

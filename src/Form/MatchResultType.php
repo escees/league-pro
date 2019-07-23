@@ -11,21 +11,20 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditMatchType extends AbstractType
+class MatchResultType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
+//        parent::buildForm($builder, $options);
 
-        $builder->remove('startDate');
-        $builder->remove('awayTeam');
-        $builder->remove('homeTeam');
+//        $builder->remove('startDate');
+//        $builder->remove('awayTeam');
+//        $builder->remove('homeTeam');
 
         $builder->add(
             'matchDetails',
-            EntityType::class,
+            MatchDetailsType::class,
             [
-                'class' => MatchDetails::class,
                 'attr' => [
                     'class' => 'form-control'
                 ],
@@ -33,10 +32,10 @@ class EditMatchType extends AbstractType
         );
     }
 
-    public function getParent()
-    {
-        return MatchType::class;
-    }
+//    public function getParent()
+//    {
+//        return MatchType::class;
+//    }
 
     public function configureOptions(OptionsResolver $resolver)
     {

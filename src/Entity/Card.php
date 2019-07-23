@@ -38,7 +38,7 @@ class Card
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\MatchDetails", inversedBy="cards")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $matchDetails;
 

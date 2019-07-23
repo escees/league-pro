@@ -37,12 +37,12 @@ class MatchDetails
     private $footballMatch;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="matchDetails")
+     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="matchDetails", cascade={"persist", "remove"})
      */
     private $goals;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="matchDetails")
+     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="matchDetails", cascade={"persist", "remove"})
      */
     private $cards;
 

@@ -44,7 +44,7 @@ class CardType extends AbstractType
             'color',
             ChoiceType::class,
             [
-                'choices' => ['yellow', 'red'],
+                'choices' => ['Żółta' => 'yellow', 'Czerwona' => 'red'],
                 'attr' => [
                     'class' => 'form-control'
                 ],

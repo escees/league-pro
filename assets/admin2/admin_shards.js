@@ -1,7 +1,4 @@
 require('./js/extras.1.1.0.min');
-require('./js/app/app-blog-new-post.1.1.0.min');
-require('./js/app/app-blog-overview.1.1.0.min');
-require('./js/app/app-components-overview.1.1.0.min');
 require('./js/sharre.min');
 require('moment');
 require('./js/jquery.datetimepicker.full.min');

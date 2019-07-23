@@ -97,6 +97,11 @@ $(document).ready(function () {
         });
     };
 
+    LPRO.MatchDashboard.handleDetailTooltips = function () {
+        $('.match-details').tooltip();
+    };
+
+
     LPRO.MatchDashboard.handleAjax = function () {
         var modalClose = true;
         $('body').on('click', '#save-score', function (e) {
@@ -139,6 +144,7 @@ $(document).ready(function () {
     LPRO.MatchDashboard.init = function () {
         LPRO.MatchDashboard.handleAjax();
         LPRO.MatchDashboard.handleSetScoreForm();
+        LPRO.MatchDashboard.handleDetailTooltips();
     };
 
     LPRO.MatchDashboard.init();

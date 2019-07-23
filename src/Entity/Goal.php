@@ -34,7 +34,7 @@ class Goal
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\MatchDetails", inversedBy="goals")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $matchDetails;
 
