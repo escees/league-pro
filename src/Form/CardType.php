@@ -25,7 +25,7 @@ class CardType extends AbstractType
                 'class' => Player::class,
                 'choice_label' => 'name',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control card-type-field'
                 ],
             ]
         );
@@ -36,7 +36,7 @@ class CardType extends AbstractType
             [
                 'label' => false,
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control card-type-field',
                     'placeholder' => 'Minuta otrzymania kartki'
                 ],
 
@@ -51,7 +51,7 @@ class CardType extends AbstractType
                 'label' => false,
                 'choices' => ['Żółta' => 'yellow', 'Czerwona' => 'red'],
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control card-type-field'
                 ],
 
             ]

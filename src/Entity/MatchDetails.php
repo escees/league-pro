@@ -23,7 +23,7 @@ class MatchDetails
      * @Assert\NotBlank(message="Ilość bramek gospodarzy nie może być pusta")
      * @ORM\Column(type="integer")
      */
-    private $homeTeamGoals; //@todo validation doesn't work for editing result with empty value hometeamgoals
+    private $homeTeamGoals;
 
     /**
      * @Assert\NotBlank(message="Ilość bramek przyjezdnych nie może być pusta")
@@ -37,11 +37,13 @@ class MatchDetails
     private $footballMatch;
 
     /**
+     * @Assert\Valid()
      * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="matchDetails", cascade={"persist", "remove"})
      */
     private $goals;
 
     /**
+     * @Assert\Valid()
      * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="matchDetails", cascade={"persist", "remove"})
      */
     private $cards;

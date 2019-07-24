@@ -18,10 +18,11 @@ class Card
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
      * @Assert\Choice(
      *     choices={"yellow", "red"}
      * )
+     *
+     * @ORM\Column(type="string", length=255)
      */
     private $color;
 
@@ -31,7 +32,11 @@ class Card
      */
     private $player;
 
+    //@todo add handling form errors for collection fields in edit result form
     /**
+     * @Assert\NotBlank(message="Proszę podać minutę w której padła bramka")
+     * @Assert\GreaterThan(value="0", message="Minuta musi być większa od zera")
+     *
      * @ORM\Column(type="integer")
      */
     private $minute;

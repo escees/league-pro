@@ -67,7 +67,6 @@ class MatchController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $this->entityManager->persist($match);
             $this->entityManager->flush();
 
             $this->addFlash(FlashType::SUCCESS, 'Zapisano szczegóły meczu');
@@ -101,11 +100,6 @@ class MatchController extends AbstractController
             $this->entityManager->persist($matchDetails);
             $this->entityManager->persist($match);
             $this->entityManager->flush();
-
-//            $this->get('event_dispatcher')->dispatch(
-//                ManagerEvents::HARDWARE_REGISTRY_ENTRY_EDITED,
-//                new HardwareRegistryEntryEditedEvent($this->getUser(), $employee)
-//            );
 
             $body = $this->renderView(
                 'admin/matches/edit_score.html.twig',

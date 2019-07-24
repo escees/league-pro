@@ -10,10 +10,19 @@ $(document).ready(function () {
         LPRO.MatchDetails.handleScorersCollection();
         LPRO.MatchDetails.handleCardsCollection();
         LPRO.MatchDetails.handleGoalTypeRow();
+        LPRO.MatchDetails.handleCardTypeRow();
     };
 
     LPRO.MatchDetails.handleGoalTypeRow = function () {
         $('.add-scorer').on('click', function () {
+            $('.goal-type-field').parent().addClass('col-sm-12 col-md-2');
+            console.log($('.goal-type-field').parent());
+        })
+    };
+
+    LPRO.MatchDetails.handleCardTypeRow = function () {
+        $('.add-card').on('click', function () {
+            $('.card-type-field').parent().addClass('col-sm-12 col-md-2');
             console.log($('.goal-type-field').parent());
         })
     };

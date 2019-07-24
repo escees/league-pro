@@ -1,7 +1,15 @@
 {% macro goalScorer(goalForm) %}
     {{ form_errors(goalForm) }}
     {{ form_widget(goalForm, {'attr': {'class': 'row'}}) }}
-    <a href="#" class="btn btn-sm btn-danger delete-scorer text-right"><i class="fas fa-trash-alt"></i></a>
+    <a href="#" class="btn btn-sm btn-danger delete-scorer"><i class="fas fa-trash-alt"></i></a>
+    <br>
+    <br>
+{% endmacro %}
+{% macro cardTaker(cardForm) %}
+    {{ form_errors(cardForm) }}
+    {{ form_widget(cardForm, {'attr': {'class': 'row'}}) }}
+    <a href="#" class="btn btn-sm btn-danger delete-card"><i class="fas fa-trash-alt"></i></a>
+    <br>
     <br>
 {% endmacro %}
 {% import _self as formMacros %}
@@ -40,30 +48,29 @@
                         <div class="col-sm-12 text-danger">
                             {{ form_errors(form.matchDetails.awayTeamGoals) }}
                         </div>
+                        <div class="col-sm-12 text-danger">
+                            {{ form_errors(form.matchDetails.cards) }}
+                        </div>
+                        <div class="col-sm-12 text-danger">
+                            {{ form_errors(form.matchDetails.goals) }}
+                        </div>
                         <div class="col-sm-12">
                             <h4>Bramki</h4>
                             <hr>
                         </div>
                         <div class="scorers col-sm-12"
                              data-add-session-condition-link="{{ '<br /><button type="button" class="btn btn-outline-info add-scorer">' ~ 'Dodaj strzelca' ~ '</button><br /><br/><br />' }}"
-{#                             data-delete-session-condition-link='<a href="#" class="btn btn-sm btn-danger delete-scorer text-right"><i class="fas fa-trash-alt"></i></a>'#}
                              data-prototype="{{ formMacros.goalScorer(form.matchDetails.goals.vars.prototype)|e('html_attr') }}"
                         >
-{#                        <div class="scorer">#}
-{#                        </div>#}
-
                         </div>
                         <div class="col-sm-12">
                             <h4>Kartki</h4>
                             <hr>
                         </div>
                         <div class="match-cards col-sm-12"
-                             data-add-card-link="{{ '<br /><button type="button" class="btn btn-outline-info">' ~ 'Dodaj kartkę' ~ '</button><br /><br/><br />' }}"
-                             data-delete-card-link='<a href="#" class="btn btn-sm btn-danger delete-card"><i class="fas fa-trash-alt"></i></a>'
-                             data-prototype="{{ form_widget(form.matchDetails.cards.vars.prototype)|e }}"
+                             data-add-card-link="{{ '<br /><button type="button" class="btn btn-outline-info add-card">' ~ 'Dodaj kartkę' ~ '</button><br /><br/><br />' }}"
+                             data-prototype="{{ formMacros.cardTaker(form.matchDetails.cards.vars.prototype)|e }}"
                         >
-                        <div class="match-card">
-                        </div>
                         </div>
                         <div class="col">
                             <button type="submit" class="btn btn-primary">Zapisz</button>

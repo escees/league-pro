@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GoalRepository")
@@ -27,7 +28,11 @@ class Goal
      */
     private $scorer;
 
+    //@todo add handling form errors for collection fields in edit result form
     /**
+     * @Assert\NotBlank(message="Proszę podać minutę w której padła bramka")
+     * @Assert\GreaterThan(value="0", message="Minuta musi być większa od zera")
+     *
      * @ORM\Column(type="integer")
      */
     private $minute;
@@ -72,7 +77,7 @@ class Goal
         return $this->minute;
     }
 
-    public function setMinute(int $minute): self
+    public function setMinute(?int $minute): self
     {
         $this->minute = $minute;
 
