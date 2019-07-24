@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin2", name="app.admin")
+     * @Route("/admin2", name="app.admin2")
      */
     public function index(Request $request)
     {
@@ -33,11 +33,11 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/form-layouts", name="app.form_layouts")
+     * @Route("/form-components", name="app.components")
      */
-    public function formLayouts(Request $request)
+    public function formComponents(Request $request)
     {
-        return $this->render('admin/dashboard/form-layouts.html.twig');
+        return $this->render('admin/dashboard/form-components.html.twig');
     }
 
     /**

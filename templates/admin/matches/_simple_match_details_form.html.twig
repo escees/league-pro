@@ -1,0 +1,27 @@
+{{ form_start(form, {
+    'attr': {
+        'class': 'form-inline'
+    },
+}) }}
+    <div class="col text-right">
+        <span class="collections-content ">{{ match.homeTeam.name }}</span>
+    </div>
+    <div class="col text-center">
+        {{ form_widget(form.homeTeamGoals) }}  :  {{ form_widget(form.awayTeamGoals) }}
+    </div>
+    <div class="col text-left">
+        <span class="collections-content">{{ match.awayTeam.name }}</span>
+    </div>
+    <div class="col text-center">
+        <span class="">{{ match.startDate|date('Y-m-d H:i') }}</span>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{ form_errors(form.homeTeamGoals) }}
+        </div>
+        <div class="col">
+            {{ form_errors(form.awayTeamGoals) }}
+        </div>
+    </div>
+{{ form_rest(form)}}
+

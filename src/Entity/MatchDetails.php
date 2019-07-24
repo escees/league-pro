@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MatchDetailsRepository")
@@ -19,11 +20,13 @@ class MatchDetails
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Ilość bramek gospodarzy nie może być pusta")
      * @ORM\Column(type="integer")
      */
     private $homeTeamGoals;
 
     /**
+     * @Assert\NotBlank(message="Ilość bramek przyjezdnych nie może być pusta")
      * @ORM\Column(type="integer")
      */
     private $awayTeamGoals;
@@ -34,13 +37,21 @@ class MatchDetails
     private $footballMatch;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MatchEvent", mappedBy="matchDetails")
+     * @Assert\Valid()
+     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="matchDetails", cascade={"persist", "remove"})
      */
-    private $matchEvents;
+    private $goals;
+
+    /**
+     * @Assert\Valid()
+     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="matchDetails", cascade={"persist", "remove"})
+     */
+    private $cards;
 
     public function __construct()
     {
-        $this->matchEvents = new ArrayCollection();
+        $this->goals = new ArrayCollection();
+        $this->cards = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -53,7 +64,7 @@ class MatchDetails
         return $this->homeTeamGoals;
     }
 
-    public function setHomeTeamGoals(int $homeTeamGoals): self
+    public function setHomeTeamGoals(?int $homeTeamGoals): self
     {
         $this->homeTeamGoals = $homeTeamGoals;
 
@@ -65,7 +76,7 @@ class MatchDetails
         return $this->awayTeamGoals;
     }
 
-    public function setAwayTeamGoals(int $awayTeamGoals): self
+    public function setAwayTeamGoals(?int $awayTeamGoals): self
     {
         $this->awayTeamGoals = $awayTeamGoals;
 
@@ -91,30 +102,61 @@ class MatchDetails
     }
 
     /**
-     * @return Collection|MatchEvent[]
+     * @return Collection|Goal[]
      */
-    public function getMatchEvents(): Collection
+    public function getGoals(): Collection
     {
-        return $this->matchEvents;
+        return $this->goals;
     }
 
-    public function addMatchEvent(MatchEvent $matchEvent): self
+    public function addGoal(Goal $goal): self
     {
-        if (!$this->matchEvents->contains($matchEvent)) {
-            $this->matchEvents[] = $matchEvent;
-            $matchEvent->setMatchDetails($this);
+        if (!$this->goals->contains($goal)) {
+            $this->goals[] = $goal;
+            $goal->setMatchDetails($this);
         }
 
         return $this;
     }
 
-    public function removeMatchEvent(MatchEvent $matchEvent): self
+    public function removeGoal(Goal $goal): self
     {
-        if ($this->matchEvents->contains($matchEvent)) {
-            $this->matchEvents->removeElement($matchEvent);
+        if ($this->goals->contains($goal)) {
+            $this->goals->removeElement($goal);
             // set the owning side to null (unless already changed)
-            if ($matchEvent->getMatchDetails() === $this) {
-                $matchEvent->setMatchDetails(null);
+            if ($goal->getMatchDetails() === $this) {
+                $goal->setMatchDetails(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Card[]
+     */
+    public function getCards(): Collection
+    {
+        return $this->cards;
+    }
+
+    public function addCard(Card $card): self
+    {
+        if (!$this->cards->contains($card)) {
+            $this->cards[] = $card;
+            $card->setMatchDetails($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCard(Card $card): self
+    {
+        if ($this->cards->contains($card)) {
+            $this->cards->removeElement($card);
+            // set the owning side to null (unless already changed)
+            if ($card->getMatchDetails() === $this) {
+                $card->setMatchDetails(null);
             }
         }
 

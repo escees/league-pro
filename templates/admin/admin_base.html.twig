@@ -3,24 +3,35 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" integrity="sha256-PF6MatZtiJ8/c9O9HQ8uSUXr++R9KBYu4gbNG5511WE=" crossorigin="anonymous" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('core') }}
             {{ encore_entry_link_tags('admin') }}
         {% endblock %}
     </head>
-    <body>
-        {% include 'admin/header.html.twig' %}
-        <div id="main">
-            <div class="wrapper">
+    <body class="h-100">
+        <div class="container-fluid">
+            <div class="row">
                 {% include 'admin/menu/left_menu.html.twig' %}
-                {% block body %}{% endblock %}
-                {% include 'admin/menu/right_menu.html.twig' %}
+                <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+                    <div class="main-navbar sticky-top bg-white">
+                        {% include 'admin/header.html.twig' %}
+                    </div>
+                    {% include 'admin/flash_message.html.twig' %}
+                    <div class="main-content-container container-fluid px-4">
+                        {% block body %}{% endblock %}
+                    </div>
+                    {% include 'admin/footer.html.twig' %}
+                </main>
             </div>
         </div>
         {% block javascripts %}
+            <script async defer src="https://buttons.github.io/buttons.js"></script>
             {{ encore_entry_script_tags('core') }}
-            {{ encore_entry_link_tags('admin') }}
+            {{ encore_entry_script_tags('admin') }}
             {{ encore_entry_script_tags('admin_menu') }}
         {% endblock %}
     </body>

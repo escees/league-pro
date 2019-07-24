@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FootballMatchRepository")
@@ -34,6 +35,7 @@ class FootballMatch
     private $video;
 
     /**
+     * @Assert\Valid()
      * @ORM\OneToOne(targetEntity="App\Entity\MatchDetails", inversedBy="footballMatch", cascade={"persist", "remove"})
      */
     private $matchDetails;
@@ -46,6 +48,7 @@ class FootballMatch
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="awayFootballMatch")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $awayTeam;
 
@@ -124,5 +127,10 @@ class FootballMatch
         $this->awayTeam = $awayTeam;
 
         return $this;
+    }
+
+    public function isFixture(): bool
+    {
+        return $this->startDate > new \DateTime();
     }
 }

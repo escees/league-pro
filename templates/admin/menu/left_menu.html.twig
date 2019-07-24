@@ -1,81 +1,76 @@
-<aside id="left-sidebar-nav">
-    <ul id="slide-out" class="side-nav fixed leftside-navigation">
-        <li class="user-details cyan darken-2">
-            <div class="row">
-                <div class="col col s4 m4 l4">
-                    <img src="images/avatar/avatar-7.png" alt="" class="circle responsive-img valign profile-image cyan">
+<aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
+    <div class="main-navbar">
+        <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
+            <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
+                <div class="d-table m-auto">
+                    {#<img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="images/shards-dashboards-logo.svg" alt="Shards Dashboard">#}
+                    <span class="d-none d-md-inline ml-1">Shards Dashboard</span>
                 </div>
-                <div class="col col s8 m8 l8">
-                    <ul id="profile-dropdown-nav" class="dropdown-content">
-                        <li>
-                            <a href="#" class="grey-text text-darken-1">
-                                <i class="material-icons">face</i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#" class="grey-text text-darken-1">
-                                <i class="material-icons">settings</i> Settings</a>
-                        </li>
-                        <li>
-                            <a href="#" class="grey-text text-darken-1">
-                                <i class="material-icons">live_help</i> Help</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#" class="grey-text text-darken-1">
-                                <i class="material-icons">lock_outline</i> Lock</a>
-                        </li>
-                        <li>
-                            <a href="#" class="grey-text text-darken-1">
-                                <i class="material-icons">keyboard_tab</i> Logout</a>
-                        </li>
-                    </ul>
-                    <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown-nav">John Doe<i class="mdi-navigation-arrow-drop-down right"></i></a>
-                    <p class="user-roal">Administrator</p>
+            </a>
+            <a class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
+                <i class="material-icons">&#xE5C4;</i>
+            </a>
+        </nav>
+    </div>
+    <form action="#" class="main-sidebar__search w-100 border-right d-sm-flex d-md-none d-lg-none">
+        <div class="input-group input-group-seamless ml-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-search"></i>
                 </div>
             </div>
-        </li>
-        <li class="no-padding">
-            <ul class="collapsible" data-collapsible="accordion">
-                <li class="bold">
-                    <a href="{{ path('app.admin') }}" class="waves-effect waves-cyan">
-                        <i class="material-icons">pie_chart_outlined</i>
-                        <span class="nav-text">Dashboard</span>
-                    </a>
-                </li>
-                <li class="bold">
-                    <a href="{{ path('app.match.dashboard') }}" class="waves-effect waves-cyan">
-                        <i class="material-icons">insert_invitation</i>
-                        <span class="nav-text">Mecze</span>
-                    </a>
-                </li>
-                <li class="bold">
-                    <a href="{{ path('app.buttons') }}" class="waves-effect waves-cyan">
-                        <i class="material-icons">person</i>
-                        <span class="nav-text">Zawodnicy</span>
-                    </a>
-                </li>
-                <li class="bold">
-                    <a href="{{ path('app.form_layouts') }}" class="waves-effect waves-cyan">
-                        <i class="material-icons">group</i>
-                        <span class="nav-text">Drużyny</span>
-                    </a>
-                </li>
-                <li class="bold">
-                    <a href="{{ path('app.typography') }}" class="waves-effect waves-cyan">
-                        <i class="material-icons">library_books</i>
-                        <span class="nav-text">Newsy</span>
-                    </a>
-                </li>
-                <li class="bold">
-                    <a href="{{ path('app.css_color') }}" class="waves-effect waves-cyan">
-                        <i class="material-icons">insert_chart</i>
-                        <span class="nav-text">Statystyki</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only">
-        <i class="material-icons">menu</i>
-    </a>
+            <input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search"> </div>
+    </form>
+    <div class="nav-wrapper">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link " href="{{ path('app.admin2') }}">
+                    <i class="material-icons">table_chart</i>
+                    <span>Podsumowanie</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ path('app.match.dashboard') }}">
+                    <i class="material-icons">edit</i>
+                    <span>Mecze</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="components-blog-posts.html">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Drużyny</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="add-new-post.html">
+                    <i class="material-icons">note_add</i>
+                    <span>Zawodnicy</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ path('app.components') }}">
+                    <i class="material-icons">view_module</i>
+                    <span>Newsy</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="tables.html">
+                    <i class="material-icons">table_chart</i>
+                    <span>Tables</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="user-profile-lite.html">
+                    <i class="material-icons">person</i>
+                    <span>User Profile</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="errors.html">
+                    <i class="material-icons">error</i>
+                    <span>Errors</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </aside>

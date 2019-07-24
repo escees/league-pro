@@ -1,0 +1,44 @@
+{#{% extends 'admin/admin_base.html.twig' %}#}
+{% block body %}
+    <div class="row">
+        <div class="container">
+        <div class="col-lg-12 col-md col-sm mb-4 mt-5">
+            <div class="card card-small blog-comments">
+                <div class="card-header border-bottom">
+                    <h5 class="text-center m-b-5">Zakończone mecze</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-small list-group-flush">
+                            {% for match in matches %}
+                                {% set matchId = match.id  %}
+                                {% set setScorePath = path('app.match.score', {'match': matchId }) %}
+                                {% set setScoreButton = '<a class="btn btn-outline-info btn-sm set-score" data-match-id="'~ matchId ~'" data-href="' ~ setScorePath ~ '" data-toggle="modal" data-target="#edit-score-modal">+</a>' %}
+                                {% if not match.isFixture %}
+                                    <li class="list-group-item d-flex px-3 }" id="match-{{ match.id }}">
+                                        <div class="col-sm-1 col-md col-lg-1 loop-index">
+                                            <span class="collections-content left-align">{{ loop.index }}</span>
+                                        </div>
+                                        <div class="col-sm-2 col-md col-lg-4 text-right">
+                                            <span class="collections-content ">{{ match.homeTeam.name }}</span>
+                                        </div>
+                                        <div class="col-sm-1 col-md col-lg-1 text-center text-nowrap">
+                                            {{ match.matchDetails ? (match.matchDetails.homeTeamGoals ~ ' : ' ~ match.matchDetails.awayTeamGoals) : setScoreButton|raw }}
+                                        </div>
+                                        <div class="col-sm-2 col-md col-lg-4 text-left">
+                                            <span class="collections-content">{{ match.awayTeam.name }}</span>
+                                        </div>
+                                        <div class="col-sm-2 col-md-2 col-lg-2 text-center">
+                                            <span class="">{{ match.startDate|date('Y-m-d H:i') }}</span>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

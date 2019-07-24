@@ -39,13 +39,19 @@ class Player
     private $team;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MatchEvent", mappedBy="player")
+     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="scorer")
      */
-    private $matchEvents;
+    private $goals;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="player")
+     */
+    private $cards;
 
     public function __construct()
     {
-        $this->matchEvents = new ArrayCollection();
+        $this->goals = new ArrayCollection();
+        $this->cards = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -102,30 +108,61 @@ class Player
     }
 
     /**
-     * @return Collection|MatchEvent[]
+     * @return Collection|Goal[]
      */
-    public function getMatchEvents(): Collection
+    public function getGoals(): Collection
     {
-        return $this->matchEvents;
+        return $this->goals;
     }
 
-    public function addMatchEvent(MatchEvent $matchEvent): self
+    public function addGoal(Goal $goal): self
     {
-        if (!$this->matchEvents->contains($matchEvent)) {
-            $this->matchEvents[] = $matchEvent;
-            $matchEvent->setPlayer($this);
+        if (!$this->goals->contains($goal)) {
+            $this->goals[] = $goal;
+            $goal->setScorer($this);
         }
 
         return $this;
     }
 
-    public function removeMatchEvent(MatchEvent $matchEvent): self
+    public function removeGoal(Goal $goal): self
     {
-        if ($this->matchEvents->contains($matchEvent)) {
-            $this->matchEvents->removeElement($matchEvent);
+        if ($this->goals->contains($goal)) {
+            $this->goals->removeElement($goal);
             // set the owning side to null (unless already changed)
-            if ($matchEvent->getPlayer() === $this) {
-                $matchEvent->setPlayer(null);
+            if ($goal->getScorer() === $this) {
+                $goal->setScorer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Card[]
+     */
+    public function getCards(): Collection
+    {
+        return $this->cards;
+    }
+
+    public function addCard(Card $card): self
+    {
+        if (!$this->cards->contains($card)) {
+            $this->cards[] = $card;
+            $card->setPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCard(Card $card): self
+    {
+        if ($this->cards->contains($card)) {
+            $this->cards->removeElement($card);
+            // set the owning side to null (unless already changed)
+            if ($card->getPlayer() === $this) {
+                $card->setPlayer(null);
             }
         }
 
