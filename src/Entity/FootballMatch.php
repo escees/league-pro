@@ -48,6 +48,7 @@ class FootballMatch
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="awayFootballMatch")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $awayTeam;
 

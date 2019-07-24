@@ -39,14 +39,17 @@ class MatchDetailsType extends AbstractType
             'goals',
             CollectionType::class,
             [
-                'label' => 'Strzelcy',
                 'entry_type' => GoalType::class,
                 'attr' => [
-                    'class' => 'form-control form-inline'
+                    'class' => 'form-control'
                 ],
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'label' => false,
+                'entry_options' => [
+                    'label' => false,
+                ],
             ]
         );
 
@@ -54,7 +57,6 @@ class MatchDetailsType extends AbstractType
             'cards',
             CollectionType::class,
             [
-                'label' => 'Kartki',
                 'entry_type' => CardType::class,
                 'attr' => [
                     'class' => 'form-control'
@@ -62,6 +64,10 @@ class MatchDetailsType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'label' => false,
+                'entry_options' => [
+                    'label' => false,
+                ],
             ]
         );
     }

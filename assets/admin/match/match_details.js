@@ -9,18 +9,24 @@ $(document).ready(function () {
     LPRO.MatchDetails.init = function() {
         LPRO.MatchDetails.handleScorersCollection();
         LPRO.MatchDetails.handleCardsCollection();
+        LPRO.MatchDetails.handleGoalTypeRow();
     };
 
-    LPRO.MatchDetails.addNewMatchEventForm = function ($collectionHolder, $newLinkButton, $deleteLink, $condition)  {
+    LPRO.MatchDetails.handleGoalTypeRow = function () {
+        $('.add-scorer').on('click', function () {
+            console.log($('.goal-type-field').parent());
+        })
+    };
+
+    LPRO.MatchDetails.addNewMatchEventForm = function ($collectionHolder, $newLinkButton, $condition)  {
         var prototype = $collectionHolder.data('prototype');
         var index = $collectionHolder.data('index');
         var newForm = prototype.replace(/__name__/g, index);
 
         $collectionHolder.data('index', index + 1);
-
         var $newFormLi = $("<div class=\"" + $condition + "\"></div>")
-            .append(newForm)
-            .append($deleteLink);
+            .append(newForm);
+            // .append($deleteLink);
 
         $newLinkButton.before($newFormLi);
     }
@@ -30,13 +36,13 @@ $(document).ready(function () {
         $('html').on('click', $field, function(e) {
             e.preventDefault();
 
-            $(this).parent($condition).remove();
+            $(this).parent($condition).fadeOut().remove();
         });
     }
 
     LPRO.MatchDetails.handleScorersCollection = function() {
         var addLink = $('.scorers').data('add-session-condition-link');
-        var deleteLink = $('.scorers').data('delete-session-condition-link');
+        // var deleteLink = $('.scorers').data('delete-session-condition-link');
         var $addConditionLink = $(addLink);
         var $newLinkButton = $('<div></div>').append($addConditionLink);
         var $sessionCondition = 'scorer';
@@ -49,7 +55,7 @@ $(document).ready(function () {
         $addConditionLink.on('click', function(e) {
             e.preventDefault();
 
-            LPRO.MatchDetails.addNewMatchEventForm($collectionHolder, $newLinkButton, deleteLink, $sessionCondition );
+            LPRO.MatchDetails.addNewMatchEventForm($collectionHolder, $newLinkButton, $sessionCondition );
         });
 
         LPRO.MatchDetails.addEventDeleteLink('.delete-scorer', '.'+$sessionCondition);
@@ -57,7 +63,7 @@ $(document).ready(function () {
 
     LPRO.MatchDetails.handleCardsCollection = function() {
         var addLink = $('.match-cards').data('add-card-link');
-        var deleteLink = $('.match-cards').data('delete-card-link');
+        // var deleteLink = $('.match-cards').data('delete-card-link');
         var $addConditionLink = $(addLink);
         var $newLinkButton = $('<div></div>').append($addConditionLink);
         var $sessionCondition = 'match-card';
@@ -70,7 +76,7 @@ $(document).ready(function () {
         $addConditionLink.on('click', function(e) {
             e.preventDefault();
 
-            LPRO.MatchDetails.addNewMatchEventForm($collectionHolder, $newLinkButton, deleteLink, $sessionCondition );
+            LPRO.MatchDetails.addNewMatchEventForm($collectionHolder, $newLinkButton, $sessionCondition );
         });
 
         LPRO.MatchDetails.addEventDeleteLink('.delete-card', '.'+$sessionCondition);

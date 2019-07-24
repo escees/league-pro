@@ -20,11 +20,11 @@ class GoalType extends AbstractType
             'scorer',
             EntityType::class,
             [
-                'label' => 'Strzelec',
+                'label' => false,
                 'class' => Player::class,
                 'choice_label' => 'name',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control goal-type-field'
                 ],
                 'placeholder' => 'Wybierz strzelca'
             ]
@@ -34,9 +34,9 @@ class GoalType extends AbstractType
             'minute',
             IntegerType::class,
             [
-                'label' => 'Minuta',
+                'label' => false,
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control goal-type-field',
                     'placeholder' => 'Minuta strzelonej bramki'
 
                 ],
@@ -47,12 +47,12 @@ class GoalType extends AbstractType
             'assistant',
             EntityType::class,
             [
-                'label' => 'Asystujący',
+                'label' => false,
                 'required' => false,
                 'class' => Player::class,
                 'choice_label' => 'name',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control goal-type-field',
                 ],
                 'placeholder' => 'Asystent(opcjonalnie)'
             ]

@@ -23,7 +23,7 @@ class MatchDetails
      * @Assert\NotBlank(message="Ilość bramek gospodarzy nie może być pusta")
      * @ORM\Column(type="integer")
      */
-    private $homeTeamGoals;
+    private $homeTeamGoals; //@todo validation doesn't work for editing result with empty value hometeamgoals
 
     /**
      * @Assert\NotBlank(message="Ilość bramek przyjezdnych nie może być pusta")
@@ -62,7 +62,7 @@ class MatchDetails
         return $this->homeTeamGoals;
     }
 
-    public function setHomeTeamGoals(int $homeTeamGoals): self
+    public function setHomeTeamGoals(?int $homeTeamGoals): self
     {
         $this->homeTeamGoals = $homeTeamGoals;
 
@@ -74,7 +74,7 @@ class MatchDetails
         return $this->awayTeamGoals;
     }
 
-    public function setAwayTeamGoals(int $awayTeamGoals): self
+    public function setAwayTeamGoals(?int $awayTeamGoals): self
     {
         $this->awayTeamGoals = $awayTeamGoals;
 

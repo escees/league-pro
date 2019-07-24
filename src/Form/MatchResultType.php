@@ -28,6 +28,7 @@ class MatchResultType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ],
+                'label' => false,
             ]
         );
     }
