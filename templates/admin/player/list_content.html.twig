@@ -1,0 +1,47 @@
+<div class="col-lg-8 col-md-12 col-sm-12 mb-4 ">
+    <div class="card card-small ">
+        <div class="card-header text-center">
+            <h3>Lista zawodników</h3>
+            <button type="button" class=" text right btn btn-outline-info add-player" data-href="{{ path('app.player.add') }}" data-toggle="modal" data-target="#add-player-modal">Dodaj zawodnika</button>
+        </div>
+        <div class="card-body pt-0">
+            {% for team in teams %}
+                <h5 class="{{ loop.index > 1 ? 'mt-4' }}">{{ team.name }}</h5>
+                <ul class="list-group team-{{ team.id }}" data-team-id="{{ team.id }}">
+                    {% for player in team.players %}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    {{ player.name }}
+                                </div>
+                                <div class="col-sm-1">
+                                    <a href="{{ path('app.player.edit', {'player': player.id }) }}" class="btn btn-outline-info btn-sm match-details" data-toggle="modal" data-target="#edit-player-modal">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% include 'admin/modal/player.html.twig' with {
+    'playerModalId': 'add-player-modal',
+    'playerModalTitle': 'Dodaj zawodnika',
+    'playerModalFormBody': 'add-player-form-body',
+    'playerModalButton': 'save-player',
+
+}%}
+{% include 'admin/modal/player.html.twig' with {
+    'playerModalId': 'edit-player-modal',
+    'playerModalTitle': 'Edytuj zawodnika',
+    'playerModalFormBody': 'edit-player-form-body',
+    'playerModalButton': 'edit-player',
+}%}
+{% block javascripts %}
+    {{ encore_entry_script_tags('add_player') }}
+    {{ encore_entry_script_tags('prevent_multiple_js_loading') }}
+{% endblock %}
+

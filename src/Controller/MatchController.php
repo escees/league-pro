@@ -13,10 +13,10 @@ use App\Form\MatchType;
 use App\Form\SimpleMatchDetailsType;
 use App\Repository\FootballMatchRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Types\Object_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -34,7 +34,7 @@ class MatchController extends AbstractController
     /**
      * @Route("/dashboard", name="app.match.dashboard")
      */
-    public function dashboard(Request $request, FootballMatchRepository $footballMatchRepository)
+    public function dashboard(Request $request, FootballMatchRepository $footballMatchRepository): Response
     {
         $form = $this->createForm(MatchType::class, $match = new FootballMatch());
 
@@ -61,7 +61,7 @@ class MatchController extends AbstractController
     /**
      * @Route("/{match}/edit-result", name="app.match.edit_result")
      */
-    public function editResult(Request $request, FootballMatch $match)
+    public function editResult(Request $request, FootballMatch $match): Response
     {
         $form = $this->createForm(MatchResultType::class, $match);
         $form->handleRequest($request);
@@ -90,7 +90,7 @@ class MatchController extends AbstractController
      *     condition="request.isXmlHttpRequest()"
      * )
      */
-    public function setMatchScore(Request $request, FootballMatch $match, FootballMatchRepository $footballMatchRepository)
+    public function setMatchScore(Request $request, FootballMatch $match, FootballMatchRepository $footballMatchRepository): Response
     {
         $form = $this->createForm(SimpleMatchDetailsType::class, $matchDetails = new MatchDetails());
         $form->handleRequest($request);
@@ -130,7 +130,7 @@ class MatchController extends AbstractController
      *     condition="request.isXmlHttpRequest()"
      * )
      */
-    public function addScorer(Request $request, FootballMatch $match)
+    public function addScorer(Request $request, FootballMatch $match): JsonResponse
     {
         return $this->addMatchEvent($request, new Goal(), $match);
     }
@@ -142,12 +142,12 @@ class MatchController extends AbstractController
      *     condition="request.isXmlHttpRequest()"
      * )
      */
-    public function addCard(Request $request, FootballMatch $match)
+    public function addCard(Request $request, FootballMatch $match): JsonResponse
     {
         return $this->addMatchEvent($request, new Card(), $match);
     }
 
-    private function addMatchEvent(Request $request, object $matchEvent, FootballMatch $match)
+    private function addMatchEvent(Request $request, object $matchEvent, FootballMatch $match): JsonResponse
     {
         $form = $this->createForm(MatchDetailsType::class, $matchDetails = new MatchDetailsType());
         $form->handleRequest($request);

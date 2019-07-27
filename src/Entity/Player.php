@@ -48,10 +48,21 @@ class Player
      */
     private $cards;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="assistant")
+     */
+    private $assists;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $position;
+
     public function __construct()
     {
         $this->goals = new ArrayCollection();
         $this->cards = new ArrayCollection();
+        $this->assists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -165,6 +176,49 @@ class Player
                 $card->setPlayer(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Goal[]
+     */
+    public function getAssists(): Collection
+    {
+        return $this->assists;
+    }
+
+    public function addAssist(Goal $assist): self
+    {
+        if (!$this->assists->contains($assist)) {
+            $this->assists[] = $assist;
+            $assist->setAssistant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAssist(Goal $assist): self
+    {
+        if ($this->assists->contains($assist)) {
+            $this->assists->removeElement($assist);
+            // set the owning side to null (unless already changed)
+            if ($assist->getAssistant() === $this) {
+                $assist->setAssistant(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPosition(): ?string
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?string $position): self
+    {
+        $this->position = $position;
 
         return $this;
     }

@@ -18,11 +18,6 @@ class Goal
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Player", cascade={"persist", "remove"})
-     */
-    private $assistant;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Player", inversedBy="goals")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -43,21 +38,14 @@ class Goal
      */
     private $matchDetails;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Player", inversedBy="assists")
+     */
+    private $assistant;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getAssistant(): ?Player
-    {
-        return $this->assistant;
-    }
-
-    public function setAssistant(?Player $assistant): self
-    {
-        $this->assistant = $assistant;
-
-        return $this;
     }
 
     public function getScorer(): ?Player
@@ -92,6 +80,18 @@ class Goal
     public function setMatchDetails(?MatchDetails $matchDetails): self
     {
         $this->matchDetails = $matchDetails;
+
+        return $this;
+    }
+
+    public function getAssistant(): ?Player
+    {
+        return $this->assistant;
+    }
+
+    public function setAssistant(?Player $assistant): self
+    {
+        $this->assistant = $assistant;
 
         return $this;
     }
