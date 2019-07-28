@@ -3,17 +3,8 @@
 namespace App\Controller;
 
 use App\Dictionary\FlashType;
-use App\Entity\Card;
-use App\Entity\FootballMatch;
-use App\Entity\Goal;
-use App\Entity\MatchDetails;
 use App\Entity\Player;
-use App\Form\MatchDetailsType;
-use App\Form\MatchResultType;
-use App\Form\MatchType;
 use App\Form\PlayerType;
-use App\Form\SimpleMatchDetailsType;
-use App\Repository\FootballMatchRepository;
 use App\Repository\PlayerRepository;
 use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
