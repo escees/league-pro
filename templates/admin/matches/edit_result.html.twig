@@ -73,7 +73,8 @@
                         >
                         </div>
                         <div class="col">
-                            <button type="submit" class="btn btn-primary">Zapisz</button>
+                            <button type="submit" class="btn btn-outline-primary">Zapisz</button>
+                            <a href="{{ path('app.match.dashboard') }}" class="btn btn-outline-secondary">Wróć na listę</a>
                         </div>
                         {{ form_widget(form._token) }}
                         {{ form_end(form, {'render_rest': false})}}

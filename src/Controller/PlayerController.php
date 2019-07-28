@@ -87,7 +87,7 @@ class PlayerController extends AbstractController
 
     /**
      * @Route(
-     *     "/edit",
+     *     "/{player}/edit",
      *     name="app.player.edit",
      *     condition="request.isXmlHttpRequest()"
      * )
@@ -116,6 +116,26 @@ class PlayerController extends AbstractController
         return $this->render('admin/player/view.html.twig',
             [
                 'form' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @Route(
+     *     "/{player}/delete",
+     *     name="app.player.delete",
+     * )
+     */
+    public function deleteAction(Request $request, Player $player, TeamRepository $teamRepository): Response
+    {
+        $this->entityManager->remove($player);
+        $this->entityManager->flush();
+
+        $this->addFlash(FlashType::DANGER, 'Zawodnik został usunięty!');
+
+        return $this->render('admin/player/list.html.twig',
+            [
+                'teams' => $teamRepository->findAll(),
             ]
         );
     }

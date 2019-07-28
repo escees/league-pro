@@ -9,7 +9,7 @@
                 <li class="list-group-item p-3">
                     <div class="row">
                         <div class="col">
-                            {{ form_start(form) }}
+                            {{ form_start(form, {'attr': {'data-edit-player': path('app.player.edit', {'player': form.vars.data.id ?? 0}) }}) }}
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         {{ form_label(form.name) }}
