@@ -8,82 +8,82 @@ $(document).ready(function () {
 
     let LPRO = LPRO || {};
 
-    LPRO.Player = {};
+    LPRO.Team = {};
 
-    LPRO.Player.handleAddPlayerForm = function () {
-        $('.add-player').on('click', function (e) {
-            let addPlayerFormSelector = '#add-player-form-body';
+    LPRO.Team.handleAddTeamForm = function () {
+        $('.add-team').on('click', function (e) {
+            let addPlayerFormSelector = '#add-team-form-body';
             console.log('dupa1');
             $(addPlayerFormSelector).html('');
             $(addPlayerFormSelector).load($(this).data('href'));
 
-            $('#add-player-modal').on('show.bs.modal', function(e) {
-                $(this).find('#save-player').attr({
+            $('#add-team-modal').on('show.bs.modal', function(e) {
+                $(this).find('#save-team').attr({
                     'data-href': $(e.relatedTarget).data('href'),
                 });
             });
         });
     };
 
-    LPRO.Player.handleEditPlayerForm = function () {
-        $('.edit-player').on('click', function (e) {
-            let editPlayerFormSelector = '#edit-player-form-body';
+    LPRO.Team.handleEditTeamForm = function () {
+        $('.edit-team').on('click', function (e) {
+            let editPlayerFormSelector = '#edit-team-form-body';
             $(editPlayerFormSelector).html('');
             console.log('dupa2');
-            $(editPlayerFormSelector).load($(this).data('href'));
+            $('#edit-team-form-body').load($(this).data('href'));
 
-            $('#edit-player-modal').on('show.bs.modal', function(e) {
-                $(this).find('#edit-player').attr({
+            $('#edit-team-modal').on('show.bs.modal', function(e) {
+                $(this).find('#edit-team').attr({
                     'data-href': $(e.relatedTarget).data('href'),
                 });
             });
         });
     };
 
-    LPRO.Player.handleDeletePlayerForm = function () {
-        $('.delete-player').on('click', function (e) {
-            $('#delete-player-modal').on('show.bs.modal', function(e) {
+    LPRO.Team.handleDeleteTeamForm = function () {
+        $('.delete-team').on('click', function (e) {
+            $('#delete-team-modal').on('show.bs.modal', function(e) {
                 $('#name').html($(e.relatedTarget).data('name'));
-                $(this).find('#delete-player').attr({
+                $(this).find('#delete-team').attr({
                     'href': $(e.relatedTarget).data('href'),
                 });
             });
         });
     };
 
-    LPRO.Player.handleSaveAddPlayerForm = function () {
-        LPRO.Player.handleAjax('#save-player')
+    LPRO.Team.handleSaveAddTeamForm = function () {
+        LPRO.Team.handleAjax('#save-team')
     } ;
 
-    LPRO.Player.handleSaveEditPlayerForm = function () {
-        LPRO.Player.handleAjax('#edit-player')
+    LPRO.Team.handleSaveEditTeamForm = function () {
+        LPRO.Team.handleAjax('#edit-team')
     } ;
 
-    LPRO.Player.handleDetailTooltips = function () {
-        $('.add-player').tooltip();
-    };
+    // LPRO.Team.handleDetailTooltips = function () {
+    //     $('.add-player').tooltip();
+    // };
 
 
-    LPRO.Player.handleAjax = function (button) {
+    LPRO.Team.handleAjax = function (button) {
         let modalClose = true;
         $('body').on('click', button, function (e) {
             e.preventDefault();
 
             let $button = $(this);
-            let isEditButton = button === '#edit-player';
+            let isEditButton = button === '#edit-team';
             if ($button.hasClass('disabled')) {
                 return;
             }
 
             let selectedTeamId = $('#player_team').find('option:selected').val();
-            let $form = $('form[name=player]');
+            let $form = $('form[name=team]');
             let section ='#team-list';
             let $serializedForm = $form.serialize();
             let $section = $(section);
             let ajaxUrl = $(this).data('href');
 
             if (isEditButton) {
-                ajaxUrl = $form.data('edit-player');
+                ajaxUrl = $form.data('edit-team');
             }
 
             $.ajax({
@@ -117,14 +117,14 @@ $(document).ready(function () {
     };
 
 
-    LPRO.Player.init = function() {
-        LPRO.Player.handleAddPlayerForm();
-        LPRO.Player.handleSaveEditPlayerForm();
-        LPRO.Player.handleSaveAddPlayerForm();
-        LPRO.Player.handleDeletePlayerForm();
-        LPRO.Player.handleEditPlayerForm();
-        // LPRO.Player.handleAjax();
+    LPRO.Team.init = function() {
+        LPRO.Team.handleAddTeamForm();
+        LPRO.Team.handleSaveEditTeamForm();
+        LPRO.Team.handleSaveAddTeamForm();
+        LPRO.Team.handleDeleteTeamForm();
+        LPRO.Team.handleEditTeamForm();
+        // LPRO.Team.handleAjax();
     };
 
-    LPRO.Player.init();
+    LPRO.Team.init();
 });

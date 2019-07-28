@@ -28,6 +28,7 @@ Encore
     .addEntry('admin', './assets/admin/admin.js')
     .addEntry('match_details', './assets/admin/match/match_details.js')
     .addEntry('player', './assets/admin/player/player.js')
+    .addEntry('team', './assets/admin/team/team.js')
     .addEntry('datepicker', './assets/admin/datepicker.js')
     .addEntry('prevent_multiple_js_loading', './assets/admin/player/prevent_multiple_js_loading.js')
     .addEntry('login', './assets/js/login.js')
