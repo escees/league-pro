@@ -1,0 +1,79 @@
+<div class="col-lg-8 col-md-12 col-sm-12 mb-4 ">
+    <div class="card card-small ">
+        <div class="card-header text-center">
+            <h3>Lista zawodników</h3>
+            <button type="button" class=" text right btn btn-outline-info add-player" data-href="{{ path('app.player.add') }}" data-toggle="modal" data-target="#add-player-modal">Dodaj zawodnika</button>
+        </div>
+        <div class="card-body pt-0" id="team-list">
+            {% for team in teams %}
+                <h5 class="{{ loop.index > 1 ? 'mt-4' }}">{{ team.name }}: {{ team.players|length }} zawodników</h5>
+                <ul class="list-group team-{{ team.id }}" data-team-id="{{ team.id }}">
+                    <li class="list-group-item bg-warning">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                Imię i nazwisko
+                            </div>
+                            <div class="col-sm-3">
+                                Pozycja
+                            </div>
+                            <div class="col-sm-3">
+                                Data urodzenia
+                            </div>
+                            <div class="col-sm-2">
+                                Akcje
+                            </div>
+                        </div>
+                    </li>
+                    {% for player in team.players %}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    {{ player.name }}
+                                </div>
+                                <div class="col-sm-3">
+                                    {{ player.position }}
+                                </div>
+                                <div class="col-sm-3">
+                                    {{ player.dateOfBirth|date('Y-m-d') }}
+                                </div>
+                                <div class="btn-group col-sm-1">
+                                        <button class="btn btn-outline-info btn-sm edit-player"
+                                                data-href="{{ path('app.player.edit', {'player': player.id }) }}"
+                                                data-player-id="{{ player.id }}"
+                                                data-team-id="{{ team.id }}"
+                                                data-toggle="modal"
+                                                data-target="#edit-player-modal"
+                                        >
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-outline-danger btn-sm delete-player"
+                                                data-href="{{ path('app.player.delete', {'player': player.id }) }}"
+                                                data-name="{{ player.name }}"
+                                                data-toggle="modal"
+                                                data-target="#delete-player-modal"
+                                        >
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% include 'admin/modal/add_player.html.twig' %}
+{% include 'admin/modal/player.html.twig' with {
+    'playerModalId': 'edit-player-modal',
+    'playerModalTitle': 'Edytuj zawodnika',
+    'playerModalFormBody': 'edit-player-form-body',
+    'playerModalButton': 'edit-player',
+}%}
+{% include 'admin/modal/delete.html.twig' with {
+    'deleteModalId': 'delete-player-modal',
+    'deleteModalTitleId': 'deletePlayerModal',
+    'deleteModalTitle': 'Usuń zawodnika',
+    'deletedItem': 'zawodnika',
+    'deleteButtonId': 'delete-player',
+}%}

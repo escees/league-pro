@@ -2,43 +2,35 @@ import $ from "jquery";
 
 $(document).ready(function () {
 
-    var LPRO = LPRO || {};
+    let LPRO = LPRO || {};
 
     LPRO.MatchDetails = {};
 
-    LPRO.MatchDetails.init = function() {
-        LPRO.MatchDetails.handleScorersCollection();
-        LPRO.MatchDetails.handleCardsCollection();
-        LPRO.MatchDetails.handleGoalTypeRow();
-        LPRO.MatchDetails.handleCardTypeRow();
+    LPRO.MatchDetails.handleGoalFormRow = function () {
+        LPRO.MatchDetails.handleMatchEventFormRow('.add-scorer', '.goal-type-field');
     };
 
-    LPRO.MatchDetails.handleGoalTypeRow = function () {
-        $('.add-scorer').on('click', function () {
-            $('.goal-type-field').parent().addClass('col-sm-12 col-md-2');
-            console.log($('.goal-type-field').parent());
-        })
+    LPRO.MatchDetails.handleCardFormRow = function () {
+        LPRO.MatchDetails.handleMatchEventFormRow('.add-card', '.card-type-field');
     };
 
-    LPRO.MatchDetails.handleCardTypeRow = function () {
-        $('.add-card').on('click', function () {
-            $('.card-type-field').parent().addClass('col-sm-12 col-md-2');
-            console.log($('.goal-type-field').parent());
+    LPRO.MatchDetails.handleMatchEventFormRow = function (matchEventAddButton, matchEventTypeField) {
+        $(matchEventAddButton).on('click', function () {
+            $(matchEventTypeField).parent().addClass('col-sm-12 col-md');
         })
     };
 
     LPRO.MatchDetails.addNewMatchEventForm = function ($collectionHolder, $newLinkButton, $condition)  {
-        var prototype = $collectionHolder.data('prototype');
-        var index = $collectionHolder.data('index');
-        var newForm = prototype.replace(/__name__/g, index);
+        let prototype = $collectionHolder.data('prototype');
+        let index = $collectionHolder.data('index');
+        let newForm = prototype.replace(/__name__/g, index);
 
         $collectionHolder.data('index', index + 1);
-        var $newFormLi = $("<div class=\"" + $condition + "\"></div>")
+        let $newFormLi = $("<div class=\"" + $condition + "\"></div>")
             .append(newForm);
-            // .append($deleteLink);
 
         $newLinkButton.before($newFormLi);
-    }
+    };
 
 
     LPRO.MatchDetails.addEventDeleteLink =  function ($field, $condition) {
@@ -47,16 +39,16 @@ $(document).ready(function () {
 
             $(this).parent($condition).fadeOut().remove();
         });
-    }
+    };
 
     LPRO.MatchDetails.handleScorersCollection = function() {
-        var addLink = $('.scorers').data('add-session-condition-link');
-        // var deleteLink = $('.scorers').data('delete-session-condition-link');
-        var $addConditionLink = $(addLink);
-        var $newLinkButton = $('<div></div>').append($addConditionLink);
-        var $sessionCondition = 'scorer';
+        let $scorers = $('.scorers');
+        let addLink = $scorers.data('add-session-condition-link');
+        let $addConditionLink = $(addLink);
+        let $newLinkButton = $('<div></div>').append($addConditionLink);
+        let $sessionCondition = 'scorer';
 
-        var $collectionHolder = $('.scorers');
+        let $collectionHolder = $scorers;
         $collectionHolder.append($newLinkButton);
 
         $collectionHolder.data('index', $collectionHolder.find('.' + $sessionCondition).length);
@@ -71,13 +63,13 @@ $(document).ready(function () {
     };
 
     LPRO.MatchDetails.handleCardsCollection = function() {
-        var addLink = $('.match-cards').data('add-card-link');
-        // var deleteLink = $('.match-cards').data('delete-card-link');
-        var $addConditionLink = $(addLink);
-        var $newLinkButton = $('<div></div>').append($addConditionLink);
-        var $sessionCondition = 'match-card';
+        let $matchCards = $('.match-cards');
+        let addLink = $matchCards.data('add-card-link');
+        let $addConditionLink = $(addLink);
+        let $newLinkButton = $('<div></div>').append($addConditionLink);
+        let $sessionCondition = 'match-card';
 
-        var $collectionHolder = $('.match-cards');
+        let $collectionHolder = $matchCards;
         $collectionHolder.append($newLinkButton);
 
         $collectionHolder.data('index', $collectionHolder.find('.' + $sessionCondition).length);
@@ -89,6 +81,13 @@ $(document).ready(function () {
         });
 
         LPRO.MatchDetails.addEventDeleteLink('.delete-card', '.'+$sessionCondition);
+    };
+
+    LPRO.MatchDetails.init = function() {
+        LPRO.MatchDetails.handleScorersCollection();
+        LPRO.MatchDetails.handleCardsCollection();
+        LPRO.MatchDetails.handleGoalFormRow();
+        LPRO.MatchDetails.handleCardFormRow();
     };
 
     LPRO.MatchDetails.init();
