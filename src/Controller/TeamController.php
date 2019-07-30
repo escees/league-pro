@@ -123,7 +123,7 @@ class TeamController extends AbstractController
         $this->entityManager->remove($team);
         $this->entityManager->flush();
 
-        $this->addFlash(FlashType::DANGER, 'Drużyna została usunięty!');
+        $this->addFlash(FlashType::DANGER, 'Drużyna została usunięta!');
 
         return $this->render('admin/team/list.html.twig',
             [

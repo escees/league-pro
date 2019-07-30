@@ -73,7 +73,6 @@ class Team
      */
     private $awayFootballMatch;
 
-
     public function __construct()
     {
         $this->players = new ArrayCollection();

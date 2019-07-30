@@ -13,7 +13,6 @@ $(document).ready(function () {
     LPRO.Team.handleAddTeamForm = function () {
         $('.add-team').on('click', function (e) {
             let addPlayerFormSelector = '#add-team-form-body';
-            console.log('dupa1');
             $(addPlayerFormSelector).html('');
             $(addPlayerFormSelector).load($(this).data('href'));
 
@@ -29,7 +28,6 @@ $(document).ready(function () {
         $('.edit-team').on('click', function (e) {
             let editPlayerFormSelector = '#edit-team-form-body';
             $(editPlayerFormSelector).html('');
-            console.log('dupa2');
             $('#edit-team-form-body').load($(this).data('href'));
 
             $('#edit-team-modal').on('show.bs.modal', function(e) {
@@ -59,11 +57,6 @@ $(document).ready(function () {
         LPRO.Team.handleAjax('#edit-team')
     } ;
 
-    // LPRO.Team.handleDetailTooltips = function () {
-    //     $('.add-player').tooltip();
-    // };
-
-
     LPRO.Team.handleAjax = function (button) {
         let modalClose = true;
         $('body').on('click', button, function (e) {
@@ -75,7 +68,6 @@ $(document).ready(function () {
                 return;
             }
 
-            let selectedTeamId = $('#player_team').find('option:selected').val();
             let $form = $('form[name=team]');
             let section ='#team-list';
             let $serializedForm = $form.serialize();
@@ -99,9 +91,7 @@ $(document).ready(function () {
                     if ($('.modal-backdrop').hasClass('show')) {
                         $('.modal-backdrop').removeClass('show')
                     }
-                    // if(isEditButton) {
                         window.location.reload()
-                    // }
                 }
 
                 if (typeof data.status === 'undefined') {
@@ -123,7 +113,6 @@ $(document).ready(function () {
         LPRO.Team.handleSaveAddTeamForm();
         LPRO.Team.handleDeleteTeamForm();
         LPRO.Team.handleEditTeamForm();
-        // LPRO.Team.handleAjax();
     };
 
     LPRO.Team.init();

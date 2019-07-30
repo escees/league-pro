@@ -14,6 +14,7 @@ use App\Form\SimpleMatchDetailsType;
 use App\Repository\FootballMatchRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,10 +26,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class MatchController extends AbstractController
 {
     private $entityManager;
+    private $eventDispatcher;
 
-    public function __construct(EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        EventDispatcherInterface $eventDispatcher
+    ) {
         $this->entityManager = $entityManager;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**

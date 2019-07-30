@@ -15,12 +15,6 @@ class MatchResultType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-//        parent::buildForm($builder, $options);
-
-//        $builder->remove('startDate');
-//        $builder->remove('awayTeam');
-//        $builder->remove('homeTeam');
-
         $builder->add(
             'matchDetails',
             MatchDetailsType::class,
@@ -32,11 +26,6 @@ class MatchResultType extends AbstractType
             ]
         );
     }
-
-//    public function getParent()
-//    {
-//        return MatchType::class;
-//    }
 
     public function configureOptions(OptionsResolver $resolver)
     {
