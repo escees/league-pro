@@ -1,0 +1,62 @@
+<div class="col-lg-6 col-md-12 col-sm-12 mb-4">
+    <div class="card card-small ">
+        <div class="card-header text-center">
+            <h3>Lista drużyn</h3>
+            <button type="button" class=" text right btn btn-outline-info add-team" data-href="{{ path('app.team.add') }}" data-toggle="modal" data-target="#add-team-modal">Dodaj drużynę</button>
+        </div>
+        <div class="card-body pt-0" id="team-list">
+            {% for team in teams %}
+                <ul class="list-group team-{{ team.id }}" data-team-id="{{ team.id }}">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col">
+                                {{ team.name }}
+                            </div>
+                            <div class="btn-group col col-md col-lg-2">
+                                <button class="btn btn-outline-info btn-sm edit-team"
+                                        data-team-id="{{ team.id }}"
+                                        data-href="{{ path('app.team.edit', {'team': team.id}) }}"
+                                        data-toggle="modal"
+                                        data-target="#edit-team-modal"
+                                >
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm delete-team"
+                                        data-href="{{ path('app.team.delete', {'team': team.id}) }}"
+                                        data-name="{{ team.name }}"
+                                        data-toggle="modal"
+                                        data-target="#delete-team-modal"
+                                >
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% include 'admin/modal/team.html.twig' with {
+    'teamModalId': 'add-team-modal',
+    'teamModalTitle': 'Dodaj drużynę',
+    'teamModalFormBody': 'add-team-form-body',
+    'teamModalButton': 'save-team',
+    'teamModalTitleId': 'add-team-title',
+}%}
+
+{% include 'admin/modal/team.html.twig' with {
+    'teamModalId': 'edit-team-modal',
+    'teamModalTitle': 'Edytuj drużynę',
+    'teamModalFormBody': 'edit-team-form-body',
+    'teamModalButton': 'edit-team',
+    'teamModalTitleId': 'edit-team-title',
+}%}
+{% include 'admin/modal/delete.html.twig' with {
+    'deleteModalId': 'delete-team-modal',
+    'deleteModalTitleId': 'delete-team-title',
+    'deleteModalTitle': 'Usuń zawodnika',
+    'deletedItem': 'drużynę',
+    'deleteButtonId': 'delete-team',
+}%}
