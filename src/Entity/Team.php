@@ -29,24 +29,24 @@ class Team
     private $name;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      */
-    private $wins;
+    private $wins = 0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      */
-    private $winsAfterExtraTime;
+    private $winsAfterPenalties = 0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      */
-    private $draws;
+    private $draws = 0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      */
-    private $loses;
+    private $loses = 0;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -72,6 +72,26 @@ class Team
      * @ORM\OneToMany(targetEntity="App\Entity\FootballMatch", mappedBy="awayTeam")
      */
     private $awayFootballMatch;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $points = 0;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $goalsScored = 0;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $goalsConceded = 0;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $losesAfterPenalties = 0;
 
     public function __construct()
     {
@@ -140,14 +160,14 @@ class Team
         return $this;
     }
 
-    public function getWinsAfterExtraTime(): ?int
+    public function getWinsAfterPenalties(): ?int
     {
-        return $this->winsAfterExtraTime;
+        return $this->winsAfterPenalties;
     }
 
-    public function setWinsAfterExtraTime(?int $winsAfterExtraTime): self
+    public function setWinsAfterPenalties(?int $winsAfterPenalties): self
     {
-        $this->winsAfterExtraTime = $winsAfterExtraTime;
+        $this->winsAfterPenalties = $winsAfterPenalties;
 
         return $this;
     }
@@ -275,6 +295,93 @@ class Team
                 $awayFootballMatch->setAwayTeam(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function addPoints(int $pointsToAdd)
+    {
+        $this->points += $pointsToAdd;
+    }
+
+    public function setPoints(?int $points): self
+    {
+        $this->points = $points;
+
+        return $this;
+    }
+
+    public function getGoalsScored(): ?int
+    {
+        return $this->goalsScored;
+    }
+
+    public function addGoalsScored(int $goals): void
+    {
+        $this->goalsScored += $goals;
+    }
+
+    public function setGoalsScored(?int $goalsScored): self
+    {
+        $this->goalsScored = $goalsScored;
+
+        return $this;
+    }
+
+    public function getGoalsConceded(): ?int
+    {
+        return $this->goalsConceded;
+    }
+
+
+    public function addGoalsConceded(int $goals): void
+    {
+        $this->goalsConceded += $goals;
+    }
+
+    public function setGoalsConceded(?int $goalsConceded): self
+    {
+        $this->goalsConceded = $goalsConceded;
+
+        return $this;
+    }
+
+    public function addWin()
+    {
+        $this->wins++;
+        $this->addPoints(3);
+    }
+
+    public function addWinAfterPenalties()
+    {
+        $this->winsAfterExtraTime++;
+        $this->addPoints(2);
+    }
+
+    public function addLose()
+    {
+        $this->loses++;
+    }
+
+    public function addLoseAfterPenalties()
+    {
+        $this->losesAfterPenalties++;
+        $this->addPoints(1);
+    }
+
+    public function getLosesAfterPenalties(): ?int
+    {
+        return $this->losesAfterPenalties;
+    }
+
+    public function setLosesAfterPenalties(?int $losesAfterPenalties): self
+    {
+        $this->losesAfterPenalties = $losesAfterPenalties;
 
         return $this;
     }

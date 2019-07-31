@@ -19,40 +19,25 @@ class FootballMatchRepository extends ServiceEntityRepository
         parent::__construct($registry, FootballMatch::class);
     }
 
-    public function findAllFixtures()
+    public function getAllFixturesOrderedByStartDateAscending()
     {
         return $this->createQueryBuilder('m')
-            ->where('m.startDate > NOW()')
+            ->where('m.startDate > :now')
+            ->orderBy('m.startDate', 'ASC')
+            ->setParameter('now', new \Datetime())
+            ->setMaxResults(15)
             ->getQuery()
             ->execute();
     }
 
-    // /**
-    //  * @return FootballMatch[] Returns an array of FootballMatch objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getAllPlayedMatchesOrderedByStartDateDescending()
     {
         return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
+            ->where('m.startDate < :now')
+            ->orderBy('m.startDate', 'DESC')
+            ->setParameter('now', new \Datetime())
+            ->setMaxResults(15)
             ->getQuery()
-            ->getResult()
-        ;
+            ->execute();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?FootballMatch
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

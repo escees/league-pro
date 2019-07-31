@@ -7,6 +7,8 @@ use App\Entity\Card;
 use App\Entity\FootballMatch;
 use App\Entity\Goal;
 use App\Entity\MatchDetails;
+use App\Event\LeagueProEvents;
+use App\Event\MatchResultAddedEvent;
 use App\Form\MatchDetailsType;
 use App\Form\MatchResultType;
 use App\Form\MatchType;
@@ -57,7 +59,8 @@ class MatchController extends AbstractController
         return $this->render(
             'admin/matches/dashboard.html.twig',
             [
-                'matches' => $footballMatchRepository->findAll(),
+                'fixtures' => $footballMatchRepository->getAllFixturesOrderedByStartDateAscending(),
+                'matches' => $footballMatchRepository->getAllPlayedMatchesOrderedByStartDateDescending(),
                 'form' => $form->createView()
             ]
         );
@@ -73,6 +76,12 @@ class MatchController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
+
+            $this->eventDispatcher->dispatch(
+                new MatchResultAddedEvent($match),
+                LeagueProEvents::MATCH_RESULT_ADDED
+
+            );
 
             $this->addFlash(FlashType::SUCCESS, 'Zapisano szczegóły meczu');
 
@@ -105,6 +114,12 @@ class MatchController extends AbstractController
             $this->entityManager->persist($matchDetails);
             $this->entityManager->persist($match);
             $this->entityManager->flush();
+
+            $this->eventDispatcher->dispatch(
+                new MatchResultAddedEvent($match),
+                LeagueProEvents::MATCH_RESULT_ADDED
+
+            );
 
             $body = $this->renderView(
                 'admin/matches/edit_score.html.twig',

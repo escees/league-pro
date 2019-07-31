@@ -1,0 +1,74 @@
+<?php
+
+namespace App\EventListener;
+
+use App\Event\LeagueProEvents;
+use App\Event\MatchResultAddedEvent;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class MatchResultEventListener implements EventSubscriberInterface
+{
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return [
+            LeagueProEvents::MATCH_RESULT_ADDED => 'onResultAdded',
+        ];
+    }
+
+    public function onResultAdded(MatchResultAddedEvent $matchResultAddedEvent) //@todo refactor this spaghetti
+    {
+        $match = $matchResultAddedEvent->getMatch();
+
+        $homeTeam = $match->getHomeTeam();
+        $awayTeam = $match->getAwayTeam();
+        $matchDetails = $match->getMatchDetails();
+
+        $awayTeamGoals = $matchDetails->getAwayTeamGoals();
+        $homeTeamGoals = $matchDetails->getHomeTeamGoals();
+
+        $homeTeam->addGoalsScored($homeTeamGoals);
+        $homeTeam->addGoalsConceded($awayTeamGoals);
+        $awayTeam->addGoalsScored($awayTeamGoals);
+        $awayTeam->addGoalsConceded($homeTeamGoals);
+
+        if ($homeTeamGoals > $awayTeamGoals) {
+            $homeTeam->addWin();
+            $awayTeam->addLose();
+        }
+
+        if ($homeTeamGoals < $awayTeamGoals) {
+            $awayTeam->addWin();
+            $homeTeam->addLose();
+        }
+
+        if ($homeTeamGoals === $awayTeamGoals) {
+            $awayPenalties = $matchDetails->getAwayTeamPenalties();
+            $homePenalties = $matchDetails->getHomeTeamPenalties();
+
+            if ($homePenalties > $awayPenalties) {
+                $homeTeam->addWinAfterPenalties();
+                $awayTeam->addLoseAfterPenalties();
+            }
+
+            if ($homePenalties < $awayPenalties) {
+                $awayTeam->addWinAfterPenalties();
+                $homeTeam->addLoseAfterPenalties();
+            }
+        }
+
+        $this->entityManager->persist($homeTeam);
+        $this->entityManager->persist($awayTeam);
+        $this->entityManager->flush();
+    }
+}

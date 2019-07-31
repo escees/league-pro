@@ -19,22 +19,30 @@ class TeamRepository extends ServiceEntityRepository
         parent::__construct($registry, Team::class);
     }
 
-    // /**
-    //  * @return Team[] Returns an array of Team objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Team[] Returns an array of Team objects
+      */
+//    /*
+    public function getTeamStandings()
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('t.points')
+            ->addSelect('t.name')
+            ->addSelect('t.wins')
+            ->addSelect('t.loses')
+            ->addSelect('t.winsAfterPenalties')
+            ->addSelect('t.losesAfterPenalties')
+            ->addSelect('t.goalsScored')
+            ->addSelect('t.goalsConceded')
+            ->addSelect('t.goalsScored  - t.goalsConceded as goals_diff')
+            ->addSelect('t.wins + t.loses + t.winsAfterPenalties + t.losesAfterPenalties as played')
+            ->orderBy('t.points', 'DESC')
+            ->addOrderBy('goals_diff', 'DESC')
             ->getQuery()
-            ->getResult()
+            ->execute()
         ;
     }
-    */
+//    */
 
     /*
     public function findOneBySomeField($value): ?Team
