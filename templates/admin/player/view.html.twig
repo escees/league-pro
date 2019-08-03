@@ -14,10 +14,12 @@
                                     <div class="form-group col-md-6">
                                         {{ form_label(form.name) }}
                                         {{ form_widget(form.name) }}
+                                        {{ form_errors(form.name)}}
                                     </div>
                                     <div class="form-group col-md-6">
                                         {{ form_label(form.team) }}
                                         {{ form_widget(form.team) }}
+                                        {{ form_errors(form.team)}}
                                     </div>
                                 </div>
                                 <div class="form-row">

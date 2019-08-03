@@ -95,7 +95,7 @@ $(document).ready(function () {
                 }
 
                 if (typeof data.status === 'undefined') {
-                    $('form[name=player]').replaceWith(data);
+                    $('form[name=team]').replaceWith($(data).find('form[name=team]'));
                     modalClose = false;
                 }
             }).always(function () {
