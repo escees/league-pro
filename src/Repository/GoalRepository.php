@@ -19,32 +19,33 @@ class GoalRepository extends ServiceEntityRepository
         parent::__construct($registry, Goal::class);
     }
 
-    // /**
-    //  * @return Goal[] Returns an array of Goal objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getBestScorers()
     {
         return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('g.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('COUNT(g.id) as goals')
+            ->addSelect('s.name as name')
+            ->addSelect('t.name as team')
+            ->leftJoin('g.scorer', 's')
+            ->leftJoin('s.team', 't')
+            ->groupBy('s.name, t.name')
+            ->orderBy('goals', 'DESC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->execute()
+            ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Goal
+    public function getBestAssistants()
     {
         return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('COUNT(g.id) as assists')
+            ->addSelect('a.name as name')
+            ->addSelect('t.name as team')
+            ->leftJoin('g.assistant', 'a')
+            ->leftJoin('a.team', 't')
+            ->groupBy('a.name, t.name')
+            ->orderBy('assists', 'DESC')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->execute()
+            ;
     }
-    */
 }

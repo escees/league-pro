@@ -359,7 +359,7 @@ class Team
 
     public function addWinAfterPenalties()
     {
-        $this->winsAfterExtraTime++;
+        $this->winsAfterPenalties++;
         $this->addPoints(2);
     }
 
