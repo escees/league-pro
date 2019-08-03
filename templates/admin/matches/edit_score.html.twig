@@ -23,7 +23,10 @@
                                             <span class="collections-content ">{{ match.homeTeam.name }}</span>
                                         </div>
                                         <div class="col-sm-1 col-md col-lg-1 text-center text-nowrap">
-                                            {{ match.matchDetails ? (match.matchDetails.homeTeamGoals ~ ' : ' ~ match.matchDetails.awayTeamGoals) : setScoreButton|raw }}
+                                            {{ match.matchDetails ?
+                                                '('~match.matchDetails.homeTeamPenalties~') '~(match.matchDetails.homeTeamGoals ~ ' : ' ~ match.matchDetails.awayTeamGoals) ~' ('~match.matchDetails.awayTeamPenalties~')' :
+                                                setScoreButton|raw
+                                            }}
                                         </div>
                                         <div class="col-sm-2 col-md col-lg-4 text-left">
                                             <span class="collections-content">{{ match.awayTeam.name }}</span>

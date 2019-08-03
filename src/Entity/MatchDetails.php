@@ -48,6 +48,16 @@ class MatchDetails
      */
     private $cards;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $homeTeamPenalties;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $awayTeamPenalties;
+
     public function __construct()
     {
         $this->goals = new ArrayCollection();
@@ -159,6 +169,30 @@ class MatchDetails
                 $card->setMatchDetails(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getHomeTeamPenalties(): ?int
+    {
+        return $this->homeTeamPenalties;
+    }
+
+    public function setHomeTeamPenalties(?int $homeTeamPenalties): self
+    {
+        $this->homeTeamPenalties = $homeTeamPenalties;
+
+        return $this;
+    }
+
+    public function getAwayTeamPenalties(): ?int
+    {
+        return $this->awayTeamPenalties;
+    }
+
+    public function setAwayTeamPenalties(?int $awayTeamPenalties): self
+    {
+        $this->awayTeamPenalties = $awayTeamPenalties;
 
         return $this;
     }

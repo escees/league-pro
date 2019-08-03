@@ -70,6 +70,26 @@ class MatchDetailsType extends AbstractType
                 ],
             ]
         );
+
+        $builder->add(
+            'homeTeamPenalties',
+            NumberType::class,
+            [
+                'attr' => [
+                    'class' => 'form-control col-sm-3'
+                ],
+            ]
+        );
+
+        $builder->add(
+            'awayTeamPenalties',
+            NumberType::class,
+            [
+                'attr' => [
+                    'class' => 'form-control col-sm-3'
+                ],
+            ]
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
