@@ -23,6 +23,7 @@ class MatchResultType extends AbstractType
                     'class' => 'form-control'
                 ],
                 'label' => false,
+                'match' => $options['data']
             ]
         );
     }
