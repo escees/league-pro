@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\FootballMatch;
 use App\Entity\MatchDetails;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -14,6 +15,11 @@ class MatchDetailsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
+
+        /** @var FootballMatch $match */
+        $match = $options['match'];
+        $homeTeam = $match->getHomeTeam();
+        $awayTeam = $match->getAwayTeam();
 
         $builder->add(
             'homeTeamGoals',
@@ -49,7 +55,11 @@ class MatchDetailsType extends AbstractType
                 'label' => false,
                 'entry_options' => [
                     'label' => false,
+                    'home_team' => $homeTeam,
+                    'away_team' => $awayTeam
                 ],
+
+
             ]
         );
 
@@ -67,6 +77,8 @@ class MatchDetailsType extends AbstractType
                 'label' => false,
                 'entry_options' => [
                     'label' => false,
+                    'home_team' => $homeTeam,
+                    'away_team' => $awayTeam
                 ],
             ]
         );
@@ -95,7 +107,8 @@ class MatchDetailsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => MatchDetails::class
+            'data_class' => MatchDetails::class,
+            'match' => null
         ]);
     }
 }

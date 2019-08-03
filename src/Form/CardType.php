@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Card;
 use App\Entity\Player;
+use App\Repository\PlayerRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -17,6 +18,9 @@ class CardType extends AbstractType
     {
         parent::buildForm($builder, $options);
 
+        $homeTeam = $options['home_team'];
+        $awayTeam = $options['away_team'];
+
         $builder->add(
             'player',
             EntityType::class,
@@ -24,9 +28,13 @@ class CardType extends AbstractType
                 'label' => false,
                 'class' => Player::class,
                 'choice_label' => 'name',
+                'query_builder' => function (PlayerRepository $playerRepository) use ($homeTeam, $awayTeam) {
+                    return $playerRepository->findPlayersForTeamsParticipatingInMatchQueryBuilder($homeTeam, $awayTeam);
+                } ,
                 'attr' => [
                     'class' => 'form-control card-type-field'
                 ],
+                'placeholder' => 'Wybierz kartkowicza'
             ]
         );
 
@@ -61,7 +69,9 @@ class CardType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' =>  Card::class
+            'data_class' =>  Card::class,
+            'home_team' => null,
+            'away_team' => null
         ]);
     }
 }
