@@ -11,4 +11,6 @@ $(document).ready(function () {
             format: 'd/m/Y H:i'
         });
     };
+
+    LPRO.Datepicker.init();
 });

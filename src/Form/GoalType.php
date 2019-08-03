@@ -26,7 +26,9 @@ class GoalType extends AbstractType
             [
                 'label' => false,
                 'class' => Player::class,
-                'choice_label' => 'name',
+                'choice_label' => function (Player $player) {
+                    return $player->getName() . ' nr ' . $player->getNumber();
+                },
                 'query_builder' => function (PlayerRepository $playerRepository) use ($homeTeam, $awayTeam) {
                     return $playerRepository->findPlayersForTeamsParticipatingInMatchQueryBuilder($homeTeam, $awayTeam);
                 } ,
@@ -64,7 +66,7 @@ class GoalType extends AbstractType
                 'attr' => [
                     'class' => 'form-control goal-type-field col',
                 ],
-                'placeholder' => 'Asystent(opcjonalnie)'
+                'placeholder' => 'Asystent (opcjonalnie)'
             ]
         );
     }

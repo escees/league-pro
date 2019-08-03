@@ -58,6 +58,11 @@ class Player
      */
     private $position;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $number;
+
     public function __construct()
     {
         $this->goals = new ArrayCollection();
@@ -219,6 +224,18 @@ class Player
     public function setPosition(?string $position): self
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    public function getNumber(): ?int
+    {
+        return $this->number;
+    }
+
+    public function setNumber(?int $number): self
+    {
+        $this->number = $number;
 
         return $this;
     }
