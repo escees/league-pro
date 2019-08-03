@@ -3,11 +3,8 @@
 namespace App\Controller;
 
 use App\Dictionary\FlashType;
-use App\Entity\Player;
 use App\Entity\Team;
-use App\Form\PlayerType;
 use App\Form\TeamType;
-use App\Repository\PlayerRepository;
 use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

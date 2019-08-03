@@ -13,10 +13,13 @@
                             <div class="col-sm-4">
                                 Imię i nazwisko
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
+                                Numer
+                            </div>
+                            <div class="col-sm-2">
                                 Pozycja
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 Data urodzenia
                             </div>
                             <div class="col-sm-2">
@@ -30,10 +33,13 @@
                                 <div class="col-sm-4">
                                     {{ player.name }}
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
+                                    {{ player.number }}
+                                </div>
+                                <div class="col-sm-2">
                                     {{ player.position }}
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     {{ player.dateOfBirth|date('Y-m-d') }}
                                 </div>
                                 <div class="btn-group col-sm-1">
