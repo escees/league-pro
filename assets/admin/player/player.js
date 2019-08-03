@@ -1,4 +1,5 @@
 import $ from "jquery";
+require('bootstrap4-notify');
 
 $(document).ready(function () {
 
@@ -75,7 +76,6 @@ $(document).ready(function () {
                 return;
             }
 
-            let selectedTeamId = $('#player_team').find('option:selected').val();
             let $form = $('form[name=player]');
             let section ='#team-list';
             let $serializedForm = $form.serialize();
@@ -99,13 +99,11 @@ $(document).ready(function () {
                     if ($('.modal-backdrop').hasClass('show')) {
                         $('.modal-backdrop').removeClass('show')
                     }
-                    // if(isEditButton) {
-                        window.location.reload()
-                    // }
+                    window.location.reload()
                 }
 
                 if (typeof data.status === 'undefined') {
-                    $('form[name=player]').replaceWith(data);
+                    $('form[name=player]').replaceWith($(data).find('form[name=player]'));
                     modalClose = false;
                 }
             }).always(function () {
@@ -123,7 +121,6 @@ $(document).ready(function () {
         LPRO.Player.handleSaveAddPlayerForm();
         LPRO.Player.handleDeletePlayerForm();
         LPRO.Player.handleEditPlayerForm();
-        // LPRO.Player.handleAjax();
     };
 
     LPRO.Player.init();

@@ -8,16 +8,18 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item p-3">
                     <div class="row">
-                        <div class="col">
+                        <div class="col player-form">
                             {{ form_start(form, {'attr': {'data-edit-player': path('app.player.edit', {'player': form.vars.data.id ?? 0}) }}) }}
                                 <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 player-name">
                                         {{ form_label(form.name) }}
                                         {{ form_widget(form.name) }}
+                                        {{ form_errors(form.name)}}
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 player-team">
                                         {{ form_label(form.team) }}
                                         {{ form_widget(form.team) }}
+                                        {{ form_errors(form.team)}}
                                     </div>
                                 </div>
                                 <div class="form-row">
