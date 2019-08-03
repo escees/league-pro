@@ -1,4 +1,5 @@
 import $ from "jquery";
+require('bootstrap4-notify');
 
 $(document).ready(function () {
 
@@ -120,7 +121,6 @@ $(document).ready(function () {
         LPRO.Player.handleSaveAddPlayerForm();
         LPRO.Player.handleDeletePlayerForm();
         LPRO.Player.handleEditPlayerForm();
-        // LPRO.Player.handleAjax();
     };
 
     LPRO.Player.init();
