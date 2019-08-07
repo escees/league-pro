@@ -119,14 +119,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for assistant in bestAssistants %}
-                        <tr>
-                            <td>{{ loop.index }}</td>
-                            <td>{{ assistant.name }}</td>
-                            <td>{{ assistant.team }}</td>
-                            <td>{{ assistant.assists }}</td>
-                        </tr>
-                    {% endfor %}
+                        {% for assistant in bestAssistants %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ assistant.name }}</td>
+                                <td>{{ assistant.team }}</td>
+                                <td>{{ assistant.assists }}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

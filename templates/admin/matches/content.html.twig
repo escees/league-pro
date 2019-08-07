@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mt-4">
     <div class="col-sm-12">
         <div class="card card-small mb-4">
             <div class="card-header border-bottom">
@@ -100,7 +100,7 @@
                                     <span class="collections-content">{{ match.awayTeam.name }}</span>
                                 </div>
                                 <div class="col-sm-1 col-md col-lg-1">
-                                    <a href="{{ path('app.match.edit_result', {'match': match.id}) }}" class="btn btn-outline-info btn-sm match-details" data-toggle="tooltip" data-placement="left" title="Uzupełnij wynik, strzelców, kartki i asystentów">
+                                    <a href="{{ path('app.match.add_result', {'match': match.id}) }}" class="btn btn-outline-info btn-sm match-details" data-toggle="tooltip" data-placement="left" title="Uzupełnij wynik, strzelców, kartki i asystentów">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </div>

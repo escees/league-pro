@@ -42,6 +42,7 @@ class GoalRepository extends ServiceEntityRepository
             ->addSelect('t.name as team')
             ->leftJoin('g.assistant', 'a')
             ->leftJoin('a.team', 't')
+            ->where('g.assistant IS NOT NULL')
             ->groupBy('a.name, t.name')
             ->orderBy('assists', 'DESC')
             ->getQuery()

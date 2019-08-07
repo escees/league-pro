@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Repository\GoalRepository;
 use App\Repository\TeamRepository;
@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminStatisticsController extends AbstractController
 {
     /**
-     * @Route("/statistics", name="app.admin.statistics")
+     * @Route("/admin/statistics", name="app.admin.statistics")
      */
     public function index(
         Request $request,

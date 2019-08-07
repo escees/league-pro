@@ -57,18 +57,14 @@
                         <hr>
                     </div>
                     <div class="scorers col-sm-12"
-                         data-add-session-condition-link="{{ '<br /><button type="button" class="btn btn-outline-info add-scorer">' ~ 'Dodaj strzelca' ~ '</button><br /><br/><br />' }}"
-                         data-prototype="{{ formMacros.goalScorer(form.matchDetails.goals.vars.prototype)|e }}"
+                         data-prototype="{{ formMacros.goalScorer(form.matchDetails.goals.vars.prototype)|e('html_attr') }}"
+                         data-add-scorer-link="{{ '<br /><button type="button" class="btn btn-outline-info add-scorer">' ~ 'Dodaj strzelca' ~ '</button><br /><br/><br />' }}"
                     >
                         {% for goal in form.matchDetails.goals %}
                             <div class="col">
                                 {{ formMacros.goalScorer(goal) }}
                             </div>
                         {% endfor %}
-                    </div>
-                    <div class="col-sm-12">
-                        <h4>Kartki</h4>
-                        <hr>
                     </div>
                     <div class="match-cards col-sm-12"
                          data-add-card-link="{{ '<br /><button type="button" class="btn btn-outline-info add-card">' ~ 'Dodaj kartkę' ~ '</button><br /><br/><br />' }}"

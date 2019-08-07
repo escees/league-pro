@@ -26,7 +26,7 @@ class MatchResultEventListener implements EventSubscriberInterface
         ];
     }
 
-    public function onResultAdded(MatchResultAddedEvent $matchResultAddedEvent) //@todo refactor this spaghetti
+    public function onResultAdded(MatchResultAddedEvent $matchResultAddedEvent) //@todo try refactor
     {
         $match = $matchResultAddedEvent->getMatch();
 
@@ -66,6 +66,8 @@ class MatchResultEventListener implements EventSubscriberInterface
                 $homeTeam->addLoseAfterPenalties();
             }
         }
+
+        $match->setCompleteStats(true);
 
         $this->entityManager->persist($homeTeam);
         $this->entityManager->persist($awayTeam);
