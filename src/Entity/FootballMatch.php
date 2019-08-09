@@ -53,7 +53,7 @@ class FootballMatch
     /**
      * @ORM\Column(type="boolean")
      */
-    private $completeStats;
+    private $completeStats = 0;
 
     public function getId(): ?int
     {

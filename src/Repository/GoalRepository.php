@@ -19,9 +19,9 @@ class GoalRepository extends ServiceEntityRepository
         parent::__construct($registry, Goal::class);
     }
 
-    public function getBestScorers()
+    public function getBestScorers(bool $forFrontend)
     {
-        return $this->createQueryBuilder('g')
+        $qb = $this->createQueryBuilder('g')
             ->select('COUNT(g.id) as goals')
             ->addSelect('s.name as name')
             ->addSelect('t.name as team')
@@ -29,9 +29,14 @@ class GoalRepository extends ServiceEntityRepository
             ->leftJoin('s.team', 't')
             ->groupBy('s.name, t.name')
             ->orderBy('goals', 'DESC')
-            ->getQuery()
-            ->execute()
-            ;
+            ->setMaxResults(10);
+
+
+        if($forFrontend) {
+            $qb->setMaxResults(8);
+        }
+
+        return $qb->getQuery()->execute();
     }
 
     public function getBestAssistants()

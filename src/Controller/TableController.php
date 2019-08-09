@@ -20,7 +20,7 @@ class TableController extends AbstractController
         GoalRepository $goalRepository,
         CanadianPointsCalculator $canadianPointsCalculator
     ) {
-        $bestScorers = $goalRepository->getBestScorers();
+        $bestScorers = $goalRepository->getBestScorers(true);
         $bestAssistants = $goalRepository->getBestAssistants();
 
         return $this->render(

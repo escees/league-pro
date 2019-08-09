@@ -78,8 +78,8 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
     .copyFiles({
-        from: './assets/admin2/images',
-        to: 'admin/images/[path][name].[ext]'
+        from: './assets/img',
+        to: '/img/[path][name].[ext]'
     })
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()

@@ -21,7 +21,7 @@
 
                                             <span class="goals">
                                                 <b>{{ result.matchDetails.homeTeamGoals }}</b> - <b>{{ result.matchDetails.awayTeamGoals }}</b>
-                                                <a href="single-result.html" class="btn theme">View More</a>
+                                                <a href="{{ path('app.single_result', {'match': result.id}) }}" class="btn theme">View More</a>
                                             </span>
 
                                             <a href="single-team.html">

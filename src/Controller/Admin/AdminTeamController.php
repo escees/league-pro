@@ -115,7 +115,7 @@ class AdminTeamController extends AbstractController
      *     name="app.team.delete",
      * )
      */
-    public function deleteAction(Request $request, Team $team, TeamRepository $teamRepository): Response
+    public function delete(Request $request, Team $team, TeamRepository $teamRepository): Response
     {
         $this->entityManager->remove($team);
         $this->entityManager->flush();

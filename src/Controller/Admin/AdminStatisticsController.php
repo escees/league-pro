@@ -20,7 +20,7 @@ class AdminStatisticsController extends AbstractController
         GoalRepository $goalRepository,
         CanadianPointsCalculator $canadianPointsCalculator
     ) {
-        $bestScorers = $goalRepository->getBestScorers();
+        $bestScorers = $goalRepository->getBestScorers(false);
         $bestAssistants = $goalRepository->getBestAssistants();
 
         return $this->render(
@@ -33,5 +33,4 @@ class AdminStatisticsController extends AbstractController
             ]
         );
     }
-
 }

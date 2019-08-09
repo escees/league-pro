@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\FootballMatch;
+use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\AbstractQuery;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,13 +21,40 @@ class FootballMatchRepository extends ServiceEntityRepository
         parent::__construct($registry, FootballMatch::class);
     }
 
+    public function getNextMatch()
+    {
+        return $this->createQueryBuilder('m')
+            ->select('m')
+            ->where('m.startDate > :now')
+            ->orderBy('m.startDate', 'ASC')
+            ->setParameter('now', new \Datetime())
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
     public function getAllFixturesOrderedByStartDateAscending()
     {
         return $this->createQueryBuilder('m')
             ->where('m.startDate > :now')
             ->orderBy('m.startDate', 'ASC')
             ->setParameter('now', new \Datetime())
-            ->setMaxResults(15)
+            ->setMaxResults(16)
+            ->getQuery()
+            ->execute();
+    }
+
+    public function getAllFixturesByTeam(Team $team)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.startDate > :now')
+            ->andWhere('m.homeTeam = :team OR m.awayTeam = :team')
+            ->orderBy('m.startDate', 'ASC')
+            ->setParameters([
+                'now' => new \Datetime(),
+                'team' => $team
+            ])
+            ->setMaxResults(16)
             ->getQuery()
             ->execute();
     }
@@ -34,9 +63,38 @@ class FootballMatchRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('m')
             ->where('m.startDate < :now')
+            ->andWhere('m.matchDetails IS NOT NULL')
             ->orderBy('m.startDate', 'DESC')
             ->setParameter('now', new \Datetime())
-            ->setMaxResults(15)
+            ->setMaxResults(16)
+            ->getQuery()
+            ->execute();
+    }
+
+    public function getLastThreeMatches()
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.startDate < :now')
+            ->andWhere('m.matchDetails IS NOT NULL')
+            ->orderBy('m.startDate', 'DESC')
+            ->setParameter('now', new \Datetime())
+            ->setMaxResults(3)
+            ->getQuery()
+            ->execute();
+    }
+
+    public function getAllResultsOrderedByStartDateDescendingByTeam(Team $team)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.startDate < :now')
+            ->andWhere('m.homeTeam = :team OR m.awayTeam = :team')
+            ->andWhere('m.matchDetails IS NOT NULL')
+            ->orderBy('m.startDate', 'DESC')
+            ->setParameters([
+                'now' => new \Datetime(),
+                'team' => $team
+            ])
+            ->setMaxResults(16)
             ->getQuery()
             ->execute();
     }

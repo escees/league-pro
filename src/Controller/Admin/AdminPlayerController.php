@@ -117,7 +117,7 @@ class AdminPlayerController extends AbstractController
      *     name="app.player.delete",
      * )
      */
-    public function deleteAction(Request $request, Player $player, TeamRepository $teamRepository): Response
+    public function delete(Request $request, Player $player, TeamRepository $teamRepository): Response
     {
         $this->entityManager->remove($player);
         $this->entityManager->flush();
