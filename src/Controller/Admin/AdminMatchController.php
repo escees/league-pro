@@ -60,7 +60,7 @@ class AdminMatchController extends AbstractController
         return $this->render(
             'admin/matches/dashboard.html.twig',
             [
-                'fixtures' => $footballMatchRepository->getAllFixturesOrderedByStartDateAscending(),
+                'fixtures' => $footballMatchRepository->getNumberOfFixturesOrderedByStartDateAscending(16),
                 'matches' => $footballMatchRepository->getAllPlayedMatchesOrderedByStartDateDescending(),
                 'form' => $form->createView()
             ]

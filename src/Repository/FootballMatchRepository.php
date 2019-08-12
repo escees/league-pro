@@ -33,13 +33,13 @@ class FootballMatchRepository extends ServiceEntityRepository
             ->getSingleResult();
     }
 
-    public function getAllFixturesOrderedByStartDateAscending()
+    public function getNumberOfFixturesOrderedByStartDateAscending(int $number)
     {
         return $this->createQueryBuilder('m')
             ->where('m.startDate > :now')
             ->orderBy('m.startDate', 'ASC')
             ->setParameter('now', new \Datetime())
-            ->setMaxResults(16)
+            ->setMaxResults($number)
             ->getQuery()
             ->execute();
     }

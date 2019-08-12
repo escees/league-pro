@@ -9,7 +9,7 @@
                 <a href="#">Liga</a>
                 <div class="sf-mega">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <h5><i class="fa fa-trophy" aria-hidden="true"></i>Ekstraklasa</h5>
                             <ul>
                                 <li><a href="{{ path('app.table') }}">Tabela</a></li>
@@ -19,27 +19,18 @@
                             </ul>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <h5><i class="fa fa-users" aria-hidden="true"></i> Lista drużyn</h5>
                             <div class="img-hover">
                                 <img src="{{ asset('build/img/blog/1.jpg') }}" alt="" class="img-responsive">
-                                <div class="overlay"><a href="teams.html">+</a></div>
+                                <div class="overlay"><a href="{{ path('app.team.list') }}">+</a></div>
                             </div>
                         </div>
-
-                        <div class="col-md-3">
-                            <h5><i class="fa fa-futbol-o" aria-hidden="true"></i> Lista zawodników</h5>
-                            <div class="img-hover">
-                                <img src="{{ asset('build/img/blog/2.jpg') }}" alt="" class="img-responsive">
-                                <div class="overlay"><a href="players.html">+</a></div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <h5><i class="fa fa-gamepad" aria-hidden="true"></i> Wyniki</h5>
                             <div class="img-hover">
                                 <img src="{{ asset('build/img/blog/3.jpg') }}" alt="" class="img-responsive">
-                                <div class="overlay"><a href="results.html">+</a></div>
+                                <div class="overlay"><a href="{{ path('app.results') }}">+</a></div>
                             </div>
                         </div>
                     </div>
@@ -54,15 +45,6 @@
                     </li>
                 </ul>
             </li>
-            <li class="current">
-                <a href="players.html">Zawodnicy</a>
-                <ul class="sub-current">
-                    <li>
-                        <a href="players.html">Lista zawodników</a>
-                    </li>
-                </ul>
-            </li>
-
             <li class="current">
                 <a href="{{ path('app.fixtures')}}">Terminarz</a>
                 <ul class="sub-current">

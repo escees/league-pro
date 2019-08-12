@@ -26,7 +26,8 @@ class HomepageController extends AbstractController
                 'teams' => $teamRepository->getTeamStandings(),
                 'results' => $footballMatchRepository->getLastThreeMatches(),
                 'bestScorers' => $goalRepository->getBestScorers(true),
-                'nextMatch' => $footballMatchRepository->getNextMatch()
+                'nextMatch' => $footballMatchRepository->getNextMatch(),
+                'fixtures' => $footballMatchRepository->getNumberOfFixturesOrderedByStartDateAscending(5)
             ]
         );
     }

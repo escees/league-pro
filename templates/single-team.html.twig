@@ -180,7 +180,7 @@
                                             <div class="item-player">
                                                 <div class="head-player">
                                                     <img src="{{ asset('build/img/players/'~random(1,7)~'.jpg')}}" alt="location-team">
-                                                    <div class="overlay"><a href="single-player.html">+</a></div>
+{#                                                    <div class="overlay"><a href="single-player.html">+</a></div>#}
                                                 </div>
                                                 <div class="info-player">
                                                     <span class="number-player">
@@ -196,9 +196,12 @@
                                                         </li>
                                                         <li><strong>Liczba występów:</strong> <span>{{ player.appearances}}</span></li>
                                                         <li><strong>Wiek:</strong><span>28</span></li>
+                                                        <li><strong>Bramki:</strong><span>{{ player.goals|length }}</span></li>
+                                                        <li><strong>Asysty:</strong><span>{{ player.assists|length }}</span></li>
+
                                                     </ul>
                                                 </div>
-                                                <a href="single-player.html" class="btn">Szczegóły zawodnika <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+{#                                                <a href="single-player.html" class="btn">Szczegóły zawodnika <i class="fa fa-angle-right" aria-hidden="true"></i></a>#}
                                             </div>
                                         </div>
                                     {% endfor %}
@@ -248,17 +251,17 @@
                                                     </span>
 
                                                     <div class="goals-result">
-                                                        <a href="single-team.html">
+                                                        <a href="{{ path('app.team.view', {'team': result.homeTeam.id}) }}">
                                                             <img src="{{ asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                             {{ result.homeTeam.name }}
                                                         </a>
 
                                                         <span class="goals">
                                                             <b>{{ result.matchDetails.homeTeamGoals }}</b> - <b>{{ result.matchDetails.awayTeamGoals }}</b>
-                                                            <a href="single-result.html" class="btn theme">Zobacz więcej</a>
+                                                            <a href="{{ path('app.single_result', {'match': result.id}) }}" class="btn theme">Zobacz więcej</a>
                                                         </span>
 
-                                                        <a href="single-team.html">
+                                                        <a href="{{ path('app.team.view', {'team': result.awayTeam.id}) }}">
                                                             <img src="{{ asset('build/img/clubs-logos/por.png') }}" alt="">
                                                             {{ result.awayTeam.name }}
                                                         </a>
@@ -444,42 +447,6 @@
                         </div>
                     </div>
 
-                </div>
-            </div>
-        </div>
-        <div class="section-newsletter">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="text-center">
-                            <h2>Enter your e-mail and <span class="text-resalt">subscribe</span> to our newsletter.</h2>
-                            <p>Duis non lorem porta,  eros sit amet, tempor sem. Donec nunc arcu, semper a tempus et, consequat.</p>
-                        </div>
-                        <form id="newsletterForm" action="php/mailchip/newsletter-subscribe.php">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-envelope"></i>
-                                        </span>
-                                        <input class="form-control" placeholder="Your Name" name="name"  type="text" required="required">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-envelope"></i>
-                                        </span>
-                                        <input class="form-control" placeholder="Your  Email" name="email"  type="email" required="required">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary" type="submit" name="subscribe" >SIGN UP</button>
-                                         </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <div id="result-newsletter"></div>
-                    </div>
                 </div>
             </div>
         </div>

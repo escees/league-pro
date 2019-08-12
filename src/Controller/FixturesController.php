@@ -22,7 +22,7 @@ class FixturesController extends AbstractController
         return $this->render(
             'fixtures.html.twig',
             [
-                'fixtures' => $footballMatchRepository->getAllFixturesOrderedByStartDateAscending(),
+                'fixtures' => $footballMatchRepository->getNumberOfFixturesOrderedByStartDateAscending(16),
             ]
         );
     }
