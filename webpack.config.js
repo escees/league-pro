@@ -29,6 +29,7 @@ Encore
     .addEntry('match_details', './assets/admin/match/match_details.js')
     .addEntry('player', './assets/admin/player/player.js')
     .addEntry('team', './assets/admin/team/team.js')
+    .addEntry('news', './assets/admin/news/news.js')
     .addEntry('datepicker', './assets/admin/datepicker.js')
     .addEntry('player_datepicker', './assets/admin/player/player_datepicker.js')
     .addEntry('prevent_multiple_js_loading', './assets/admin/player/prevent_multiple_js_loading.js')
@@ -80,6 +81,10 @@ Encore
     .copyFiles({
         from: './assets/img',
         to: '/img/[path][name].[ext]'
+    })
+    .copyFiles({
+        from: './assets/admin/tinymce/skins',
+        to: '/skins/[path][name].[ext]'
     })
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()

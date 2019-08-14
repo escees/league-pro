@@ -1,0 +1,53 @@
+<div class="col-lg-6 col-md-12 col-sm-12 mb-4 mt-4">
+    <div class="card card-small ">
+        <div class="card-header text-center">
+            <h3>Lista newsów</h3>
+            <a class="btn btn-outline-info" href="{{ path('app.admin.news.add') }}">Dodaj news</a>
+        </div>
+        <div class="card-body pt-0" id="team-list">
+            {% for news in news %}
+                <ul class="list-group team-{{ news.id }}" data-team-id="{{ news.id }}">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col">
+                                {{ news.title }}
+                            </div>
+                            <div class="col">
+                                {{ news.published ? 'Opublikowany' : 'Nieopublikowany' }}
+                            </div>
+                            <div class="btn-group col col-md col-lg-2">
+                                <a class="btn btn-info btn-sm news-item"
+                                   href="{{ path('app.admin.news.edit', {'news': news.id}) }}"
+                                   data-toggle="tooltip"
+                                   data-placement="left"
+                                   title="Edytuj"
+                                >
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a class="btn btn-dark btn-sm news-item {{ news.published ? 'disabled' }}"
+                                   href="{{ path('app.admin.news.publish', {'news': news.id}) }}"
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Opublikuj"
+                                >
+                                    <i class="fas fa-upload"></i>
+                                </a>
+                                <a class="btn btn-danger btn-sm news-item"
+                                   href="{{ path('app.admin.news.delete', {'news': news.id}) }}"
+                                   data-toggle="tooltip"
+                                   data-placement="right"
+                                   title="Usuń"
+                                >
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            {% else %}
+                Brak newsów
+            {% endfor %}
+        </div>
+    </div>
+</div>
+

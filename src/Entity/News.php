@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
@@ -17,24 +18,31 @@ class News
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Treść artykułu nie może być pusta.")
      * @ORM\Column(type="text")
      */
     private $text;
 
     /**
-     * @ORM\Column(type="object", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $photo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $video;
 
     /**
+     * @Assert\NotBlank(message="Tytuł nie może być pusty.")
      * @ORM\Column(type="string", length=255)
      */
     private $title;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $published;
 
     public function getId(): ?int
     {
@@ -87,5 +95,22 @@ class News
         $this->title = $title;
 
         return $this;
+    }
+
+    public function isPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(?bool $published): self
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    public function publish(): void
+    {
+        $this->setPublished(true);
     }
 }
