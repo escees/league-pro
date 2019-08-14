@@ -18,8 +18,9 @@ class MatchDetailsType extends AbstractType
 
         /** @var FootballMatch $match */
         $match = $options['match'];
-        $homeTeam = $match->getHomeTeam();
-        $awayTeam = $match->getAwayTeam();
+
+        $homeTeam = $match instanceof FootballMatch ? $match->getHomeTeam() : null;
+        $awayTeam = $match instanceof FootballMatch ? $match->getAwayTeam() : null;
 
         $builder->add(
             'homeTeamGoals',

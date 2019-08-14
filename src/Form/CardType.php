@@ -30,6 +30,7 @@ class CardType extends AbstractType
                 'choice_label' => function (Player $player) {
                     return $player->getName() . ' nr ' . $player->getNumber();
                 },
+                'group_by' => 'team',
                 'query_builder' => function (PlayerRepository $playerRepository) use ($homeTeam, $awayTeam) {
                     return $playerRepository->findPlayersForTeamsParticipatingInMatchQueryBuilder($homeTeam, $awayTeam);
                 } ,

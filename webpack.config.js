@@ -36,8 +36,8 @@ Encore
     .addEntry('admin_menu', './assets/admin/menu.js')
     .addEntry('main', './assets/js/theme-main.js')
     .addEntry('scripts', './assets/js/theme-scripts.js')
-    .addEntry('semantic_styles', './semantic/out/semantic.min.css')
-    .addEntry('semantic_javascripts', './semantic/out/semantic.min.js')
+    // .addEntry('semantic_styles', './semantic/out/semantic.min.css')
+    // .addEntry('semantic_javascripts', './semantic/out/semantic.min.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -78,8 +78,8 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
     .copyFiles({
-        from: './assets/admin2/images',
-        to: 'admin/images/[path][name].[ext]'
+        from: './assets/img',
+        to: '/img/[path][name].[ext]'
     })
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Dictionary\FlashType;
 use App\Entity\Card;
@@ -14,6 +14,7 @@ use App\Form\MatchResultType;
 use App\Form\MatchType;
 use App\Form\SimpleMatchDetailsType;
 use App\Repository\FootballMatchRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -23,9 +24,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/match")
+ * @Route("/admin/match")
  */
-class MatchController extends AbstractController
+class AdminMatchController extends AbstractController
 {
     private $entityManager;
     private $eventDispatcher;
@@ -59,7 +60,7 @@ class MatchController extends AbstractController
         return $this->render(
             'admin/matches/dashboard.html.twig',
             [
-                'fixtures' => $footballMatchRepository->getAllFixturesOrderedByStartDateAscending(),
+                'fixtures' => $footballMatchRepository->getNumberOfFixturesOrderedByStartDateAscending(16),
                 'matches' => $footballMatchRepository->getAllPlayedMatchesOrderedByStartDateDescending(),
                 'form' => $form->createView()
             ]
@@ -67,23 +68,62 @@ class MatchController extends AbstractController
     }
 
     /**
-     * @Route("/{match}/edit-result", name="app.match.edit_result")
+     * @Route("/{match}/add-result", name="app.match.add_result")
      */
-    public function editResult(Request $request, FootballMatch $match): Response
+    public function addResult(Request $request, FootballMatch $match): Response
     {
         $form = $this->createForm(MatchResultType::class, $match);
+
+        //@todo refactor DRY
+        $matchDetails = $match->getMatchDetails();
+        if ($matchDetails instanceof MatchDetails) {
+            $matchGoals = $matchDetails->getGoals();
+            $originalGoals = new ArrayCollection();
+            foreach ($matchGoals as $goal) {
+                $originalGoals->add($goal);
+            }
+
+            $matchCards = $matchDetails->getCards();
+            $originalCards = new ArrayCollection();
+            foreach ($matchCards as $card) {
+                $originalCards->add($card);
+            }
+        }
+
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) { //@todo refactor DRY
+            if ($matchDetails instanceof MatchDetails) {
+                if(!$matchDetails->getGoals()->isEmpty()) {
+                    foreach ($originalGoals as $goal) {
+                        if (false === $matchGoals->contains($goal)) {
+                            $this->entityManager->remove($goal);
+                        }
+                    }
+                }
+
+
+                if(!$matchDetails->getCards()->isEmpty()) {
+                    foreach ($originalCards as $card) {
+                        if (false === $matchCards->contains($card)) {
+                            $this->entityManager->remove($card);
+                        }
+                    }
+                }
+            }
+
+            $this->entityManager->persist($match);
             $this->entityManager->flush();
 
-            $this->eventDispatcher->dispatch(
-                new MatchResultAddedEvent($match),
-                LeagueProEvents::MATCH_RESULT_ADDED
+            if (!$match->hasCompleteStats()) {
+                $this->eventDispatcher->dispatch(
+                    new MatchResultAddedEvent($match),
+                    LeagueProEvents::MATCH_RESULT_ADDED
 
-            );
+                );
+            }
 
-            $this->addFlash(FlashType::SUCCESS, 'Zapisano szczegóły meczu');
+            $this->addFlash(FlashType::SUCCESS, 'Zapisano wynik i szczegóły meczu');
 
             return $this->redirectToRoute('app.match.dashboard');
         }
@@ -142,59 +182,4 @@ class MatchController extends AbstractController
             ]
         );
     }
-
-    /**
-     * @Route(
-     *     "/{match}/details/add-scorer",
-     *     name="app.match.scorer.add",
-     *     condition="request.isXmlHttpRequest()"
-     * )
-     */
-    public function addScorer(Request $request, FootballMatch $match): JsonResponse
-    {
-        return $this->addMatchEvent($request, new Goal(), $match);
-    }
-
-    /**
-     * @Route(
-     *     "/{match}/details/add-card",
-     *     name="app.match.card.add",
-     *     condition="request.isXmlHttpRequest()"
-     * )
-     */
-    public function addCard(Request $request, FootballMatch $match): JsonResponse
-    {
-        return $this->addMatchEvent($request, new Card(), $match);
-    }
-
-    private function addMatchEvent(Request $request, object $matchEvent, FootballMatch $match): JsonResponse
-    {
-        $form = $this->createForm(MatchDetailsType::class, $matchDetails = new MatchDetailsType());
-        $form->handleRequest($request);
-
-        /** @var MatchDetails $matchDetails */
-        $matchDetails = $form->getData();
-        if($matchEvent instanceof Goal) {
-            $matchDetails->addGoal($matchEvent);
-        }
-        if($matchEvent instanceof Card) {
-            $matchDetails->addCard($matchEvent);
-        }
-
-        $form = $this->createForm(MatchDetailsType::class, $matchDetails);
-
-        $body = $this->renderView(
-            'admin/matches/edit_result.html.twig',
-            [
-                'match' => $match,
-                'form' => $form->createView()
-            ]
-        );
-
-        return new JsonResponse([
-            'status' => true,
-            'body' => $body,
-        ]);
-    }
-
 }

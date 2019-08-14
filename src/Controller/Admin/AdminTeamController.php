@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Dictionary\FlashType;
-use App\Entity\Player;
-use App\Form\PlayerType;
-use App\Repository\PlayerRepository;
+use App\Entity\Team;
+use App\Form\TeamType;
 use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,9 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/player")
+ * @Route("/admin/team")
  */
-class PlayerController extends AbstractController
+class AdminTeamController extends AbstractController
 {
     private $entityManager;
 
@@ -27,14 +26,13 @@ class PlayerController extends AbstractController
     }
 
     /**
-     * @Route("/list", name="app.player.list")
+     * @Route("/list", name="app.team.list")
      */
-    public function dashboard(Request $request, PlayerRepository $playerRepository, TeamRepository $teamRepository): Response
+    public function dashboard(Request $request, TeamRepository $teamRepository): Response
     {
         return $this->render(
-            'admin/player/list.html.twig',
+            'admin/team/list.html.twig',
             [
-                'players' => $playerRepository->findAll(),
                 'teams' => $teamRepository->findAll(),
             ]
         );
@@ -43,21 +41,21 @@ class PlayerController extends AbstractController
     /**
      * @Route(
      *     "/add",
-     *     name="app.player.add",
+     *     name="app.team.add",
      *     condition="request.isXmlHttpRequest()"
      * )
      */
-    public function addPlayer(Request $request, TeamRepository $teamRepository): Response
+    public function addTeam(Request $request, TeamRepository $teamRepository): Response
     {
-        $form = $this->createForm(PlayerType::class, $player = new Player());
+        $form = $this->createForm(TeamType::class, $team = new Team());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($player);
+            $this->entityManager->persist($team);
             $this->entityManager->flush();
 
             $body = $this->renderView(
-                'admin/player/list_content.html.twig',
+                'admin/team/list_content.html.twig',
                 [
                     'teams' => $teamRepository->findAll(),
                 ]
@@ -69,7 +67,7 @@ class PlayerController extends AbstractController
             ]);
         }
 
-        return $this->render('admin/player/view.html.twig',
+        return $this->render('admin/team/view.html.twig',
             [
                 'form' => $form->createView(),
             ]
@@ -78,21 +76,21 @@ class PlayerController extends AbstractController
 
     /**
      * @Route(
-     *     "/{player}/edit",
-     *     name="app.player.edit",
+     *     "/{team}/edit",
+     *     name="app.team.edit",
      *     condition="request.isXmlHttpRequest()"
      * )
      */
-    public function editPlayer(Request $request, Player $player, TeamRepository $teamRepository): Response
+    public function editTeam(Request $request, Team $team, TeamRepository $teamRepository): Response
     {
-        $form = $this->createForm(PlayerType::class, $player);
+        $form = $this->createForm(TeamType::class, $team);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
 
             $body = $this->renderView(
-                'admin/player/list_content.html.twig',
+                'admin/team/list_content.html.twig',
                 [
                     'teams' => $teamRepository->findAll(),
                 ]
@@ -104,7 +102,7 @@ class PlayerController extends AbstractController
             ]);
         }
 
-        return $this->render('admin/player/view.html.twig',
+        return $this->render('admin/team/view.html.twig',
             [
                 'form' => $form->createView(),
             ]
@@ -113,18 +111,18 @@ class PlayerController extends AbstractController
 
     /**
      * @Route(
-     *     "/{player}/delete",
-     *     name="app.player.delete",
+     *     "/{team}/delete",
+     *     name="app.team.delete",
      * )
      */
-    public function deleteAction(Request $request, Player $player, TeamRepository $teamRepository): Response
+    public function delete(Request $request, Team $team, TeamRepository $teamRepository): Response
     {
-        $this->entityManager->remove($player);
+        $this->entityManager->remove($team);
         $this->entityManager->flush();
 
-        $this->addFlash(FlashType::DANGER, 'Zawodnik został usunięty!');
+        $this->addFlash(FlashType::DANGER, 'Drużyna została usunięta!');
 
-        return $this->render('admin/player/list.html.twig',
+        return $this->render('admin/team/list.html.twig',
             [
                 'teams' => $teamRepository->findAll(),
             ]

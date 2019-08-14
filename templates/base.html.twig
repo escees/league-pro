@@ -14,13 +14,20 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div id="layout">
+            {% include 'header.html.twig' %}
+            {% include 'menu/navbar.html.twig' %}
+            {% include 'menu/mobile_menu.html.twig' %}
+                {% block body %}{% endblock %}
+            {% include 'footer.html.twig' %}
+        </div>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
             {{ encore_entry_script_tags('login') }}
             {{ encore_entry_script_tags('main') }}
             {{ encore_entry_script_tags('scripts') }}
-            {{ encore_entry_script_tags('semantic_javascripts') }}
+{#            {{ encore_entry_script_tags('semantic_javascripts') }}#}
         {% endblock %}
+
     </body>
 </html>

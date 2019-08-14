@@ -23,6 +23,7 @@ class TeamRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('t')
             ->select('t.points')
+            ->addSelect('t.id')
             ->addSelect('t.name')
             ->addSelect('t.wins')
             ->addSelect('t.loses')

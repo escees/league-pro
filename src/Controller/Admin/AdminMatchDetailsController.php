@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Dictionary\FlashType;
 use App\Entity\FootballMatch;
@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 ///**
 // * @Route("/match-details")
 // */
-class MatchDetailsController extends AbstractController
+class AdminMatchDetailsController extends AbstractController
 {
 //    private $entityManager;
 //

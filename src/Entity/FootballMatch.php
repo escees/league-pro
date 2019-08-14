@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -51,6 +49,11 @@ class FootballMatch
      * @ORM\JoinColumn(nullable=false)
      */
     private $awayTeam;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $completeStats = 0;
 
     public function getId(): ?int
     {
@@ -132,5 +135,17 @@ class FootballMatch
     public function isFixture(): bool
     {
         return $this->startDate > new \DateTime();
+    }
+
+    public function hasCompleteStats(): ?bool
+    {
+        return $this->completeStats;
+    }
+
+    public function setCompleteStats(bool $completeStats): self
+    {
+        $this->completeStats = $completeStats;
+
+        return $this;
     }
 }
