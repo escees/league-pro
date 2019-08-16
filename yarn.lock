@@ -9112,6 +9112,11 @@ timsort@^0.3.0:
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
+tinymce@^5.0.13:
+  version "5.0.13"
+  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.0.13.tgz#fdccfce5fa77f23e9a221d22b6f766ab70eb0118"
+  integrity sha512-/wRN2yhl0I18agp23ut6zwLWAXmj8l1GcX7iOjCpaabGXa6nydxxElzhXn6p4558MCzLaYxibv4qu2aVamgONA==
+
 tmp@^0.0.33:
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
