@@ -118,4 +118,20 @@ class AdminNewsController extends AbstractController
 
         return $this->redirectToRoute('app.admin.news.list');
     }
+
+    /**
+     * @Route(
+     *     "/{news}/view",
+     *     name="app.admin.news.view",
+     * )
+     */
+    public function view(Request $request, News $news): Response
+    {
+        return $this->render(
+            'single-news.html.twig',
+            [
+                'news' => $news
+            ]
+        );
+    }
 }

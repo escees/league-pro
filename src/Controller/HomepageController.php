@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\FootballMatchRepository;
 use App\Repository\GoalRepository;
+use App\Repository\NewsRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,8 +19,11 @@ class HomepageController extends AbstractController
         Request $request,
         TeamRepository $teamRepository,
         FootballMatchRepository $footballMatchRepository,
-        GoalRepository $goalRepository
+        GoalRepository $goalRepository,
+        NewsRepository $newsRepository
     ) {
+        $news = $newsRepository->findPublishedNews(5);
+
         return $this->render(
             'index.html.twig',
             [
@@ -27,7 +31,9 @@ class HomepageController extends AbstractController
                 'results' => $footballMatchRepository->getLastThreeMatches(),
                 'bestScorers' => $goalRepository->getBestScorers(true),
                 'nextMatch' => $footballMatchRepository->getNextMatch(),
-                'fixtures' => $footballMatchRepository->getNumberOfFixturesOrderedByStartDateAscending(5)
+                'fixtures' => $footballMatchRepository->getNumberOfFixturesOrderedByStartDateAscending(5),
+                'news' => $news,
+                'newsForSlider' => array_slice($news, 0, 3)
             ]
         );
     }

@@ -19,6 +19,14 @@ class NewsRepository extends ServiceEntityRepository
         parent::__construct($registry, News::class);
     }
 
+    public function findPublishedNews(int $maxResults): array
+    {
+        return $this->createQueryBuilder('n')
+            ->where('n.published = 1')
+            ->setMaxResults($maxResults)
+            ->getQuery()
+            ->execute();
+    }
     // /**
     //  * @return News[] Returns an array of News objects
     //  */

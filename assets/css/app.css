@@ -11,3 +11,7 @@ body {
 .hide {
     display: none !important;
 }
+
+.teal-color {
+    color: #01d099;
+}
