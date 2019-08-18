@@ -47,7 +47,7 @@ class AdminTeamController extends AbstractController
      *     condition="request.isXmlHttpRequest()"
      * )
      */
-    public function addTeam(Request $request, TeamRepository $teamRepository): Response
+    public function addTeam(Request $request, TeamRepository $teamRepository, LeagueRepository $leagueRepository): Response
     {
         $form = $this->createForm(TeamType::class, $team = new Team());
         $form->handleRequest($request);
@@ -59,8 +59,8 @@ class AdminTeamController extends AbstractController
             $body = $this->renderView(
                 'admin/team/list_content.html.twig',
                 [
-                    'teams' => $teamRepository->findAll(),
-                ]
+                    'teams' => $teamRepository->getAllTeamsWithoutLeague(),
+                    'leagues' => $leagueRepository->findAll()                ]
             );
 
             return new JsonResponse([
@@ -83,7 +83,7 @@ class AdminTeamController extends AbstractController
      *     condition="request.isXmlHttpRequest()"
      * )
      */
-    public function editTeam(Request $request, Team $team, TeamRepository $teamRepository): Response
+    public function editTeam(Request $request, Team $team, TeamRepository $teamRepository, LeagueRepository $leagueRepository): Response
     {
         $form = $this->createForm(TeamType::class, $team);
         $form->handleRequest($request);
@@ -94,7 +94,8 @@ class AdminTeamController extends AbstractController
             $body = $this->renderView(
                 'admin/team/list_content.html.twig',
                 [
-                    'teams' => $teamRepository->findAll(),
+                    'teams' => $teamRepository->getAllTeamsWithoutLeague(),
+                    'leagues' => $leagueRepository->findAll()
                 ]
             );
 
