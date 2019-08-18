@@ -5235,7 +5235,14 @@ jquery-mousewheel@^3.1.13:
   resolved "https://registry.yarnpkg.com/jquery-mousewheel/-/jquery-mousewheel-3.1.13.tgz#06f0335f16e353a695e7206bf50503cb523a6ee5"
   integrity sha1-BvAzXxbjU6aV5yBr9QUDy1I6buU=
 
-jquery@^3.3.1, jquery@^3.4.1:
+jquery.quicksearch@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/jquery.quicksearch/-/jquery.quicksearch-2.4.0.tgz#240c9f435e936c63bf8fbba355144ffdddf9ea26"
+  integrity sha512-20FJSCW3kTawO6Jvy/6MtUCURvgUZFqRUOAGTxH/VaPlwLG4kba82sKaM3ghTi1DsmSZrM2BvrwLUwNWmwDXiw==
+  dependencies:
+    jquery ">=1.8"
+
+"jquery@>= 1.7.1", jquery@>=1.8, jquery@^3.3.1, jquery@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
   integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
@@ -6223,6 +6230,13 @@ multipipe@^0.1.2:
   integrity sha1-Ko8t33Du1WTf8tV/HhoTfZ8FB4s=
   dependencies:
     duplexer2 "0.0.2"
+
+multiselect@^0.9.12:
+  version "0.9.12"
+  resolved "https://registry.yarnpkg.com/multiselect/-/multiselect-0.9.12.tgz#d15536e986dd6a0029b160d6613bcedf81e4c7ed"
+  integrity sha1-0VU26YbdagApsWDWYTvO34Hkx+0=
+  dependencies:
+    jquery ">= 1.7.1"
 
 mute-stdout@^1.0.0:
   version "1.0.1"

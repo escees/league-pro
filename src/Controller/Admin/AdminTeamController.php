@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Dictionary\FlashType;
 use App\Entity\Team;
 use App\Form\TeamType;
+use App\Repository\LeagueRepository;
 use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,12 +29,13 @@ class AdminTeamController extends AbstractController
     /**
      * @Route("/list", name="app.team.list")
      */
-    public function dashboard(Request $request, TeamRepository $teamRepository): Response
+    public function dashboard(Request $request, TeamRepository $teamRepository, LeagueRepository $leagueRepository): Response
     {
         return $this->render(
             'admin/team/list.html.twig',
             [
-                'teams' => $teamRepository->findAll(),
+                'teams' => $teamRepository->getAllTeamsWithoutLeague(),
+                'leagues' => $leagueRepository->findAll()
             ]
         );
     }

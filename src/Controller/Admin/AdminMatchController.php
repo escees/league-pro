@@ -57,6 +57,12 @@ class AdminMatchController extends AbstractController
             return $this->redirectToRoute('app.match.dashboard');
         }
 
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash(FlashType::DANGER, (string) $form->getErrors(true, true));
+
+            return $this->redirectToRoute('app.match.dashboard');
+        }
+
         return $this->render(
             'admin/matches/dashboard.html.twig',
             [

@@ -2,28 +2,72 @@
     <div class="card card-small ">
         <div class="card-header text-center">
             <h3>Lista drużyn</h3>
+        </div>
+        <div class="card-body pt-0" id="team-list">
+            {% for league in leagues %}
+                <div class="{{ loop.index > 1 ? 'mt-4' }} d-flex justify-content-center">
+                    <h4>{{ league.name }}</h4>
+                </div>
+                {% for team in league.teams %}
+                    <ul class="list-group team-{{ team.id }}" data-team-id="{{ team.id }}">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col">
+                                    {{ team.name }}
+                                </div>
+                                <div class="btn-group col col-md col-lg-2">
+                                    <button class="btn btn-outline-info btn-sm edit-team"
+                                            data-team-id="{{ team.id }}"
+                                            data-href="{{ path('app.team.edit', {'team': team.id}) }}"
+                                            data-toggle="modal"
+                                            data-target="#edit-team-modal"
+                                    >
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger btn-sm delete-team"
+                                            data-href="{{ path('app.team.delete', {'team': team.id}) }}"
+                                            data-name="{{ team.name }}"
+                                            data-toggle="modal"
+                                            data-target="#delete-team-modal"
+                                    >
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6 col-md-12 col-sm-12 mb-4 mt-4">
+    <div class="card card-small ">
+        <div class="card-header text-center">
+            <h3>Drużyny bez ligi</h3>
             <button type="button" class=" text right btn btn-outline-info add-team" data-href="{{ path('app.team.add') }}" data-toggle="modal" data-target="#add-team-modal">Dodaj drużynę</button>
         </div>
         <div class="card-body pt-0" id="team-list">
-            {% for team in teams %}
-                <ul class="list-group team-{{ team.id }}" data-team-id="{{ team.id }}">
+            {% for teamWithoutLeague in teams %}
+                <ul class="list-group team-{{ teamWithoutLeague.id }}" data-team-id="{{ teamWithoutLeague.id }}">
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col">
-                                {{ team.name }}
+                                {{ teamWithoutLeague.name }}
                             </div>
                             <div class="btn-group col col-md col-lg-2">
                                 <button class="btn btn-outline-info btn-sm edit-team"
-                                        data-team-id="{{ team.id }}"
-                                        data-href="{{ path('app.team.edit', {'team': team.id}) }}"
+                                        data-team-id="{{ teamWithoutLeague.id }}"
+                                        data-href="{{ path('app.team.edit', {'team': teamWithoutLeague.id}) }}"
                                         data-toggle="modal"
                                         data-target="#edit-team-modal"
                                 >
                                     <i class="fas fa-edit"></i>
                                 </button>
                                 <button class="btn btn-outline-danger btn-sm delete-team"
-                                        data-href="{{ path('app.team.delete', {'team': team.id}) }}"
-                                        data-name="{{ team.name }}"
+                                        data-href="{{ path('app.team.delete', {'team': teamWithoutLeague.id}) }}"
+                                        data-name="{{ teamWithoutLeague.name }}"
                                         data-toggle="modal"
                                         data-target="#delete-team-modal"
                                 >
