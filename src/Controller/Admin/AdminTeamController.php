@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Dictionary\FlashType;
 use App\Entity\Team;
 use App\Form\TeamType;
+use App\Repository\LeagueRepository;
 use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,12 +29,13 @@ class AdminTeamController extends AbstractController
     /**
      * @Route("/list", name="app.team.list")
      */
-    public function dashboard(Request $request, TeamRepository $teamRepository): Response
+    public function dashboard(Request $request, TeamRepository $teamRepository, LeagueRepository $leagueRepository): Response
     {
         return $this->render(
             'admin/team/list.html.twig',
             [
-                'teams' => $teamRepository->findAll(),
+                'teams' => $teamRepository->getAllTeamsWithoutLeague(),
+                'leagues' => $leagueRepository->findAll()
             ]
         );
     }
@@ -45,7 +47,7 @@ class AdminTeamController extends AbstractController
      *     condition="request.isXmlHttpRequest()"
      * )
      */
-    public function addTeam(Request $request, TeamRepository $teamRepository): Response
+    public function addTeam(Request $request, TeamRepository $teamRepository, LeagueRepository $leagueRepository): Response
     {
         $form = $this->createForm(TeamType::class, $team = new Team());
         $form->handleRequest($request);
@@ -57,8 +59,8 @@ class AdminTeamController extends AbstractController
             $body = $this->renderView(
                 'admin/team/list_content.html.twig',
                 [
-                    'teams' => $teamRepository->findAll(),
-                ]
+                    'teams' => $teamRepository->getAllTeamsWithoutLeague(),
+                    'leagues' => $leagueRepository->findAll()                ]
             );
 
             return new JsonResponse([
@@ -81,7 +83,7 @@ class AdminTeamController extends AbstractController
      *     condition="request.isXmlHttpRequest()"
      * )
      */
-    public function editTeam(Request $request, Team $team, TeamRepository $teamRepository): Response
+    public function editTeam(Request $request, Team $team, TeamRepository $teamRepository, LeagueRepository $leagueRepository): Response
     {
         $form = $this->createForm(TeamType::class, $team);
         $form->handleRequest($request);
@@ -92,7 +94,8 @@ class AdminTeamController extends AbstractController
             $body = $this->renderView(
                 'admin/team/list_content.html.twig',
                 [
-                    'teams' => $teamRepository->findAll(),
+                    'teams' => $teamRepository->getAllTeamsWithoutLeague(),
+                    'leagues' => $leagueRepository->findAll()
                 ]
             );
 

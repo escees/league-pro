@@ -19,6 +19,4 @@ $(document).ready(function () {
         ],
         toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link",
     });
-
-    $('.news-item').tooltip();
 });

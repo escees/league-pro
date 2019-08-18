@@ -5,10 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TeamRepository")
+ * @UniqueEntity(fields={"league"}, message="Jedna drużyna nie może być w więcej niż w jednej lidze")
  */
 class Team
 {
@@ -94,6 +96,11 @@ class Team
      * @ORM\Column(type="integer", nullable=false)
      */
     private $losesAfterPenalties = 0;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\League", inversedBy="teams")
+     */
+    private $league;
 
     public function __construct()
     {
@@ -384,6 +391,18 @@ class Team
     public function setLosesAfterPenalties(?int $losesAfterPenalties): self
     {
         $this->losesAfterPenalties = $losesAfterPenalties;
+
+        return $this;
+    }
+
+    public function getLeague(): ?League
+    {
+        return $this->league;
+    }
+
+    public function setLeague(?League $league): self
+    {
+        $this->league = $league;
 
         return $this;
     }

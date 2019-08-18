@@ -87,11 +87,7 @@ $(document).ready(function () {
                 if (data.status === true) {
                     let $newSection = $(data.body).find(section);
                     $section.replaceWith($newSection);
-
-                    if ($('.modal-backdrop').hasClass('show')) {
-                        $('.modal-backdrop').removeClass('show')
-                    }
-                        window.location.reload()
+                    window.location.reload()
                 }
 
                 if (typeof data.status === 'undefined') {

@@ -19,6 +19,14 @@ class TeamRepository extends ServiceEntityRepository
         parent::__construct($registry, Team::class);
     }
 
+    public function getAllTeamsWithoutLeague(): array
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.league IS NULL')
+            ->getQuery()
+            ->execute();
+    }
+
     public function getTeamStandings(): array
     {
         return $this->createQueryBuilder('t')
@@ -36,6 +44,7 @@ class TeamRepository extends ServiceEntityRepository
             ->orderBy('t.points', 'DESC')
             ->addOrderBy('goals_diff', 'DESC')
             ->addOrderBy('t.goalsScored', 'DESC')
+            ->where('t.league IS NOT NULL')
             ->getQuery()
             ->execute()
         ;

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContext;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FootballMatchRepository")
@@ -147,5 +149,18 @@ class FootballMatch
         $this->completeStats = $completeStats;
 
         return $this;
+    }
+
+    /**
+     * @Assert\Callback()
+     */
+    public function validateTeams(ExecutionContextInterface $context)
+    {
+        if ($this->homeTeam === $this->awayTeam) {
+            $context
+                ->buildViolation('Te same drużyny nie mogą grać ze sobą meczu')
+                ->atPath('homeTeam')
+                ->addViolation();
+        }
     }
 }
