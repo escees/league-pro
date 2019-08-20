@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TeamRepository")
- * @UniqueEntity(fields={"league"}, message="Jedna drużyna nie może być w więcej niż w jednej lidze")
  */
 class Team
 {
@@ -98,9 +97,9 @@ class Team
     private $losesAfterPenalties = 0;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\League", inversedBy="teams")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Season", inversedBy="teams")
      */
-    private $league;
+    private $season;
 
     public function __construct()
     {
@@ -395,14 +394,14 @@ class Team
         return $this;
     }
 
-    public function getLeague(): ?League
+    public function getSeason(): ?Season
     {
-        return $this->league;
+        return $this->season;
     }
 
-    public function setLeague(?League $league): self
+    public function setSeason(?Season $season): self
     {
-        $this->league = $league;
+        $this->season = $season;
 
         return $this;
     }

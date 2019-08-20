@@ -24,13 +24,13 @@ class League
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="league")
+     * @ORM\OneToMany(targetEntity="App\Entity\Season", mappedBy="league")
      */
-    private $teams;
+    private $seasons;
 
     public function __construct()
     {
-        $this->teams = new ArrayCollection();
+        $this->seasons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,30 +51,30 @@ class League
     }
 
     /**
-     * @return Collection|Team[]
+     * @return Collection|Season[]
      */
-    public function getTeams(): Collection
+    public function getSeasons(): Collection
     {
-        return $this->teams;
+        return $this->seasons;
     }
 
-    public function addTeam(Team $team): self
+    public function addSeason(Season $season): self
     {
-        if (!$this->teams->contains($team)) {
-            $this->teams[] = $team;
-            $team->setLeague($this);
+        if (!$this->seasons->contains($season)) {
+            $this->seasons[] = $season;
+            $season->setLeague($this);
         }
 
         return $this;
     }
 
-    public function removeTeam(Team $team): self
+    public function removeSeason(Season $season): self
     {
-        if ($this->teams->contains($team)) {
-            $this->teams->removeElement($team);
+        if ($this->seasons->contains($season)) {
+            $this->seasons->removeElement($season);
             // set the owning side to null (unless already changed)
-            if ($team->getLeague() === $this) {
-                $team->setLeague(null);
+            if ($season->getLeague() === $this) {
+                $season->setLeague(null);
             }
         }
 
