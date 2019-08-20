@@ -4,11 +4,11 @@
             <h3>Lista drużyn</h3>
         </div>
         <div class="card-body pt-0" id="team-list">
-            {% for league in leagues %}
+            {% for season in seasons %}
                 <div class="{{ loop.index > 1 ? 'mt-4' }} d-flex justify-content-center">
-                    <h4>{{ league.name }}</h4>
+                    <h4>{{ season.league.name }}</h4>
                 </div>
-                {% for team in league.teams %}
+                {% for team in season.teams %}
                     <ul class="list-group team-{{ team.id }}" data-team-id="{{ team.id }}">
                         <li class="list-group-item">
                             <div class="row">

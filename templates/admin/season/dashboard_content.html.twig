@@ -1,0 +1,48 @@
+<div class="col-lg-6 col-md-12 col-sm-12 mb-4 mt-4">
+    <div class="card card-small ">
+        <div class="card-header text-center">
+            <h3>Ligi</h3>
+            <a class="btn btn-outline-info" href="{{ path('app.admin.season.add') }}">Dodaj sezon</a>
+        </div>
+        <div class="card-body pt-0" id="team-list">
+            {% for season in seasons %}
+                <div class="{{ loop.index > 1 ? 'mt-4' }} d-flex justify-content-center">
+                    <h4>{{ season.league.name }}</h4>
+                </div>
+                <ul class="list-group team-{{ season.id }}" data-team-id="{{ season.id }}">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col">
+                                {{ season.name }}
+                            </div>
+                            <div class="col">
+                                {{ season.league.name }}
+                            </div>
+                            <div class="btn-group col col-md col-lg-2">
+                                <a class="btn btn-info btn-sm season-item"
+                                   href="{{ path('app.admin.season.edit', {'season': season.id}) }}"
+                                   data-toggle="tooltip"
+                                   data-placement="left"
+                                   title="Edytuj"
+                                >
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a class="btn btn-danger btn-sm season-item"
+                                   href="{{ path('app.admin.season.delete', {'season': season.id}) }}"
+                                   data-toggle="tooltip"
+                                   data-placement="right"
+                                   title="Usuń"
+                                >
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            {% else %}
+                Jeszcze nie utworzyłeś żadnej sezonu.
+            {% endfor %}
+        </div>
+    </div>
+</div>
+

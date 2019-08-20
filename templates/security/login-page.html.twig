@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zaloguj się</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('login_page') }}
+        {{ encore_entry_link_tags('core') }}
+    {% endblock %}
+</head>
+{% block body %}
+<body>
+    <div class="login-page container-fluid bg-light d-flex justify-content-center align-items-center">
+        <div class="content d-flex flex-column flex-grow-1 flex-lg-grow-0">
+            <div class="login-header d-flex justify-content-center align-items-center">
+                <h2 class="header pl-3">Zaloguj się</h2>
+            </div>
+
+            <form class="login-form bg-white p-3" method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                <div class="align-items-center">
+                    <div class="form-field">
+                        <label class="sr-only" for="login-email">E-mail address</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text login-form-icon justify-content-center"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                            </div>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label class="sr-only" for="login-password">Password</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text login-form-icon justify-content-center"><i class="fa fa-user" aria-hidden="true"></i></div>
+                            </div>
+                            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+                            <label class="form-check-label" for="autoSizingCheck">
+                                Zapamiętaj mnie
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-block btn-lg btn-info mb-2">Zaloguj</button>
+                    </div>
+                    <div class="form-submit">
+                        <a href="{{ path('app.homepage') }}" class="btn btn-block btn-lg btn-dark mb-2">Wróć na stronę główną</a>
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+            </form>
+        </div>
+
+    </div>
+</body>
+    {% endblock %}
+    {% block javascripts %}
+    {{ encore_entry_script_tags('core') }}
+    {{ encore_entry_script_tags('login_page') }}
+{% endblock %}
+

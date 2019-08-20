@@ -15,7 +15,7 @@
                             <div class="col">
                                 {{ news.published ? 'Opublikowany' : 'Nieopublikowany' }}
                             </div>
-                            <div class="btn-group col col-md col-lg-2">
+                            <div class="btn-group">
                                 <a class="btn btn-info btn-sm news-item"
                                    href="{{ path('app.admin.news.edit', {'news': news.id}) }}"
                                    data-toggle="tooltip"

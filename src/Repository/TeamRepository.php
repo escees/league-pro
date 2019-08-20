@@ -22,7 +22,7 @@ class TeamRepository extends ServiceEntityRepository
     public function getAllTeamsWithoutLeague(): array
     {
         return $this->createQueryBuilder('t')
-            ->where('t.league IS NULL')
+            ->where('t.season IS NULL')
             ->getQuery()
             ->execute();
     }
@@ -44,7 +44,7 @@ class TeamRepository extends ServiceEntityRepository
             ->orderBy('t.points', 'DESC')
             ->addOrderBy('goals_diff', 'DESC')
             ->addOrderBy('t.goalsScored', 'DESC')
-            ->where('t.league IS NOT NULL')
+            ->where('t.season IS NOT NULL')
             ->getQuery()
             ->execute()
         ;
