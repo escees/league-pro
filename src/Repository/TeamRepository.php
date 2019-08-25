@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -25,6 +26,12 @@ class TeamRepository extends ServiceEntityRepository
             ->where('t.season IS NULL')
             ->getQuery()
             ->execute();
+    }
+
+    public function getAllTeamsWithLeague(): QueryBuilder
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.season IS NOT NULL');
     }
 
     public function getTeamStandings(): array

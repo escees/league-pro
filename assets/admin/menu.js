@@ -64,10 +64,10 @@ $(document).ready(function () {
     };
 
     $(window).on('load', function() {
-        $('.datepicker').attr('value', '').val('')
+        $('.match-datepicker').attr('value', '').val('')
     });
 
-    $('.datepicker').datetimepicker({
+    $('.match-datepicker').datetimepicker({
         format: 'd/m/Y H:i'
     });
 

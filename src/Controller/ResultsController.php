@@ -20,7 +20,7 @@ class ResultsController extends AbstractController
         return $this->render(
             'results.html.twig',
             [
-                'results' => $footballMatchRepository->getAllPlayedMatchesOrderedByStartDateDescending(),
+                'results' => $footballMatchRepository->getAllResultsOrderedByStartDateDescending(),
             ]
         );
     }

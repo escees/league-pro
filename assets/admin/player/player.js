@@ -114,7 +114,6 @@ $(document).ready(function () {
         });
     };
 
-
     LPRO.Player.init = function() {
         LPRO.Player.handleAddPlayerForm();
         LPRO.Player.handleSaveEditPlayerForm();

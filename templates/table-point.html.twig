@@ -25,7 +25,7 @@
                             {% for team in teams %}
                                 <tr>
                                     <td>{{ loop.index }}</td>
-                                    <td><img src="img/clubs-logos/colombia.png" alt="Colombia"> {{ team.name }}</td>
+                                    <td><img src="{{ asset('build/img/clubs-logos/pol.png') }}" alt="Colombia"> {{ team.name }}</td>
                                     <td>{{ team.played }}</td>
                                     <td>{{ team.wins }}</td>
                                     <td>{{ team.winsAfterPenalties }}</td>

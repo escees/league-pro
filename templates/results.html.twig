@@ -14,18 +14,18 @@
                                         </span>
 
                                         <div class="goals-result">
-                                            <a href="single-team.html">
-                                                <img src="img/clubs-logos/por.png" alt="">
+                                            <a href="single-team.html" class="col">
+                                                <img src="{{ asset('build/img/clubs-logos/por.png') }}" alt="">
                                                 {{ result.homeTeam.name }}
                                             </a>
 
-                                            <span class="goals">
+                                            <span class="goals col">
                                                 <b>{{ result.matchDetails.homeTeamGoals }}</b> - <b>{{ result.matchDetails.awayTeamGoals }}</b>
                                                 <a href="{{ path('app.single_result', {'match': result.id}) }}" class="btn theme">View More</a>
                                             </span>
 
-                                            <a href="single-team.html">
-                                                <img src="img/clubs-logos/esp.png" alt="">
+                                            <a href="single-team.html" class="col">
+                                                <img src="{{ asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                 {{ result.awayTeam.name }}
                                             </a>
                                         </div>

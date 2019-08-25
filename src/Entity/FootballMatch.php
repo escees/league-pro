@@ -57,6 +57,11 @@ class FootballMatch
      */
     private $completeStats = 0;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\MatchDay", inversedBy="matches")
+     */
+    private $matchDay;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -162,5 +167,17 @@ class FootballMatch
                 ->atPath('homeTeam')
                 ->addViolation();
         }
+    }
+
+    public function getMatchDay(): ?MatchDay
+    {
+        return $this->matchDay;
+    }
+
+    public function setMatchDay(?MatchDay $matchDay): self
+    {
+        $this->matchDay = $matchDay;
+
+        return $this;
     }
 }

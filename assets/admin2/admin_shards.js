@@ -10,3 +10,4 @@ require('./css/accents/info.1.1.0.min.css');
 require('./css/accents/secondary.1.1.0.min.css');
 require('./css/accents/success.1.1.0.min.css');
 require('./css/accents/warning.1.1.0.min.css');
+require('../css/app.css');
