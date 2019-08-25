@@ -15,3 +15,7 @@ body {
 .teal-color {
     color: #01d099;
 }
+
+.matchday-card {
+    min-width: 400px;
+}

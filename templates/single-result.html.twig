@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-md-5 col-lg-5">
                     <div class="team">
-                        <img src="img/clubs-logos/colombia.png" alt="club-logo">
+                        <img src="{{ asset('build/img/clubs-logos/colombia.png') }}" alt="club-logo">
                         <a href="{{ path('app.team.view', {'team': match.homeTeam.id}) }}">{{ match.homeTeam.name }}</a>
                         <ul>
                             {% for goal in match.matchDetails.goals %}
@@ -41,7 +41,7 @@
                 <div class="col-md-5 col-lg-5">
                     <div class="team right">
                         <a href="{{ path('app.team.view', {'team': match.awayTeam.id}) }}">{{ match.awayTeam.name }}</a>
-                        <img src="img/clubs-logos/arg.png" alt="club-logo">
+                        <img src="{{ asset('build/img/clubs-logos/pol.png') }}" alt="club-logo">
                         <ul>
                             {% for goal in match.matchDetails.goals|sort %}
                                 {% if goal.scorer in match.awayTeam.players %}

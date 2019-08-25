@@ -422,47 +422,50 @@
 {#                            </div>#}
                         </div>
                     </div>
+
                     <div class="col-xl-3 col-md-12">
                         <div class="counter-home-wraper">
                             <div class="title-color text-center">
                                 <h4>Ekstraklasa Jesień 2019</h4>
                             </div>
-
-                            <div class="content-counter content-counter-home">
-                                <p class="text-center">
-                                    <i class="fa fa-clock-o"></i>
-                                    Do najblizszego meczu pozostało:
-                                </p>
-                                <div id="event-one" class="counter"></div>
-                                <ul class="post-options">
-                                    <li><i class="fa fa-calendar"></i>{{ nextMatch.startDate|date('d/m/Y') }}</li>
-                                    <li><i class="fa fa-clock-o"></i>Rozpoczęcie, {{ nextMatch.startDate|date('H:i') }}</li>
-                                </ul>
-                                <div class="list-groups">
-                                    <div class="row align-items-center">
-                                        <div class="col-md-12">
-                                            <p>TZN Arena</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <img src="img/clubs-logos/rusia.png" alt="">
-                                            <span>{{ nextMatch.homeTeam.name }}</span>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="vs">Vs</div>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <img src="img/clubs-logos/arabia.png" alt="">
-                                            <span>{{ nextMatch.awayTeam.name }}</span>
+                            {% if nextMatch is not null %}
+                                <div class="content-counter content-counter-home">
+                                    <p class="text-center">
+                                        <i class="fa fa-clock-o"></i>
+                                        Do najblizszego meczu pozostało:
+                                    </p>
+                                    <div id="event-one" class="counter"></div>
+                                    <ul class="post-options">
+                                        <li><i class="fa fa-calendar"></i>{{ nextMatch.startDate|date('d/m/Y') }}</li>
+                                        <li><i class="fa fa-clock-o"></i>Rozpoczęcie, {{ nextMatch.startDate|date('H:i') }}</li>
+                                    </ul>
+                                    <div class="list-groups">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-12">
+                                                <p>TZN Arena</p>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <img src="img/clubs-logos/rusia.png" alt="">
+                                                <span>{{ nextMatch.homeTeam.name }}</span>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="vs">Vs</div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <img src="img/clubs-logos/arabia.png" alt="">
+                                                <span>{{ nextMatch.awayTeam.name }}</span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <a class="btn btn-primary" href="#">
+                                        Zapraszamy!
+                                        <i class="fa fa-trophy"></i>
+                                    </a>
                                 </div>
-                                <a class="btn btn-primary" href="#">
-                                    Zapraszamy!
-                                    <i class="fa fa-trophy"></i>
-                                </a>
-                            </div>
+                            {% endif %}
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

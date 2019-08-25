@@ -32,6 +32,7 @@ Encore
     .addEntry('news', './assets/admin/news/news.js')
     .addEntry('league', './assets/admin/league/league.js')
     .addEntry('season', './assets/admin/season/season.js')
+    .addEntry('datetimepicker', './assets/admin/datetimepicker.js')
     .addEntry('datepicker', './assets/admin/datepicker.js')
     .addEntry('player_datepicker', './assets/admin/player/player_datepicker.js')
     .addEntry('prevent_multiple_js_loading', './assets/admin/player/prevent_multiple_js_loading.js')

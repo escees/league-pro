@@ -8,8 +8,7 @@ $(document).ready(function () {
 
     LPRO.Datepicker.init = function () {
         $('.datepicker').datetimepicker({
-            timepicker: false,
-            format: 'd/m/Y'
+            format: 'd/m/Y H:i'
         });
     };
 

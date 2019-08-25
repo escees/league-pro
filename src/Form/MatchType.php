@@ -3,7 +3,10 @@
 namespace App\Form;
 
 use App\Entity\FootballMatch;
+use App\Entity\MatchDay;
 use App\Entity\Team;
+use App\Repository\MatchDayRepository;
+use App\Repository\TeamRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -20,6 +23,9 @@ class MatchType extends AbstractType
             [
                 'class' => Team::class,
                 'choice_label' => 'name',
+                'query_builder' => function (TeamRepository $teamRepository) {
+                    return $teamRepository->getAllTeamsWithLeague();
+                },
                 'attr' => [
                     'class' => 'form-control'
                 ],
@@ -33,6 +39,9 @@ class MatchType extends AbstractType
             [
                 'class' => Team::class,
                 'choice_label' => 'name',
+                'query_builder' => function (TeamRepository $teamRepository) {
+                    return $teamRepository->getAllTeamsWithLeague();
+                },
                 'attr' => [
                     'class' => 'form-control'
                 ],
@@ -49,10 +58,29 @@ class MatchType extends AbstractType
                 'html5' => false,
                 'format' => 'dd/MM/yyyy HH:mm',
                 'attr' => [
-                    'class' => 'form-control datepicker',
+                    'class' => 'form-control match-datepicker',
                     'autocomplete' => 'off',
                     'placeholder' => 'Data i godzina rozgrywania meczu'
                 ],
+            ]
+        );
+
+        $builder->add(
+            'matchDay',
+            EntityType::class,
+            [
+                'class' => MatchDay::class,
+                'choice_label' => 'name',
+                'group_by' => 'season.name',
+                'query_builder' => function (MatchDayRepository $matchDayRepository) {
+                    return $matchDayRepository->createQueryBuilder('m')
+                        ->where('m.endDate >= :now')
+                        ->setParameter('now', new \DateTime());
+                },
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+                'placeholder' => 'Wybierz kolejkę'
             ]
         );
     }

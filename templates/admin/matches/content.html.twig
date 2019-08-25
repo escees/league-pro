@@ -10,12 +10,15 @@
                         <div class="col">
                             {{ form_start(form) }}
                                 <div class="form-row">
-                                    <div class="form-group col-sm-12 col-md-4">
+                                    <div class="form-group col-sm-12 col-md-3">
                                         {{ form_widget(form.homeTeam) }}
                                         {{ form_errors(form.homeTeam) }}
                                     </div>
-                                    <div class="form-group col-sm-12 col-md-4">
+                                    <div class="form-group col-sm-12 col-md-3">
                                         {{ form_widget(form.awayTeam) }}
+                                    </div>
+                                    <div class="form-group col-sm-12 col-md-2">
+                                        {{ form_widget(form.matchDay) }}
                                     </div>
                                     <div class="form-group col-sm-12 col-md-2">
                                         {{ form_widget(form.startDate) }}
@@ -33,146 +36,145 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
-        <div class="card card-small blog-comments">
-            <div class="card-header border-bottom">
-                <h5 class="m-0 text-center">Nadchodzące mecze</h5>
-            </div>
-            <div class="card-body p-0">
+{#    <div class="col-lg-6 col-md-12 col-sm-12 mb-4">#}
+{#        <div class="card card-small blog-comments">#}
+{#            <div class="card-header border-bottom">#}
+{#                <h5 class="m-0 text-center">Nadchodzące mecze</h5>#}
+{#            </div>#}
+{#            <div class="card-body p-0">#}
+{#                <div class="card-body p-0">#}
+{#                    <ul class="list-group list-group-small list-group-flush">#}
+{#                        {% for fixture in fixtures %}#}
+{#                            <li class="list-group-item d-flex px-3">#}
+{#                                <div class="col-sm-1 col-md col-lg-1 loop-index">#}
+{#                                    <span class="collections-content left-align">{{ loop.index }}</span>#}
+{#                                </div>#}
+{#                                <div class="col-sm-4 col-md col-lg-4 text-right">#}
+{#                                    <span class="collections-content ">{{ fixture.homeTeam.name }}</span>#}
+{#                                </div>#}
+{#                                <div class="col-sm-1 col-md col-lg-1 text-center text-nowrap">#}
+{#                                    <span class="">#}
+{#                                        - : -#}
+{#                                    </span>#}
+{#                                </div>#}
+{#                                <div class="col-sm-4 col-md col-lg-4 text-left">#}
+{#                                    <span class="collections-content">{{ fixture.awayTeam.name }}</span>#}
+{#                                </div>#}
+{#                                <div class="col-sm-2 col-md-2 col-lg-2 text-center">#}
+{#                                    <span class="">{{ fixture.startDate|date('Y-m-d H:i') }}</span>#}
+{#                                </div>#}
+{#                            </li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="col-lg-6 col-md-12 col-sm-12 mb-4">#}
+{#        <div class="card card-small blog-comments">#}
+{#            <div class="card-header border-bottom">#}
+{#                <h5 class="text-center m-b-5">Zakończone mecze</h5>#}
+{#            </div>#}
+{#            <div class="card-body p-0">#}
+{#                <div class="card-body p-0">#}
+{#                    <ul class="list-group list-group-small list-group-flush">#}
+{#                        {% for match in matches %}#}
+{#                            {% set matchId = match.id  %}#}
+{#                            {% set setScorePath = path('app.match.score', {'match': matchId }) %}#}
+{#                            {% set setScoreButton = '#}
+{#                                    <a class="btn btn-outline-info btn-sm set-score" data-href="' ~ setScorePath ~ '" data-match-id="'~matchId~'" data-toggle="modal" data-target="#edit-score-modal">#}
+{#                                        <i class="far fa-plus-square"></i>#}
+{#                                    </a>#}
+{#                                '#}
+{#                            %}#}
+{#                            <li class="list-group-item d-flex px-3" id="match-{{ match.id }}">#}
+{#                                <div class="col-sm-1 col-md col-lg-1 loop-index">#}
+{#                                    <span class="collections-content left-align">{{ loop.index }}</span>#}
+{#                                </div>#}
+{#                                <div class="col-sm-4 col-md col-lg-4 text-right">#}
+{#                                    <span class="collections-content ">{{ match.homeTeam.name }}</span>#}
+{#                                </div>#}
+{#                                <div class="col-sm-1 col-md col-lg-1 text-center text-nowrap">#}
+{#                                    {{ match.matchDetails ?#}
+{#                                        '('~match.matchDetails.homeTeamPenalties~') '~(match.matchDetails.homeTeamGoals ~ ' : ' ~ match.matchDetails.awayTeamGoals) ~' ('~match.matchDetails.awayTeamPenalties~')' :#}
+{#                                        setScoreButton|raw#}
+{#                                    }}#}
+{#                                </div>#}
+{#                                <div class="col-sm-3 col-md col-lg-3 text-left">#}
+{#                                    <span class="collections-content">{{ match.awayTeam.name }}</span>#}
+{#                                </div>#}
+{#                                <div class="col-sm-1 col-md col-lg-1">#}
+{#                                    <a href="{{ path('app.match.add_result', {'match': match.id}) }}" class="btn btn-outline-info btn-sm match-details" data-toggle="tooltip" data-placement="left" title="Uzupełnij wynik, strzelców, kartki i asystentów">#}
+{#                                        <i class="fas fa-edit"></i>#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                                <div class="col-sm-2 col-md-2 col-lg-2 text-center">#}
+{#                                    <span class="">{{ match.startDate|date('Y-m-d H:i') }}</span>#}
+{#                                </div>#}
+{#                            </li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+    {% for matchday in matchdays %}
+        {% set isFinished = matchday.endDate|date('m/d/Y') < 'now'|date('m/d/Y') %}
+        {% set isInProgress = matchday.endDate|date('m/d/Y') >= 'now'|date('m/d/Y') and matchday.startDate|date('m/d/Y') <= 'now'|date('m/d/Y') %}
+        {% set isNotStarted = matchday.startDate|date('m/d/Y') > 'now'|date('m/d/Y') %}
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-4">
+            <div class="card card-small">
+                <div class="card-header border-bottom {{ isFinished ? 'bg-success' }} {{ isInProgress ? 'bg-info' }} {{ isNotStarted ? 'bg-warning' }}">
+                    <h5 class="m-0 text-center">{{ matchday.name }} - {{ isFinished ? 'Zakończona' }} {{ isInProgress ? 'W trakcie' }} {{ isNotStarted ? 'Nierozpoczęta' }}</h5>
+                    <div class="small text-center mt-2">{{ matchday.startDate|date('d/m/Y') }} - {{ matchday.endDate|date('d/m/Y') }}</div>
+                </div>
                 <div class="card-body p-0">
-                    <ul class="list-group list-group-small list-group-flush">
-                        {% for fixture in fixtures %}
-                            <li class="list-group-item d-flex px-3">
-                                <div class="col-sm-1 col-md col-lg-1 loop-index">
-                                    <span class="collections-content left-align">{{ loop.index }}</span>
-                                </div>
-                                <div class="col-sm-4 col-md col-lg-4 text-right">
-                                    <span class="collections-content ">{{ fixture.homeTeam.name }}</span>
-                                </div>
-                                <div class="col-sm-1 col-md col-lg-1 text-center text-nowrap">
-                                    <span class="">
-                                        - : -
-                                    </span>
-                                </div>
-                                <div class="col-sm-4 col-md col-lg-4 text-left">
-                                    <span class="collections-content">{{ fixture.awayTeam.name }}</span>
-                                </div>
-                                <div class="col-sm-2 col-md-2 col-lg-2 text-center">
-                                    <span class="">{{ fixture.startDate|date('Y-m-d H:i') }}</span>
-                                </div>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
-        <div class="card card-small blog-comments">
-            <div class="card-header border-bottom">
-                <h5 class="text-center m-b-5">Zakończone mecze</h5>
-            </div>
-            <div class="card-body p-0">
-                <div class="card-body p-0">
-                    <ul class="list-group list-group-small list-group-flush">
-                        {% for match in matches %}
-                            {% set matchId = match.id  %}
-                            {% set setScorePath = path('app.match.score', {'match': matchId }) %}
-                            {% set setScoreButton = '
-                                    <a class="btn btn-outline-info btn-sm set-score" data-href="' ~ setScorePath ~ '" data-match-id="'~matchId~'" data-toggle="modal" data-target="#edit-score-modal">
-                                        <i class="far fa-plus-square"></i>
-                                    </a>
-                                '
-                            %}
-                            <li class="list-group-item d-flex px-3" id="match-{{ match.id }}">
-                                <div class="col-sm-1 col-md col-lg-1 loop-index">
-                                    <span class="collections-content left-align">{{ loop.index }}</span>
-                                </div>
-                                <div class="col-sm-4 col-md col-lg-4 text-right">
-                                    <span class="collections-content ">{{ match.homeTeam.name }}</span>
-                                </div>
-                                <div class="col-sm-1 col-md col-lg-1 text-center text-nowrap">
-                                    {{ match.matchDetails ?
-                                        '('~match.matchDetails.homeTeamPenalties~') '~(match.matchDetails.homeTeamGoals ~ ' : ' ~ match.matchDetails.awayTeamGoals) ~' ('~match.matchDetails.awayTeamPenalties~')' :
-                                        setScoreButton|raw
-                                    }}
-                                </div>
-                                <div class="col-sm-3 col-md col-lg-3 text-left">
-                                    <span class="collections-content">{{ match.awayTeam.name }}</span>
-                                </div>
-                                <div class="col-sm-1 col-md col-lg-1">
-                                    <a href="{{ path('app.match.add_result', {'match': match.id}) }}" class="btn btn-outline-info btn-sm match-details" data-toggle="tooltip" data-placement="left" title="Uzupełnij wynik, strzelców, kartki i asystentów">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                </div>
-                                <div class="col-sm-2 col-md-2 col-lg-2 text-center">
-                                    <span class="">{{ match.startDate|date('Y-m-d H:i') }}</span>
-                                </div>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-12 col-sm-12 mb-4">
-        <div class="card card-small">
-            <div class="card-header border-bottom">
-                <h6 class="m-0">Top Referrals</h6>
-            </div>
-            <div class="card-body p-0">
-                <ul class="list-group list-group-small list-group-flush">
-                    <li class="list-group-item d-flex px-3">
-                        <span class="text-semibold text-fiord-blue">GitHub</span>
-                        <span class="ml-auto text-right text-semibold text-reagent-gray">19,291</span>
-                    </li>
-                    <li class="list-group-item d-flex px-3">
-                        <span class="text-semibold text-fiord-blue">Stack Overflow</span>
-                        <span class="ml-auto text-right text-semibold text-reagent-gray">11,201</span>
-                    </li>
-                    <li class="list-group-item d-flex px-3">
-                        <span class="text-semibold text-fiord-blue">Hacker News</span>
-                        <span class="ml-auto text-right text-semibold text-reagent-gray">9,291</span>
-                    </li>
-                    <li class="list-group-item d-flex px-3">
-                        <span class="text-semibold text-fiord-blue">Reddit</span>
-                        <span class="ml-auto text-right text-semibold text-reagent-gray">8,281</span>
-                    </li>
-                    <li class="list-group-item d-flex px-3">
-                        <span class="text-semibold text-fiord-blue">The Next Web</span>
-                        <span class="ml-auto text-right text-semibold text-reagent-gray">7,128</span>
-                    </li>
-                    <li class="list-group-item d-flex px-3">
-                        <span class="text-semibold text-fiord-blue">Tech Crunch</span>
-                        <span class="ml-auto text-right text-semibold text-reagent-gray">6,218</span>
-                    </li>
-                    <li class="list-group-item d-flex px-3">
-                        <span class="text-semibold text-fiord-blue">YouTube</span>
-                        <span class="ml-auto text-right text-semibold text-reagent-gray">1,218</span>
-                    </li>
-                    <li class="list-group-item d-flex px-3">
-                        <span class="text-semibold text-fiord-blue">Adobe</span>
-                        <span class="ml-auto text-right text-semibold text-reagent-gray">827</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-footer border-top">
-                <div class="row">
-                    <div class="col">
-                        <select class="custom-select custom-select-sm">
-                            <option selected>Last Week</option>
-                            <option value="1">Today</option>
-                            <option value="2">Last Month</option>
-                            <option value="3">Last Year</option>
-                        </select>
-                    </div>
-                    <div class="col text-right view-report">
-                        <a href="#">Full report &rarr;</a>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-small list-group-flush">
+                            {% for match in matchday.matches %}
+                                {% set matchId = match.id  %}
+                                {% set setScorePath = path('app.match.score', {'match': matchId }) %}
+                                {% set setScoreButton = '
+                                        <a class="btn btn-outline-info btn-sm set-score" data-href="' ~ setScorePath ~ '" data-match-id="'~matchId~'" data-toggle="modal" data-target="#edit-score-modal">
+                                            <i class="far fa-plus-square"></i>
+                                        </a>
+                                    '
+                                %}
+                                <li class="list-group-item d-flex px-3">
+                                    <div class="col text-center text-nowrap d-flex flex-column">
+                                        <span class="">{{ match.startDate|date('Y-m-d') }}</span>
+                                        <span class="">{{ match.startDate|date('H:i') }}</span>
+                                    </div>
+                                    <div class="col text-right">
+                                        <span class="collections-content ">{{ match.homeTeam.name }}</span>
+                                    </div>
+                                    <div class="col text-center text-nowrap">
+                                        <span class="">
+                                            {{ match.matchDetails ?
+                                                '('~match.matchDetails.homeTeamPenalties~') '~(match.matchDetails.homeTeamGoals ~ ' : ' ~ match.matchDetails.awayTeamGoals) ~' ('~match.matchDetails.awayTeamPenalties~')' :
+                                                setScoreButton|raw
+                                            }}
+                                        </span>
+                                    </div>
+                                    <div class="col text-left">
+                                        <span class="collections-content">{{ match.awayTeam.name }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <a href="{{ path('app.match.add_result', {'match': match.id}) }}" class="btn btn-outline-info btn-sm match-details" data-toggle="tooltip" data-placement="left" title="Uzupełnij wynik, strzelców, kartki i asystentów">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </div>
+
+                                </li>
+                            {% else %}
+                                <div class="text-center mt-3 mb-3">Brak meczów w tej kolejce.</div>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endfor %}
 </div>
 
 {% include '/admin/modal/simple_edit_score.html.twig' %}

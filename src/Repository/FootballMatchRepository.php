@@ -21,7 +21,7 @@ class FootballMatchRepository extends ServiceEntityRepository
         parent::__construct($registry, FootballMatch::class);
     }
 
-    public function getNextMatch()
+    public function getNextMatch(): ?FootballMatch
     {
         return $this->createQueryBuilder('m')
             ->select('m')
@@ -30,7 +30,7 @@ class FootballMatchRepository extends ServiceEntityRepository
             ->setParameter('now', new \Datetime())
             ->setMaxResults(1)
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
     }
 
     public function getNumberOfFixturesOrderedByStartDateAscending(int $number)
@@ -60,6 +60,17 @@ class FootballMatchRepository extends ServiceEntityRepository
     }
 
     public function getAllPlayedMatchesOrderedByStartDateDescending()
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.startDate < :now')
+            ->orderBy('m.startDate', 'DESC')
+            ->setParameter('now', new \Datetime())
+            ->setMaxResults(16)
+            ->getQuery()
+            ->execute();
+    }
+
+    public function getAllResultsOrderedByStartDateDescending()
     {
         return $this->createQueryBuilder('m')
             ->where('m.startDate < :now')

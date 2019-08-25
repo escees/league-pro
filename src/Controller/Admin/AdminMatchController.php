@@ -14,6 +14,7 @@ use App\Form\MatchResultType;
 use App\Form\MatchType;
 use App\Form\SimpleMatchDetailsType;
 use App\Repository\FootballMatchRepository;
+use App\Repository\MatchDayRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,7 +43,7 @@ class AdminMatchController extends AbstractController
     /**
      * @Route("/dashboard", name="app.match.dashboard")
      */
-    public function dashboard(Request $request, FootballMatchRepository $footballMatchRepository): Response
+    public function dashboard(Request $request, FootballMatchRepository $footballMatchRepository, MatchDayRepository $matchDayRepository): Response
     {
         $form = $this->createForm(MatchType::class, $match = new FootballMatch());
 
@@ -66,6 +67,7 @@ class AdminMatchController extends AbstractController
         return $this->render(
             'admin/matches/dashboard.html.twig',
             [
+                'matchdays' => $matchDayRepository->findAllOrderByDateDescendant(),
                 'fixtures' => $footballMatchRepository->getNumberOfFixturesOrderedByStartDateAscending(16),
                 'matches' => $footballMatchRepository->getAllPlayedMatchesOrderedByStartDateDescending(),
                 'form' => $form->createView()

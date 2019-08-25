@@ -13,3 +13,7 @@
     width: 50px !important;
     padding: 0 !important;
 }
+
+.login-page .content {
+    width: 400px;
+}
