@@ -40,8 +40,6 @@ Encore
     .addEntry('main', './assets/js/theme-main.js')
     .addEntry('scripts', './assets/js/theme-scripts.js')
     .addEntry('login_page', './assets/css/login_page.css')
-    // .addEntry('semantic_styles', './semantic/out/semantic.min.css')
-    // .addEntry('semantic_javascripts', './semantic/out/semantic.min.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
