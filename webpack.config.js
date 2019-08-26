@@ -36,7 +36,6 @@ Encore
     .addEntry('datepicker', './assets/admin/datepicker.js')
     .addEntry('player_datepicker', './assets/admin/player/player_datepicker.js')
     .addEntry('prevent_multiple_js_loading', './assets/admin/player/prevent_multiple_js_loading.js')
-    .addEntry('login', './assets/js/login.js')
     .addEntry('admin_menu', './assets/admin/menu.js')
     .addEntry('main', './assets/js/theme-main.js')
     .addEntry('scripts', './assets/js/theme-scripts.js')
