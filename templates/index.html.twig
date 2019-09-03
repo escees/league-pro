@@ -42,7 +42,7 @@
                                                                 {{ loop.index }}
                                                             </span>
                                                             <a href="{{ path('app.team.view', {'team': team.id}) }}">
-                                                                <img src="{{ asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                                                <img src="{{ asset('images/team/crest/' ~ team.team.crest.name) }}" alt="">
                                                                 {{ team.name }}
                                                             </a>
                                                             <span class="points">
@@ -481,7 +481,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="img-hover">
-                                           <img src="{{ asset('build/img/blog/' ~ random(1,4) ~ '.jpg') }}" alt="" class="img-responsive">
+                                           <img src="{{ article.photo.name is not null ? asset('images/news/' ~ article.photo.name) : asset('build/img/blog/' ~ random(1,4) ~ '.jpg') }}" alt="" class="img-responsive">
                                            <div class="overlay"><a href="{{ path('app.admin.news.view', {'news': article.id}) }}">+</a></div>
                                         </div>
                                     </div>

@@ -6,7 +6,7 @@
                 <div class="col-xl-7">
                     <div class="row">
                         <div class="col-md-3">
-                            <img src="{{ asset('build/img/clubs-logos/pol.png')}}" alt="">
+                            <img src="{{ asset('images/team/crest/' ~ team.crest.originalName)}}" alt="{{ team.name }} logo">
                         </div>
                         <div class="col-md-9">
                             <h1>{{ team.name }}</h1>
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-image-team" style="background:url({{ asset('build/img/clubs-teams/poland.jpg')}});"></div>
+        <div class="bg-image-team" style="background:url({{ asset('images/team/photo/' ~ team.photo.originalName)}});"></div>
     </div>
     <section class="content-info">
         <div class="single-team-tabs">
@@ -179,7 +179,7 @@
                                         <div class="col-xl-4 col-lg-6 col-md-6">
                                             <div class="item-player">
                                                 <div class="head-player">
-                                                    <img src="{{ asset('build/img/players/'~random(1,7)~'.jpg')}}" alt="location-team">
+                                                    <img src="{{ asset('images/player/photo/' ~ player.photo.name)}}" alt="location-team">
 {#                                                    <div class="overlay"><a href="single-player.html">+</a></div>#}
                                                 </div>
                                                 <div class="info-player">

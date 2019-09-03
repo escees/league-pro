@@ -10,9 +10,9 @@
         {{ form_widget(form.text) }}
         {{ form_errors(form.text) }}
     </div>
-    <div class="form-group col-sm-2">
-        {{ form_label(form.photo) }}
-        {{ form_widget(form.photo) }}
+    <div class="form-group col-sm-2 news-photo">
+        {{ form_label(form.photoFile) }}
+        {{ form_widget(form.photoFile) }}
     </div>
     <div class="form-group col-sm-12">
         {{ form_label(form.video) }}
@@ -27,9 +27,6 @@
 </div>
 <a class="btn btn-sm btn-outline-secondary" href="{{ path('app.admin.news.list') }}">
     <i class="material-icons">save</i> Wróć
-</a>
-<a class="btn btn-sm btn-accent" href="#">
-    <i class="material-icons">save</i> Zapisz wersje roboczą
 </a>
 <button class="btn btn-sm btn-info" type="submit">
     <i class="material-icons">file_copy</i> Zapisz

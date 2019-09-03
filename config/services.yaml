@@ -5,6 +5,10 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     banners_path: /images/media
+    crest_path: /images/team/crest
+    photo_path: /images/team/photo
+    player_photo_path: /images/player/photo
+    news_photo_path: /images/news
 
 services:
     # default configuration for services in *this* file

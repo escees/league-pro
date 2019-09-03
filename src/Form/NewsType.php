@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class NewsType extends AbstractType
 {
@@ -42,14 +43,15 @@ class NewsType extends AbstractType
         );
 
         $builder->add(
-            'photo',
-            FileType::class,
+            'photoFile',
+            VichImageType::class,
             [
+                'label' => 'Zdjęcie dla newsa',
                 'required' => false,
-                'label' => 'Zdjęcie',
-                'attr' => [
-                    'class' => 'form-control'
-                ],
+                'allow_delete' => true,
+//                'download_label' => 'Zdjęcie lub dowolny obrazek',
+                'download_uri' => true,
+                'image_uri' => true,
             ]
         );
 

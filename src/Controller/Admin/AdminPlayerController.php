@@ -27,7 +27,7 @@ class AdminPlayerController extends AbstractController
     }
 
     /**
-     * @Route("/list", name="app.player.list")
+     * @Route("/list", name="app.admin.player.list")
      */
     public function dashboard(Request $request, PlayerRepository $playerRepository, TeamRepository $teamRepository): Response
     {
@@ -43,8 +43,7 @@ class AdminPlayerController extends AbstractController
     /**
      * @Route(
      *     "/add",
-     *     name="app.player.add",
-     *     condition="request.isXmlHttpRequest()"
+     *     name="app.player.add"
      * )
      */
     public function addPlayer(Request $request, TeamRepository $teamRepository): Response
@@ -56,20 +55,12 @@ class AdminPlayerController extends AbstractController
             $this->entityManager->persist($player);
             $this->entityManager->flush();
 
-            $body = $this->renderView(
-                'admin/player/list_content.html.twig',
-                [
-                    'teams' => $teamRepository->findAll(),
-                ]
-            );
+            $this->addFlash(FlashType::SUCCESS, 'Zawodnik została poprawnie dodany');
 
-            return new JsonResponse([
-                'status' => true,
-                'body' => $body,
-            ]);
+            return $this->redirectToRoute('app.admin.player.list');
         }
 
-        return $this->render('admin/player/view.html.twig',
+        return $this->render('admin/player/add.html.twig',
             [
                 'form' => $form->createView(),
             ]
@@ -79,11 +70,10 @@ class AdminPlayerController extends AbstractController
     /**
      * @Route(
      *     "/{player}/edit",
-     *     name="app.player.edit",
-     *     condition="request.isXmlHttpRequest()"
+     *     name="app.player.edit"
      * )
      */
-    public function editPlayer(Request $request, Player $player, TeamRepository $teamRepository): Response
+    public function editPlayer(Request $request, Player $player): Response
     {
         $form = $this->createForm(PlayerType::class, $player);
         $form->handleRequest($request);
@@ -91,20 +81,12 @@ class AdminPlayerController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
 
-            $body = $this->renderView(
-                'admin/player/list_content.html.twig',
-                [
-                    'teams' => $teamRepository->findAll(),
-                ]
-            );
+            $this->addFlash(FlashType::SUCCESS, 'Zawodnik został poprawnie edytowany');
 
-            return new JsonResponse([
-                'status' => true,
-                'body' => $body,
-            ]);
+            return $this->redirectToRoute('app.admin.player.list');
         }
 
-        return $this->render('admin/player/view.html.twig',
+        return $this->render('admin/player/edit.html.twig',
             [
                 'form' => $form->createView(),
             ]

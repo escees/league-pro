@@ -30,11 +30,7 @@ class CmsImageExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @param $key
-     * @return bool|string
-     */
-    public function getImagePath(string $key)
+    public function getImagePath(string $key): string
     {
         $media = $this->mediaRepository->findOneByFileKey($key);
 
