@@ -6,10 +6,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Entity\File as EmbeddedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TeamRepository")
+ * @UniqueEntity("name", message="Taka nazwa drużyny jest już zajęta.")
+ * @Vich\Uploadable
  */
 class Team
 {
@@ -57,12 +63,48 @@ class Team
     private $description;
 
     /**
-     * @ORM\Column(type="object", nullable=true)
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(
+     *     mapping="team_crest_image",
+     *     fileNameProperty="crest.name",
+     *     size="crest.size",
+     *     mimeType="crest.mimeType",
+     *     originalName="crest.originalName",
+     *     dimensions="crest.dimensions"
+     * )
+     *
+     * @var File
+     */
+    private $crestFile;
+
+    /**
+     * @ORM\Embedded(class="Vich\UploaderBundle\Entity\File")
+     *
+     * @var EmbeddedFile
      */
     private $crest;
 
     /**
-     * @ORM\Column(type="object", nullable=true)
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(
+     *     mapping="team_photo_image",
+     *     fileNameProperty="photo.name",
+     *     size="photo.size",
+     *     mimeType="photo.mimeType",
+     *     originalName="photo.originalName",
+     *     dimensions="photo.dimensions"
+     * )
+     *
+     * @var File
+     */
+    private $photoFile;
+
+    /**
+     * @ORM\Embedded(class="Vich\UploaderBundle\Entity\File")
+     *
+     * @var EmbeddedFile
      */
     private $photo;
 
@@ -101,11 +143,20 @@ class Team
      */
     private $season;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
         $this->homeFootballMatch = new ArrayCollection();
         $this->awayFootballMatch = new ArrayCollection();
+        $this->crest = new EmbeddedFile();
+        $this->photo = new EmbeddedFile();
     }
 
     public function getId(): ?int
@@ -216,28 +267,62 @@ class Team
         return $this;
     }
 
-    public function getCrest()
+    public function getCrest(): ?EmbeddedFile
     {
         return $this->crest;
     }
 
-    public function setCrest($crest): self
+    public function setCrest(EmbeddedFile $crest): self
     {
         $this->crest = $crest;
 
         return $this;
     }
 
-    public function getPhoto()
+    public function getPhoto(): ?EmbeddedFile
     {
         return $this->photo;
     }
 
-    public function setPhoto($photo): self
+    public function setPhoto(EmbeddedFile $photo): self
     {
         $this->photo = $photo;
 
         return $this;
+    }
+
+    /**
+     * @param File|UploadedFile $imageFile
+     */
+    public function setCrestFile(?File $crestFile = null)
+    {
+        $this->crestFile = $crestFile;
+
+        if (null !== $crestFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getCrestFile(): ?File
+    {
+        return $this->crestFile;
+    }
+
+    /**
+     * @param File|UploadedFile $imageFile
+     */
+    public function setPhotoFile(?File $photoFile = null)
+    {
+        $this->photoFile = $photoFile;
+
+        if (null !== $photoFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getPhotoFile(): ?File
+    {
+        return $this->photoFile;
     }
 
     public function __toString()
@@ -404,5 +489,10 @@ class Team
         $this->season = $season;
 
         return $this;
+    }
+
+    public function canBeDeleted(): bool
+    {
+        return $this->getAwayFootballMatch()->isEmpty() && $this->getHomeFootballMatch()->isEmpty();
     }
 }

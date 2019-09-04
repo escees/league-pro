@@ -73,7 +73,6 @@ $(document).ready(function () {
             let $serializedForm = $form.serialize();
             let $section = $(section);
             let ajaxUrl = $(this).data('href');
-
             if (isEditButton) {
                 ajaxUrl = $form.data('edit-team');
             }
@@ -87,7 +86,7 @@ $(document).ready(function () {
                 if (data.status === true) {
                     let $newSection = $(data.body).find(section);
                     $section.replaceWith($newSection);
-                    window.location.reload()
+                    // window.location.reload()
                 }
 
                 if (typeof data.status === 'undefined') {

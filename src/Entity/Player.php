@@ -5,10 +5,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Entity\File as EmbeddedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PlayerRepository")
+ * @Vich\Uploadable
  */
 class Player
 {
@@ -66,11 +71,42 @@ class Player
      */
     private $number;
 
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(
+     *     mapping="player_photo_image",
+     *     fileNameProperty="photo.name",
+     *     size="photo.size",
+     *     mimeType="photo.mimeType",
+     *     originalName="photo.originalName",
+     *     dimensions="photo.dimensions"
+     * )
+     *
+     * @var File
+     */
+    private $photoFile;
+
+    /**
+     * @ORM\Embedded(class="Vich\UploaderBundle\Entity\File")
+     *
+     * @var EmbeddedFile
+     */
+    private $photo;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+
     public function __construct()
     {
         $this->goals = new ArrayCollection();
         $this->cards = new ArrayCollection();
         $this->assists = new ArrayCollection();
+        $this->photo = new EmbeddedFile();
     }
 
     public function getId(): ?int
@@ -239,6 +275,35 @@ class Player
     public function setNumber(?int $number): self
     {
         $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * @param File|UploadedFile $imageFile
+     */
+    public function setPhotoFile(?File $photoFile = null)
+    {
+        $this->photoFile = $photoFile;
+
+        if (null !== $photoFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getPhotoFile(): ?File
+    {
+        return $this->photoFile;
+    }
+
+    public function getPhoto(): ?EmbeddedFile
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(EmbeddedFile $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

@@ -28,7 +28,7 @@ class AdminTeamController extends AbstractController
     }
 
     /**
-     * @Route("/list", name="app.team.list")
+     * @Route("/list", name="app.admin.team.list")
      */
     public function dashboard(Request $request, TeamRepository $teamRepository, SeasonRepository $seasonRepository): Response
     {
@@ -44,11 +44,10 @@ class AdminTeamController extends AbstractController
     /**
      * @Route(
      *     "/add",
-     *     name="app.team.add",
-     *     condition="request.isXmlHttpRequest()"
+     *     name="app.admin.team.add"
      * )
      */
-    public function addTeam(Request $request, TeamRepository $teamRepository, LeagueRepository $leagueRepository): Response
+    public function addTeam(Request $request, TeamRepository $teamRepository, SeasonRepository $seasonRepository): Response
     {
         $form = $this->createForm(TeamType::class, $team = new Team());
         $form->handleRequest($request);
@@ -57,20 +56,12 @@ class AdminTeamController extends AbstractController
             $this->entityManager->persist($team);
             $this->entityManager->flush();
 
-            $body = $this->renderView(
-                'admin/team/list_content.html.twig',
-                [
-                    'teams' => $teamRepository->getAllTeamsWithoutLeague(),
-                    'leagues' => $leagueRepository->findAll()                ]
-            );
+            $this->addFlash(FlashType::SUCCESS, 'Drużyna została poprawnie dodana');
 
-            return new JsonResponse([
-                'status' => true,
-                'body' => $body,
-            ]);
+            return $this->redirectToRoute('app.admin.team.list');
         }
 
-        return $this->render('admin/team/view.html.twig',
+        return $this->render('admin/team/add.html.twig',
             [
                 'form' => $form->createView(),
             ]
@@ -81,10 +72,9 @@ class AdminTeamController extends AbstractController
      * @Route(
      *     "/{team}/edit",
      *     name="app.team.edit",
-     *     condition="request.isXmlHttpRequest()"
      * )
      */
-    public function editTeam(Request $request, Team $team, TeamRepository $teamRepository, LeagueRepository $leagueRepository): Response
+    public function editTeam(Request $request, Team $team, TeamRepository $teamRepository, SeasonRepository $seasonRepository): Response
     {
         $form = $this->createForm(TeamType::class, $team);
         $form->handleRequest($request);
@@ -92,21 +82,12 @@ class AdminTeamController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
 
-            $body = $this->renderView(
-                'admin/team/list_content.html.twig',
-                [
-                    'teams' => $teamRepository->getAllTeamsWithoutLeague(),
-                    'leagues' => $leagueRepository->findAll()
-                ]
-            );
+            $this->addFlash(FlashType::SUCCESS, 'Drużyna została poprawnie edytowana');
 
-            return new JsonResponse([
-                'status' => true,
-                'body' => $body,
-            ]);
+            return $this->redirectToRoute('app.admin.team.list');
         }
 
-        return $this->render('admin/team/view.html.twig',
+        return $this->render('admin/team/edit.html.twig',
             [
                 'form' => $form->createView(),
             ]
@@ -119,17 +100,18 @@ class AdminTeamController extends AbstractController
      *     name="app.team.delete",
      * )
      */
-    public function delete(Request $request, Team $team, TeamRepository $teamRepository): Response
+    public function delete(Request $request, Team $team, TeamRepository $teamRepository, SeasonRepository $seasonRepository): Response
     {
+        if (!$team->canBeDeleted()) {
+            $this->addFlash(FlashType::DANGER, 'Drużyna nie może zostać usunięta ponieważ rozegrała lub ma do rozegrania mecze!');
+
+            return $this->redirectToRoute('app.admin.team.list');
+        }
         $this->entityManager->remove($team);
         $this->entityManager->flush();
 
-        $this->addFlash(FlashType::DANGER, 'Drużyna została usunięta!');
+        $this->addFlash(FlashType::SUCCESS, 'Drużyna została usunięta!');
 
-        return $this->render('admin/team/list.html.twig',
-            [
-                'teams' => $teamRepository->findAll(),
-            ]
-        );
+        return $this->redirectToRoute('app.admin.team.list');
     }
 }

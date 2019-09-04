@@ -73,7 +73,7 @@
                             <h4>{{ news.title }}</h4>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <img src="{{ asset('build/img/locations/1.jpg') }}" alt="">
+                            <img src="{{ news.photo.name is not null ? asset('images/news/' ~ news.photo.name) : asset('build/img/locations/1.jpg') }}" alt="">
                         </div>
                         <div class="info-panel">
                             {{ news.text|raw }}

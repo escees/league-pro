@@ -16,14 +16,14 @@
                                     {{ team.name }}
                                 </div>
                                 <div class="btn-group col col-md col-lg-2">
-                                    <button class="btn btn-outline-info btn-sm edit-team"
-                                            data-team-id="{{ team.id }}"
-                                            data-href="{{ path('app.team.edit', {'team': team.id}) }}"
-                                            data-toggle="modal"
-                                            data-target="#edit-team-modal"
+                                    <a href="{{ path('app.team.edit', {'team': team.id}) }}" class="btn btn-outline-info btn-sm edit-team"
+{#                                            data-team-id="{{ team.id }}"#}
+{#                                            data-href="{{ path('app.team.edit', {'team': team.id}) }}"#}
+{#                                            data-toggle="modal"#}
+{#                                            data-target="#edit-team-modal"#}
                                     >
                                         <i class="fas fa-edit"></i>
-                                    </button>
+                                    </a>
                                     <button class="btn btn-outline-danger btn-sm delete-team"
                                             data-href="{{ path('app.team.delete', {'team': team.id}) }}"
                                             data-name="{{ team.name }}"
@@ -46,7 +46,7 @@
     <div class="card card-small ">
         <div class="card-header text-center">
             <h3>Drużyny bez ligi</h3>
-            <button type="button" class=" text right btn btn-outline-info add-team" data-href="{{ path('app.team.add') }}" data-toggle="modal" data-target="#add-team-modal">Dodaj drużynę</button>
+            <a class=" text right btn btn-outline-info add-team" href="{{ path('app.admin.team.add') }}">Dodaj drużynę</a>
         </div>
         <div class="card-body pt-0" id="team-list">
             {% for teamWithoutLeague in teams %}
@@ -57,14 +57,14 @@
                                 {{ teamWithoutLeague.name }}
                             </div>
                             <div class="btn-group col col-md col-lg-2">
-                                <button class="btn btn-outline-info btn-sm edit-team"
+                                <a href="{{ path('app.team.edit', {'team': teamWithoutLeague.id}) }}" class="btn btn-outline-info btn-sm edit-team"
                                         data-team-id="{{ teamWithoutLeague.id }}"
-                                        data-href="{{ path('app.team.edit', {'team': teamWithoutLeague.id}) }}"
-                                        data-toggle="modal"
-                                        data-target="#edit-team-modal"
+{#                                        data-href="{{ path('app.team.edit', {'team': teamWithoutLeague.id}) }}"#}
+{#                                        data-toggle="modal"#}
+{#                                        data-target="#edit-team-modal"#}
                                 >
                                     <i class="fas fa-edit"></i>
-                                </button>
+                                </a>
                                 <button class="btn btn-outline-danger btn-sm delete-team"
                                         data-href="{{ path('app.team.delete', {'team': teamWithoutLeague.id}) }}"
                                         data-name="{{ teamWithoutLeague.name }}"

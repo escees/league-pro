@@ -13,11 +13,25 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PlayerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add(
+            'photoFile',
+            VichImageType::class,
+            [
+                'label' => 'Zdjęcie zawodnika',
+                'required' => false,
+                'allow_delete' => true,
+//                'download_label' => 'Zdjęcie lub dowolny obrazek',
+                'download_uri' => true,
+                'image_uri' => true,
+            ]
+        );
+
         $builder->add(
             'name',
             TextType::class,
