@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/admin/media/")
+ */
 class AdminMediaController extends AbstractController
 {
     private $entityManager;
@@ -74,7 +77,7 @@ class AdminMediaController extends AbstractController
             return $this->redirectToRoute('app.admin.media.list');
         }
 
-        return $this->render('admin/media/add.html.twig',
+        return $this->render('admin/media/edit.html.twig',
             [
                 'form' => $form->createView(),
             ]
