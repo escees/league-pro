@@ -50,7 +50,6 @@
                                                             </span>
                                                         </li>
                                                     {% endfor %}
-
                                                 </ul>
                                             </div>
                                        </div>
@@ -65,19 +64,16 @@
                                                             <span class="head">
                                                                 <small>{{ result.homeTeam.name }} vs. {{ result.awayTeam.name }}  <span class="date">{{ result.startDate|date('d/m/Y H:i') }}</span></small>
                                                             </span>
-
                                                             <div class="goals-result">
                                                                 <a href="{{ path('app.team.view', {'team': result.homeTeam.id}) }}">
                                                                     <img src="img/clubs-logos/por.png" alt="">
                                                                     {{ result.homeTeam.name }}
                                                                 </a>
-
                                                                 <span class="goals">
                                                                     <a href="{{ path('app.single_result', {'match': result.id}) }}">
                                                                         <b>{{ result.matchDetails.homeTeamGoals }}</b> - <b>{{ result.matchDetails.awayTeamGoals }}</b>
                                                                     </a>
                                                                 </span>
-
                                                                 <a href="{{ path('app.team.view', {'team': result.awayTeam.id}) }}">
                                                                     <img src="img/clubs-logos/esp.png" alt="">
                                                                     {{ result.awayTeam.name }}
@@ -114,312 +110,6 @@
                                     </div>
                                 </div>
                             </div>
-{#                            <div class="tab-pane" id="groups">#}
-{#                                <div class="groups-list">#}
-{#                                    <div class="row">#}
-{#                                        <div class="col-lg-3 col-md-6">#}
-{#                                           <h5><a href="groups.html">GROUP A</a></h5>#}
-{#                                            <div class="item-group">#}
-{#                                                <ul>#}
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/rusia.png" alt="">#}
-{#                                                            Russia#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/arabia.png" alt="">#}
-{#                                                            Saudi Arabia#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/egy.png" alt="">#}
-{#                                                            Egypt#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/uru.png" alt="">#}
-{#                                                            Uruguay#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-{#                                                </ul>#}
-{#                                            </div>#}
-{#                                        </div>#}
-
-{#                                        <div class="col-lg-3 col-md-6">#}
-{#                                           <h5><a href="groups.html">GROUP B</a></h5>#}
-{#                                            <div class="item-group">#}
-{#                                                <ul>#}
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/por.png" alt="">#}
-{#                                                            Portugal#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/esp.png" alt="">#}
-{#                                                            Spain#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/mar.png" alt="">#}
-{#                                                            Morocco#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/irn.png" alt="">#}
-{#                                                            IR Iran#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-{#                                                </ul>#}
-{#                                            </div>#}
-{#                                        </div>#}
-
-{#                                        <div class="col-lg-3 col-md-6">#}
-{#                                           <h5><a href="group-list.html">GROUP C</a></h5>#}
-{#                                            <div class="item-group">#}
-{#                                                <ul>#}
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/fra.png" alt="">#}
-{#                                                            France#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/aus.png" alt="">#}
-{#                                                            Australia#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/per.png" alt="">#}
-{#                                                            Peru#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/den.png" alt="">#}
-{#                                                            Denmark#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-{#                                                </ul>#}
-{#                                            </div>#}
-{#                                        </div>#}
-
-{#                                        <div class="col-lg-3 col-md-6">#}
-{#                                           <h5><a href="group-list.html">GROUP D</a></h5>#}
-{#                                            <div class="item-group">#}
-{#                                                <ul>#}
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/arg.png" alt="">#}
-{#                                                            Argentina#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/isl.png" alt="">#}
-{#                                                            Iceland#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/cro.png" alt="">#}
-{#                                                            Croatia#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/nga.png" alt="">#}
-{#                                                            Nigeria#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-{#                                                </ul>#}
-{#                                            </div>#}
-{#                                        </div>#}
-{#                                    </div>#}
-
-{#                                    <div class="row">#}
-{#                                        <div class="col-lg-3 col-md-6">#}
-{#                                           <h5><a href="group-list-html">GROUP E</a></h5>#}
-{#                                            <div class="item-group">#}
-{#                                                <ul>#}
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/bra.png" alt="">#}
-{#                                                            Brazil#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/sui.png" alt="">#}
-{#                                                            Switzerland#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/costa-rica.png" alt="">#}
-{#                                                            Costa rica#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/srb.png" alt="">#}
-{#                                                            Serbia#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-{#                                                </ul>#}
-{#                                            </div>#}
-{#                                        </div>#}
-
-{#                                        <div class="col-lg-3 col-md-6">#}
-{#                                           <h5><a href="group-list-html">GROUP F</a></h5>#}
-{#                                            <div class="item-group">#}
-{#                                                <ul>#}
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/ger.png" alt="">#}
-{#                                                            Germany#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/mex.png" alt="">#}
-{#                                                            Mexico#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/swe.png" alt="">#}
-{#                                                            Sweden#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/kor.png" alt="">#}
-{#                                                            Korea Rep#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-{#                                                </ul>#}
-{#                                            </div>#}
-{#                                        </div>#}
-
-{#                                        <div class="col-lg-3 col-md-6">#}
-{#                                           <h5><a href="group-list-html">GROUP G</a></h5>#}
-{#                                            <div class="item-group">#}
-{#                                                <ul>#}
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/bel.png" alt="">#}
-{#                                                            Belgium#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/pan.png" alt="">#}
-{#                                                            Panama#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/tun.png" alt="">#}
-{#                                                            Tunisia#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/eng.png" alt="">#}
-{#                                                            England#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-{#                                                </ul>#}
-{#                                            </div>#}
-{#                                        </div>#}
-
-{#                                        <div class="col-lg-3 col-md-6">#}
-{#                                           <h5><a href="group-list-html">GROUP H</a></h5>#}
-{#                                            <div class="item-group">#}
-{#                                                <ul>#}
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/pol.png" alt="">#}
-{#                                                            Poland#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/sen.png" alt="">#}
-{#                                                            Senegal#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/colombia.png" alt="">#}
-{#                                                            Colombia#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-
-{#                                                    <li>#}
-{#                                                       <a href="single-team.html">#}
-{#                                                            <img src="img/clubs-logos/japan.png" alt="">#}
-{#                                                            Japan#}
-{#                                                        </a>#}
-{#                                                    </li>#}
-{#                                                </ul>#}
-{#                                            </div>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="tab-pane" id="description">#}
-{#                               <div class="info-general">#}
-{#                                    <div class="row">#}
-{#                                       <div class="col-md-4">#}
-{#                                          <img src="img/locations/1.jpg" alt="">#}
-{#                                       </div>#}
-
-{#                                       <div class="col-md-8">#}
-{#                                           <h3>2018 FIFA World Cup</h3>#}
-{#                                           <p class="lead">The 2018 FIFA World Cup will be the 21st FIFA World Cup, a quadrennial international football tournament contested by the men's national teams.  West of the Ural Mountains to keep travel time manageable.</p>#}
-{#                                       </div>#}
-
-{#                                       <div class="col-md-12">#}
-{#                                           <p>It is scheduled to take place in Russia from 14 June to 15 July 2018,[2] after the country was awarded the hosting rights on 2 December 2010. This will be the first World Cup held in Europe since 2006; all but one of the stadium venues are in European Russia, west of the Ural Mountains to keep travel time manageable.</p>#}
-{#                                           <h4>Gianni Infantino - Fifa President</h4>#}
-{#                                       </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
                         </div>
                     </div>
 
@@ -429,7 +119,7 @@
                                 <h4>Ekstraklasa Jesień 2019</h4>
                             </div>
                             {% if nextMatch is not null %}
-                                <div class="content-counter content-counter-home">
+                                <div class="content-counter content-counter-home" id="start-date" data-date="{{ nextMatch.startDate|date('d M y H:i:s') }}">
                                     <p class="text-center">
                                         <i class="fa fa-clock-o"></i>
                                         Do najblizszego meczu pozostało:
@@ -465,7 +155,6 @@
                             {% endif %}
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -494,51 +183,6 @@
                                </div>
                             </div>
                         {% endfor %}
-{#                        <div class="post-item">#}
-{#                            <div class="row">#}
-{#                                <div class="col-md-4">#}
-{#                                    <div class="img-hover">#}
-{#                                       <img src="{{ asset('build/img/blog/2.jpg') }}" alt="" class="img-responsive">#}
-{#                                       <div class="overlay"><a href="single-news.html">+</a></div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="col-md-8">#}
-{#                                    <h5><a href="single-news.html">Russia 2018’s potential classic match-ups</a></h5>#}
-{#                                    <span class="data-info">January 9, 2014  / <i class="fa fa-comments"></i><a href="#">5</a></span>#}
-{#                                    <p>Our goal is very clear, it didn’t change after the draw. We should qualify for the knockout stage.<a href="single-news.html">Read More [+]</a></p>#}
-{#                                </div>#}
-{#                           </div>#}
-{#                        </div>#}
-{#                        <div class="post-item">#}
-{#                            <div class="row">#}
-{#                                <div class="col-md-4">#}
-{#                                    <div class="img-hover">#}
-{#                                       <img src="{{ asset('build/img/blog/3.jpg') }}" alt="" class="img-responsive">#}
-{#                                       <div class="overlay"><a href="single-news.html">+</a></div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="col-md-8">#}
-{#                                    <h5><a href="single-news.html">World Cup rivalries reprised</a></h5>#}
-{#                                    <span class="data-info">January  4, 2014  / <i class="fa fa-comments"></i><a href="#">3</a></span>#}
-{#                                    <p>The outdoor exhibition on Manezhnaya Square comprises 11 figures that symbolise the main sites of interest.<a href="single-news.html">Read More [+]</a></p>#}
-{#                                </div>#}
-{#                           </div>#}
-{#                        </div>#}
-{#                        <div class="post-item">#}
-{#                            <div class="row">#}
-{#                                <div class="col-md-4">#}
-{#                                    <div class="img-hover">#}
-{#                                       <img src="img/blog/4.jpg" alt="" class="img-responsive">#}
-{#                                       <div class="overlay"><a href="single-news.html">+</a></div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="col-md-8">#}
-{#                                    <h5><a href="single-news.html">All set for your trip to Russia?</a></h5>#}
-{#                                    <span class="data-info">January 8, 2014  / <i class="fa fa-comments"></i><a href="#">2</a></span>#}
-{#                                    <p>Colombia play Japan on 19 June at the Mordovia Arena, where the piling and casting operations.<a href="single-news.html">Read More [+]</a></p>#}
-{#                                </div>#}
-{#                           </div>#}
-{#                        </div>#}
                     </div>
                 </div>
                 <aside class="col-sm-6 col-lg-3 col-xl-2">
@@ -564,14 +208,6 @@
                             {% endfor %}
                         </ul>
                     </div>
-{#                    <div class="panel-box">#}
-{#                       <div class="titles no-margin">#}
-{#                            <h4><i class="fa fa-link"></i>Cta</h4>#}
-{#                        </div>#}
-{#                        <a href="http://themeforest.net/user/iwthemes/portfolio?ref=iwthemes" target="_blank">#}
-{#                            <img src="img/adds/sidebar.png" class="img-responsive" alt="">#}
-{#                        </a>#}
-{#                    </div>#}
                 </aside>
             </div>
             <div class="row no-line-height">
@@ -589,15 +225,8 @@
             </ul>
         </div>
     </section>
-
-{#    <div class="instagram-btn">#}
-{#        <div class="btn-instagram">#}
-{#            <i class="fa fa-instagram"></i>#}
-{#            FOLLOW#}
-{#            <a href="https://www.instagram.com/fifaworldcup/" target="_blank">&#64;fifaworldcup</a>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="content-instagram">#}
-{#        <div id="instafeed"></div>#}
-{#    </div>#}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('homepage') }}
 {% endblock %}
