@@ -25,6 +25,7 @@ Encore
      */
     .addEntry('core', './assets/core.js')
     .addEntry('app', './assets/js/app.js')
+    .addEntry('homepage', './assets/js/homepage.js')
     .addEntry('admin', './assets/admin/admin.js')
     .addEntry('match_details', './assets/admin/match/match_details.js')
     .addEntry('player', './assets/admin/player/player.js')
