@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <section class="content-info">
+    <section class="content-info mb-5">
         <div class="container paddings-mini">
             <div class="row">
                 <div class="col-lg-12">
                     <table class="table-striped table-hover result-point">
-                        <thead class="point-table-head">
+                        <thead class="point-table-head teal-color-background">
                         <tr>
                             <th class="text-left">#</th>
                             <th class="text-left">Drużyna</th>
@@ -25,7 +25,7 @@
                             {% for team in teams %}
                                 <tr>
                                     <td>{{ loop.index }}</td>
-                                    <td><img src="{{ asset('build/img/clubs-logos/pol.png') }}" alt="Colombia"> {{ team.name }}</td>
+                                    <td><img src="{{ team.team.crest.name ? asset('images/team/crest/' ~ team.team.crest.name) : asset('build/img/clubs-logos/pol.png') }}"> {{ team.name }}</td>
                                     <td>{{ team.played }}</td>
                                     <td>{{ team.wins }}</td>
                                     <td>{{ team.winsAfterPenalties }}</td>
@@ -34,7 +34,7 @@
                                     <td>{{ team.goalsScored }}</td>
                                     <td>{{ team.goalsConceded }}</td>
                                     <td>{{ team.goals_diff }}</td>
-                                    <td>{{ team.points }}</td>
+                                    <td><strong>{{ team.points }}</strong></td>
                                 </tr>
                             {% endfor %}
                         </tbody>

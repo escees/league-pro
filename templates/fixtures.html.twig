@@ -7,24 +7,45 @@
                 <h3 class="clear-title">Mecze</h3>
             </div>
             <div class="col-lg-12">
-                <table class="table-striped table-hover">
+                <table class="table-striped table-hover mb-5">
                     <tbody>
                         {% for fixture in fixtures %}
                             <tr>
                                 <td class="text-center">
-                                    <img src="img/clubs-logos/colombia.png" alt="icon">
+                                    <img src="{{ fixture.homeTeam.crest.name ? asset('images/team/crest/' ~ fixture.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="icon">
                                     <strong>{{ fixture.homeTeam.name }}</strong><br>
                                     <small class="meta-text">GRUPA 1</small>
                                 </td>
                                 <td class="text-center">Vs</td>
                                 <td class="text-center">
-                                    <img src="img/clubs-logos/japan.png" alt="icon1">
+                                    <img src="{{ fixture.awayTeam.crest.name ? asset('images/team/crest/' ~ fixture.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="icon1">
                                     <strong>{{ fixture.awayTeam.name }}</strong><br>
                                     <small class="meta-text">GRUPA 1</small>
                                 </td>
                                 <td class="text-center">
                                     {{ fixture.startDate|date('d-m-Y H:i') }}<br>
                                     <small class="meta-text">TZN Arena ;)</small>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td>
+                                    Brak meczów w terminarzu
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
                                 </td>
                             </tr>
                         {% endfor %}

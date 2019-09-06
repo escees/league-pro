@@ -48,12 +48,12 @@
 
                         <div class="item-team">
                             <div class="head-team">
-                                <img src="{{ asset('build/img/clubs-teams/poland.jpg')}}" alt="location-team">
+                                <img src="{{ team.photo.name ? asset('images/team/photo/' ~ team.photo.name) : asset('build/img/clubs-teams/poland.jpg')}}" alt="location-team">
                                 <div class="overlay"><a href="{{ path('app.team.view', { 'team': team.id }) }}">+</a></div>
                             </div>
                             <div class="info-team">
                             <span class="logo-team">
-                                <img src="{{ asset('build/img/clubs-logos/pol.png')}}" alt="logo-team">
+                                <img src="{{ team.crest.name ? asset('images/team/crest/' ~ team.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="logo-team">
                             </span>
                                 <h4>{{ team.name }}</h4>
                                 <span class="location-team">

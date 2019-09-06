@@ -34,9 +34,9 @@ class TeamRepository extends ServiceEntityRepository
             ->where('t.season IS NOT NULL');
     }
 
-    public function getTeamStandings(): array
+    public function getTeamStandings(int $maxResults = null): array
     {
-        return $this->createQueryBuilder('t')
+        $qb = $this->createQueryBuilder('t')
             ->select('t.points')
             ->addSelect('t as team')
             ->addSelect('t.id')
@@ -47,14 +47,17 @@ class TeamRepository extends ServiceEntityRepository
             ->addSelect('t.losesAfterPenalties')
             ->addSelect('t.goalsScored')
             ->addSelect('t.goalsConceded')
-            ->addSelect('t.goalsScored  - t.goalsConceded as goals_diff')
+            ->addSelect('t.goalsScored - t.goalsConceded as goals_diff')
             ->addSelect('t.wins + t.loses + t.winsAfterPenalties + t.losesAfterPenalties as played')
             ->orderBy('t.points', 'DESC')
             ->addOrderBy('goals_diff', 'DESC')
             ->addOrderBy('t.goalsScored', 'DESC')
-            ->where('t.season IS NOT NULL')
-            ->getQuery()
-            ->execute()
-        ;
+            ->where('t.season IS NOT NULL');
+
+        if ($maxResults) {
+            $qb->setMaxResults($maxResults);
+        }
+
+        return $qb->getQuery()->execute();
     }
 }

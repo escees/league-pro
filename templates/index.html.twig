@@ -33,7 +33,7 @@
                                 <div class="row">
                                    <div class="col-lg-4">
                                        <div class="club-ranking">
-                                            <h5><a href="{{ path('app.table') }}">Tabela</a></h5>
+                                            <h5><a href="{{ path('app.table') }}">Skrócona tabela</a></h5>
                                             <div class="info-ranking">
                                                 <ul>
                                                     {% for team in teams %}
@@ -42,7 +42,7 @@
                                                                 {{ loop.index }}
                                                             </span>
                                                             <a href="{{ path('app.team.view', {'team': team.id}) }}">
-                                                                <img src="{{ asset('images/team/crest/' ~ team.team.crest.name) }}" alt="">
+                                                                <img src="{{ team.team.crest.name ? asset('images/team/crest/' ~ team.team.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                                 {{ team.name }}
                                                             </a>
                                                             <span class="points">
@@ -66,7 +66,7 @@
                                                             </span>
                                                             <div class="goals-result">
                                                                 <a href="{{ path('app.team.view', {'team': result.homeTeam.id}) }}">
-                                                                    <img src="img/clubs-logos/por.png" alt="">
+                                                                    <img src="{{ result.homeTeam.crest.name ? asset('images/team/crest/' ~ result.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                                     {{ result.homeTeam.name }}
                                                                 </a>
                                                                 <span class="goals">
@@ -75,7 +75,7 @@
                                                                     </a>
                                                                 </span>
                                                                 <a href="{{ path('app.team.view', {'team': result.awayTeam.id}) }}">
-                                                                    <img src="img/clubs-logos/esp.png" alt="">
+                                                                    <img src="{{ result.awayTeam.crest.name ? asset('images/team/crest/' ~ result.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                                     {{ result.awayTeam.name }}
                                                                 </a>
                                                             </div>
@@ -96,7 +96,7 @@
                                                               {{ loop.index }}
                                                             </span>
                                                             <a href="#">
-                                                                <img src="img/players/1.jpg" alt="">
+{#                                                                <img src="img/players/1.jpg" alt="">#}
                                                                 {{ scorer.name }}
                                                             </a>
                                                             <span class="points">
@@ -135,14 +135,14 @@
                                                 <p>TZN Arena</p>
                                             </div>
                                             <div class="col-md-5">
-                                                <img src="img/clubs-logos/rusia.png" alt="">
+                                                <img src="{{ nextMatch.homeTeam.crest.name ? asset('images/team/crest/' ~ nextMatch.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                 <span>{{ nextMatch.homeTeam.name }}</span>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="vs">Vs</div>
                                             </div>
                                             <div class="col-md-5">
-                                                <img src="img/clubs-logos/arabia.png" alt="">
+                                                <img src="{{ nextMatch.awayTeam.crest.name ? asset('images/team/crest/' ~ nextMatch.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                 <span>{{ nextMatch.awayTeam.name }}</span>
                                             </div>
                                         </div>
@@ -196,11 +196,11 @@
                                 <h6>Ekstraklasa <span>{{ fixture.startDate|date('d/m/Y H:i') }}</span></h6>
                                 <ul class="club-logo">
                                     <li>
-                                        <img src="img/clubs-logos/rusia.png" alt="">
+                                        <img src="{{ fixture.homeTeam.crest.name ? asset('images/team/crest/' ~ fixture.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                         <span>{{ fixture.homeTeam.name }}</span>
                                     </li>
                                     <li>
-                                        <img src="img/clubs-logos/arabia.png" alt="">
+                                        <img src="{{ fixture.awayTeam.crest.name ? asset('images/team/crest/' ~ fixture.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                         <span>{{ fixture.awayTeam.name }}</span>
                                     </li>
                                 </ul>

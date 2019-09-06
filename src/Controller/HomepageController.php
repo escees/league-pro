@@ -27,7 +27,7 @@ class HomepageController extends AbstractController
         return $this->render(
             'index.html.twig',
             [
-                'teams' => $teamRepository->getTeamStandings(),
+                'teams' => $teamRepository->getTeamStandings(8),
                 'results' => $footballMatchRepository->getLastThreeMatches(),
                 'bestScorers' => $goalRepository->getBestScorers(true),
                 'nextMatch' => $footballMatchRepository->getNextMatch(),

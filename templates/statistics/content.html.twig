@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col mt-2">
+            <div class="card card-small mb-4">
+                <div class="card-header border-bottom text-center">
+                    <h6 class="m-0">Klasyfikacja kanadyjska</h6>
+                </div>
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table table-hover  mb-0">
+                        <thead class="teal-color-background">
+                        <tr>
+                            <th scope="col" class="border-0">#</th>
+                            <th scope="col" class="border-0">Imię i nazwisko</th>
+                            <th scope="col" class="border-0">Drużyna</th>
+                            <th scope="col" class="border-0">Punkty</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for player in canadianPoints %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ player.name }}</td>
+                                <td><a href="{{ path('app.team.view', {'team': player.team_id}) }}">{{ player.team }}</a></td>
+                                <td>{{ player.points }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col mt-2">
+            <div class="card card-small mb-4">
+                <div class="card-header border-bottom text-center">
+                    <h6 class="m-0">Najlepsi Strzelcy</h6>
+                </div>
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table table-hover  mb-0">
+                        <thead class="teal-color-background">
+                        <tr>
+                            <th scope="col" class="border-0">#</th>
+                            <th scope="col" class="border-0">Imię i nazwisko</th>
+                            <th scope="col" class="border-0">Drużyna</th>
+                            <th scope="col" class="border-0">Bramki</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for scorer in bestScorers %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ scorer.name }}</td>
+                                <td><a href="{{ path('app.team.view', {'team': scorer.team_id}) }}">{{ scorer.team }}</a></td>
+                                <td>{{ scorer.goals }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col mt-2">
+            <div class="card card-small mb-4">
+                <div class="card-header border-bottom text-center">
+                    <h6 class="m-0">Najlepsi asystenci</h6>
+                </div>
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table table-hover  mb-0">
+                        <thead class="teal-color-background">
+                        <tr>
+                            <th scope="col" class="border-0">#</th>
+                            <th scope="col" class="border-0">Imię i nazwisko</th>
+                            <th scope="col" class="border-0">Drużyna</th>
+                            <th scope="col" class="border-0">Asysty</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for assistant in bestAssistants %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ assistant.name }}</td>
+                                <td><a href="{{ path('app.team.view', {'team': assistant.team_id}) }}">{{ assistant.team }}</a></td>
+                                <td>{{ assistant.assists }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

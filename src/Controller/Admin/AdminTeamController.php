@@ -30,7 +30,7 @@ class AdminTeamController extends AbstractController
     /**
      * @Route("/list", name="app.admin.team.list")
      */
-    public function dashboard(Request $request, TeamRepository $teamRepository, SeasonRepository $seasonRepository): Response
+    public function list(Request $request, TeamRepository $teamRepository, SeasonRepository $seasonRepository): Response
     {
         return $this->render(
             'admin/team/list.html.twig',

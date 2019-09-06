@@ -34,6 +34,9 @@ services:
       volumes:
           - .:/var/www/html
           - ./.docker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+          - ./.docker/php-fpm/timezone.ini:/usr/local/etc/php/conf.d/timezone.ini
+          - "/etc/timezone:/etc/timezone:ro"
+          - "/etc/localtime:/etc/localtime:ro"
       restart: unless-stopped
 
 volumes:
