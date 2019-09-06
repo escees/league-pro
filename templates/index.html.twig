@@ -135,14 +135,14 @@
                                                 <p>TZN Arena</p>
                                             </div>
                                             <div class="col-md-5">
-                                                <img src="{{ nextMatch.homeTeam.crest.name ? asset('images/team/crest/' ~ nextMatch.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                                <img class="counter-team-crest" src="{{ nextMatch.homeTeam.crest.name ? asset('images/team/crest/' ~ nextMatch.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                 <span>{{ nextMatch.homeTeam.name }}</span>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="vs">Vs</div>
                                             </div>
                                             <div class="col-md-5">
-                                                <img src="{{ nextMatch.awayTeam.crest.name ? asset('images/team/crest/' ~ nextMatch.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                                <img class="counter-team-crest" src="{{ nextMatch.awayTeam.crest.name ? asset('images/team/crest/' ~ nextMatch.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                 <span>{{ nextMatch.awayTeam.name }}</span>
                                             </div>
                                         </div>

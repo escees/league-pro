@@ -52,3 +52,9 @@ body {
 .row .team img {
     max-width: 30%;
 }
+
+@media screen and (max-width: 768px) {
+    .counter-team-crest {
+        max-width: 30%;
+    }
+}
