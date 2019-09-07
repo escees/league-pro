@@ -1,0 +1,42 @@
+easy_admin:
+    user:
+        display_name: true
+        name_property_path: 'name'
+    site_name: '<i class="logo-text">My6aside</i>'
+    design:
+        brand_color: '#81b9ba'
+        assets:
+            css: ['build/custom_backend.css']
+    list:
+        actions:
+            - { name: 'edit', icon: 'pencil', label: 'action.edit' }
+            - { name: 'show', icon: 'info-circle', label: 'action.show' }
+            - { name: 'delete', icon: 'trash', label: 'action.delete' }
+    entities:
+        FootballMatch:
+            label: menu.match
+            class: App\Entity\FootballMatch
+            list:
+              title: 'list.match'
+        Player:
+            label: menu.players
+            class: App\Entity\Player
+            list:
+              title: 'list.player'
+              fields:
+                  - { property: 'name', label: 'player.name' }
+                  - { property: 'appearances', label: 'player.appearances' }
+                  - { property: 'dateOfBirth', label: 'player.dateOfBirth' }
+                  - { property: 'team', label: 'player.team' }
+                  - { property: 'cards', label: 'player.cards' }
+                  - { property: 'goals', label: 'player.goals' }
+        Team:
+            label: menu.teams
+            class: App\Entity\Team
+            list:
+              title: 'list.team'
+        News:
+            label: menu.news
+            class: App\Entity\News
+            list:
+              title: 'list.news'

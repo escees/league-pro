@@ -1,0 +1,26 @@
+menu:
+  matches: 'Mecze'
+  players: 'Zawodnicy'
+  teams: 'Drużyny'
+  news: 'Newsy'
+  logout: 'Wyloguj się'
+
+list:
+  match: 'Lista meczy'
+  player: 'Lista zawodników'
+  team: 'Lista drużyn'
+  news: 'Lista newsów'
+
+action:
+  save: 'Zapisz'
+  edit: 'Edytuj'
+  delete: 'Usuń'
+  show: 'Pokaż'
+
+player:
+  name: 'Imię i nazwisko'
+  appearances: 'Ilość występów'
+  dateOfBirth: 'Data urodzenia'
+  team: 'Drużyna'
+  cards: 'Ilość kartek'
+  goals: 'Bramki'

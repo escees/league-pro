@@ -1,0 +1,44 @@
+<nav class="mainmenu">
+    <div class="container">
+        <ul class="sf-menu" id="menu">
+            <li class="current">
+                <a href="{{ path('app.homepage') }}">Strona główna</a>
+            </li>
+{#            <li class="current">#}
+{#                <a href="{{ path('app.teams')}}">Ligi</a>#}
+{#                <ul class="sub-current ">#}
+{#                    <li><a class="d-flex justify-content-center"><i class="fa fa-trophy" aria-hidden="true"></i>  Ekstraklasa</a></li>#}
+{#                    <li><a href="{{ path('app.table') }}">Tabela</a></li>#}
+{#                    <li><a href="{{ path('app.fixtures') }}">Terminarz</a></li>#}
+{#                    <li><a href="{{ path('app.teams')}}">Drużyny</a></li>#}
+{#                    <li><a href="{{ path('app.results') }}">Wyniki</a></li>#}
+{#                    <li><a href="{{ path('app.table')}}">Tabela</a></li>#}
+{#                </ul>#}
+{#            </li>#}
+{#            <li class="current">#}
+{#                <a href="{{ path('app.teams')}}">Newsy</a>#}
+{#            </li>#}
+{#            <li class="current">#}
+{#                <a href="{{ path('app.teams')}}">Kontakt</a>#}
+{#            </li>#}
+            <li class="current">
+                <a href="{{ path('app.teams')}}">Drużyny</a>
+            </li>
+            <li class="current">
+                <a href="{{ path('app.fixtures')}}">Terminarz</a>
+            </li>
+            <li class="current">
+                <a href={{ path('app.results') }}>Wyniki</a>
+            </li>
+            <li>
+                <a href="{{ path('app.table')}}">Tabela</a>
+            </li>
+            <li>
+                <a href="{{ path('app.statistics')}}">Statystyki</a>
+            </li>
+            <li class="float-right">
+                <a href="{{ path('app_login') }}" class="login-button">Zaloguj się</a>
+            </li>
+        </ul>
+    </div>
+</nav>

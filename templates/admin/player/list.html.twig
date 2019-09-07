@@ -1,0 +1,10 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block body %}
+    {% include 'admin/player/list_content.html.twig' %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('player') }}
+    {{ encore_entry_script_tags('prevent_multiple_js_loading') }}
+{% endblock %}
+

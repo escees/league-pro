@@ -1,0 +1,49 @@
+<div class="col-lg-8 col-md-12 col-sm-12 mb-4 mt-4">
+    <div class="card card-small ">
+        <div class="card-header text-center">
+            <h3>Kolejki</h3>
+            <a class="btn btn-outline-info" href="{{ path('app.admin.matchday.add') }}">Dodaj kolejkę</a>
+        </div>
+        <div class="card-body pt-0" id="team-list">
+            {% for matchday in matchdays %}
+                <ul class="list-group team-{{ matchday.id }}" data-team-id="{{ matchday.id }}">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col">
+                                {{ matchday.name }}
+                            </div>
+                            <div class="col">
+                                {{ matchday.season.league.name }} {{ matchday.season.name }}
+                            </div>
+                            <div class="col">
+                                {{ matchday.startDate|date('d/m/Y') }} - {{ matchday.endDate|date('d/m/Y') }}
+                            </div>
+                            <div class="btn-group col col-md col-lg-2">
+                                <a class="btn btn-info btn-sm matchday-item"
+                                   href="{{ path('app.admin.matchday.edit', {'matchDay': matchday.id}) }}"
+                                   data-toggle="tooltip"
+                                   data-placement="left"
+                                   title="Edytuj"
+                                >
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a class="btn btn-danger btn-sm matchday-item"
+                                   href="#"
+{#                                   href="{{ path('app.admin.matchday.delete', {'matchday': matchday.id}) }}"#}
+                                   data-toggle="tooltip"
+                                   data-placement="right"
+                                   title="Usuń"
+                                >
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            {% else %}
+                Jeszcze nie utworzyłeś żadnej kolejki rozgrywek.
+            {% endfor %}
+        </div>
+    </div>
+</div>
+

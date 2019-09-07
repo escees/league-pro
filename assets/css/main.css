@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css);
-@import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700");
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,500");
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
 @media print {
@@ -10061,7 +10061,7 @@ a.text-dark:focus, a.text-dark:hover {
 /* line 89, ../sass/_partials/_main_nav.scss */
 .sf-menu .sf-mega {
   box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.2);
-  width: 100%;
+  width: 25%;
   /* allow long menu items to determine submenu width */
 }
 
@@ -16956,7 +16956,7 @@ iframe.big-video {
 footer {
   background: #101010;
   color: #888;
-  padding: 60px 0;
+  padding: 40px 0;
   font-size: 13px;
   line-height: 20px;
 }

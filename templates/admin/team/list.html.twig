@@ -1,0 +1,12 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block body %}
+    <div class="d-flex justify-content-start">
+        {% include 'admin/team/list_content.html.twig' %}
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('team') }}
+    {{ encore_entry_script_tags('prevent_multiple_js_loading') }}
+{% endblock %}
+

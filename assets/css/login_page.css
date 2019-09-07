@@ -1,0 +1,19 @@
+.login-page {
+    height: 100vh;
+}
+
+.login-page .logo {
+    width: 100px;
+}
+
+.login-form {
+    border-radius: 6px;
+}
+.input-group-text.login-form-icon {
+    width: 50px !important;
+    padding: 0 !important;
+}
+
+.login-page .content {
+    width: 400px;
+}

@@ -23,13 +23,24 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
+    .addEntry('core', './assets/core.js')
     .addEntry('app', './assets/js/app.js')
-    .addEntry('bootstrap', './assets/js/bootstrap.min.js')
-    .addEntry('popper', './assets/js/popper.min.js')
+    .addEntry('homepage', './assets/js/homepage.js')
+    .addEntry('admin', './assets/admin/admin.js')
+    .addEntry('match_details', './assets/admin/match/match_details.js')
+    .addEntry('player', './assets/admin/player/player.js')
+    .addEntry('team', './assets/admin/team/team.js')
+    .addEntry('news', './assets/admin/news/news.js')
+    .addEntry('league', './assets/admin/league/league.js')
+    .addEntry('season', './assets/admin/season/season.js')
+    .addEntry('datetimepicker', './assets/admin/datetimepicker.js')
+    .addEntry('datepicker', './assets/admin/datepicker.js')
+    .addEntry('player_datepicker', './assets/admin/player/player_datepicker.js')
+    .addEntry('prevent_multiple_js_loading', './assets/admin/player/prevent_multiple_js_loading.js')
+    .addEntry('admin_menu', './assets/admin/menu.js')
     .addEntry('main', './assets/js/theme-main.js')
     .addEntry('scripts', './assets/js/theme-scripts.js')
-    //.addEntry('page1', './assets/js/page1.js')
-    //.addEntry('page2', './assets/js/page2.js')
+    .addEntry('login_page', './assets/css/login_page.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -37,7 +48,7 @@ Encore
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
-
+    // .disableSingleRuntimeChunk()
     /*
      * FEATURE CONFIG
      *
@@ -69,7 +80,14 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
-
+    .copyFiles({
+        from: './assets/img',
+        to: '/img/[path][name].[ext]'
+    })
+    .copyFiles({
+        from: './assets/admin/tinymce/skins',
+        to: '/skins/[path][name].[ext]'
+    })
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')

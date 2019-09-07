@@ -1,0 +1,26 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block body %}
+    <div class="d-flex justify-content-start">
+        <div class="main-content-container container-fluid px-4">
+            <div class="page-header row no-gutters py-4">
+                <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                    <h3 class="page-title">Edytuj ligę</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-small mb-3">
+                        <div class="card-body">
+                            {%  include('admin/league/_league_form_content.html.twig') %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('league') }}
+{% endblock %}
+
