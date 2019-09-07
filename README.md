@@ -9,8 +9,6 @@ Technologies stack:
 
 - PHP 7.3
 
-- EasyAdminBundle
-
 - Bootstrap 4
 
 - CSS3
