@@ -1,140 +1,41 @@
 <nav class="mainmenu">
     <div class="container">
-        <!-- Menu-->
         <ul class="sf-menu" id="menu">
             <li class="current">
                 <a href="{{ path('app.homepage') }}">Strona główna</a>
             </li>
-            <li>
-                <a href="#">Liga</a>
-                <div class="sf-mega">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h5><i class="fa fa-trophy" aria-hidden="true"></i>Ekstraklasa</h5>
-                            <ul>
-                                <li><a href="{{ path('app.table') }}">Tabela</a></li>
-                                <li><a href="{{ path('app.fixtures') }}">Terminarz</a></li>
-                                <li><a href="#">Grupa A</a></li>
-                                <li><a href="#">Grupa B</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="col-md-4">
-                            <h5><i class="fa fa-users" aria-hidden="true"></i> Lista drużyn</h5>
-                            <div class="img-hover">
-                                <img src="{{ asset('build/img/blog/1.jpg') }}" alt="" class="img-responsive">
-                                <div class="overlay"><a href="{{ path('app.admin.team.list') }}">+</a></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <h5><i class="fa fa-gamepad" aria-hidden="true"></i> Wyniki</h5>
-                            <div class="img-hover">
-                                <img src="{{ asset('build/img/blog/3.jpg') }}" alt="" class="img-responsive">
-                                <div class="overlay"><a href="{{ path('app.results') }}">+</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
+{#            <li class="current">#}
+{#                <a href="{{ path('app.teams')}}">Ligi</a>#}
+{#                <ul class="sub-current ">#}
+{#                    <li><a class="d-flex justify-content-center"><i class="fa fa-trophy" aria-hidden="true"></i>  Ekstraklasa</a></li>#}
+{#                    <li><a href="{{ path('app.table') }}">Tabela</a></li>#}
+{#                    <li><a href="{{ path('app.fixtures') }}">Terminarz</a></li>#}
+{#                    <li><a href="{{ path('app.teams')}}">Drużyny</a></li>#}
+{#                    <li><a href="{{ path('app.results') }}">Wyniki</a></li>#}
+{#                    <li><a href="{{ path('app.table')}}">Tabela</a></li>#}
+{#                </ul>#}
+{#            </li>#}
+{#            <li class="current">#}
+{#                <a href="{{ path('app.teams')}}">Newsy</a>#}
+{#            </li>#}
+{#            <li class="current">#}
+{#                <a href="{{ path('app.teams')}}">Kontakt</a>#}
+{#            </li>#}
             <li class="current">
                 <a href="{{ path('app.teams')}}">Drużyny</a>
-                <ul class="sub-current">
-                    <li>
-                        <a href="{{ path('app.teams')}}">Lista drużyn</a>
-                    </li>
-                </ul>
             </li>
             <li class="current">
                 <a href="{{ path('app.fixtures')}}">Terminarz</a>
-                <ul class="sub-current">
-                    <li>
-                        <a href="{{ path('app.fixtures') }}">Grupa A</a>
-                        <a href="{{ path('app.fixtures') }}">Grupa B</a>
-                    </li>
-                </ul>
             </li>
-
             <li class="current">
                 <a href={{ path('app.results') }}>Wyniki</a>
-                <ul class="sub-current">
-                    <li>
-                        <a href="{{ path('app.results') }}">Lista wyników</a>
-                    </li>
-                </ul>
             </li>
-
             <li>
                 <a href="{{ path('app.table')}}">Tabela</a>
             </li>
-
-{#            <li>#}
-{#                <a href="#">Features</a>#}
-{#                <div class="sf-mega">#}
-{#                    <div class="row">#}
-{#                        <div class="col-md-3">#}
-{#                            <h5>Features</h5>#}
-{#                            <ul>#}
-{#                                <li><a href="page-full-width.html">Full Width</a></li>#}
-{#                                <li><a href="page-left-sidebar.html">Left Sidebar</a></li>#}
-{#                                <li><a href="page-right-sidebar.html">Right Sidebar</a></li>#}
-{#                                <li><a href="page-404.html">404 Page</a></li>#}
-{#                                <li><a href="page-faq.html">FAQ</a></li>#}
-{#                                <li><a href="sitemap.html">Sitemap</a></li>#}
-{#                                <li><a href="page-pricing.html">Pricing</a></li>#}
-{#                                <li><a href="page-register.html">Register Form</a></li>#}
-{#                            </ul>#}
-{#                        </div>#}
-{#                        <div class="col-md-3">#}
-{#                            <h5>Headers & Footers</h5>#}
-{#                            <ul>#}
-{#                                <li><a href="feature-header-footer-1.html.twig">Header Version 1</a></li>#}
-{#                                <li><a href="feature-header-footer-2.html.twig">Header Version 2</a></li>#}
-{#                                <li><a href="feature-header-footer-3.html.twig">Header Version 3</a></li>#}
-{#                                <li><a href="index-5.html">Header Version 4</a></li>#}
-{#                                <li><a href="feature-header-footer-1.html.twig#footer">Footer Version 1</a></li>#}
-{#                                <li><a href="feature-header-footer-2.html.twig#footer">Footer Version 2</a></li>#}
-{#                                <li><a href="feature-header-footer-3.html.twig#footer">Footer Version 3</a></li>#}
-{#                            </ul>#}
-{#                        </div>#}
-
-{#                        <div class="col-md-3">#}
-{#                            <h5>Pages</h5>#}
-{#                            <ul>#}
-{#                                <li><a href="page-about.html">About Us</a></li>#}
-{#                                <li><a href="single-player.html">About Me</a></li>#}
-{#                                <li><a href="services.html">Services</a></li>#}
-{#                                <li><a href="single-team.html">Club Info</a></li>#}
-{#                                <li><a href="single-result.html">Match Result</a></li>#}
-{#                                <li><a href="table-point.html">Positions</a></li>#}
-{#                            </ul>#}
-{#                        </div>#}
-
-{#                        <div class="col-md-3">#}
-{#                            <h5>News</h5>#}
-{#                            <ul>#}
-{#                                <li>#}
-{#                                    <a href="news-left-sidebar.html">News Lef Sidebar</a>#}
-{#                                </li>#}
-{#                                <li>#}
-{#                                    <a href="news-right-sidebar.html">News Right Sidebar</a>#}
-{#                                </li>#}
-{#                                <li>#}
-{#                                    <a href="news-no-sidebar.html">News No Sidebar</a>#}
-{#                                </li>#}
-{#                                <li>#}
-{#                                    <a href="single-news.html">Single News</a>#}
-{#                                </li>#}
-{#                            </ul>#}
-{#                        </div>#}
-{#                        <i class="fa fa-trophy big-icon" aria-hidden="true"></i>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </li>#}
-{#            <li>#}
-{#                <a href="contact.html.twig">Contact</a>#}
-{#            </li>#}
-
+            <li>
+                <a href="{{ path('app.statistics')}}">Statystyki</a>
+            </li>
             <li class="float-right">
                 <a href="{{ path('app_login') }}" class="login-button">Zaloguj się</a>
             </li>

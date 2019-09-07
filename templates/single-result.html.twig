@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-md-5 col-lg-5">
                     <div class="team">
-                        <img src="{{ asset('build/img/clubs-logos/colombia.png') }}" alt="club-logo">
+                        <img src="{{ match.homeTeam.crest.name ? asset('images/team/crest/' ~ match.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png')  }}" alt="club-logo">
                         <a href="{{ path('app.team.view', {'team': match.homeTeam.id}) }}">{{ match.homeTeam.name }}</a>
                         <ul>
                             {% for goal in match.matchDetails.goals %}
@@ -41,7 +41,7 @@
                 <div class="col-md-5 col-lg-5">
                     <div class="team right">
                         <a href="{{ path('app.team.view', {'team': match.awayTeam.id}) }}">{{ match.awayTeam.name }}</a>
-                        <img src="{{ asset('build/img/clubs-logos/pol.png') }}" alt="club-logo">
+                        <img src="{{ match.awayTeam.crest.name ? asset('images/team/crest/' ~ match.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png')  }}" alt="club-logo">
                         <ul>
                             {% for goal in match.matchDetails.goals|sort %}
                                 {% if goal.scorer in match.awayTeam.players %}
@@ -127,53 +127,14 @@
                                   </div>
                                     <div class="row">
                                        <div class="col-lg-12 col-xl-4">
-                                           <img src="img/clubs-teams/single-team.jpg" alt="">
+                                           <img src="{{ asset('build/img/locations/1.jpg') }}" alt="">
                                        </div>
 
                                        <div class="col-lg-12 col-xl-8">
-                                           <p>The Colombia national football team (Spanish: Selección de fútbol de Colombia)
-                                               represents Colombia in international football competitions and is overseen by the Colombian Football Federation.
-                                               It is a member of the CONMEBOL and is currently ranked thirteenth in the FIFA World Rankings.
-                                               [3] The team are nicknamed Los Cafeteros due to the coffee production in their country.
+                                           <p>
+                                               {{ match.description ?? 'Brak opisu meczu' }}
                                            </p>
-
-                                            <p>Since the mid-1980s, the national team has been a symbol fighting the country's negative reputation.
-                                                This has made the sport popular and made the national team a sign of nationalism, pride and passion for many Colombians worldwide.
-                                            </p>
-
-                                            <p> It is a member of the CONMEBOL and is currently ranked thirteenth in the FIFA World Rankings.
-                                                [3] The team are nicknamed Los Cafeteros due to the coffee production in their country
-                                            </p>
                                        </div>
-                                   </div>
-                               </div>
-                               <div class="row no-line-height">
-                                  <div class="col-md-12">
-                                      <h3 class="clear-title">Video</h3>
-                                  </div>
-                                  <div class="col-lg-6 col-xl-4">
-                                        <div class="panel-box">
-                                            <div class="titles no-margin">
-                                                <h4><a href="#">Eliminatory to the world.</a></h4>
-                                            </div>
-                                            <iframe class="video" src="https://www.youtube.com/embed/Ln8rXkeeyP0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-                                        </div>
-                                   </div>
-                                  <div class="col-lg-6 col-xl-4">
-                                        <div class="panel-box">
-                                            <div class="titles no-margin">
-                                                <h4><a href="#">Colombia classification</a></h4>
-                                            </div>
-                                            <iframe class="video" src="https://www.youtube.com/embed/Z5cackyUfgk" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-                                        </div>
-                                   </div>
-                                  <div class="col-lg-6 col-xl-4">
-                                        <div class="panel-box">
-                                            <div class="titles no-margin">
-                                                <h4><a href="#">World Cup goal</a></h4>
-                                            </div>
-                                            <iframe class="video" src="https://www.youtube.com/embed/hW3hnUoUS0k" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-                                        </div>
                                    </div>
                                </div>
                                <div class="row no-line-height">
@@ -181,7 +142,7 @@
                                           <h3 class="clear-title">Sponsorzy</h3>
                                       </div>
                                 </div>
-                                <ul class="sponsors-carousel">
+                                <ul class="sponsors-carousel mb-5">
                                     <li><a href="#"><img src="{{ asset('build/img/sponsors/1.png') }}" alt=""></a></li>
                                     <li><a href="#"><img src="{{ asset('build/img/sponsors/2.png') }}" alt=""></a></li>
                                     <li><a href="#"><img src="{{ asset('build/img/sponsors/3.png') }}" alt=""></a></li>

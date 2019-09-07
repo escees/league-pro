@@ -1,140 +1,31 @@
 <div id="mobile-nav">
-    <!-- Menu-->
     <ul>
         <li>
-            <a href="index.html">Strona główna</a>
+            <a href="{{ path('app.homepage') }}">Strona główna</a>
         </li>
 
         <li>
-            <a href="#">Liga</a>
-            <ul>
-                <li>
-                    <a href="#">Ekstraklasa</a>
-                    <ul>
-                        <li><a href="table-point.html">Tabela</a></li>
-                        <li><a href="fixtures.html.twig">Terminarz</a></li>
-{#                        <li><a href="news-left-sidebar.html">News</a></li>#}
-{#                        <li><a href="contact.html.twig">Contact Us</a></li>#}
-                    </ul>
-                </li>
-
-                <li><a href="teams.html">Lista drużyn</a></li>
-                <li><a href="players.html">Lista zawodników</a></li>
-                <li><a href="results.html">Wyniki</a></li>
-            </ul>
+            <a href="{{ path('app.teams')}}">Drużyny</a>
         </li>
 
         <li>
-            <a href="teams.html">Teams</a>
-            <ul>
-                <li>
-                    <a href="teams.html">Teams List</a>
-                </li>
-                <li>
-                    <a href="single-team.html">Single Team</a>
-                </li>
-            </ul>
+            <a href="{{ path('app.fixtures')}}">Terminarz</a>
         </li>
 
         <li>
-            <a href="players.html">Players</a>
-            <ul>
-                <li>
-                    <a href="players.html">Players List</a>
-                </li>
-                <li>
-                    <a href="single-player.html">Single Player</a>
-                </li>
-            </ul>
+            <a href={{ path('app.results') }}>Wyniki</a>
         </li>
 
         <li>
-            <a href="fixtures.html.twig">Fixtures</a>
+            <a href="{{ path('app.table')}}">Tabela</a>
         </li>
 
         <li>
-            <a href="results.html">Results</a>
-            <ul>
-                <li>
-                    <a href="results.html">Results List</a>
-                </li>
-                <li>
-                    <a href="single-result.html">Single Result</a>
-                </li>
-            </ul>
+            <a href="{{ path('app.statistics')}}">Statystyki</a>
         </li>
 
         <li>
-            <a href="table-point.html">Point Table</a>
-        </li>
-
-        <li>
-            <a href="groups.html">Groups</a>
-        </li>
-
-        <li>
-            <a href="#">Features</a>
-            <ul>
-                <li>
-                    <a href="#">Features</a>
-                    <ul>
-                        <li><a href="page-full-width.html">Full Width</a></li>
-                        <li><a href="page-left-sidebar.html">Left Sidebar</a></li>
-                        <li><a href="page-right-sidebar.html">Right Sidebar</a></li>
-                        <li><a href="page-404.html">404 Page</a></li>
-                        <li><a href="page-faq.html">FAQ</a></li>
-                        <li><a href="sitemap.html">Sitemap</a></li>
-                        <li><a href="page-pricing.html">Pricing</a></li>
-                        <li><a href="page-register.html">Register Form</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="#">Headers & Footers</a>
-                    <ul>
-                        <li><a href="feature-header-footer-1.html.twig">Header Version 1</a></li>
-                        <li><a href="feature-header-footer-2.html.twig">Header Version 2</a></li>
-                        <li><a href="feature-header-footer-3.html.twig">Header Version 3</a></li>
-                        <li><a href="index-5.html">Header Version 4</a></li>
-                        <li><a href="feature-header-footer-1.html.twig#footer">Footer Version 1</a></li>
-                        <li><a href="feature-header-footer-2.html.twig#footer">Footer Version 2</a></li>
-                        <li><a href="feature-header-footer-3.html.twig#footer">Footer Version 3</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Pages</a>
-                    <ul>
-                        <li><a href="page-about.html">About Us</a></li>
-                        <li><a href="single-player.html">About Me</a></li>
-                        <li><a href="feature-header-footer-2.html.twig#footer">Services</a></li>
-                        <li><a href="single-team.html">Club Info</a></li>
-                        <li><a href="single-result.html">Match Result</a></li>
-                        <li><a href="table-point.html">Positions</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">News</a>
-                    <ul>
-                        <li>
-                            <a href="news-left-sidebar.html">News Lef Sidebar</a>
-                        </li>
-                        <li>
-                            <a href="news-right-sidebar.html">News Right Sidebar</a>
-                        </li>
-                        <li>
-                            <a href="news-no-sidebar.html">News No Sidebar</a>
-                        </li>
-                        <li>
-                            <a href="single-news.html">Single News</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="contact.html.twig">Contact</a>
+            <a href="{{ path('app_login') }}" class="login-button">Zaloguj się</a>
         </li>
     </ul>
-    <!-- End Menu-->
 </div>

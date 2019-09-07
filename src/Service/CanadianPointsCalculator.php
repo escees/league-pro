@@ -12,11 +12,11 @@ class CanadianPointsCalculator
 
     public function calculate(array $scorers, array $assistants): array //@todo refactor
     {
-        $playersCanadianPoints = [];
+        $canadianPointsPerPlayer = [];
         foreach ($scorers as $scorer) {
             $scorerName = $scorer[self::NAME];
-            if(!isset($playersCanadianPoints[$scorerName])) {
-                $playersCanadianPoints[$scorerName] = [
+            if(!isset($canadianPointsPerPlayer[$scorerName])) {
+                $canadianPointsPerPlayer[$scorerName] = [
                     self::NAME => $scorerName,
                     self::POINTS => $scorer[self::GOALS],
                     self::TEAM => $scorer[self::TEAM],
@@ -24,29 +24,31 @@ class CanadianPointsCalculator
             }
             foreach ($assistants as $assistant) {
                 $assistantName = $assistant[self::NAME];
-                if(!isset($playersCanadianPoints[$assistantName])) {
-                    $playersCanadianPoints[self::NAME] = [
+                if(!isset($canadianPointsPerPlayer[$assistantName])) {
+                    $canadianPointsPerPlayer[self::NAME] = [
                         self::NAME => $assistantName,
                         self::POINTS => $assistant[self::ASSISTS],
                         self::TEAM => $assistant[self::TEAM],
+                        'team_id' => $assistant['team_id']
                     ];
                 }
 
                 if ($scorerName === $assistantName) {
-                    $playersCanadianPoints[$scorerName] = [
+                    $canadianPointsPerPlayer[$scorerName] = [
                         self::NAME => $scorerName,
                         self::POINTS => $scorer[self::GOALS] + $assistant[self::ASSISTS],
                         self::TEAM => $scorer[self::TEAM],
+                        'team_id' => $scorer['team_id']
                     ];
                 }
 
             }
         }
 
-        usort($playersCanadianPoints, function($a, $b) {
+        usort($canadianPointsPerPlayer, function($a, $b) {
             return $b[self::POINTS] - $a[self::POINTS];
         });
 
-        return $playersCanadianPoints;
+        return $canadianPointsPerPlayer;
     }
 }
