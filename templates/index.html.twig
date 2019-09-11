@@ -61,13 +61,17 @@
                                                 <ul>
                                                     {% for result in results %}
                                                         <li>
-                                                            <span class="head">
-                                                                <small>{{ result.homeTeam.name }} vs. {{ result.awayTeam.name }}  <span class="date">{{ result.startDate|date('d/m/Y H:i') }}</span></small>
+                                                            <span class="head d-flex flex-column align-items-center">
+                                                                <small>{{ result.homeTeam.name }} vs. {{ result.awayTeam.name }}  </small>
+                                                                <small><span class="teal-color">{{ result.startDate|date('d/m/Y H:i') }}</span></small>
+
                                                             </span>
                                                             <div class="goals-result">
                                                                 <a href="{{ path('app.team.view', {'team': result.homeTeam.id}) }}">
-                                                                    <img src="{{ result.homeTeam.crest.name ? asset('images/team/crest/' ~ result.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                                                    {{ result.homeTeam.name }}
+                                                                    <div class="truncate">
+                                                                        <img src="{{ result.homeTeam.crest.name ? asset('images/team/crest/' ~ result.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                                                        {{ result.homeTeam.name }}
+                                                                    </div>
                                                                 </a>
                                                                 <span class="goals">
                                                                     <a href="{{ path('app.single_result', {'match': result.id}) }}">
@@ -75,8 +79,10 @@
                                                                     </a>
                                                                 </span>
                                                                 <a href="{{ path('app.team.view', {'team': result.awayTeam.id}) }}">
-                                                                    <img src="{{ result.awayTeam.crest.name ? asset('images/team/crest/' ~ result.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                                                    {{ result.awayTeam.name }}
+                                                                    <div class="truncate">
+                                                                        <img src="{{ result.awayTeam.crest.name ? asset('images/team/crest/' ~ result.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                                                        {{ result.awayTeam.name }}
+                                                                    </div>
                                                                 </a>
                                                             </div>
                                                         </li>
