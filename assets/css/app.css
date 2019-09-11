@@ -58,3 +58,10 @@ body {
         max-width: 30%;
     }
 }
+
+.truncate {
+    max-width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
