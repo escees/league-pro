@@ -82,7 +82,6 @@ $(document).ready(function () {
 
 
     LPRO.MatchDashboard.handleSetScoreForm = function () {
-
         $('.set-score').on('click', function (e) {
             let $matchId = $(this).data('match-id');
             let setScoreSelector = '#score-form-body';
@@ -127,7 +126,7 @@ $(document).ready(function () {
                 if (data.status === true) {
                     var $newSection = $(data.body).find(section);
                     $section.replaceWith($newSection);
-
+                    window.location.reload()
                 }
                 if (typeof data.status === 'undefined') {
                     $('form[name=simple_match_details]').replaceWith(data);

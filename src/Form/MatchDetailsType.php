@@ -88,6 +88,7 @@ class MatchDetailsType extends AbstractType
             'homeTeamPenalties',
             NumberType::class,
             [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control col-sm-3'
                 ],
@@ -98,6 +99,7 @@ class MatchDetailsType extends AbstractType
             'awayTeamPenalties',
             NumberType::class,
             [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control col-sm-3'
                 ],
