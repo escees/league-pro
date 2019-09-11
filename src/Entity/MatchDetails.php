@@ -58,6 +58,11 @@ class MatchDetails
      */
     private $awayTeamPenalties;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
     public function __construct()
     {
         $this->goals = new ArrayCollection();
@@ -193,6 +198,18 @@ class MatchDetails
     public function setAwayTeamPenalties(?int $awayTeamPenalties): self
     {
         $this->awayTeamPenalties = $awayTeamPenalties;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
