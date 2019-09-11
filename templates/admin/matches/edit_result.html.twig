@@ -62,6 +62,14 @@
                     <div class="col-sm-12 text-danger">
                         {{ form_errors(form.matchDetails.goals) }}
                     </div>
+                    <hr>
+                    <div class="col-sm-12 mt-5">
+                        <h4>{{ form_label(form.matchDetails.description) }}</h4>
+                    </div>
+                    <div class="col-sm-12 mb-5 mt-1">
+                        {{ form_widget(form.matchDetails.description) }}
+                    </div>
+                    <hr>
                     <div class="col-sm-12">
                         <h4>Bramki</h4>
                         <hr>
