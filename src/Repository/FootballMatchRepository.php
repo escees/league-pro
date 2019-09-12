@@ -87,7 +87,6 @@ class FootballMatchRepository extends ServiceEntityRepository
             ->andWhere('m.matchDetails IS NOT NULL')
             ->orderBy('m.startDate', 'DESC')
             ->setParameter('now', new \Datetime())
-            ->setMaxResults(16)
             ->getQuery()
             ->execute();
     }

@@ -37,4 +37,18 @@ class MatchDayRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute();
     }
+
+    public function getAllResults()
+    {
+        return $this->createQueryBuilder('m')
+            ->select('m')
+            ->addSelect('r')
+            ->addSelect('rm')
+            ->leftJoin('m.matches', 'r')
+            ->leftJoin('r.matchDetails', 'rm')
+            ->where('r.matchDetails IS NOT NULL')
+            ->orderBy('m.startDate', 'DESC')
+            ->getQuery()
+            ->execute();
+    }
 }
