@@ -9,7 +9,7 @@
                             <div class="col-lg-7">
                                 <div class="info-slider">
                                     <h1>{{ news.title }}</h1>
-                                    <a href="{{ path('app.admin.news.view', {'news': news.id}) }}" class="btn-iw outline">Czytaj więcej <i class="fa fa-long-arrow-right"></i></a>
+                                    <a href="{{ path('app.news.view', {'news': news.id}) }}" class="btn-iw outline">Czytaj więcej <i class="fa fa-long-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -96,13 +96,12 @@
                                             <h5><a href="#">Najlepsi strzelcy</a></h5>
                                             <div class="info-player">
                                                 <ul>
-                                                    {% for scorer in bestScorers %}
+                                                    {% for scorer in bestScorers|slice(0,8) %}
                                                         <li>
                                                             <span class="position">
                                                               {{ loop.index }}
                                                             </span>
                                                             <a href="#">
-{#                                                                <img src="img/players/1.jpg" alt="">#}
                                                                 {{ scorer.name }}
                                                             </a>
                                                             <span class="points">
@@ -177,14 +176,14 @@
                                     <div class="col-md-4">
                                         <div class="img-hover">
                                            <img src="{{ article.photo.name is not null ? asset('images/news/' ~ article.photo.name) : asset('build/img/blog/' ~ random(1,4) ~ '.jpg') }}" alt="" class="img-responsive">
-                                           <div class="overlay"><a href="{{ path('app.admin.news.view', {'news': article.id}) }}">+</a></div>
+                                           <div class="overlay"><a href="{{ path('app.news.view', {'news': article.id}) }}">+</a></div>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <h4><a href="{{ path('app.admin.news.view', {'news': article.id}) }}">{{ article.title }}</a></h4>
+                                        <h4><a href="{{ path('app.news.view', {'news': article.id}) }}">{{ article.title }}</a></h4>
                                         <span class="data-info">January 3, 2014  / <i class="fa fa-comments"></i><a href="#">0</a></span>
                                         {{ article.text|slice(0, 400)|raw }} ...
-                                        <a class="teal-color" href="{{ path('app.admin.news.view', {'news': article.id}) }}">Czytaj więcej [+]</a>
+                                        <a class="teal-color" href="{{ path('app.news.view', {'news': article.id}) }}">Czytaj więcej [+]</a>
                                     </div>
                                </div>
                             </div>

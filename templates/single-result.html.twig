@@ -25,7 +25,13 @@
                         <ul>
                             {% for goal in match.matchDetails.goals %}
                                 {% if goal.scorer in match.homeTeam.players %}
-                                    <li>{{ goal.scorer.name }} {{ goal.minute }}' <i class="fa fa-futbol-o" aria-hidden="true"></i></li>
+                                    <li>
+                                    {% if goal.assistant is not null %}
+                                        <small>{{ goal.assistant.name }}</small> <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    {% endif %}
+                                        {{ goal.scorer.name }} {{ goal.minute }}' <i class="fa fa-futbol-o" aria-hidden="true"></i>
+                                    </li>
+
                                 {% endif %}
                             {% endfor %}
                         </ul>
@@ -46,6 +52,9 @@
                             {% for goal in match.matchDetails.goals|sort %}
                                 {% if goal.scorer in match.awayTeam.players %}
                                     <li><i class="fa fa-futbol-o" aria-hidden="true"></i> {{ goal.scorer.name }} {{ goal.minute }}' </li>
+                                    {% if goal.assistant is not null %}
+                                        <li><i class="fa fa-user-plus" aria-hidden="true"></i> <small>{{ goal.assistant.name }}</small></li>
+                                    {% endif %}
                                 {% endif %}
                             {% endfor %}
                         </ul>
