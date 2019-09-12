@@ -16,20 +16,12 @@ class TableController extends AbstractController
      */
     public function index(
         Request $request,
-        TeamRepository $teamRepository,
-        GoalRepository $goalRepository,
-        CanadianPointsCalculator $canadianPointsCalculator
+        TeamRepository $teamRepository
     ) {
-        $bestScorers = $goalRepository->getBestScorers(true);
-        $bestAssistants = $goalRepository->getBestAssistants();
-
         return $this->render(
             'table-point.html.twig',
             [
                 'teams' => $teamRepository->getTeamStandings(),
-                'bestScorers' => $bestScorers,
-                'bestAssistants' => $bestAssistants,
-                'canadianPoints' => $canadianPointsCalculator->calculate($bestScorers, $bestAssistants)
             ]
         );
     }

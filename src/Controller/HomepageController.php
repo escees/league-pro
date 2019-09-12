@@ -29,7 +29,7 @@ class HomepageController extends AbstractController
             [
                 'teams' => $teamRepository->getTeamStandings(8),
                 'results' => $footballMatchRepository->getLastThreeMatches(),
-                'bestScorers' => $goalRepository->getBestScorers(true),
+                'bestScorers' => $goalRepository->getBestScorers(),
                 'nextMatch' => $footballMatchRepository->getNextMatch(),
                 'fixtures' => $footballMatchRepository->getNumberOfFixturesOrderedByStartDateAscending(5),
                 'news' => $news,

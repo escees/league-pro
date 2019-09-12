@@ -16,7 +16,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for player in canadianPoints %}
+                        {% for player in canadianPoints|slice(0,15) %}
                             <tr>
                                 <td>{{ loop.index }}</td>
                                 <td>{{ player.name }}</td>
@@ -45,7 +45,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for scorer in bestScorers %}
+                        {% for scorer in bestScorers|slice(0,15) %}
                             <tr>
                                 <td>{{ loop.index }}</td>
                                 <td>{{ scorer.name }}</td>
@@ -74,7 +74,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for assistant in bestAssistants %}
+                        {% for assistant in bestAssistants|slice(0,15) %}
                             <tr>
                                 <td>{{ loop.index }}</td>
                                 <td>{{ assistant.name }}</td>
