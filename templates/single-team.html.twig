@@ -93,7 +93,7 @@
                                                             <strong>Narodowość</strong> <span><img src="{{ asset('build/img/clubs-logos/pol.png')}}" alt=""> Polska </span>
                                                         </li>
                                                         <li><strong>Liczba występów:</strong> <span>{{ player.appearances > 0 ? player.appearances }}</span></li>
-                                                        <li><strong>Wiek:</strong><span>28</span></li>
+                                                        <li><strong>Wiek:</strong><span>{{ player.dateOfBirth ? date('now').diff(player.dateOfBirth).format('%y') }}</span></li>
                                                         <li><strong>Bramki:</strong><span>{{ player.goals|length }}</span></li>
                                                         <li><strong>Asysty:</strong><span>{{ player.assists|length }}</span></li>
 
@@ -105,7 +105,7 @@
                                     {% endfor %}
                                 </div>
                             </div>
-                            <div class="tab-pane" id="fixtures">
+                            <div class="tab-pane mb-5" id="fixtures">
                                 <table class="table-striped table-hover">
                                     <thead>
                                         <tr>

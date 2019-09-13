@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\FootballMatch;
 use App\Repository\FootballMatchRepository;
+use App\Repository\MatchDayRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,12 +16,12 @@ class ResultsController extends AbstractController
      */
     public function results(
         Request $request,
-        FootballMatchRepository $footballMatchRepository
+        MatchDayRepository $matchDayRepository
     ) {
         return $this->render(
             'results.html.twig',
             [
-                'results' => $footballMatchRepository->getAllResultsOrderedByStartDateDescending(),
+                'matchdays' => $matchDayRepository->getAllResults(),
             ]
         );
     }

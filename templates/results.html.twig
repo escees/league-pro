@@ -6,34 +6,40 @@
                 <div class="col-lg-12">
                     <div class="recent-results results-page">
                         <div class="info-results">
-                            <ul>
-                                {% for result in results %}
-                                    <li>
-                                        <span class="head">
-                                          {{ result.homeTeam.name }} vs. {{ result.awayTeam.name }}  <span class="date">{{ result.startDate|date('d/m/Y H:i') }}</span>
-                                        </span>
-
-                                        <div class="goals-result">
-                                            <a href="single-team.html" class="col">
-                                                <img src="{{ asset('build/img/clubs-logos/por.png') }}" alt="">
-                                                {{ result.homeTeam.name }}
-                                            </a>
-
-                                            <span class="goals col">
-                                                <b>{{ result.matchDetails.homeTeamGoals }}</b> - <b>{{ result.matchDetails.awayTeamGoals }}</b>
-                                                <a href="{{ path('app.single_result', {'match': result.id}) }}" class="btn theme">View More</a>
+                            {% for matchday in matchdays %}
+                                {% if loop.index - 1 is same as(matchday.matches|length) %}
+                                    <div class="d-flex justify-content-center">
+                                        <h4>{{ matchday.name }}</h4>
+                                    </div>
+                                    <br>
+                                {% endif %}
+                                <ul>
+                                    {% for result in matchday.matches %}
+                                        <li>
+                                            <span class="head">
+                                              {{ result.homeTeam.name }} vs. {{ result.awayTeam.name }} <span class="date">{{ result.startDate|date('d/m/Y H:i') }}</span>
                                             </span>
-
-                                            <a href="single-team.html" class="col">
-                                                <img src="{{ asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                                {{ result.awayTeam.name }}
-                                            </a>
-                                        </div>
-                                    </li>
-                                {% endfor %}
-                            </ul>
+                                            <div class="goals-result">
+                                                <a href="{{ path('app.team.view', {'team': result.homeTeam.id}) }}" class="col">
+                                                    <img src="{{ asset('build/img/clubs-logos/por.png') }}" alt="">
+                                                    {{ result.homeTeam.name }}
+                                                </a>
+                                                <span class="goals col">
+                                                    <b>{{ result.matchDetails.homeTeamGoals }}</b> - <b>{{ result.matchDetails.awayTeamGoals }}</b>
+                                                    <a href="{{ path('app.single_result', {'match': result.id}) }}" class="btn theme">View More</a>
+                                                </span>
+                                                <a href="{{ path('app.team.view', {'team': result.awayTeam.id}) }}" class="col">
+                                                    <img src="{{ asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                                    {{ result.awayTeam.name }}
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endfor %}
                         </div>
                    </div>
+
                 </div>
             </div>
         </div>
