@@ -23,7 +23,6 @@ class Goal
      */
     private $scorer;
 
-    //@todo add handling form errors for collection fields in edit result form
     /**
      * @Assert\NotBlank(message="Proszę podać minutę w której padła bramka")
      * @Assert\GreaterThan(value="0", message="Minuta musi być większa od zera")
