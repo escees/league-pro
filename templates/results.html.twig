@@ -21,7 +21,7 @@
                                             </span>
                                             <div class="goals-result">
                                                 <a href="{{ path('app.team.view', {'team': result.homeTeam.id}) }}" class="col">
-                                                    <img src="{{ asset('build/img/clubs-logos/por.png') }}" alt="">
+                                                    <img src="{{ result.homeTeam.crest.name ? asset('images/team/crest/' ~ result.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                     {{ result.homeTeam.name }}
                                                 </a>
                                                 <span class="goals col">
@@ -29,7 +29,7 @@
                                                     <a href="{{ path('app.single_result', {'match': result.id}) }}" class="btn theme">View More</a>
                                                 </span>
                                                 <a href="{{ path('app.team.view', {'team': result.awayTeam.id}) }}" class="col">
-                                                    <img src="{{ asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                                    <img src="{{ result.awayTeam.crest.name ? asset('images/team/crest/' ~ result.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                     {{ result.awayTeam.name }}
                                                 </a>
                                             </div>

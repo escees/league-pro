@@ -42,6 +42,12 @@
                     <div class="result-match">
                         {{ match.matchDetails.homeTeamGoals }} : {{ match.matchDetails.awayTeamGoals }}
                     </div>
+                    <br>
+                    {% if match.matchDetails.mvp is not null %}
+                        <div class="text-center text-white">
+                            <strong>{{ match.matchDetails.mvp.player.name }}</strong> <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                    {% endif %}
                 </div>
 
                 <div class="col-md-5 col-lg-5">

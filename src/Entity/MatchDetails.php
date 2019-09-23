@@ -63,6 +63,11 @@ class MatchDetails
      */
     private $description;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ManOfTheMatch", mappedBy="matchDetails", cascade={"persist", "remove"})
+     */
+    private $mvp;
+
     public function __construct()
     {
         $this->goals = new ArrayCollection();
@@ -210,6 +215,24 @@ class MatchDetails
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getMvp(): ?ManOfTheMatch
+    {
+        return $this->mvp;
+    }
+
+    public function setMvp(?ManOfTheMatch $mvp): self
+    {
+        $this->mvp = $mvp;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newMatchDetails = $mvp === null ? null : $this;
+        if ($newMatchDetails !== $mvp->getMatchDetails()) {
+            $mvp->setMatchDetails($newMatchDetails);
+        }
 
         return $this;
     }

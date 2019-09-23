@@ -101,12 +101,18 @@ class Player
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ManOfTheMatch", mappedBy="player")
+     */
+    private $mvps;
+
     public function __construct()
     {
         $this->goals = new ArrayCollection();
         $this->cards = new ArrayCollection();
         $this->assists = new ArrayCollection();
         $this->photo = new EmbeddedFile();
+        $this->mvps = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -304,6 +310,37 @@ class Player
     public function setPhoto(EmbeddedFile $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ManOfTheMatch[]
+     */
+    public function getMvps(): Collection
+    {
+        return $this->mvps;
+    }
+
+    public function addMvp(ManOfTheMatch $mvp): self
+    {
+        if (!$this->mvps->contains($mvp)) {
+            $this->mvps[] = $mvp;
+            $mvp->setPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMvp(ManOfTheMatch $mvp): self
+    {
+        if ($this->mvps->contains($mvp)) {
+            $this->mvps->removeElement($mvp);
+            // set the owning side to null (unless already changed)
+            if ($mvp->getPlayer() === $this) {
+                $mvp->setPlayer(null);
+            }
+        }
 
         return $this;
     }
