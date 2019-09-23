@@ -94,6 +94,13 @@
                             </div>
                         {% endfor %}
                     </div>
+                    <div class="col-sm-12">
+                        <h4>Gracz meczu</h4>
+                        <hr>
+                    </div>
+                    <div class="col-sm-12 mb-5 mt-1">
+                        {{ form_widget(form.matchDetails.mvp) }}
+                    </div>
                     <div class="col">
                         <a href="{{ path('app.match.dashboard') }}" class="btn btn-outline-secondary">Wróć na listę</a>
                         <button type="submit" class="btn btn-outline-success">Zapisz</button>

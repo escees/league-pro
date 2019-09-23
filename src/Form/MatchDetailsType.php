@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\FootballMatch;
+use App\Entity\ManOfTheMatch;
 use App\Entity\MatchDetails;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -82,6 +84,16 @@ class MatchDetailsType extends AbstractType
                     'home_team' => $homeTeam,
                     'away_team' => $awayTeam
                 ],
+            ]
+        );
+
+        $builder->add(
+            'mvp',
+            ManOfTheMatchType::class,
+            [
+                'label' => false,
+                'home_team' => $homeTeam,
+                'away_team' => $awayTeam
             ]
         );
 
