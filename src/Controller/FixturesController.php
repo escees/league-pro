@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\FootballMatchRepository;
 use App\Repository\GoalRepository;
+use App\Repository\MatchDayRepository;
 use App\Repository\TeamRepository;
 use App\Service\CanadianPointsCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,12 +18,12 @@ class FixturesController extends AbstractController
      */
     public function index(
         Request $request,
-        FootballMatchRepository $footballMatchRepository
+        MatchDayRepository $matchDayRepository
     ) {
         return $this->render(
             'fixtures.html.twig',
             [
-                'fixtures' => $footballMatchRepository->getNumberOfFixturesOrderedByStartDateAscending(16),
+                'matchdays' => $matchDayRepository->findAllOrderByDateAscending(),
             ]
         );
     }

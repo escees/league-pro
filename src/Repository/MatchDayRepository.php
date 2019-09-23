@@ -26,32 +26,29 @@ class MatchDayRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute();
     }
-    // /**
-    //  * @return MatchDay[] Returns an array of MatchDay objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?MatchDay
+    public function findAllOrderByDateAscending()
     {
         return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
+            ->where('m.startDate <= :now AND m.endDate >= :now')
+            ->orWhere('m.startDate > :now')
+            ->setParameter('now', new \DateTime())
+            ->orderBy('m.startDate', 'ASC')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->execute();
     }
-    */
+
+    public function getAllResults()
+    {
+        return $this->createQueryBuilder('m')
+            ->select('m')
+            ->addSelect('r')
+            ->addSelect('rm')
+            ->leftJoin('m.matches', 'r')
+            ->leftJoin('r.matchDetails', 'rm')
+            ->where('r.matchDetails IS NOT NULL')
+            ->orderBy('m.startDate', 'DESC')
+            ->getQuery()
+            ->execute();
+    }
 }

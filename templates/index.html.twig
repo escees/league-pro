@@ -9,7 +9,7 @@
                             <div class="col-lg-7">
                                 <div class="info-slider">
                                     <h1>{{ news.title }}</h1>
-                                    <a href="{{ path('app.admin.news.view', {'news': news.id}) }}" class="btn-iw outline">Czytaj więcej <i class="fa fa-long-arrow-right"></i></a>
+                                    <a href="{{ path('app.news.view', {'news': news.id}) }}" class="btn-iw outline">Czytaj więcej <i class="fa fa-long-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -61,13 +61,17 @@
                                                 <ul>
                                                     {% for result in results %}
                                                         <li>
-                                                            <span class="head">
-                                                                <small>{{ result.homeTeam.name }} vs. {{ result.awayTeam.name }}  <span class="date">{{ result.startDate|date('d/m/Y H:i') }}</span></small>
+                                                            <span class="head d-flex flex-column align-items-center">
+                                                                <small>{{ result.homeTeam.name }} vs. {{ result.awayTeam.name }}  </small>
+                                                                <small><span class="teal-color">{{ result.startDate|date('d/m/Y H:i') }}</span></small>
+
                                                             </span>
                                                             <div class="goals-result">
                                                                 <a href="{{ path('app.team.view', {'team': result.homeTeam.id}) }}">
-                                                                    <img src="{{ result.homeTeam.crest.name ? asset('images/team/crest/' ~ result.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                                                    {{ result.homeTeam.name }}
+                                                                    <div class="truncate">
+                                                                        <img src="{{ result.homeTeam.crest.name ? asset('images/team/crest/' ~ result.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                                                        {{ result.homeTeam.name }}
+                                                                    </div>
                                                                 </a>
                                                                 <span class="goals">
                                                                     <a href="{{ path('app.single_result', {'match': result.id}) }}">
@@ -75,8 +79,10 @@
                                                                     </a>
                                                                 </span>
                                                                 <a href="{{ path('app.team.view', {'team': result.awayTeam.id}) }}">
-                                                                    <img src="{{ result.awayTeam.crest.name ? asset('images/team/crest/' ~ result.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                                                    {{ result.awayTeam.name }}
+                                                                    <div class="truncate">
+                                                                        <img src="{{ result.awayTeam.crest.name ? asset('images/team/crest/' ~ result.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                                                        {{ result.awayTeam.name }}
+                                                                    </div>
                                                                 </a>
                                                             </div>
                                                         </li>
@@ -90,13 +96,12 @@
                                             <h5><a href="#">Najlepsi strzelcy</a></h5>
                                             <div class="info-player">
                                                 <ul>
-                                                    {% for scorer in bestScorers %}
+                                                    {% for scorer in bestScorers|slice(0,8) %}
                                                         <li>
                                                             <span class="position">
                                                               {{ loop.index }}
                                                             </span>
                                                             <a href="#">
-{#                                                                <img src="img/players/1.jpg" alt="">#}
                                                                 {{ scorer.name }}
                                                             </a>
                                                             <span class="points">
@@ -171,14 +176,14 @@
                                     <div class="col-md-4">
                                         <div class="img-hover">
                                            <img src="{{ article.photo.name is not null ? asset('images/news/' ~ article.photo.name) : asset('build/img/blog/' ~ random(1,4) ~ '.jpg') }}" alt="" class="img-responsive">
-                                           <div class="overlay"><a href="{{ path('app.admin.news.view', {'news': article.id}) }}">+</a></div>
+                                           <div class="overlay"><a href="{{ path('app.news.view', {'news': article.id}) }}">+</a></div>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <h4><a href="{{ path('app.admin.news.view', {'news': article.id}) }}">{{ article.title }}</a></h4>
+                                        <h4><a href="{{ path('app.news.view', {'news': article.id}) }}">{{ article.title }}</a></h4>
                                         <span class="data-info">January 3, 2014  / <i class="fa fa-comments"></i><a href="#">0</a></span>
                                         {{ article.text|slice(0, 400)|raw }} ...
-                                        <a class="teal-color" href="{{ path('app.admin.news.view', {'news': article.id}) }}">Czytaj więcej [+]</a>
+                                        <a class="teal-color" href="{{ path('app.news.view', {'news': article.id}) }}">Czytaj więcej [+]</a>
                                     </div>
                                </div>
                             </div>

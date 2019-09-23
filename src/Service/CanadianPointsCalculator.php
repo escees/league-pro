@@ -9,6 +9,7 @@ class CanadianPointsCalculator
     const POINTS = 'points';
     const GOALS = 'goals';
     const ASSISTS = 'assists';
+    const TEAM_ID = 'team_id';
 
     public function calculate(array $scorers, array $assistants): array //@todo refactor
     {
@@ -20,6 +21,7 @@ class CanadianPointsCalculator
                     self::NAME => $scorerName,
                     self::POINTS => $scorer[self::GOALS],
                     self::TEAM => $scorer[self::TEAM],
+                    self::TEAM_ID => $scorer[self::TEAM_ID]
                 ];
             }
             foreach ($assistants as $assistant) {
@@ -29,7 +31,7 @@ class CanadianPointsCalculator
                         self::NAME => $assistantName,
                         self::POINTS => $assistant[self::ASSISTS],
                         self::TEAM => $assistant[self::TEAM],
-                        'team_id' => $assistant['team_id']
+                        self::TEAM_ID => $assistant[self::TEAM_ID]
                     ];
                 }
 
@@ -38,7 +40,7 @@ class CanadianPointsCalculator
                         self::NAME => $scorerName,
                         self::POINTS => $scorer[self::GOALS] + $assistant[self::ASSISTS],
                         self::TEAM => $scorer[self::TEAM],
-                        'team_id' => $scorer['team_id']
+                        self::TEAM_ID => $scorer[self::TEAM_ID]
                     ];
                 }
 

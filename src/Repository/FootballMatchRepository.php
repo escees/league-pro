@@ -33,6 +33,16 @@ class FootballMatchRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function getAllFixtures()
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.startDate > :now')
+            ->orderBy('m.startDate', 'ASC')
+            ->setParameter('now', new \Datetime())
+            ->getQuery()
+            ->execute();
+    }
+
     public function getNumberOfFixturesOrderedByStartDateAscending(int $number)
     {
         return $this->createQueryBuilder('m')
@@ -77,7 +87,6 @@ class FootballMatchRepository extends ServiceEntityRepository
             ->andWhere('m.matchDetails IS NOT NULL')
             ->orderBy('m.startDate', 'DESC')
             ->setParameter('now', new \Datetime())
-            ->setMaxResults(16)
             ->getQuery()
             ->execute();
     }

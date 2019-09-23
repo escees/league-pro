@@ -77,7 +77,7 @@
                                         <div class="col-xl-4 col-lg-6 col-md-6">
                                             <div class="item-player">
                                                 <div class="head-player">
-                                                    <img src="{{ asset('images/player/photo/' ~ player.photo.name)}}" alt="location-team">
+                                                    <img src="{{ player.photo.name ? asset('images/player/photo/' ~ player.photo.name) : asset('build/img/players/'~random(1,7)~'.jpg') }}" alt="">
 {#                                                    <div class="overlay"><a href="single-player.html">+</a></div>#}
                                                 </div>
                                                 <div class="info-player">
@@ -93,7 +93,7 @@
                                                             <strong>Narodowość</strong> <span><img src="{{ asset('build/img/clubs-logos/pol.png')}}" alt=""> Polska </span>
                                                         </li>
                                                         <li><strong>Liczba występów:</strong> <span>{{ player.appearances > 0 ? player.appearances }}</span></li>
-                                                        <li><strong>Wiek:</strong><span>28</span></li>
+                                                        <li><strong>Wiek:</strong><span>{{ player.dateOfBirth ? date('now').diff(player.dateOfBirth).format('%y') }}</span></li>
                                                         <li><strong>Bramki:</strong><span>{{ player.goals|length }}</span></li>
                                                         <li><strong>Asysty:</strong><span>{{ player.assists|length }}</span></li>
 
@@ -105,7 +105,7 @@
                                     {% endfor %}
                                 </div>
                             </div>
-                            <div class="tab-pane" id="fixtures">
+                            <div class="tab-pane mb-5" id="fixtures">
                                 <table class="table-striped table-hover">
                                     <thead>
                                         <tr>
@@ -121,13 +121,13 @@
                                                 <td>
                                                     <img src="{{ fixture.homeTeam.crest.name ? asset('images/team/crest/' ~ fixture.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="icon">
                                                     <strong>{{ fixture.homeTeam.name }}</strong><br>
-                                                    <small class="meta-text">GROUP H.</small>
+                                                    <small class="meta-text">Ekstraklasa</small>
                                                 </td>
                                                 <td class="text-center">Vs</td>
                                                 <td>
                                                     <img src="{{ fixture.awayTeam.crest.name ? asset('images/team/crest/' ~ fixture.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png')  }}" alt="icon1">
                                                     <strong>{{ fixture.awayTeam.name }}</strong><br>
-                                                    <small class="meta-text">GROUP H.</small>
+                                                    <small class="meta-text">Ekstraklasa</small>
                                                 </td>
                                                 <td>
                                                     {{ fixture.startDate|date('d/m/Y H:i') }}<br>

@@ -25,7 +25,13 @@
                         <ul>
                             {% for goal in match.matchDetails.goals %}
                                 {% if goal.scorer in match.homeTeam.players %}
-                                    <li>{{ goal.scorer.name }} {{ goal.minute }}' <i class="fa fa-futbol-o" aria-hidden="true"></i></li>
+                                    <li>
+                                    {% if goal.assistant is not null %}
+                                        <small>{{ goal.assistant.name }}</small> <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    {% endif %}
+                                        {{ goal.scorer.name }} {{ goal.minute }}' <i class="fa fa-futbol-o" aria-hidden="true"></i>
+                                    </li>
+
                                 {% endif %}
                             {% endfor %}
                         </ul>
@@ -36,6 +42,12 @@
                     <div class="result-match">
                         {{ match.matchDetails.homeTeamGoals }} : {{ match.matchDetails.awayTeamGoals }}
                     </div>
+                    <br>
+                    {% if match.matchDetails.mvp is not null %}
+                        <div class="text-center text-white">
+                            <strong>{{ match.matchDetails.mvp.player.name }}</strong> <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                    {% endif %}
                 </div>
 
                 <div class="col-md-5 col-lg-5">
@@ -45,7 +57,11 @@
                         <ul>
                             {% for goal in match.matchDetails.goals|sort %}
                                 {% if goal.scorer in match.awayTeam.players %}
-                                    <li><i class="fa fa-futbol-o" aria-hidden="true"></i> {{ goal.scorer.name }} {{ goal.minute }}' </li>
+                                    <li><i class="fa fa-futbol-o" aria-hidden="true"></i> {{ goal.scorer.name }} {{ goal.minute }}'
+                                        {% if goal.assistant is not null %}
+                                            <i class="fa fa-user-plus" aria-hidden="true"></i> <small>{{ goal.assistant.name }}</small>
+                                        {% endif %}
+                                    </li>
                                 {% endif %}
                             {% endfor %}
                         </ul>

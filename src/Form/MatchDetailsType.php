@@ -3,10 +3,13 @@
 namespace App\Form;
 
 use App\Entity\FootballMatch;
+use App\Entity\ManOfTheMatch;
 use App\Entity\MatchDetails;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -85,9 +88,20 @@ class MatchDetailsType extends AbstractType
         );
 
         $builder->add(
+            'mvp',
+            ManOfTheMatchType::class,
+            [
+                'label' => false,
+                'home_team' => $homeTeam,
+                'away_team' => $awayTeam
+            ]
+        );
+
+        $builder->add(
             'homeTeamPenalties',
             NumberType::class,
             [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control col-sm-3'
                 ],
@@ -98,8 +112,21 @@ class MatchDetailsType extends AbstractType
             'awayTeamPenalties',
             NumberType::class,
             [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control col-sm-3'
+                ],
+            ]
+        );
+
+        $builder->add(
+            'description',
+            TextareaType::class,
+            [
+                'required' => false,
+                'label' => 'Opis meczu',
+                'attr' => [
+                    'class' => 'form-control tinymce'
                 ],
             ]
         );
