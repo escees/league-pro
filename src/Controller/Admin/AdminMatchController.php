@@ -91,7 +91,7 @@ class AdminMatchController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) { //@todo refactor DRY
             if ($matchDetails instanceof MatchDetails) {
-                if(!$matchDetails->getGoals()->isEmpty()) {
+                if($matchDetails->hasGoals()) {
                     foreach ($originalGoals as $goal) {
                         if (false === $matchGoals->contains($goal)) {
                             $this->entityManager->remove($goal);
@@ -100,7 +100,7 @@ class AdminMatchController extends AbstractController
                 }
 
 
-                if(!$matchDetails->getCards()->isEmpty()) {
+                if($matchDetails->hasCards()) {
                     foreach ($originalCards as $card) {
                         if (false === $matchCards->contains($card)) {
                             $this->entityManager->remove($card);
