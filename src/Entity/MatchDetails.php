@@ -236,4 +236,14 @@ class MatchDetails
 
         return $this;
     }
+
+    public function hasGoals(): bool
+    {
+        return !$this->getGoals()->isEmpty();
+    }
+
+    public function hasCards(): bool
+    {
+        return !$this->getCards()->isEmpty();
+    }
 }
