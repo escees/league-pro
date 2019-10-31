@@ -20,47 +20,32 @@
     </div>
     <section class="content-info">
         <!-- Nav Filters -->
-{#        <div class="portfolioFilter">#}
-{#            <div class="container">#}
-{#                <h5><i class="fa fa-filter" aria-hidden="true"></i>Filtruj po:</h5>#}
-{#                <a href="#" data-filter="*" class="current">Pokaż wszystkie</a>#}
-{#                <a href="#" data-filter=".group-a">Grupa A</a>#}
-{#                <a href="#" data-filter=".group-b">Grupa B</a>#}
-{#                <a href="#" data-filter=".group-c">Group C</a>#}
-{#                <a href="#" data-filter=".group-d">Group D</a>#}
-{#                <a href="#" data-filter=".group-e">Group E</a>#}
-{#                <a href="#" data-filter=".group-f">Group F</a>#}
-{#                <a href="#" data-filter=".group-g">Group G</a>#}
-{#                <a href="#" data-filter=".group-h">Group H</a>#}
-{#            </div>#}
-{#        </div>#}
         <!-- End Nav Filters -->
         <div class="container padding-top">
             <div class="row portfolioContainer">
                 {% for team in teams %}
                     <div class="col-md-6 col-lg-4 col-xl-3 group-a">
-
-                            <div class="item-team">
-                                <div class="head-team">
-                                    <img src="{{ team.photo.name ? asset('images/team/photo/' ~ team.photo.name) : asset('build/img/clubs-teams/poland.jpg')}}" alt="location-team">
-                                    <div class="overlay"><a href="{{ path('app.team.view', { 'team': team.id }) }}">+</a></div>
-                                </div>
-                                <div class="info-team">
-                                    <span class="logo-team">
-                                        <img src="{{ team.crest.name ? asset('images/team/crest/' ~ team.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="logo-team">
-                                    </span>
-                                        <h4>{{ team.name }}</h4>
-                                        <span class="location-team">
-                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                        TZN Arena ;)
-                                    </span>
-                                        <span class="group-team">
-                                        <i class="fa fa-trophy" aria-hidden="true"></i>
-                                        Ekstraklasa
-                                    </span>
-                                </div>
-                                <a href="{{ path('app.team.view', { 'team': team.id }) }}" class="btn">Szczegóły drużyny<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        <div class="item-team">
+                            <div class="head-team">
+                                <img src="{{ team.photo.name ? asset('images/team/photo/' ~ team.photo.name) : asset('build/img/clubs-teams/poland.jpg')}}" alt="location-team">
+                                <div class="overlay"><a href="{{ path('app.team.view', { 'team': team.id }) }}">+</a></div>
                             </div>
+                            <div class="info-team">
+                                <span class="logo-team">
+                                    <img src="{{ team.crest.name ? asset('images/team/crest/' ~ team.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="logo-team">
+                                </span>
+                                    <h4>{{ team.name }}</h4>
+                                    <span class="location-team">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    TZN Arena ;)
+                                </span>
+                                    <span class="group-team">
+                                    <i class="fa fa-trophy" aria-hidden="true"></i>
+                                    Ekstraklasa
+                                </span>
+                            </div>
+                            <a href="{{ path('app.team.view', { 'team': team.id }) }}" class="btn">Szczegóły drużyny<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
