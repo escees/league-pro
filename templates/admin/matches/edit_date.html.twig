@@ -1,0 +1,42 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('match_details') }}
+{% endblock %}
+{% block body %}
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <h3 class="page-title">Uzupełnij datę meczu</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card card-small mb-3">
+                <div class="card-header">
+                    <div class="col">
+                        <h5>{{ match.homeTeam.name }} : {{ match.awayTeam.name }}</h5>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {{ form_start(form) }}
+                            <div class="form-group col text-center">
+                                {{ form_widget(form.startDate) }}
+                            </div>
+                            <br>
+                            <div class="form-group col">
+                                <a href="{{ path('app.match.dashboard') }}" class="btn btn-outline-secondary">Wróć na listę</a>
+                                <button type="submit" class="btn btn-outline-success">Zapisz</button>
+                            </div>
+                        {{ form_widget(form._token) }}
+                        {{ form_rest(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('match_details') }}
+{% endblock %}

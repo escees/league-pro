@@ -26,11 +26,6 @@ class PlayerRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->where('p.team = :homeTeam')
             ->orWhere('p.team = :awayTeam')
-            ->setParameters(
-                [
-                    'homeTeam' => $homeTeam,
-                    'awayTeam' => $awayTeam
-                ]
-            );
+            ->setParameters(['homeTeam' => $homeTeam, 'awayTeam' => $awayTeam]);
     }
 }
