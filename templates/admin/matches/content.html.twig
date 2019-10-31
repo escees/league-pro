@@ -141,9 +141,11 @@
                                     '
                                 %}
                                 <li class="list-group-item d-flex px-3">
-                                    <div class="col text-center text-nowrap d-flex flex-column">
-                                        <span class="">{{ match.startDate|date('Y-m-d') }}</span>
-                                        <span class="">{{ match.startDate|date('H:i') }}</span>
+                                    <div class="col text-center text-nowrap ">
+                                        <a class="d-flex flex-column text-reagent-gray" href="{{ path('app.match.edit_date', {'match': match.id}) }}">
+                                            <span class="">{{ match.startDate|date('Y-m-d') }}</span>
+                                            <span class="">{{ match.startDate|date('H:i') }}</span>
+                                        </a>
                                     </div>
                                     <div class="col text-right">
                                         <span class="collections-content ">{{ match.homeTeam.name }}</span>

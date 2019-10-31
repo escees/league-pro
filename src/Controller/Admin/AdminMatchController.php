@@ -11,6 +11,7 @@ use App\Event\LeagueProEvents;
 use App\Event\MatchResultAddedEvent;
 use App\Form\MatchDetailsType;
 use App\Form\MatchResultType;
+use App\Form\MatchStartDateType;
 use App\Form\MatchType;
 use App\Form\SimpleMatchDetailsType;
 use App\Repository\FootballMatchRepository;
@@ -187,6 +188,34 @@ class AdminMatchController extends AbstractController
             [
                 'form' => $form->createView(),
                 'match' => $match,
+            ]
+        );
+    }
+
+    /**
+     * @Route("/{match}/edit-date", name="app.match.edit_date")
+     */
+    public function editMatchStartDate(Request $request, FootballMatch $match)
+    {
+        $form = $this->createForm(MatchStartDateType::class, $match);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->entityManager->persist($match);
+            $this->entityManager->flush();
+
+            $this->addFlash(FlashType::SUCCESS, 'Data rozpoczęcia meczu została zmieniona');
+
+            return $this->redirectToRoute('app.match.dashboard');
+        }
+
+        return $this->render(
+            'admin/matches/edit_date.html.twig',
+            [
+                'match' => $match,
+                'form' => $form->createView()
             ]
         );
     }
