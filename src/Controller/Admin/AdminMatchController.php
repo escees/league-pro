@@ -83,22 +83,10 @@ class AdminMatchController extends AbstractController
     {
         $form = $this->createForm(MatchResultType::class, $match);
 
-        //@todo refactor DRY
         $matchDetails = $match->getMatchDetails();
         if ($matchDetails instanceof MatchDetails) {
-            $matchGoals = $matchDetails->getGoals();
-            $originalGoals = new ArrayCollection();
-            foreach ($matchGoals as $goal) {
-                $originalGoals->add($goal);
-            }
-
-            $matchCards = $matchDetails->getCards();
-            $originalCards = new ArrayCollection();
-            foreach ($matchCards as $card) {
-                $originalCards->add($card);
-            }
+           list($matchGoals, $originalGoals, $matchCards, $originalCards) = $this->getExistingMatchEvents($matchDetails);
         }
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) { //@todo refactor DRY
@@ -218,5 +206,22 @@ class AdminMatchController extends AbstractController
                 'form' => $form->createView()
             ]
         );
+    }
+
+    private function getExistingMatchEvents(MatchDetails $matchDetails): array
+    {
+        $matchGoals = $matchDetails->getGoals();
+        $originalGoals = new ArrayCollection();
+        foreach ($matchGoals as $goal) {
+            $originalGoals->add($goal);
+        }
+
+        $matchCards = $matchDetails->getCards();
+        $originalCards = new ArrayCollection();
+        foreach ($matchCards as $card) {
+            $originalCards->add($card);
+        }
+
+        return [$matchGoals, $originalGoals, $matchCards, $originalCards];
     }
 }
