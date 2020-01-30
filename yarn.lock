@@ -6736,10 +6736,10 @@ timsort@^0.3.0:
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
-tinymce@^5.0.13:
-  version "5.0.13"
-  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.0.13.tgz#fdccfce5fa77f23e9a221d22b6f766ab70eb0118"
-  integrity sha512-/wRN2yhl0I18agp23ut6zwLWAXmj8l1GcX7iOjCpaabGXa6nydxxElzhXn6p4558MCzLaYxibv4qu2aVamgONA==
+tinymce@^5.1.4:
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.1.4.tgz#a45282a68e66d0959bcae19a972f8ae52a358667"
+  integrity sha512-Y7JYnByNF2A4BzR2KIbKEQV90PHZ5OwsU5An1Qj1zbSI8aXCOOhffL04LqlGw5UP/ookaC/V9V41H5XJbp/l9w==
 
 tmp@^0.0.33:
   version "0.0.33"
