@@ -85,7 +85,7 @@ class AdminMatchController extends AbstractController
 
         $matchDetails = $match->getMatchDetails();
         if ($matchDetails instanceof MatchDetails) {
-           list($matchGoals, $originalGoals, $matchCards, $originalCards) = $this->getExistingMatchEvents($matchDetails);
+           [$matchGoals, $originalGoals, $matchCards, $originalCards] = $this->getExistingMatchEvents($matchDetails);
         }
         $form->handleRequest($request);
 
@@ -149,7 +149,7 @@ class AdminMatchController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $match->setMatchDetails($matchDetails);
             $this->entityManager->persist($matchDetails);
-            $this->entityManager->persist($match);
+            $this->entityManager->persist($match); //@todo probably to remove
             $this->entityManager->flush();
 
             $this->eventDispatcher->dispatch(
