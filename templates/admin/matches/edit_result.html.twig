@@ -1,14 +1,14 @@
 {% macro goalScorer(goalForm) %}
     {{ form_errors(goalForm) }}
-    {{ form_widget(goalForm, {'attr': {'class': 'row'}}) }}
-    <a href="#" class="btn btn-sm btn-danger delete-scorer pull-right"><i class="fas fa-trash-alt"></i></a>
+    {{ form_widget(goalForm.scorer) }} {{ form_widget(goalForm.minute) }} {{ form_widget(goalForm.assistant) }}
+    <a href="#" class="btn btn-sm btn-danger delete-scorer"><i class="fas fa-trash-alt"></i></a>
     <br>
     <br>
 {% endmacro %}
 {% macro cardTaker(cardForm) %}
     {{ form_errors(cardForm) }}
-    {{ form_widget(cardForm, {'attr': {'class': 'row'}}) }}
-    <a href="#" class="btn btn-sm btn-danger delete-card pull-right"><i class="fas fa-trash-alt"></i></a>
+    {{ form_widget(cardForm.player) }} {{ form_widget(cardForm.minute) }} {{ form_widget(cardForm.color) }}
+    <a href="#" class="btn btn-sm btn-danger delete-card"><i class="fas fa-trash-alt"></i></a>
     <br>
     <br>
 {% endmacro %}
@@ -74,22 +74,22 @@
                         <h4>Bramki</h4>
                         <hr>
                     </div>
-                    <div class="scorers col-sm-12"
+                    <div class="scorers col-sm-12 text-center"
                          data-prototype="{{ formMacros.goalScorer(form.matchDetails.goals.vars.prototype)|e('html_attr') }}"
                          data-add-scorer-link="{{ '<br /><button type="button" class="btn btn-outline-info add-scorer">' ~ 'Dodaj strzelca' ~ '</button><br /><br/><br />' }}"
                     >
                         {% for goal in form.matchDetails.goals %}
-                            <div class="col">
+                            <div class="col-sm-12">
                                 {{ formMacros.goalScorer(goal) }}
                             </div>
                         {% endfor %}
                     </div>
-                    <div class="match-cards col-sm-12"
-                         data-add-card-link="{{ '<br /><button type="button" class="btn btn-outline-info add-card">' ~ 'Dodaj kartkę' ~ '</button><br /><br/><br />' }}"
+                    <div class="match-cards col-sm-12 text-center"
                          data-prototype="{{ formMacros.cardTaker(form.matchDetails.cards.vars.prototype)|e }}"
+                         data-add-card-link="{{ '<br /><button type="button" class="btn btn-outline-info add-card">' ~ 'Dodaj kartkę' ~ '</button><br /><br/><br />' }}"
                     >
                         {% for card in form.matchDetails.cards %}
-                            <div class="col">
+                            <div class="col-sm-12">
                                 {{ formMacros.cardTaker(card) }}
                             </div>
                         {% endfor %}
