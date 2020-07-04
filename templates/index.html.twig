@@ -181,7 +181,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h4><a href="{{ path('app.news.view', {'news': article.id}) }}">{{ article.title }}</a></h4>
-                                        <span class="data-info">January 3, 2014  / <i class="fa fa-comments"></i><a href="#">0</a></span>
+                                        <span class="data-info">{{ article.createdAt|date('d-m-Y, H:i') }}  / <i class="fa fa-comments"></i><a href="#">0</a></span>
                                         {{ article.text|slice(0, 400)|raw }} ...
                                         <a class="teal-color" href="{{ path('app.news.view', {'news': article.id}) }}">Czytaj więcej [+]</a>
                                     </div>
@@ -215,19 +215,19 @@
                     </div>
                 </aside>
             </div>
-            <div class="row no-line-height">
-                <div class="col-md-12">
-                    <h3 class="clear-title">Sponsorzy</h3>
-                </div>
-            </div>
-            <ul class="sponsors-carousel">
-                <li><a href="#"><img src="{{ asset('build/img/sponsors/1.png') }}" alt=""></a></li>
-                <li><a href="#"><img src="{{ asset('build/img/sponsors/2.png') }}" alt=""></a></li>
-                <li><a href="#"><img src="{{ asset('build/img/sponsors/3.png') }}" alt=""></a></li>
-                <li><a href="#"><img src="{{ asset('build/img/sponsors/4.png') }}" alt=""></a></li>
-                <li><a href="#"><img src="{{ asset('build/img/sponsors/5.png') }}" alt=""></a></li>
-                <li><a href="#"><img src="{{ asset('build/img/sponsors/6.png') }}" alt=""></a></li>
-            </ul>
+{#            <div class="row no-line-height">#}
+{#                <div class="col-md-12">#}
+{#                    <h3 class="clear-title">Sponsorzy</h3>#}
+{#                </div>#}
+{#            </div>#}
+{#            <ul class="sponsors-carousel">#}
+{#                <li><a href="#"><img src="{{ asset('build/img/sponsors/1.png') }}" alt=""></a></li>#}
+{#                <li><a href="#"><img src="{{ asset('build/img/sponsors/2.png') }}" alt=""></a></li>#}
+{#                <li><a href="#"><img src="{{ asset('build/img/sponsors/3.png') }}" alt=""></a></li>#}
+{#                <li><a href="#"><img src="{{ asset('build/img/sponsors/4.png') }}" alt=""></a></li>#}
+{#                <li><a href="#"><img src="{{ asset('build/img/sponsors/5.png') }}" alt=""></a></li>#}
+{#                <li><a href="#"><img src="{{ asset('build/img/sponsors/6.png') }}" alt=""></a></li>#}
+{#            </ul>#}
         </div>
     </section>
 {% endblock %}
