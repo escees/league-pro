@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -70,9 +71,16 @@ class News
     /**
      * @ORM\Column(type="datetime", nullable=true)
      *
-     * @var \DateTime
+     * @var DateTimeInterface
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var DateTimeInterface
+     */
+    private $createdAt;
 
     public function __construct()
     {
@@ -164,5 +172,18 @@ class News
         $this->photo = $photo;
 
         return $this;
+    }
+
+    public function getCreatedAt(): DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setCreatedAt(): void
+    {
+        $this->createdAt = new \DateTime();
     }
 }
