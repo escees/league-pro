@@ -4,11 +4,15 @@ namespace App\Controller\Admin;
 
 use App\Dictionary\FlashType;
 use App\Entity\Player;
+use App\Form\PlayerImportType;
 use App\Form\PlayerType;
 use App\Repository\PlayerRepository;
 use App\Repository\TeamRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,7 +59,7 @@ class AdminPlayerController extends AbstractController
             $this->entityManager->persist($player);
             $this->entityManager->flush();
 
-            $this->addFlash(FlashType::SUCCESS, 'Zawodnik została poprawnie dodany');
+            $this->addFlash(FlashType::SUCCESS, 'Zawodnik został poprawnie dodany');
 
             return $this->redirectToRoute('app.admin.player.list');
         }
@@ -109,6 +113,47 @@ class AdminPlayerController extends AbstractController
         return $this->render('admin/player/list.html.twig',
             [
                 'teams' => $teamRepository->findAll(),
+            ]
+        );
+    }
+
+    /**
+     * @Route(
+     *     "/import",
+     *     name="app.player.import.csv",
+     * )
+     */
+    public function import(Request $request)
+    {
+        $form = $this->createForm(PlayerImportType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('playerFile')->getData(); //@todo refactor and move to service
+            $reader = Reader::createFromPath($file->getPathName());
+            $records = $reader->getRecords();
+            foreach($records as $offset => $record) {
+                if ($offset !== 0) {
+                    $player = new Player();
+                    $player->setName($record[0]);
+                    $player->setDateOfBirth(new Datetime($record[1]));
+                    $player->setPosition($record[2]);
+                    $player->setNumber((int)$record[3]);
+                    $player->setTeam($form->getData()['team']);
+                    $this->entityManager->persist($player);
+                }
+            }
+            $this->entityManager->flush();
+
+            $this->addFlash(FlashType::SUCCESS, sprintf('Zawodnicy zostali poprawnie zaimportowani do drużyny %s', $form->getData()['team']->getName()));
+
+            return $this->redirectToRoute('app.admin.player.list');
+        }
+
+        return $this->render('admin/player/import.html.twig',
+            [
+                'form' => $form->createView(),
             ]
         );
     }

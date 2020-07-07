@@ -1,0 +1,37 @@
+<div class="col-sm-12">
+    {{ form_start(form) }}
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item p-3">
+            <div class="row">
+                <div class="col player-form">
+                    <div class="form-row">
+                        <div class="form-group col-md-6 player-team">
+                            {{ form_label(form.team) }}
+                            {{ form_widget(form.team) }}
+                            {{ form_errors(form.team)}}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6 player-name">
+                            {{ form_label(form.playerFile) }}
+                            {{ form_widget(form.playerFile) }}
+                            {{ form_errors(form.playerFile)}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <br>
+    <a class="btn btn-sm btn-outline-secondary" href="{{ path('app.admin.player.list') }}">
+        <i class="material-icons">save</i> Wróć
+    </a>
+    <button class="btn btn-sm btn-info" type="submit">
+        <i class="material-icons">file_copy</i> Zapisz
+    </button>
+    {{ form_rest(form) }}
+</div>
+{% block javascripts %}
+    {{ encore_entry_script_tags('player_datepicker') }}
+{% endblock %}

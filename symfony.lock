@@ -133,6 +133,9 @@
     "jms/metadata": {
         "version": "2.0.0"
     },
+    "league/csv": {
+        "version": "9.6.0"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
     },
