@@ -4,10 +4,12 @@ namespace App\Controller\Admin;
 
 use App\Dictionary\FlashType;
 use App\Entity\Player;
+use App\Factory\PlayerFactory;
 use App\Form\PlayerImportType;
 use App\Form\PlayerType;
 use App\Repository\PlayerRepository;
 use App\Repository\TeamRepository;
+use App\Service\Import\Csv\PlayerCsvImporter;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Csv\Reader;
@@ -123,28 +125,14 @@ class AdminPlayerController extends AbstractController
      *     name="app.player.import.csv",
      * )
      */
-    public function import(Request $request)
+    public function import(Request $request, PlayerCsvImporter $playerImporter)
     {
         $form = $this->createForm(PlayerImportType::class);
-
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $file = $form->get('playerFile')->getData(); //@todo refactor and move to service
-            $reader = Reader::createFromPath($file->getPathName());
-            $records = $reader->getRecords();
-            foreach($records as $offset => $record) {
-                if ($offset !== 0) {
-                    $player = new Player();
-                    $player->setName($record[0]);
-                    $player->setDateOfBirth(new Datetime($record[1]));
-                    $player->setPosition($record[2]);
-                    $player->setNumber((int)$record[3]);
-                    $player->setTeam($form->getData()['team']);
-                    $this->entityManager->persist($player);
-                }
-            }
-            $this->entityManager->flush();
+            $file = $form->get('playerFile')->getData();
+            $playerImporter->import($file, $form->getData()['team']);
 
             $this->addFlash(FlashType::SUCCESS, sprintf('Zawodnicy zostali poprawnie zaimportowani do drużyny %s', $form->getData()['team']->getName()));
 

@@ -2,15 +2,13 @@
 
 namespace App\Form;
 
-use App\Entity\Media;
-use App\Entity\Player;
 use App\Entity\Team;
+use App\Model\PlayerImport;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PlayerImportType extends AbstractType
 {
@@ -44,7 +42,7 @@ class PlayerImportType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' =>  null
+            'data_class' => null
         ]);
     }
 }
