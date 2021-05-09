@@ -4,11 +4,17 @@ namespace App\Controller\Admin;
 
 use App\Dictionary\FlashType;
 use App\Entity\Player;
+use App\Factory\PlayerFactory;
+use App\Form\PlayerImportType;
 use App\Form\PlayerType;
 use App\Repository\PlayerRepository;
 use App\Repository\TeamRepository;
+use App\Service\Import\Csv\PlayerCsvImporter;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,7 +61,7 @@ class AdminPlayerController extends AbstractController
             $this->entityManager->persist($player);
             $this->entityManager->flush();
 
-            $this->addFlash(FlashType::SUCCESS, 'Zawodnik została poprawnie dodany');
+            $this->addFlash(FlashType::SUCCESS, 'Zawodnik został poprawnie dodany');
 
             return $this->redirectToRoute('app.admin.player.list');
         }
@@ -109,6 +115,33 @@ class AdminPlayerController extends AbstractController
         return $this->render('admin/player/list.html.twig',
             [
                 'teams' => $teamRepository->findAll(),
+            ]
+        );
+    }
+
+    /**
+     * @Route(
+     *     "/import",
+     *     name="app.player.import.csv",
+     * )
+     */
+    public function import(Request $request, PlayerCsvImporter $playerImporter)
+    {
+        $form = $this->createForm(PlayerImportType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('playerFile')->getData();
+            $playerImporter->import($file, $form->getData()['team']);
+
+            $this->addFlash(FlashType::SUCCESS, sprintf('Zawodnicy zostali poprawnie zaimportowani do drużyny %s', $form->getData()['team']->getName()));
+
+            return $this->redirectToRoute('app.admin.player.list');
+        }
+
+        return $this->render('admin/player/import.html.twig',
+            [
+                'form' => $form->createView(),
             ]
         );
     }

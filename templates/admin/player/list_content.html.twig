@@ -2,7 +2,12 @@
     <div class="card card-small ">
         <div class="card-header text-center">
             <h3>Lista zawodników</h3>
-            <a class=" text right btn btn-outline-info add-player" href="{{ path('app.player.add') }}">Dodaj zawodnika</a>
+            <a class=" text right btn btn-outline-info add-player" href="{{ path('app.player.add') }}">
+                Dodaj zawodnika
+            </a>
+            <a class=" text right btn btn-warning add-player" href="{{ path('app.player.import.csv') }}">
+                Zaimportuj zawodników z CSV
+            </a>
         </div>
         <div class="card-body pt-0" id="team-list">
             {% for team in teams %}
@@ -43,21 +48,23 @@
                                     {{ player.dateOfBirth|date('Y-m-d') }}
                                 </div>
                                 <div class="btn-group col-sm-1">
-                                        <a class="btn btn-outline-info btn-sm edit-player"
-                                                href="{{ path('app.player.edit', {'player': player.id }) }}"
-                                                data-player-id="{{ player.id }}"
-                                                data-team-id="{{ team.id }}"
-                                        >
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <button class="btn btn-outline-danger btn-sm delete-player"
-                                                data-href="{{ path('app.player.delete', {'player': player.id }) }}"
-                                                data-name="{{ player.name }}"
-                                                data-toggle="modal"
-                                                data-target="#delete-player-modal"
-                                        >
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                    <a
+                                        class="btn btn-outline-info btn-sm edit-player"
+                                        href="{{ path('app.player.edit', {'player': player.id }) }}"
+                                        data-player-id="{{ player.id }}"
+                                        data-team-id="{{ team.id }}"
+                                    >
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button
+                                        class="btn btn-outline-danger btn-sm delete-player"
+                                        data-href="{{ path('app.player.delete', {'player': player.id }) }}"
+                                        data-name="{{ player.name }}"
+                                        data-toggle="modal"
+                                        data-target="#delete-player-modal"
+                                    >
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </div>
                             </div>
                         </li>
