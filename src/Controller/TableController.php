@@ -12,16 +12,31 @@ use Symfony\Component\Routing\Annotation\Route;
 class TableController extends AbstractController
 {
     /**
-     * @Route("/table", name="app.table")
+     * @Route("/table/extraclass", name="app.table.extraclass")
      */
-    public function index(
+    public function tableExtraclass(
         Request $request,
         TeamRepository $teamRepository
     ) {
         return $this->render(
             'table-point.html.twig',
             [
-                'teams' => $teamRepository->getTeamStandings(),
+                'teams' => $teamRepository->getTeamStandings('Ekstraklasa'),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/table/first-league", name="app.table.first_league")
+     */
+    public function tableFirstLeague(
+        Request $request,
+        TeamRepository $teamRepository
+    ) {
+        return $this->render(
+            'table-point.html.twig',
+            [
+                'teams' => $teamRepository->getTeamStandings('I liga'),
             ]
         );
     }

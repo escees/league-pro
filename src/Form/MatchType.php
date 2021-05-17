@@ -73,9 +73,9 @@ class MatchType extends AbstractType
                 'choice_label' => 'name',
                 'group_by' => 'season.name',
                 'query_builder' => function (MatchDayRepository $matchDayRepository) {
-                    return $matchDayRepository->createQueryBuilder('m')
-                        ->where('m.endDate >= :now')
-                        ->setParameter('now', new \DateTime());
+                    return $matchDayRepository->findAll();
+//                        ->where('m.endDate >= :now')
+//                        ->setParameter('now', new \DateTime());
                 },
                 'attr' => [
                     'class' => 'form-control'

@@ -14,16 +14,31 @@ use Symfony\Component\Routing\Annotation\Route;
 class FixturesController extends AbstractController
 {
     /**
-     * @Route("/fixtures", name="app.fixtures")
+     * @Route("/fixtures/extraclass", name="app.fixtures.extraclass")
      */
-    public function index(
+    public function resultsExtraclass(
         Request $request,
         MatchDayRepository $matchDayRepository
     ) {
         return $this->render(
             'fixtures.html.twig',
             [
-                'matchdays' => $matchDayRepository->findAllOrderByDateAscending(),
+                'matchdays' => $matchDayRepository->findAllOrderByDateAscending('Ekstraklasa'),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/fixtures/first-league", name="app.fixtures.first_league")
+     */
+    public function resultsFirstLeague(
+        Request $request,
+        MatchDayRepository $matchDayRepository
+    ) {
+        return $this->render(
+            'fixtures.html.twig',
+            [
+                'matchdays' => $matchDayRepository->findAllOrderByDateAscending('I liga'),
             ]
         );
     }

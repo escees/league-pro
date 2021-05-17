@@ -27,18 +27,25 @@ class MatchDayRepository extends ServiceEntityRepository
             ->execute();
     }
 
-    public function findAllOrderByDateAscending()
+    public function findAllOrderByDateAscending(string $league)
     {
         return $this->createQueryBuilder('m')
+            ->leftJoin('m.matches', 'r')
+            ->leftJoin('r.matchDetails', 'rm')
+            ->leftJoin('r.homeTeam', 't')
+            ->leftJoin('t.season', 's')
+            ->leftJoin('s.league', 'l')
+            ->setParameter('leagueName', $league)
             ->where('m.startDate <= :now AND m.endDate >= :now')
             ->orWhere('m.startDate > :now')
+            ->andWhere('l.name = :leagueName')
             ->setParameter('now', new \DateTime())
             ->orderBy('m.startDate', 'ASC')
             ->getQuery()
             ->execute();
     }
 
-    public function getAllResults()
+    public function getAllResultsForLeague(string $league)
     {
         return $this->createQueryBuilder('m')
             ->select('m')
@@ -46,7 +53,12 @@ class MatchDayRepository extends ServiceEntityRepository
             ->addSelect('rm')
             ->leftJoin('m.matches', 'r')
             ->leftJoin('r.matchDetails', 'rm')
+            ->leftJoin('r.homeTeam', 't')
+            ->leftJoin('t.season', 's')
+            ->leftJoin('s.league', 'l')
             ->where('r.matchDetails IS NOT NULL')
+            ->andWhere('l.name = :leagueName')
+            ->setParameter('leagueName', $league)
             ->orderBy('m.startDate', 'DESC')
             ->getQuery()
             ->execute();
