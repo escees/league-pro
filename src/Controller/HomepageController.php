@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\FootballMatchRepository;
 use App\Repository\GoalRepository;
+use App\Repository\LeagueRepository;
 use App\Repository\NewsRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,6 +20,7 @@ class HomepageController extends AbstractController
         Request $request,
         TeamRepository $teamRepository,
         FootballMatchRepository $footballMatchRepository,
+        LeagueRepository $leagueRepository,
         GoalRepository $goalRepository,
         NewsRepository $newsRepository
     ) {
@@ -27,9 +29,12 @@ class HomepageController extends AbstractController
         return $this->render(
             'index.html.twig',
             [
-                'teams' => $teamRepository->getTeamStandings(8),
-                'results' => $footballMatchRepository->getLastThreeMatches(),
-                'bestScorers' => $goalRepository->getBestScorers(),
+                'teamsExtraclass' => $teamRepository->getTeamStandings('Ekstraklasa', 8),
+                'teamsFirstLeague' => $teamRepository->getTeamStandings('I liga',8),
+                'resultsExtraclass' => $footballMatchRepository->getLastThreeMatchesForLeague('Ekstraklasa'),
+                'resultsFirstLeague' => $footballMatchRepository->getLastThreeMatchesForLeague('I liga'),
+                'bestScorersExtraclass' => $goalRepository->getBestScorersForLeague('Ekstraklasa'),
+                'bestScorersFirstLeague' => $goalRepository->getBestScorersForLeague('I liga'),
                 'nextMatch' => $footballMatchRepository->getNextMatch(),
                 'fixtures' => $footballMatchRepository->getNumberOfFixturesOrderedByStartDateAscending(5),
                 'news' => $news,

@@ -12,14 +12,27 @@ use Symfony\Component\Routing\Annotation\Route;
 class TeamController extends AbstractController
 {
     /**
-     * @Route("/team/list", name="app.teams")
+     * @Route("/team/list/extraclass", name="app.teams.extraclass")
      */
-    public function list(Request $request, TeamRepository $teamRepository)
+    public function listExtraclass(Request $request, TeamRepository $teamRepository)
     {
         return $this->render(
             'teams.html.twig',
             [
-                'teams' => $teamRepository->findAll(),
+                'teams' => $teamRepository->getAllTeamsForLeague('Ekstraklasa'),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/team/list/first-league", name="app.teams.first_league")
+     */
+    public function listFirstLeague(Request $request, TeamRepository $teamRepository)
+    {
+        return $this->render(
+            'teams.html.twig',
+            [
+                'teams' => $teamRepository->getAllTeamsForLeague('I liga'),
             ]
         );
     }
