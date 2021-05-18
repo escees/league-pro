@@ -11,8 +11,6 @@
                             <th class="text-left">Drużyna</th>
                             <th class="text-center">M</th>
                             <th class="text-center">Z</th>
-                            <th class="text-center">ZPK</th>
-                            <th class="text-center">PPK</th>
                             <th class="text-center">P</th>
                             <th class="text-center">GZ</th>
                             <th class="text-center">GS</th>
@@ -28,8 +26,6 @@
                                     <td><img src="{{ team.team.crest.name ? asset('images/team/crest/' ~ team.team.crest.name) : asset('build/img/clubs-logos/pol.png') }}"> {{ team.name }}</td>
                                     <td>{{ team.played }}</td>
                                     <td>{{ team.wins }}</td>
-                                    <td>{{ team.winsAfterPenalties }}</td>
-                                    <td>{{ team.losesAfterPenalties }}</td>
                                     <td>{{ team.loses }}</td>
                                     <td>{{ team.goalsScored }}</td>
                                     <td>{{ team.goalsConceded }}</td>

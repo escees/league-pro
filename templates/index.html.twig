@@ -75,7 +75,7 @@
                                                                 </a>
                                                                 <span class="goals">
                                                                     <a href="{{ path('app.single_result', {'match': result.id}) }}">
-                                                                        <b>{{ result.matchDetails.homeTeamGoals }}</b> - <b>{{ result.matchDetails.awayTeamGoals }}</b>
+                                                                        <b>{{ result.matchDetails.homeTeamGoals }}</b> : <b>{{ result.matchDetails.awayTeamGoals }}</b>
                                                                     </a>
                                                                 </span>
                                                                 <a href="{{ path('app.team.view', {'team': result.awayTeam.id}) }}">
@@ -144,7 +144,7 @@
                                                 <span>{{ nextMatch.homeTeam.name }}</span>
                                             </div>
                                             <div class="col-md-2">
-                                                <div class="vs">Vs</div>
+                                                <div class="vs">:</div>
                                             </div>
                                             <div class="col-md-5">
                                                 <img class="counter-team-crest" src="{{ nextMatch.awayTeam.crest.name ? asset('images/team/crest/' ~ nextMatch.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
