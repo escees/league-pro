@@ -46,6 +46,12 @@ class FootballMatchRepository extends ServiceEntityRepository
     public function getNumberOfFixturesOrderedByStartDateAscending(int $number)
     {
         return $this->createQueryBuilder('m')
+            ->select('m as match')
+            ->addSelect('tsl.name as league_name')
+            ->leftJoin('m.homeTeam', 't')
+            ->leftJoin('t.season', 'ts')
+            ->leftJoin('ts.league', 'tsl')
+            ->where('t.season IS NOT NULL')
             ->where('m.startDate > :now')
             ->orderBy('m.startDate', 'ASC')
             ->setParameter('now', new \Datetime())

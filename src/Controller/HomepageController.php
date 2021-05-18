@@ -17,10 +17,8 @@ class HomepageController extends AbstractController
      * @Route("/", name="app.homepage")
      */
     public function index(
-        Request $request,
         TeamRepository $teamRepository,
         FootballMatchRepository $footballMatchRepository,
-        LeagueRepository $leagueRepository,
         GoalRepository $goalRepository,
         NewsRepository $newsRepository
     ) {

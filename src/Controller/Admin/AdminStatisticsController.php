@@ -15,21 +15,26 @@ class AdminStatisticsController extends AbstractController
      * @Route("/admin/statistics", name="app.admin.statistics")
      */
     public function index(
-        Request $request,
         TeamRepository $teamRepository,
         GoalRepository $goalRepository,
         CanadianPointsCalculator $canadianPointsCalculator
     ) {
-        $bestScorers = $goalRepository->getBestScorers();
-        $bestAssistants = $goalRepository->getBestAssistants();
+        $bestScorersExtraclass = $goalRepository->getBestScorersForLeague('Ekstraklasa');
+        $bestScorersFirstLeague = $goalRepository->getBestScorersForLeague('I liga');
+        $bestAssistantsExtraclass = $goalRepository->getBestAssistantsForLeague('Ekstraklasa');
+        $bestAssistantsFirstLeague = $goalRepository->getBestAssistantsForLeague('I liga');
 
         return $this->render(
             'admin/statistics/dashboard.html.twig',
             [
-                'teams' => $teamRepository->getTeamStandings(),
-                'bestScorers' => $bestScorers,
-                'bestAssistants' => $bestAssistants,
-                'canadianPoints' => $canadianPointsCalculator->calculate($bestScorers, $bestAssistants)
+                'teamsExtraclass' => $teamRepository->getTeamStandings('Ekstraklasa'),
+                'teamsFirstLeague' => $teamRepository->getTeamStandings('I liga'),
+                'bestScorersExtraclass' => $bestScorersExtraclass,
+                'bestScorersFirstLeague' => $bestScorersFirstLeague,
+                'bestAssistantsExtraclass' => $bestAssistantsExtraclass,
+                'bestAssistantsFirstLeague' => $bestAssistantsFirstLeague,
+                'canadianPointsExtraclass' => $canadianPointsCalculator->calculate($bestScorersExtraclass, $bestAssistantsExtraclass),
+                'canadianPointsFirstLeague' => $canadianPointsCalculator->calculate($bestScorersFirstLeague, $bestAssistantsFirstLeague)
             ]
         );
     }

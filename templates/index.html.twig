@@ -222,9 +222,6 @@
                                     </ul>
                                     <div class="list-groups">
                                         <div class="row align-items-center">
-                                            <div class="col-md-12">
-                                                <p>TZN Arena</p>
-                                            </div>
                                             <div class="col-md-5">
                                                 <img class="counter-team-crest" src="{{ nextMatch.homeTeam.crest.name ? asset('images/team/crest/' ~ nextMatch.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                 <span>{{ nextMatch.homeTeam.name }}</span>
@@ -235,6 +232,12 @@
                                             <div class="col-md-5">
                                                 <img class="counter-team-crest" src="{{ nextMatch.awayTeam.crest.name ? asset('images/team/crest/' ~ nextMatch.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                 <span>{{ nextMatch.awayTeam.name }}</span>
+                                            </div>
+                                            <div class="col-md-12">
+                                                Miejsce rozgrywania:
+                                                <p>
+                                                    <i class="fa fa-globe" aria-hidden="true"></i> <strong>{{ nextMatch.arena ?? 'Brak miejsca rozgrywania meczu' }}</strong>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -283,16 +286,17 @@
                         </div>
                         <ul class="list-diary">
                             {% for fixture in fixtures %}
+
                             <li>
-                                <h6>Ekstraklasa <span>{{ fixture.startDate|date('d/m/Y H:i') }}</span></h6>
+                                <h6> {{ fixture.league_name }} <span>{{ fixture.match.startDate|date('d/m/Y H:i') }}</span></h6>
                                 <ul class="club-logo">
                                     <li>
-                                        <img src="{{ fixture.homeTeam.crest.name ? asset('images/team/crest/' ~ fixture.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                        <span>{{ fixture.homeTeam.name }}</span>
+                                        <img src="{{ fixture.match.homeTeam.crest.name ? asset('images/team/crest/' ~ fixture.match.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                        <span>{{ fixture.match.homeTeam.name }}</span>
                                     </li>
                                     <li>
-                                        <img src="{{ fixture.awayTeam.crest.name ? asset('images/team/crest/' ~ fixture.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                        <span>{{ fixture.awayTeam.name }}</span>
+                                        <img src="{{ fixture.match.awayTeam.crest.name ? asset('images/team/crest/' ~ fixture.match.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                        <span>{{ fixture.match.awayTeam.name }}</span>
                                     </li>
                                 </ul>
                             </li>

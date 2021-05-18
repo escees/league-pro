@@ -9,6 +9,7 @@ use App\Repository\MatchDayRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -73,14 +74,25 @@ class MatchType extends AbstractType
                 'choice_label' => 'name',
                 'group_by' => 'season.name',
                 'query_builder' => function (MatchDayRepository $matchDayRepository) {
-                    return $matchDayRepository->findAll();
-//                        ->where('m.endDate >= :now')
-//                        ->setParameter('now', new \DateTime());
+                    return $matchDayRepository->createQueryBuilder('m');
                 },
                 'attr' => [
                     'class' => 'form-control'
                 ],
                 'placeholder' => 'Wybierz kolejkę'
+            ]
+        );
+
+        $builder->add(
+            'arena',
+            ChoiceType::class,
+            [
+                'required' => false,
+                'choices' => ['TZN' => 'TZN', 'Dźbów' => 'Dźbów'],
+                'placeholder' => 'Wybierze miejsce',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
             ]
         );
     }

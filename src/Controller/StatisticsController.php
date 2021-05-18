@@ -14,7 +14,6 @@ class StatisticsController extends AbstractController
      * @Route("/statistics/extraclass", name="app.statistics.extraclass")
      */
     public function statisticsExtraclass(
-        Request $request,
         GoalRepository $goalRepository,
         CanadianPointsCalculator $canadianPointsCalculator
     ) {
@@ -35,7 +34,6 @@ class StatisticsController extends AbstractController
      * @Route("/statistics/first-league", name="app.statistics.first_league")
      */
     public function statisticsFirstLeague(
-        Request $request,
         GoalRepository $goalRepository,
         CanadianPointsCalculator $canadianPointsCalculator
     ) {
