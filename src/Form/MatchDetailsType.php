@@ -98,28 +98,6 @@ class MatchDetailsType extends AbstractType
         );
 
         $builder->add(
-            'homeTeamPenalties',
-            NumberType::class,
-            [
-                'required' => false,
-                'attr' => [
-                    'class' => 'form-control col-sm-3'
-                ],
-            ]
-        );
-
-        $builder->add(
-            'awayTeamPenalties',
-            NumberType::class,
-            [
-                'required' => false,
-                'attr' => [
-                    'class' => 'form-control col-sm-3'
-                ],
-            ]
-        );
-
-        $builder->add(
             'description',
             TextareaType::class,
             [

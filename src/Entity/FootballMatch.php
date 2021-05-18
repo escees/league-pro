@@ -62,6 +62,11 @@ class FootballMatch
      */
     private $matchDay;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $arena;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -177,6 +182,18 @@ class FootballMatch
     public function setMatchDay(?MatchDay $matchDay): self
     {
         $this->matchDay = $matchDay;
+
+        return $this;
+    }
+
+    public function getArena(): ?string
+    {
+        return $this->arena;
+    }
+
+    public function setArena(?string $arena): self
+    {
+        $this->arena = $arena;
 
         return $this;
     }

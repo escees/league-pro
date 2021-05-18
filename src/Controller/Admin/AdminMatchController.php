@@ -3,13 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Dictionary\FlashType;
-use App\Entity\Card;
 use App\Entity\FootballMatch;
-use App\Entity\Goal;
 use App\Entity\MatchDetails;
 use App\Event\LeagueProEvents;
 use App\Event\MatchResultAddedEvent;
-use App\Form\MatchDetailsType;
 use App\Form\MatchResultType;
 use App\Form\MatchStartDateType;
 use App\Form\MatchType;

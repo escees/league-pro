@@ -10,15 +10,18 @@
                         <div class="col">
                             {{ form_start(form) }}
                                 <div class="form-row">
-                                    <div class="form-group col-sm-12 col-md-3">
+                                    <div class="form-group col-sm-12 col-md-2">
                                         {{ form_widget(form.homeTeam) }}
                                         {{ form_errors(form.homeTeam) }}
                                     </div>
-                                    <div class="form-group col-sm-12 col-md-3">
+                                    <div class="form-group col-sm-12 col-md-2">
                                         {{ form_widget(form.awayTeam) }}
                                     </div>
                                     <div class="form-group col-sm-12 col-md-2">
                                         {{ form_widget(form.matchDay) }}
+                                    </div>
+                                    <div class="form-group col-sm-12 col-md-2">
+                                        {{ form_widget(form.arena) }}
                                     </div>
                                     <div class="form-group col-sm-12 col-md-2">
                                         {{ form_widget(form.startDate) }}

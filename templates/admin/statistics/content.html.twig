@@ -1,3 +1,7 @@
+<div class="text-center p-3">
+    <h2>Ekstraklasa</h2>
+</div>
+
 <div class="row">
     <div class="col mt-5">
         <div class="card card-small mb-4">
@@ -22,14 +26,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for team in teams %}
+                        {% for team in teamsExtraclass %}
                             <tr>
                                 <td>{{ loop.index }}</td>
                                 <td>{{ team.name }}</td>
                                 <td>{{ team.played }}</td>
                                 <td>{{ team.wins }}</td>
-                                <td>{{ team.winsAfterPenalties }}</td>
-                                <td>{{ team.losesAfterPenalties }}</td>
+                                <td>{{ team.draws }}</td>
                                 <td>{{ team.loses }}</td>
                                 <td>{{ team.goalsScored }}</td>
                                 <td>{{ team.goalsConceded }}</td>
@@ -61,7 +64,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        {% for player in canadianPoints|slice(0,15) %}
+                        {% for player in canadianPointsExtraclass|slice(0,15) %}
                             <tr>
                                 <td>{{ loop.index }}</td>
                                 <td>{{ player.name }}</td>
@@ -90,7 +93,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        {% for scorer in bestScorers|slice(0,15) %}
+                        {% for scorer in bestScorersExtraclass|slice(0,15) %}
                             <tr>
                                 <td>{{ loop.index }}</td>
                                 <td>{{ scorer.name }}</td>
@@ -119,7 +122,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        {% for assistant in bestAssistants|slice(0,15) %}
+                        {% for assistant in bestAssistantsExtraclass|slice(0,15) %}
                             <tr>
                                 <td>{{ loop.index }}</td>
                                 <td>{{ assistant.name }}</td>
@@ -127,6 +130,146 @@
                                 <td>{{ assistant.assists }}</td>
                             </tr>
                         {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="text-center">
+    <h2>I liga</h2>
+</div>
+
+<div class="row">
+    <div class="col mt-5">
+        <div class="card card-small mb-4">
+            <div class="card-header border-bottom text-center">
+                <h6 class="m-0">Tabela</h6>
+            </div>
+            <div class="card-body p-0 pb-3 text-center">
+                <table class="table table-hover  mb-0">
+                    <thead class="bg-warning">
+                    <tr>
+                        <th scope="col" class="border-0">#</th>
+                        <th scope="col" class="border-0">Drużyna</th>
+                        <th scope="col" class="border-0">M</th>
+                        <th scope="col" class="border-0">Z</th>
+                        <th scope="col" class="border-0">R</th>
+                        <th scope="col" class="border-0">P</th>
+                        <th scope="col" class="border-0">BZ</th>
+                        <th scope="col" class="border-0">BS</th>
+                        <th scope="col" class="border-0">RB</th>
+                        <th scope="col" class="border-0">PKT</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for team in teamsFirstLeague %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ team.name }}</td>
+                            <td>{{ team.played }}</td>
+                            <td>{{ team.wins }}</td>
+                            <td>{{ team.draws }}</td>
+                            <td>{{ team.loses }}</td>
+                            <td>{{ team.goalsScored }}</td>
+                            <td>{{ team.goalsConceded }}</td>
+                            <td>{{ team.goals_diff }}</td>
+                            <td>{{ team.points }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col mt-2">
+        <div class="card card-small mb-4">
+            <div class="card-header border-bottom text-center">
+                <h6 class="m-0">Klasyfikacja kanadyjska</h6>
+            </div>
+            <div class="card-body p-0 pb-3 text-center">
+                <table class="table table-hover  mb-0">
+                    <thead class="bg-warning">
+                    <tr>
+                        <th scope="col" class="border-0">#</th>
+                        <th scope="col" class="border-0">Imię i nazwisko</th>
+                        <th scope="col" class="border-0">Drużyna</th>
+                        <th scope="col" class="border-0">Punkty</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for player in canadianPointsFirstLeague|slice(0,15) %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ player.name }}</td>
+                            <td>{{ player.team }}</td>
+                            <td>{{ player.points }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col mt-2">
+        <div class="card card-small mb-4">
+            <div class="card-header border-bottom text-center">
+                <h6 class="m-0">Najlepsi Strzelcy</h6>
+            </div>
+            <div class="card-body p-0 pb-3 text-center">
+                <table class="table table-hover  mb-0">
+                    <thead class="bg-warning">
+                    <tr>
+                        <th scope="col" class="border-0">#</th>
+                        <th scope="col" class="border-0">Imię i nazwisko</th>
+                        <th scope="col" class="border-0">Drużyna</th>
+                        <th scope="col" class="border-0">Bramki</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for scorer in bestScorersFirstLeague|slice(0,15) %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ scorer.name }}</td>
+                            <td>{{ scorer.team }}</td>
+                            <td>{{ scorer.goals }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col mt-2">
+        <div class="card card-small mb-4">
+            <div class="card-header border-bottom text-center">
+                <h6 class="m-0">Najlepsi asystenci</h6>
+            </div>
+            <div class="card-body p-0 pb-3 text-center">
+                <table class="table table-hover  mb-0">
+                    <thead class="bg-warning">
+                    <tr>
+                        <th scope="col" class="border-0">#</th>
+                        <th scope="col" class="border-0">Imię i nazwisko</th>
+                        <th scope="col" class="border-0">Drużyna</th>
+                        <th scope="col" class="border-0">Asysty</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for assistant in bestAssistantsFirstLeague|slice(0,15) %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ assistant.name }}</td>
+                            <td>{{ assistant.team }}</td>
+                            <td>{{ assistant.assists }}</td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>

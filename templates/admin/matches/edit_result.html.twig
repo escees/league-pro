@@ -35,7 +35,7 @@
                     <div class="col text-right">
                         <span class="collections-content ">{{ match.homeTeam.name }}</span>
                     </div>
-                    <div class="col text-center">
+                    <div class="col">
                         {{ form_widget(form.matchDetails.homeTeamGoals) }}  :  {{ form_widget(form.matchDetails.awayTeamGoals) }}
                     </div>
                     <div class="col text-left">
@@ -43,12 +43,6 @@
                     </div>
                     <div class="col text-center">
                         <span class="">{{ match.startDate|date('Y-m-d H:i') }}</span>
-                    </div>
-                    <div class="col-sm-12 text-center">
-                        Karne
-                    </div>
-                    <div class="col-sm-12 text-center">
-                        {{ form_widget(form.matchDetails.homeTeamPenalties) }}  :  {{ form_widget(form.matchDetails.awayTeamPenalties) }}
                     </div>
                     <div class="col-sm-12 text-danger">
                         {{ form_errors(form.matchDetails.homeTeamGoals) }}
