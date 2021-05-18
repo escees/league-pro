@@ -11,15 +11,36 @@ use Symfony\Component\Routing\Annotation\Route;
 class StatisticsController extends AbstractController
 {
     /**
-     * @Route("/statistics", name="app.statistics")
+     * @Route("/statistics/extraclass", name="app.statistics.extraclass")
      */
-    public function index(
+    public function statisticsExtraclass(
         Request $request,
         GoalRepository $goalRepository,
         CanadianPointsCalculator $canadianPointsCalculator
     ) {
-        $bestScorers = $goalRepository->getBestScorers(false);
-        $bestAssistants = $goalRepository->getBestAssistants();
+        $bestScorers = $goalRepository->getBestScorersForLeague('Ekstraklasa');
+        $bestAssistants = $goalRepository->getBestAssistantsForLeague('Ekstraklasa');
+
+        return $this->render(
+            'statistics/dashboard.html.twig',
+            [
+                'bestScorers' => $bestScorers,
+                'bestAssistants' => $bestAssistants,
+                'canadianPoints' => $canadianPointsCalculator->calculate($bestScorers, $bestAssistants)
+            ]
+        );
+    }
+
+    /**
+     * @Route("/statistics/first-league", name="app.statistics.first_league")
+     */
+    public function statisticsFirstLeague(
+        Request $request,
+        GoalRepository $goalRepository,
+        CanadianPointsCalculator $canadianPointsCalculator
+    ) {
+        $bestScorers = $goalRepository->getBestScorersForLeague('I liga');
+        $bestAssistants = $goalRepository->getBestAssistantsForLeague('I liga');
 
         return $this->render(
             'statistics/dashboard.html.twig',

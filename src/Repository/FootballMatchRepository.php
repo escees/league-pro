@@ -103,6 +103,22 @@ class FootballMatchRepository extends ServiceEntityRepository
             ->execute();
     }
 
+    public function getLastThreeMatchesForLeague(string $league)
+    {
+        return $this->createQueryBuilder('m')
+            ->leftJoin('m.homeTeam', 't')
+            ->leftJoin('t.season', 's')
+            ->leftJoin('s.league', 'l')
+            ->where('m.startDate < :now')
+            ->andWhere('m.matchDetails IS NOT NULL')
+            ->andWhere('l.name = :leagueName')
+            ->orderBy('m.startDate', 'DESC')
+            ->setParameters(['now' => new \Datetime(), 'leagueName' => $league])
+            ->setMaxResults(3)
+            ->getQuery()
+            ->execute();
+    }
+
     public function getAllResultsOrderedByStartDateDescendingByTeam(Team $team)
     {
         return $this->createQueryBuilder('m')

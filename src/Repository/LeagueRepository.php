@@ -19,6 +19,19 @@ class LeagueRepository extends ServiceEntityRepository
         parent::__construct($registry, League::class);
     }
 
+    public function findAllGroupByName()
+    {
+        return $this->createQueryBuilder('l')
+//            ->select('l.name')
+//            ->addSelect('l.seasons as seasons')
+//            ->addSelect('ls.teams as teams')
+            ->leftJoin('l.seasons', 'ls')
+            ->leftJoin('ls.teams', 'lst')
+//            ->groupBy('l.seasons')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return League[] Returns an array of League objects
     //  */

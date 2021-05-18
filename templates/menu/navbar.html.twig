@@ -5,38 +5,87 @@
                 <a href="{{ path('app.homepage') }}"><img src="{{ asset('build/img/czliga_logo.png')}}" alt="league-logo" style="width: 75px; height: 24px; padding: 0"></a>
 {#                <a href="{{ path('app.homepage') }}">Strona główna</a>#}
             </li>
-{#            <li class="current">#}
-{#                <a href="{{ path('app.teams')}}">Ligi</a>#}
-{#                <ul class="sub-current ">#}
-{#                    <li><a class="d-flex justify-content-center"><i class="fa fa-trophy" aria-hidden="true"></i>  Ekstraklasa</a></li>#}
-{#                    <li><a href="{{ path('app.table') }}">Tabela</a></li>#}
-{#                    <li><a href="{{ path('app.fixtures') }}">Terminarz</a></li>#}
-{#                    <li><a href="{{ path('app.teams')}}">Drużyny</a></li>#}
-{#                    <li><a href="{{ path('app.results') }}">Wyniki</a></li>#}
-{#                    <li><a href="{{ path('app.table')}}">Tabela</a></li>#}
-{#                </ul>#}
-{#            </li>#}
+            <li class="current">
+                <a href="#"><i class="fa fa-trophy" aria-hidden="true"></i> Ekstraklasa</a>
+                <ul class="sub-current ">
+                    <li><a href="{{ path('app.table.extraclass') }}">Tabela</a></li>
+                    <li><a href="{{ path('app.fixtures.extraclass') }}">Terminarz</a></li>
+                    <li><a href="{{ path('app.teams.extraclass')}}">Drużyny</a></li>
+                    <li><a href="{{ path('app.results.extraclass') }}">Wyniki</a></li>
+                    <li><a href="{{ path('app.statistics.extraclass')}}">Statystyki</a></li>
+                </ul>
+            </li>
+            <li class="current">
+                <a href="#"><i class="fa fa-trophy" aria-hidden="true"></i> I liga</a>
+                <ul class="sub-current ">
+                    <li><a href="{{ path('app.table.first_league') }}">Tabela</a></li>
+                    <li><a href="{{ path('app.fixtures.extraclass') }}">Terminarz</a></li>
+                    <li><a href="{{ path('app.teams.first_league')}}">Drużyny</a></li>
+                    <li><a href="{{ path('app.results.first_league') }}">Wyniki</a></li>
+                    <li><a href="{{ path('app.statistics.first_league')}}">Statystyki</a></li>
+                </ul>
+            </li>
 {#            <li class="current">#}
 {#                <a href="{{ path('app.teams')}}">Newsy</a>#}
 {#            </li>#}
 {#            <li class="current">#}
 {#                <a href="{{ path('app.teams')}}">Kontakt</a>#}
 {#            </li>#}
-            <li class="current">
-                <a href="{{ path('app.teams')}}">Drużyny</a>
-            </li>
-            <li class="current">
-                <a href="{{ path('app.fixtures')}}">Terminarz</a>
-            </li>
-            <li class="current">
-                <a href={{ path('app.results') }}>Wyniki</a>
-            </li>
-            <li>
-                <a href="{{ path('app.table')}}">Tabela</a>
-            </li>
-            <li>
-                <a href="{{ path('app.statistics')}}">Statystyki</a>
-            </li>
+{#            <li class="current">#}
+{#                <a href="{{ path('app.teams')}}">Drużyny</a>#}
+{#                <ul class="sub-current">#}
+{#                    <li>#}
+{#                        <a href="{{ path('app.teams') }}">Ekstraklasa</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="{{ path('app.teams')}}">I Liga</a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </li>#}
+{#            <li class="current">#}
+{#                <a href="{{ path('app.fixtures')}}">Terminarz</a>#}
+{#                <ul class="sub-current">#}
+{#                    <li>#}
+{#                        <a href="{{ path('app.fixtures') }}">Ekstraklasa</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="{{ path('app.fixtures')}}">I Liga</a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </li>#}
+{#            <li class="current">#}
+{#                <a href={{ path('app.results') }}>Wyniki</a>#}
+{#                <ul class="sub-current">#}
+{#                    <li>#}
+{#                        <a href="{{ path('app.results') }}">Ekstraklasa</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="{{ path('app.results')}}">I Liga</a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </li>#}
+{#            <li class="current">#}
+{#                <a href="{{ path('app.table') }}">Tabela</a>#}
+{#                <ul class="sub-current">#}
+{#                    <li>#}
+{#                        <a href="{{ path('app.table') }}">Ekstraklasa</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="{{ path('app.table')}}">I Liga</a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </li>#}
+{#            <li class="current">#}
+{#                <a href="{{ path('app.statistics')}}">Statystyki</a>#}
+{#                <ul class="sub-current">#}
+{#                    <li>#}
+{#                        <a href="{{ path('app.statistics') }}">Ekstraklasa</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="{{ path('app.statistics')}}">I Liga</a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </li>#}
             <li class="float-right">
                 <a href="{{ path('app_login') }}" class="login-button">Zaloguj się</a>
             </li>

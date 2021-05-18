@@ -12,16 +12,31 @@ use Symfony\Component\Routing\Annotation\Route;
 class ResultsController extends AbstractController
 {
     /**
-     * @Route("/results", name="app.results")
+     * @Route("/results/extraclass", name="app.results.extraclass")
      */
-    public function results(
+    public function resultsExtraclass(
         Request $request,
         MatchDayRepository $matchDayRepository
     ) {
         return $this->render(
             'results.html.twig',
             [
-                'matchdays' => $matchDayRepository->getAllResults(),
+                'matchdays' => $matchDayRepository->getAllResultsForLeague('Ekstraklasa'),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/results/first-league", name="app.results.first_league")
+     */
+    public function resultsFirstLeague(
+        Request $request,
+        MatchDayRepository $matchDayRepository
+    ) {
+        return $this->render(
+            'results.html.twig',
+            [
+                'matchdays' => $matchDayRepository->getAllResultsForLeague('I liga'),
             ]
         );
     }
