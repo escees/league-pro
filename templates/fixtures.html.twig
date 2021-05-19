@@ -28,7 +28,7 @@
                                 </td>
                                 <td class="text-center">
                                     {{ fixture.startDate|date('d-m-Y H:i') }}<br>
-                                    <small class="meta-text">TZN Arena ;)</small>
+                                    <small class="meta-text">{{ fixture.arena ?? 'Brak miejsca rozgrywania' }}</small>
                                 </td>
                             </tr>
                         {% else %}
