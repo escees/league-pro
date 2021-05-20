@@ -59,7 +59,7 @@ class TeamRepository extends ServiceEntityRepository
             ->addSelect('t.goalsScored')
             ->addSelect('t.goalsConceded')
             ->addSelect('t.goalsScored - t.goalsConceded as goals_diff')
-            ->addSelect('t.wins + t.loses + t.winsAfterPenalties + t.losesAfterPenalties as played')
+            ->addSelect('t.wins + t.loses + t.draws as played')
             ->addSelect('ts as season')
             ->addSelect('tsl.name as league_name')
             ->leftJoin('t.season', 'ts')

@@ -53,18 +53,8 @@ class MatchResultEventListener implements EventSubscriberInterface
         }
 
         if ($homeTeamGoals === $awayTeamGoals) {
-            $awayPenalties = $matchDetails->getAwayTeamPenalties();
-            $homePenalties = $matchDetails->getHomeTeamPenalties();
-
-            if ($homePenalties > $awayPenalties) {
-                $homeTeam->addWinAfterPenalties();
-                $awayTeam->addLoseAfterPenalties();
-            }
-
-            if ($homePenalties < $awayPenalties) {
-                $awayTeam->addWinAfterPenalties();
-                $homeTeam->addLoseAfterPenalties();
-            }
+            $homeTeam->addDraw();
+            $awayTeam->addDraw();
         }
 
         $match->setCompleteStats(true);
