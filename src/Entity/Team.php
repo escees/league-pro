@@ -495,4 +495,10 @@ class Team
     {
         return $this->getAwayFootballMatch()->isEmpty() && $this->getHomeFootballMatch()->isEmpty();
     }
+
+    public function addDraw(): void
+    {
+        $this->draws++;
+        $this->addPoints(1);
+    }
 }
