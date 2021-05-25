@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\League;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -32,6 +33,18 @@ class TeamRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('t')
             ->where('t.season IS NOT NULL');
+    }
+
+    public function getAllTeamsForLeagueEntity(League $league): array
+    {
+        return $this->createQueryBuilder('t')
+            ->leftJoin('t.season', 'ts')
+            ->leftJoin('ts.league', 'tsl')
+            ->where('t.season IS NOT NULL')
+            ->andWhere('tsl = :league')
+            ->setParameter('league', $league)
+            ->getQuery()
+            ->getResult();
     }
 
     public function getAllTeamsForLeague(string $league): array
@@ -70,6 +83,39 @@ class TeamRepository extends ServiceEntityRepository
             ->where('t.season IS NOT NULL')
             ->andWhere('tsl.name = :leagueName')
             ->setParameter('leagueName', $leagueName)
+        ;
+
+        if ($maxResults) {
+            $qb->setMaxResults($maxResults);
+        }
+
+        return $qb->getQuery()->execute();
+    }
+
+    public function getTeamStandingsForLeague(League $league, int $maxResults = null): array
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->select('t.points')
+            ->addSelect('t as team')
+            ->addSelect('t.id')
+            ->addSelect('t.name')
+            ->addSelect('t.wins')
+            ->addSelect('t.draws')
+            ->addSelect('t.loses')
+            ->addSelect('t.goalsScored')
+            ->addSelect('t.goalsConceded')
+            ->addSelect('t.goalsScored - t.goalsConceded as goals_diff')
+            ->addSelect('t.wins + t.loses + t.draws as played')
+            ->addSelect('ts as season')
+            ->addSelect('tsl.name as league_name')
+            ->leftJoin('t.season', 'ts')
+            ->leftJoin('ts.league', 'tsl')
+            ->orderBy('t.points', 'DESC')
+            ->addOrderBy('goals_diff', 'DESC')
+            ->addOrderBy('t.goalsScored', 'DESC')
+            ->where('t.season IS NOT NULL')
+            ->andWhere('tsl = :league')
+            ->setParameter('league', $league)
         ;
 
         if ($maxResults) {

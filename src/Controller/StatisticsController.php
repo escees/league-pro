@@ -2,50 +2,35 @@
 
 namespace App\Controller;
 
+use App\Entity\League;
 use App\Repository\GoalRepository;
+use App\Repository\LeagueRepository;
 use App\Service\CanadianPointsCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StatisticsController extends AbstractController
 {
     /**
-     * @Route("/statistics/extraclass", name="app.statistics.extraclass")
+     * @Route("/statistics/{league}", name="app.statistics")
      */
-    public function statisticsExtraclass(
+    public function statistics(
         GoalRepository $goalRepository,
-        CanadianPointsCalculator $canadianPointsCalculator
-    ) {
-        $bestScorers = $goalRepository->getBestScorersForLeague('Ekstraklasa');
-        $bestAssistants = $goalRepository->getBestAssistantsForLeague('Ekstraklasa');
+        CanadianPointsCalculator $canadianPointsCalculator,
+        LeagueRepository $leagueRepository,
+        League $league
+    ): Response {
+        $bestScorers = $goalRepository->getBestScorersForLeagueEntity($league);
+        $bestAssistants = $goalRepository->getBestAssistantsForLeagueEntity($league);
 
         return $this->render(
             'statistics/dashboard.html.twig',
             [
                 'bestScorers' => $bestScorers,
                 'bestAssistants' => $bestAssistants,
-                'canadianPoints' => $canadianPointsCalculator->calculate($bestScorers, $bestAssistants)
-            ]
-        );
-    }
-
-    /**
-     * @Route("/statistics/first-league", name="app.statistics.first_league")
-     */
-    public function statisticsFirstLeague(
-        GoalRepository $goalRepository,
-        CanadianPointsCalculator $canadianPointsCalculator
-    ) {
-        $bestScorers = $goalRepository->getBestScorersForLeague('I liga');
-        $bestAssistants = $goalRepository->getBestAssistantsForLeague('I liga');
-
-        return $this->render(
-            'statistics/dashboard.html.twig',
-            [
-                'bestScorers' => $bestScorers,
-                'bestAssistants' => $bestAssistants,
-                'canadianPoints' => $canadianPointsCalculator->calculate($bestScorers, $bestAssistants)
+                'canadianPoints' => $canadianPointsCalculator->calculate($bestScorers, $bestAssistants),
+                'leagues' => $leagueRepository->findAll()
             ]
         );
     }

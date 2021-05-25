@@ -5,26 +5,18 @@
                 <a href="{{ path('app.homepage') }}"><img src="{{ asset('build/img/czliga_logo.png')}}" alt="league-logo" style="width: 75px; height: 24px; padding: 0"></a>
 {#                <a href="{{ path('app.homepage') }}">Strona główna</a>#}
             </li>
-            <li class="current">
-                <a href="#"><i class="fa fa-trophy" aria-hidden="true"></i> Ekstraklasa</a>
-                <ul class="sub-current ">
-                    <li><a href="{{ path('app.table.extraclass') }}">Tabela</a></li>
-                    <li><a href="{{ path('app.fixtures.extraclass') }}">Terminarz</a></li>
-                    <li><a href="{{ path('app.teams.extraclass')}}">Drużyny</a></li>
-                    <li><a href="{{ path('app.results.extraclass') }}">Wyniki</a></li>
-                    <li><a href="{{ path('app.statistics.extraclass')}}">Statystyki</a></li>
-                </ul>
-            </li>
-            <li class="current">
-                <a href="#"><i class="fa fa-trophy" aria-hidden="true"></i> I liga</a>
-                <ul class="sub-current ">
-                    <li><a href="{{ path('app.table.first_league') }}">Tabela</a></li>
-                    <li><a href="{{ path('app.fixtures.first_league') }}">Terminarz</a></li>
-                    <li><a href="{{ path('app.teams.first_league')}}">Drużyny</a></li>
-                    <li><a href="{{ path('app.results.first_league') }}">Wyniki</a></li>
-                    <li><a href="{{ path('app.statistics.first_league')}}">Statystyki</a></li>
-                </ul>
-            </li>
+            {%  for league in leagues %}
+                <li class="current">
+                    <a href="#"><i class="fa fa-trophy" aria-hidden="true"></i> {{ league.name }}</a>
+                    <ul class="sub-current ">
+                        <li><a href="{{ path('app.table', {'league': league.id}) }}">Tabela</a></li>
+                        <li><a href="{{ path('app.fixtures', {'league': league.id}) }}">Terminarz</a></li>
+                        <li><a href="{{ path('app.teams', {'league': league.id}) }}">Drużyny</a></li>
+                        <li><a href="{{ path('app.results', {'league': league.id}) }}">Wyniki</a></li>
+                        <li><a href="{{ path('app.statistics', {'league': league.id}) }}">Statystyki</a></li>
+                    </ul>
+                </li>
+            {% endfor %}
 {#            <li class="current">#}
 {#                <a href="{{ path('app.teams')}}">Newsy</a>#}
 {#            </li>#}

@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\FootballMatch;
+use App\Entity\League;
 use App\Repository\FootballMatchRepository;
+use App\Repository\LeagueRepository;
 use App\Repository\MatchDayRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,31 +14,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class ResultsController extends AbstractController
 {
     /**
-     * @Route("/results/extraclass", name="app.results.extraclass")
+     * @Route("/results/{league}", name="app.results")
      */
-    public function resultsExtraclass(
+    public function results(
         Request $request,
-        MatchDayRepository $matchDayRepository
+        MatchDayRepository $matchDayRepository,
+        LeagueRepository $leagueRepository,
+        League $league
     ) {
         return $this->render(
             'results.html.twig',
             [
-                'matchdays' => $matchDayRepository->getAllResultsForLeague('Ekstraklasa'),
-            ]
-        );
-    }
-
-    /**
-     * @Route("/results/first-league", name="app.results.first_league")
-     */
-    public function resultsFirstLeague(
-        Request $request,
-        MatchDayRepository $matchDayRepository
-    ) {
-        return $this->render(
-            'results.html.twig',
-            [
-                'matchdays' => $matchDayRepository->getAllResultsForLeague('I liga'),
+                'matchdays' => $matchDayRepository->getAllResultsForLeagueEntity($league),
+                'leagues' => $leagueRepository->findAll()
             ]
         );
     }
@@ -46,12 +36,14 @@ class ResultsController extends AbstractController
      */
     public function singleResult(
         Request $request,
-        FootballMatch $match
+        FootballMatch $match,
+        LeagueRepository $leagueRepository
     ) {
         return $this->render(
             'single-result.html.twig',
             [
                 'match' => $match,
+                'leagues' => $leagueRepository->findAll()
             ]
         );
     }
