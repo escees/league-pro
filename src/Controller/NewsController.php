@@ -7,6 +7,7 @@ use App\Entity\News;
 use App\Entity\Player;
 use App\Form\NewsType;
 use App\Form\PlayerType;
+use App\Repository\LeagueRepository;
 use App\Repository\NewsRepository;
 use App\Repository\PlayerRepository;
 use App\Repository\TeamRepository;
@@ -28,12 +29,13 @@ class NewsController extends AbstractController
      *     name="app.news.view",
      * )
      */
-    public function view(Request $request, News $news): Response
+    public function view(Request $request, News $news, LeagueRepository $leagueRepository): Response
     {
         return $this->render(
             'single-news.html.twig',
             [
-                'news' => $news
+                'news' => $news,
+                'leagues' => $leagueRepository->findAll()
             ]
         );
     }

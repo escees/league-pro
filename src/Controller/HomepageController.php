@@ -20,14 +20,16 @@ class HomepageController extends AbstractController
         TeamRepository $teamRepository,
         FootballMatchRepository $footballMatchRepository,
         GoalRepository $goalRepository,
-        NewsRepository $newsRepository
+        NewsRepository $newsRepository,
+        LeagueRepository $leagueRepository
     ) {
         $news = $newsRepository->findPublishedNews(5);
 
         return $this->render(
             'index.html.twig',
             [
-                'teamsExtraclass' => $teamRepository->getTeamStandings('Ekstraklasa', 8),
+                'leagues' => $leagueRepository->findAll(),
+                'teamsExtraclass' => $teamRepository->getTeamStandings('Ekstraklasa', 8), //@todo refactor
                 'teamsFirstLeague' => $teamRepository->getTeamStandings('I liga',8),
                 'resultsExtraclass' => $footballMatchRepository->getLastThreeMatchesForLeague('Ekstraklasa'),
                 'resultsFirstLeague' => $footballMatchRepository->getLastThreeMatchesForLeague('I liga'),

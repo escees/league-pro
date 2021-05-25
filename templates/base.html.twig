@@ -16,9 +16,9 @@
     <body>
         <div id="layout">
             {% include 'header.html.twig' %}
-            {% include 'menu/navbar.html.twig' %}
-            {% include 'menu/mobile_menu.html.twig' %}
-                {% block body %}{% endblock %}
+            {% include 'menu/navbar.html.twig' with {'leagues': leagues} %}
+            {% include 'menu/mobile_menu.html.twig' with {'leagues': leagues} %}
+            {% block body %}{% endblock %}
             {% include 'footer.html.twig' %}
         </div>
         {% block javascripts %}

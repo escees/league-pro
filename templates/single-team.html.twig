@@ -137,7 +137,7 @@
 
                                                     <div class="goals-result">
                                                         <a href="{{ path('app.team.view', {'team': result.homeTeam.id}) }}">
-                                                            <img src="{{ asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                                            <img src="{{ result.homeTeam.crest.name ? asset('images/team/crest/' ~ result.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                             {{ result.homeTeam.name }}
                                                         </a>
 
@@ -147,7 +147,7 @@
                                                         </span>
 
                                                         <a href="{{ path('app.team.view', {'team': result.awayTeam.id}) }}">
-                                                            <img src="{{ asset('build/img/clubs-logos/por.png') }}" alt="">
+                                                            <img src="{{ result.awayTeam.crest.name ? asset('images/team/crest/' ~ result.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                             {{ result.awayTeam.name }}
                                                         </a>
                                                     </div>
