@@ -27,6 +27,7 @@ class MatchType extends AbstractType
                 'query_builder' => function (TeamRepository $teamRepository) {
                     return $teamRepository->getAllTeamsWithLeague();
                 },
+                'group_by' => 'season.league.name',
                 'attr' => [
                     'class' => 'form-control'
                 ],
@@ -43,6 +44,7 @@ class MatchType extends AbstractType
                 'query_builder' => function (TeamRepository $teamRepository) {
                     return $teamRepository->getAllTeamsWithLeague();
                 },
+                'group_by' => 'season.league.name',
                 'attr' => [
                     'class' => 'form-control'
                 ],

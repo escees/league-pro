@@ -23,7 +23,7 @@ class FixturesController extends AbstractController
         return $this->render(
             'fixtures.html.twig',
             [
-                'matchdays' => $matchDayRepository->findAllOrderByDateAscendingForLeague($league),
+                'matchdays' => $matchDayRepository->findAllOrderByDateDescendingForLeague($league),
                 'leagues'=> $leagueRepository->findAll()
             ]
         );
