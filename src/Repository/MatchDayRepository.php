@@ -29,19 +29,20 @@ class MatchDayRepository extends ServiceEntityRepository
             ->execute();
     }
 
-    public function findAllOrderByDateAscendingForLeague(League $league)
+    public function findAllOrderByDateDescendingForLeague(League $league)
     {
         return $this->createQueryBuilder('m')
+            ->select('m')
+            ->addSelect('r')
+            ->addSelect('rm')
             ->leftJoin('m.matches', 'r')
             ->leftJoin('r.matchDetails', 'rm')
             ->leftJoin('r.homeTeam', 't')
             ->leftJoin('t.season', 's')
             ->leftJoin('s.league', 'l')
-            ->setParameter('league', $league)
-            ->where('m.startDate <= :now')
-            ->orWhere('m.startDate > :now')
+            ->where('m.startDate > :now OR (m.startDate <= :now AND r.matchDetails IS NULL)')
             ->andWhere('l = :league')
-            ->setParameter('now', new \DateTime())
+            ->setParameters(['league' => $league, 'now' => new \DateTime()])
             ->orderBy('m.startDate', 'DESC')
             ->getQuery()
             ->execute();
