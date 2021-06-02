@@ -32,7 +32,10 @@ class TeamRepository extends ServiceEntityRepository
     public function getAllTeamsWithLeague(): QueryBuilder
     {
         return $this->createQueryBuilder('t')
-            ->where('t.season IS NOT NULL');
+            ->leftJoin('t.season', 'ts')
+            ->leftJoin('ts.league', 'tsl')
+            ->where('t.season IS NOT NULL')
+            ->andWhere('ts.league IS NOT NULL');
     }
 
     public function getAllTeamsForLeagueEntity(League $league): array
