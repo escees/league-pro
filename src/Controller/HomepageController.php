@@ -8,7 +8,6 @@ use App\Repository\LeagueRepository;
 use App\Repository\NewsRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomepageController extends AbstractController
