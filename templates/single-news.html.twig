@@ -12,12 +12,22 @@
                         <div class="d-flex justify-content-center">
                             <img src="{{ news.photo.name is not null ? asset('images/news/' ~ news.photo.name) : asset('build/img/locations/1.jpg') }}" alt="">
                         </div>
+
                         <div class="info-panel">
                             {{ news.text|raw }}
+                        </div>
+
+                        <div class=" p-5 m-5 text-center">
+                            <iframe class="big-video" src="{{ news.video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
            </div>
+        </div>
+    </section>
+    <section class="sponsors">
+        <div class="container padding-top">
+            {% include 'sponsors.html.twig' %}
         </div>
     </section>
 {% endblock %}
