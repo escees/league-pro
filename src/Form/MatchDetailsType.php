@@ -91,6 +91,7 @@ class MatchDetailsType extends AbstractType
             'mvp',
             ManOfTheMatchType::class,
             [
+                'required' => false,
                 'label' => false,
                 'home_team' => $homeTeam,
                 'away_team' => $awayTeam

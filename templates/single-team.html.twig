@@ -96,10 +96,10 @@
                                 <table class="table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Team A</th>
-                                            <th class="text-center">VS</th>
-                                            <th>Team B</th>
-                                            <th>Details</th>
+                                            <th>Gospodarz</th>
+                                            <th class="text-center">:</th>
+                                            <th>Gość</th>
+                                            <th>Szczegóły</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -108,17 +108,17 @@
                                                 <td>
                                                     <img src="{{ fixture.homeTeam.crest.name ? asset('images/team/crest/' ~ fixture.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="icon">
                                                     <strong>{{ fixture.homeTeam.name }}</strong><br>
-                                                    <small class="meta-text">Ekstraklasa</small>
+                                                    <small class="meta-text">{{ fixture.homeTeam.season.league.name }}</small>
                                                 </td>
-                                                <td class="text-center">Vs</td>
+                                                <td class="text-center">:</td>
                                                 <td>
                                                     <img src="{{ fixture.awayTeam.crest.name ? asset('images/team/crest/' ~ fixture.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png')  }}" alt="icon1">
                                                     <strong>{{ fixture.awayTeam.name }}</strong><br>
-                                                    <small class="meta-text">Ekstraklasa</small>
+                                                    <small class="meta-text">{{ fixture.awayTeam.season.league.name }}</small>
                                                 </td>
                                                 <td>
                                                     {{ fixture.startDate|date('d/m/Y H:i') }}<br>
-                                                    <small class="meta-text">TZN Arena ;)</small>
+                                                    <small class="meta-text">{{ fixture.arena }}</small>
                                                 </td>
                                             </tr>
                                         {% endfor %}
