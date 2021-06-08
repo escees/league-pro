@@ -35,13 +35,9 @@
                                     <img src="{{ team.crest.name ? asset('images/team/crest/' ~ team.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="logo-team">
                                 </span>
                                     <h4>{{ team.name }}</h4>
-                                    <span class="location-team">
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                    TZN Arena ;)
-                                </span>
-                                    <span class="group-team">
+                                <span class="group-team">
                                     <i class="fa fa-trophy" aria-hidden="true"></i>
-                                    Ekstraklasa
+                                    {{ team.season.league.name }}
                                 </span>
                             </div>
                             <a href="{{ path('app.team.view', { 'team': team.id }) }}" class="btn">Szczegóły drużyny<i class="fa fa-angle-right" aria-hidden="true"></i></a>

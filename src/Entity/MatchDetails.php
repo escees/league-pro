@@ -64,6 +64,7 @@ class MatchDetails
     private $description;
 
     /**
+     * @ORM\JoinColumn(nullable=true)
      * @ORM\OneToOne(targetEntity="App\Entity\ManOfTheMatch", mappedBy="matchDetails", cascade={"persist", "remove"})
      */
     private $mvp;
