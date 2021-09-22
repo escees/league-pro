@@ -24,8 +24,8 @@
                 <div class="row">
                     <div class="col-xl-9 col-md-12">
                         <ul class="nav nav-tabs" id="myTab">
-                           <li><a href="#extraclass" data-toggle="tab" class="active">Ekstraklasa</a></li>
-                           <li><a href="#first-league" data-toggle="tab">I liga</a></li>
+                           <li><a href="#extraclass" data-toggle="tab" class="active">Grupa A</a></li>
+                           <li><a href="#first-league" data-toggle="tab">Grupa B</a></li>
 {#                           <li><a href="#description" data-toggle="tab">DESCRIPTION</a></li>#}
                         </ul>
                         <div class="tab-content">
@@ -36,13 +36,14 @@
                                             <h5><a href="#">Skrócona tabela</a></h5>
                                             <div class="info-ranking">
                                                 <ul>
-                                                    {% for team in teamsExtraclass %}
+                                                    {% for team in teamsGroupA %}
+                                                        {% set team = team.team %}
                                                         <li>
                                                             <span class="position">
                                                                 {{ loop.index }}
                                                             </span>
                                                             <a href="{{ path('app.team.view', {'team': team.id}) }}">
-                                                                <img src="{{ team.team.crest.name ? asset('images/team/crest/' ~ team.team.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                                                <img src="{{ team.crest.name ? asset('images/team/crest/' ~ team.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                                 {{ team.name }}
                                                             </a>
                                                             <span class="points">
@@ -59,7 +60,7 @@
                                             <h5><a href="#">Ostatnie wyniki</a></h5>
                                             <div class="info-results">
                                                 <ul>
-                                                    {% for result in resultsExtraclass %}
+                                                    {% for result in resultsGroupA %}
                                                         <li>
                                                             <span class="head d-flex flex-column align-items-center">
                                                                 <small>{{ result.homeTeam.name }} vs. {{ result.awayTeam.name }}  </small>
@@ -96,7 +97,7 @@
                                             <h5><a href="#">Najlepsi strzelcy</a></h5>
                                             <div class="info-player">
                                                 <ul>
-                                                    {% for scorer in bestScorersExtraclass|slice(0,8) %}
+                                                    {% for scorer in bestScorersGroupA|slice(0,8) %}
                                                         <li>
                                                             <span class="position">
                                                               {{ loop.index }}
@@ -122,13 +123,14 @@
                                             <h5><a href="#">Skrócona tabela</a></h5>
                                             <div class="info-ranking">
                                                 <ul>
-                                                    {% for team in teamsFirstLeague %}
+                                                    {% for team in teamsGroupB %}
+                                                        {% set team = team.team %}
                                                         <li>
                                                             <span class="position">
                                                                 {{ loop.index }}
                                                             </span>
                                                             <a href="{{ path('app.team.view', {'team': team.id}) }}">
-                                                                <img src="{{ team.team.crest.name ? asset('images/team/crest/' ~ team.team.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                                                <img src="{{ team.crest.name ? asset('images/team/crest/' ~ team.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
                                                                 {{ team.name }}
                                                             </a>
                                                             <span class="points">
@@ -145,7 +147,7 @@
                                             <h5><a href="#">Ostatnie wyniki</a></h5>
                                             <div class="info-results">
                                                 <ul>
-                                                    {% for result in resultsFirstLeague %}
+                                                    {% for result in resultsGroupB %}
                                                         <li>
                                                             <span class="head d-flex flex-column align-items-center">
                                                                 <small>{{ result.homeTeam.name }} vs. {{ result.awayTeam.name }}  </small>
@@ -182,7 +184,7 @@
                                             <h5><a href="#">Najlepsi strzelcy</a></h5>
                                             <div class="info-player">
                                                 <ul>
-                                                    {% for scorer in bestScorersFirstLeague|slice(0,8) %}
+                                                    {% for scorer in bestScorersGroupB|slice(0,8) %}
                                                         <li>
                                                             <span class="position">
                                                               {{ loop.index }}
@@ -286,20 +288,19 @@
                         </div>
                         <ul class="list-diary">
                             {% for fixture in fixtures %}
-
-                            <li>
-                                <h6> {{ fixture.league_name }} <span>{{ fixture.match.startDate|date('d/m/Y H:i') }}</span></h6>
-                                <ul class="club-logo">
-                                    <li>
-                                        <img src="{{ fixture.match.homeTeam.crest.name ? asset('images/team/crest/' ~ fixture.match.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                        <span>{{ fixture.match.homeTeam.name }}</span>
-                                    </li>
-                                    <li>
-                                        <img src="{{ fixture.match.awayTeam.crest.name ? asset('images/team/crest/' ~ fixture.match.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                        <span>{{ fixture.match.awayTeam.name }}</span>
-                                    </li>
-                                </ul>
-                            </li>
+                                <li>
+                                    <h6> {{ fixture.league_name }} <span>{{ fixture.match.startDate|date('d/m/Y H:i') }}</span></h6>
+                                    <ul class="club-logo">
+                                        <li>
+                                            <img src="{{ fixture.match.homeTeam.crest.name ? asset('images/team/crest/' ~ fixture.match.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                            <span>{{ fixture.match.homeTeam.name }}</span>
+                                        </li>
+                                        <li>
+                                            <img src="{{ fixture.match.awayTeam.crest.name ? asset('images/team/crest/' ~ fixture.match.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
+                                            <span>{{ fixture.match.awayTeam.name }}</span>
+                                        </li>
+                                    </ul>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>

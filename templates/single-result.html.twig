@@ -73,49 +73,78 @@
 {#                <div class="col-lg-12">#}
 {#                    <div class="timeline-result">#}
 {#                        <div class="team-timeline">#}
-{#                            <img src="img/clubs-logos/colombia.png" alt="club-logo">#}
-{#                            <a href="single-team.html">Col</a>#}
+{#                            <img src="{{ match.homeTeam.crest.name ? asset('images/team/crest/' ~ match.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png')  }}" alt="club-logo">#}
+{#                            <a href="{{ path('app.team.view', {'team': match.homeTeam}) }}">{{ match.homeTeam.name }}</a>#}
 {#                        </div>#}
 {#                        <ul class="timeline">#}
-{#                          <li class="card-result bottom goal" style="left:10%" data-placement="top" data-trigger="hover" data-toggle="popover" title="Goal" data-content="10. James Rodriguez">#}
-{#                               10'#}
-{#                           </li>#}
+{#                            {% for goal in match.matchDetails.goals %}#}
+{#                                {% set topOrBottom = goal.scorer.team == match.homeTeam ? 'top' : 'bottom' %}#}
+{#                                <li class="card-result {{ topOrBottom }} goal" style="left:{{ goal.minute }}%" data-placement="{{ topOrBottom }}" data-trigger="hover" data-toggle="popover" title="Goal" data-content="{{ goal.scorer.name }}">#}
+{#	                                {{ goal.minute }}'#}
+{#                                </li>#}
+{#                            {% endfor %}#}
+{#                            {% for card in match.matchDetails.cards %}#}
+{#                                {% set topOrBottom =  card.player.team == match.homeTeam ? 'top' : 'bottom'  %}#}
+{#                                <li class="card-result {{ topOrBottom }} {{ card.color }}" style="left:{{ card.minute }}%" data-placement="{{ topOrBottom }}" data-trigger="hover" data-toggle="popover" title="Yellow card" data-content="{{ card.player.name }}">#}
+{#	                                {{ card.minute }}'#}
+{#                                </li>#}
+{#                            {% endfor %}#}
+                            {#            <div class="row">#}
+                            {#                <div class="col-lg-12">#}
+                            {#                    <div class="timeline-result">#}
+                            {#                        <div class="team-timeline">#}
+                            {#                            <img src="img/clubs-logos/colombia.png" alt="club-logo">#}
+                            {#                            <a href="single-team.html">Col</a>#}
+                            {#                        </div>#}
+                            {#                        <ul class="timeline">#}
+                            {#                          <li class="card-result bottom goal" style="left:10%" data-placement="top" data-trigger="hover" data-toggle="popover" title="Goal" data-content="10. James Rodriguez">#}
+                            {#                               10'#}
+                            {#                           </li>#}
 
-{#                           <li class="card-result top change" style="left:20%" data-placement="bottom" data-trigger="hover" data-toggle="popover" title="Player Change" data-content="10. James Rodriguez for 9. Falcao Garcia">#}
-{#                               20'#}
-{#                           </li>#}
+                            {#                           <li class="card-result top change" style="left:20%" data-placement="bottom" data-trigger="hover" data-toggle="popover" title="Player Change" data-content="10. James Rodriguez for 9. Falcao Garcia">#}
+                            {#                               20'#}
+                            {#                           </li>#}
 
-{#                           <li class="card-result top red" style="left:31%" data-placement="bottom" data-trigger="hover" data-toggle="popover" title="Yellow card" data-content="10. James Rodriguez">#}
-{#                               31'#}
-{#                           </li>#}
+                            {#                           <li class="card-result top red" style="left:31%" data-placement="bottom" data-trigger="hover" data-toggle="popover" title="Yellow card" data-content="10. James Rodriguez">#}
+                            {#                               31'#}
+                            {#                           </li>#}
 
-{#                           <li class="card-result top goal" style="left:40%" data-placement="bottom" data-trigger="hover" data-toggle="popover" title="Goal" data-content="10. James Rodriguez">#}
-{#                               40'#}
-{#                           </li>#}
+                            {#                           <li class="card-result top goal" style="left:40%" data-placement="bottom" data-trigger="hover" data-toggle="popover" title="Goal" data-content="10. James Rodriguez">#}
+                            {#                               40'#}
+                            {#                           </li>#}
 
-{#                           <li class="card-result top yellow" style="left:65%"  data-placement="bottom" data-trigger="hover" data-toggle="popover" title="Yellow card" data-content="10. James Rodriguez">#}
-{#                                65'#}
-{#                            </li>#}
+                            {#                           <li class="card-result top yellow" style="left:65%"  data-placement="bottom" data-trigger="hover" data-toggle="popover" title="Yellow card" data-content="10. James Rodriguez">#}
+                            {#                                65'#}
+                            {#                            </li>#}
 
-{#                            <li class="card-result bottom yellow" style="left:50%" data-placement="top" data-trigger="hover" data-toggle="popover" title="Yellow card" data-content="10. James Rodriguez">#}
-{#                                50'#}
-{#                            </li>#}
+                            {#                            <li class="card-result bottom yellow" style="left:50%" data-placement="top" data-trigger="hover" data-toggle="popover" title="Yellow card" data-content="10. James Rodriguez">#}
+                            {#                                50'#}
+                            {#                            </li>#}
 
-{#                            <li class="card-result top red" style="left:65%" data-placement="bottom" data-trigger="hover" data-toggle="popover" title="Yellow card" data-content="10. James Rodriguez">#}
-{#                                65'#}
-{#                            </li>#}
+                            {#                            <li class="card-result top red" style="left:65%" data-placement="bottom" data-trigger="hover" data-toggle="popover" title="Yellow card" data-content="10. James Rodriguez">#}
+                            {#                                65'#}
+                            {#                            </li>#}
 
-{#                            <li class="card-result bottom yellow" style="left:80%" data-placement="top" data-trigger="hover" data-toggle="popover" title="Yellow card" data-content="10. James Rodriguez">#}
-{#                                80'#}
-{#                            </li>#}
+                            {#                            <li class="card-result bottom yellow" style="left:80%" data-placement="top" data-trigger="hover" data-toggle="popover" title="Yellow card" data-content="10. James Rodriguez">#}
+                            {#                                80'#}
+                            {#                            </li>#}
 
-{#                            <li class="card-result top goal" style="left:90%" data-placement="bottom" data-trigger="hover" data-toggle="popover" title="Goal" data-content="10. James Rodriguez">#}
-{#                               90'#}
-{#                           </li>#}
+                            {#                            <li class="card-result top goal" style="left:90%" data-placement="bottom" data-trigger="hover" data-toggle="popover" title="Goal" data-content="10. James Rodriguez">#}
+                            {#                               90'#}
+                            {#                           </li>#}
+                            {#                        </ul>#}
+                            {#                        <div class="team-timeline">#}
+                            {#                            <img src="img/clubs-logos/arg.png" alt="club-logo">#}
+                            {#                            <a href="single-team.html">Arg</a>#}
+                            {#                        </div>#}
+                            {#                    </div>#}
+                            {#                </div>#}
+                            {#            </div>#}
+
 {#                        </ul>#}
 {#                        <div class="team-timeline">#}
-{#                            <img src="img/clubs-logos/arg.png" alt="club-logo">#}
-{#                            <a href="single-team.html">Arg</a>#}
+{#                            <img src="{{ match.awayTeam.crest.name ? asset('images/team/crest/' ~ match.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png')  }}" alt="club-logo">#}
+{#                            <a href="{{ path('app.team.view', {'team': match.awayTeam}) }}">{{ match.awayTeam.name }}</a>#}
 {#                        </div>#}
 {#                    </div>#}
 {#                </div>#}

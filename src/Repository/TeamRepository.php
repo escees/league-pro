@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\League;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -65,19 +66,8 @@ class TeamRepository extends ServiceEntityRepository
     public function getTeamStandings(string $leagueName, int $maxResults = null): array
     {
         $qb = $this->createQueryBuilder('t')
-            ->select('t.points')
-            ->addSelect('t as team')
-            ->addSelect('t.id')
-            ->addSelect('t.name')
-            ->addSelect('t.wins')
-            ->addSelect('t.draws')
-            ->addSelect('t.loses')
-            ->addSelect('t.goalsScored')
-            ->addSelect('t.goalsConceded')
-            ->addSelect('t.goalsScored - t.goalsConceded as goals_diff')
-            ->addSelect('t.wins + t.loses + t.draws as played')
-            ->addSelect('ts as season')
-            ->addSelect('tsl.name as league_name')
+            ->select('t as team')
+            ->addSelect('(t.goalsScored - t.goalsConceded) as goals_diff')
             ->leftJoin('t.season', 'ts')
             ->leftJoin('ts.league', 'tsl')
             ->orderBy('t.points', 'DESC')
@@ -98,19 +88,8 @@ class TeamRepository extends ServiceEntityRepository
     public function getTeamStandingsForLeague(League $league, int $maxResults = null): array
     {
         $qb = $this->createQueryBuilder('t')
-            ->select('t.points')
-            ->addSelect('t as team')
-            ->addSelect('t.id')
-            ->addSelect('t.name')
-            ->addSelect('t.wins')
-            ->addSelect('t.draws')
-            ->addSelect('t.loses')
-            ->addSelect('t.goalsScored')
-            ->addSelect('t.goalsConceded')
-            ->addSelect('t.goalsScored - t.goalsConceded as goals_diff')
-            ->addSelect('t.wins + t.loses + t.draws as played')
-            ->addSelect('ts as season')
-            ->addSelect('tsl.name as league_name')
+            ->select('t as team')
+            ->addSelect('(t.goalsScored - t.goalsConceded) as goals_diff')
             ->leftJoin('t.season', 'ts')
             ->leftJoin('ts.league', 'tsl')
             ->orderBy('t.points', 'DESC')

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContext;
@@ -66,6 +68,28 @@ class FootballMatch
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $arena;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="matchesWon")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $winner;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="matchesLost")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $loser;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Team", inversedBy="matchesTied")
+     */
+    private $drawers;
+
+    public function __construct()
+    {
+        $this->drawers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -194,6 +218,56 @@ class FootballMatch
     public function setArena(?string $arena): self
     {
         $this->arena = $arena;
+
+        return $this;
+    }
+
+    public function getWinner(): ?Team
+    {
+        return $this->winner;
+    }
+
+    public function setWinner(?Team $winner): self
+    {
+        $this->winner = $winner;
+
+        return $this;
+    }
+
+    public function getLoser(): ?Team
+    {
+        return $this->loser;
+    }
+
+    public function setLoser(?Team $loser): self
+    {
+        $this->loser = $loser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Team[]
+     */
+    public function getDrawers(): Collection
+    {
+        return $this->drawers;
+    }
+
+    public function addDrawer(Team $drawer): self
+    {
+        if (!$this->drawers->contains($drawer)) {
+            $this->drawers[] = $drawer;
+        }
+
+        return $this;
+    }
+
+    public function removeDrawer(Team $drawer): self
+    {
+        if ($this->drawers->contains($drawer)) {
+            $this->drawers->removeElement($drawer);
+        }
 
         return $this;
     }

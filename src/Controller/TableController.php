@@ -23,7 +23,7 @@ class TableController extends AbstractController
         return $this->render(
             'table-point.html.twig',
             [
-                'teams' => $teamRepository->getTeamStandingsForLeague($league),
+                'teams' => $teamRepository->getTeamStandingsForLeague($league), //@todo serwis ktory ma dwie strategie dla dwóch druzyn i wiecej ilosci druzyn, punkty mnozone razy 1000 i przy sprawdzeniu wyniku dodanie jakichś małych punktów które zmienią kolejność na poprawną wg meczy bezposrednich
                 'leagues'=> $leagueRepository->findAll()
             ]
         );
