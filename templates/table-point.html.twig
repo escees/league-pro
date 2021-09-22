@@ -22,16 +22,17 @@
 
                         <tbody class="text-center">
                             {% for team in teams %}
+                                {% set team = team.team %}
                                 <tr>
                                     <td>{{ loop.index }}</td>
-                                    <td><img src="{{ team.team.crest.name ? asset('images/team/crest/' ~ team.team.crest.name) : asset('build/img/clubs-logos/pol.png') }}"> {{ team.name }}</td>
-                                    <td>{{ team.played }}</td>
-                                    <td>{{ team.wins }}</td>
-                                    <td>{{ team.draws }}</td>
-                                    <td>{{ team.loses }}</td>
+                                    <td><img src="{{ team.crest.name ? asset('images/team/crest/' ~ team.crest.name) : asset('build/img/clubs-logos/pol.png') }}"> {{ team.name }}</td>
+                                    <td>{{ team.playedMatches }}</td>
+                                    <td>{{ team.matchesWon|length }}</td>
+                                    <td>{{ team.matchesTied|length }}</td>
+                                    <td>{{ team.matchesLost|length }}</td>
                                     <td>{{ team.goalsScored }}</td>
                                     <td>{{ team.goalsConceded }}</td>
-                                    <td>{{ team.goals_diff }}</td>
+                                    <td>{{ team.goalsDiff }}</td>
                                     <td><strong>{{ team.points }}</strong></td>
                                 </tr>
                             {% endfor %}

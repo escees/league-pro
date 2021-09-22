@@ -109,13 +109,11 @@ class AdminMatchController extends AbstractController
             $this->entityManager->persist($match);
             $this->entityManager->flush();
 
-            if (!$match->hasCompleteStats()) {
-                $this->eventDispatcher->dispatch(
-                    new MatchResultAddedEvent($match),
-                    LeagueProEvents::MATCH_RESULT_ADDED
+            $this->eventDispatcher->dispatch(
+                new MatchResultAddedEvent($match),
+                LeagueProEvents::MATCH_RESULT_ADDED
 
-                );
-            }
+            );
 
             $this->addFlash(FlashType::SUCCESS, 'Zapisano wynik i szczegóły meczu');
 

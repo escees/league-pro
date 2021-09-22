@@ -19,32 +19,20 @@ class SeasonRepository extends ServiceEntityRepository
         parent::__construct($registry, Season::class);
     }
 
-    // /**
-    //  * @return Season[] Returns an array of Season objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getStandings(string $leagueName)
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+            ->leftJoin('s.matchDays', 'sm')
+            ->leftJoin('sm.matches', 'smm')
+            ->leftJoin('smm.homeTeam', 'smmt')
+            ->leftJoin('s.league', 'sl')
+            ->orderBy('smmt.points', 'DESC')
+            ->addOrderBy('smmt.goalsScored', 'DESC')
+            ->andWhere('sl.name = :leagueName')
+            ->andWhere('s.active = true')
+            ->setParameter('leagueName', $leagueName)
             ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+            ->execute();
 
-    /*
-    public function findOneBySomeField($value): ?Season
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
     }
-    */
 }

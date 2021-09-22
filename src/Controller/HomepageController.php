@@ -6,6 +6,7 @@ use App\Repository\FootballMatchRepository;
 use App\Repository\GoalRepository;
 use App\Repository\LeagueRepository;
 use App\Repository\NewsRepository;
+use App\Repository\SeasonRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +21,8 @@ class HomepageController extends AbstractController
         FootballMatchRepository $footballMatchRepository,
         GoalRepository $goalRepository,
         NewsRepository $newsRepository,
-        LeagueRepository $leagueRepository
+        LeagueRepository $leagueRepository,
+        SeasonRepository $seasonRepository
     ) {
         $news = $newsRepository->findPublishedNews(5);
 
@@ -28,12 +30,12 @@ class HomepageController extends AbstractController
             'index.html.twig',
             [
                 'leagues' => $leagueRepository->findAll(),
-                'teamsExtraclass' => $teamRepository->getTeamStandings('Ekstraklasa', 8), //@todo refactor
-                'teamsFirstLeague' => $teamRepository->getTeamStandings('I liga',8),
-                'resultsExtraclass' => $footballMatchRepository->getLastThreeMatchesForLeague('Ekstraklasa'),
-                'resultsFirstLeague' => $footballMatchRepository->getLastThreeMatchesForLeague('I liga'),
-                'bestScorersExtraclass' => $goalRepository->getBestScorersForLeague('Ekstraklasa'),
-                'bestScorersFirstLeague' => $goalRepository->getBestScorersForLeague('I liga'),
+                'teamsGroupA' => $teamRepository->getTeamStandings('Grupa A', 8), //@todo refactor
+                'teamsGroupB' => $teamRepository->getTeamStandings('Grupa B',8),
+                'resultsGroupA' => $footballMatchRepository->getLastThreeMatchesForLeague('Grupa A'),
+                'resultsGroupB' => $footballMatchRepository->getLastThreeMatchesForLeague('Grupa B'),
+                'bestScorersGroupA' => $goalRepository->getBestScorersForLeague('Grupa A'),
+                'bestScorersGroupB' => $goalRepository->getBestScorersForLeague('Grupa B'),
                 'nextMatch' => $footballMatchRepository->getNextMatch(),
                 'fixtures' => $footballMatchRepository->getNumberOfFixturesOrderedByStartDateAscending(5),
                 'news' => $news,

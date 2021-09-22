@@ -5,7 +5,7 @@
                 <a href="{{ path('app.homepage') }}"><img src="{{ asset('build/img/czliga_logo.png')}}" alt="league-logo" style="width: 75px; height: 24px; padding: 0"></a>
 {#                <a href="{{ path('app.homepage') }}">Strona główna</a>#}
             </li>
-            {%  for league in leagues %}
+            {%  for league in leagues|filter(league => league.hasTeams) %}
                 <li class="current">
                     <a href="#"><i class="fa fa-trophy" aria-hidden="true"></i> {{ league.name }}</a>
                     <ul class="sub-current ">

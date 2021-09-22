@@ -4,16 +4,19 @@ namespace App\EventListener;
 
 use App\Event\LeagueProEvents;
 use App\Event\MatchResultAddedEvent;
+use App\Service\GoalsCounter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MatchResultEventListener implements EventSubscriberInterface
 {
     private $entityManager;
+    private $goalsUpdater;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, GoalsCounter $goalsUpdater)
     {
         $this->entityManager = $entityManager;
+        $this->goalsUpdater = $goalsUpdater;
     }
 
     /**
@@ -37,30 +40,31 @@ class MatchResultEventListener implements EventSubscriberInterface
         $awayTeamGoals = $matchDetails->getAwayTeamGoals();
         $homeTeamGoals = $matchDetails->getHomeTeamGoals();
 
-        $homeTeam->addGoalsScored($homeTeamGoals);
-        $homeTeam->addGoalsConceded($awayTeamGoals);
-        $awayTeam->addGoalsScored($awayTeamGoals);
-        $awayTeam->addGoalsConceded($homeTeamGoals);
-
         if ($homeTeamGoals > $awayTeamGoals) {
-            $homeTeam->addWin();
-            $awayTeam->addLose();
+            $match->setWinner($homeTeam);
+            $match->setLoser($awayTeam);
         }
 
         if ($homeTeamGoals < $awayTeamGoals) {
-            $awayTeam->addWin();
-            $homeTeam->addLose();
+            $match->setWinner($awayTeam);
+            $match->setLoser($homeTeam);
         }
 
         if ($homeTeamGoals === $awayTeamGoals) {
-            $homeTeam->addDraw();
-            $awayTeam->addDraw();
+            $match->addDrawer($homeTeam);
+            $match->addDrawer($awayTeam);
         }
 
-        $match->setCompleteStats(true);
 
         $this->entityManager->persist($homeTeam);
         $this->entityManager->persist($awayTeam);
+        $this->entityManager->persist($match);
+
+        $homeTeam->setGoalsScored($this->goalsUpdater->countGoalsScored($homeTeam));
+        $awayTeam->setGoalsScored($this->goalsUpdater->countGoalsScored($awayTeam));
+        $homeTeam->setGoalsConceded($this->goalsUpdater->countGoalsConceded($homeTeam));
+        $awayTeam->setGoalsConceded($this->goalsUpdater->countGoalsConceded($awayTeam));
+
         $this->entityManager->flush();
     }
 }

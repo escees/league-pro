@@ -80,4 +80,15 @@ class League
 
         return $this;
     }
+
+    public function hasTeams(): bool
+    {
+        foreach ($this->getSeasons() as $season) {
+            if ($season->getTeams()->count() > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

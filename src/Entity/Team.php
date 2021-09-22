@@ -16,6 +16,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass="App\Repository\TeamRepository")
  * @UniqueEntity("name", message="Taka nazwa drużyny jest już zajęta.")
  * @Vich\Uploadable
+ * @ORM\HasLifecycleCallbacks()
  */
 class Team
 {
@@ -36,26 +37,6 @@ class Team
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $wins = 0;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $winsAfterPenalties = 0;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $draws = 0;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $loses = 0;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -134,11 +115,6 @@ class Team
     private $goalsConceded = 0;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $losesAfterPenalties = 0;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Season", inversedBy="teams")
      */
     private $season;
@@ -150,6 +126,21 @@ class Team
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FootballMatch", mappedBy="winner")
+     */
+    private $matchesWon;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FootballMatch", mappedBy="loser")
+     */
+    private $matchesLost;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\FootballMatch", mappedBy="drawers")
+     */
+    private $matchesTied;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
@@ -157,6 +148,9 @@ class Team
         $this->awayFootballMatch = new ArrayCollection();
         $this->crest = new EmbeddedFile();
         $this->photo = new EmbeddedFile();
+        $this->matchesWon = new ArrayCollection();
+        $this->matchesLost = new ArrayCollection();
+        $this->matchesTied = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -203,54 +197,6 @@ class Team
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getWins(): ?int
-    {
-        return $this->wins;
-    }
-
-    public function setWins(?int $wins): self
-    {
-        $this->wins = $wins;
-
-        return $this;
-    }
-
-    public function getWinsAfterPenalties(): ?int
-    {
-        return $this->winsAfterPenalties;
-    }
-
-    public function setWinsAfterPenalties(?int $winsAfterPenalties): self
-    {
-        $this->winsAfterPenalties = $winsAfterPenalties;
-
-        return $this;
-    }
-
-    public function getDraws(): ?int
-    {
-        return $this->draws;
-    }
-
-    public function setDraws(?int $draws): self
-    {
-        $this->draws = $draws;
-
-        return $this;
-    }
-
-    public function getLoses(): ?int
-    {
-        return $this->loses;
-    }
-
-    public function setLoses(?int $loses): self
-    {
-        $this->loses = $loses;
 
         return $this;
     }
@@ -392,23 +338,6 @@ class Team
         return $this;
     }
 
-    public function getPoints(): ?int
-    {
-        return $this->points;
-    }
-
-    public function addPoints(int $pointsToAdd)
-    {
-        $this->points += $pointsToAdd;
-    }
-
-    public function setPoints(?int $points): self
-    {
-        $this->points = $points;
-
-        return $this;
-    }
-
     public function getGoalsScored(): ?int
     {
         return $this->goalsScored;
@@ -444,41 +373,6 @@ class Team
         return $this;
     }
 
-    public function addWin()
-    {
-        $this->wins++;
-        $this->addPoints(3);
-    }
-
-    public function addWinAfterPenalties()
-    {
-        $this->winsAfterPenalties++;
-        $this->addPoints(2);
-    }
-
-    public function addLose()
-    {
-        $this->loses++;
-    }
-
-    public function addLoseAfterPenalties()
-    {
-        $this->losesAfterPenalties++;
-        $this->addPoints(1);
-    }
-
-    public function getLosesAfterPenalties(): ?int
-    {
-        return $this->losesAfterPenalties;
-    }
-
-    public function setLosesAfterPenalties(?int $losesAfterPenalties): self
-    {
-        $this->losesAfterPenalties = $losesAfterPenalties;
-
-        return $this;
-    }
-
     public function getSeason(): ?Season
     {
         return $this->season;
@@ -496,9 +390,119 @@ class Team
         return $this->getAwayFootballMatch()->isEmpty() && $this->getHomeFootballMatch()->isEmpty();
     }
 
-    public function addDraw(): void
+    public function goalsDiff(): int
     {
-        $this->draws++;
-        $this->addPoints(1);
+        return $this->goalsScored - $this->goalsConceded;
+    }
+
+    /**
+     * @return Collection|FootballMatch[]
+     */
+    public function getMatchesWon(): Collection
+    {
+        return $this->matchesWon;
+    }
+
+    public function addMatchesWon(FootballMatch $matchesWon): self
+    {
+        if (!$this->matchesWon->contains($matchesWon)) {
+            $this->matchesWon[] = $matchesWon;
+            $matchesWon->setWinner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatchesWon(FootballMatch $matchesWon): self
+    {
+        if ($this->matchesWon->contains($matchesWon)) {
+            $this->matchesWon->removeElement($matchesWon);
+            // set the owning side to null (unless already changed)
+            if ($matchesWon->getWinner() === $this) {
+                $matchesWon->setWinner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FootballMatch[]
+     */
+    public function getMatchesLost(): Collection
+    {
+        return $this->matchesLost;
+    }
+
+    public function addMatchesLost(FootballMatch $matchesLost): self
+    {
+        if (!$this->matchesLost->contains($matchesLost)) {
+            $this->matchesLost[] = $matchesLost;
+            $matchesLost->setLoser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatchesLost(FootballMatch $matchesLost): self
+    {
+        if ($this->matchesLost->contains($matchesLost)) {
+            $this->matchesLost->removeElement($matchesLost);
+            // set the owning side to null (unless already changed)
+            if ($matchesLost->getLoser() === $this) {
+                $matchesLost->setLoser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FootballMatch[]
+     */
+    public function getMatchesTied(): Collection
+    {
+        return $this->matchesTied;
+    }
+
+    public function addMatchesTied(FootballMatch $matchesTied): self
+    {
+        if (!$this->matchesTied->contains($matchesTied)) {
+            $this->matchesTied[] = $matchesTied;
+            $matchesTied->addDrawer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatchesTied(FootballMatch $matchesTied): self
+    {
+        if ($this->matchesTied->contains($matchesTied)) {
+            $this->matchesTied->removeElement($matchesTied);
+            $matchesTied->removeDrawer($this);
+        }
+
+        return $this;
+    }
+
+    public function getPoints(): int
+    {
+        $winsPoints = $this->matchesWon->count() * 3;
+        $tiePoints = $this->matchesTied->count();
+
+        return $winsPoints + $tiePoints;
+    }
+
+    /**
+     * @ORM\PreFlush()
+     */
+    public function updatePoints(): void
+    {
+        $this->points = $this->getPoints();
+    }
+
+    public function playedMatches(): int
+    {
+        return $this->matchesTied->count() + $this->matchesWon->count() + $this->matchesLost->count();
     }
 }
