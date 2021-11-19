@@ -106,4 +106,30 @@ class TeamRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->execute();
     }
+
+    public function getTeamStandingsForLeagueAndDate(League $league, \DateTime $startDate, int $maxResults = null): array
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->select('t as team')
+            ->addSelect('(t.goalsScored - t.goalsConceded) as goals_diff')
+            ->leftJoin('t.homeFootballMatch', 'thm')
+            ->leftJoin('t.awayFootballMatch', 'tam')
+            ->leftJoin('t.season', 'ts')
+            ->leftJoin('ts.league', 'tsl')
+            ->orderBy('t.points', 'DESC')
+            ->addOrderBy('goals_diff', 'DESC')
+            ->addOrderBy('t.goalsScored', 'DESC')
+            ->where('t.season IS NOT NULL')
+            ->andWhere('thm.startDate > :startDate OR tam.startDate > :startDate')
+            ->andWhere('tsl = :league')
+            ->setParameter('league', $league)
+            ->setParameter('startDate', $startDate)
+        ;
+
+        if ($maxResults) {
+            $qb->setMaxResults($maxResults);
+        }
+
+        return $qb->getQuery()->execute();
+    }
 }

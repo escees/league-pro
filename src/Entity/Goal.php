@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -20,6 +21,8 @@ class Goal
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Player", inversedBy="goals")
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @Groups({"standings"})
      */
     private $scorer;
 
@@ -28,6 +31,8 @@ class Goal
      * @Assert\GreaterThan(value="0", message="Minuta musi być większa od zera")
      *
      * @ORM\Column(type="integer")
+     *
+     * @Groups({"standings"})
      */
     private $minute;
 
@@ -39,6 +44,8 @@ class Goal
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Player", inversedBy="assists")
+     *
+     * @Groups({"standings"})
      */
     private $assistant;
 

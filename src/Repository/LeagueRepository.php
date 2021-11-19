@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\League;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,45 +20,10 @@ class LeagueRepository extends ServiceEntityRepository
         parent::__construct($registry, League::class);
     }
 
-    public function findAllGroupByName()
+    public function getLeaguesToChooseForPlayoffs(League $league): QueryBuilder
     {
         return $this->createQueryBuilder('l')
-//            ->select('l.name')
-//            ->addSelect('l.seasons as seasons')
-//            ->addSelect('ls.teams as teams')
-            ->leftJoin('l.seasons', 'ls')
-            ->leftJoin('ls.teams', 'lst')
-//            ->groupBy('l.seasons')
-            ->getQuery()
-            ->getResult();
+            ->where('l.id != :id')
+            ->setParameter('id', $league->getId());
     }
-
-    // /**
-    //  * @return League[] Returns an array of League objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?League
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
