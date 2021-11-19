@@ -20,7 +20,7 @@ class GoalRepository extends ServiceEntityRepository
         parent::__construct($registry, Goal::class);
     }
 
-    public function getBestScorers()
+    public function getBestScorersForTeams(array $teams)
     {
         $qb = $this->createQueryBuilder('g')
             ->select('COUNT(g.id) as goals')
@@ -29,6 +29,8 @@ class GoalRepository extends ServiceEntityRepository
             ->addSelect('t.id as team_id')
             ->leftJoin('g.scorer', 's')
             ->leftJoin('s.team', 't')
+            ->where('t IN (:teams)')
+            ->setParameter('teams', $teams)
             ->groupBy('s.name, t.name, t.id')
             ->orderBy('goals', 'DESC');
 
@@ -73,7 +75,7 @@ class GoalRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getBestAssistants()
+    public function getBestAssistantsForTeams(array $teams)
     {
         return $this->createQueryBuilder('g')
             ->select('COUNT(g.id) as assists')
@@ -83,6 +85,8 @@ class GoalRepository extends ServiceEntityRepository
             ->leftJoin('g.assistant', 'a')
             ->leftJoin('a.team', 't')
             ->where('g.assistant IS NOT NULL')
+            ->andWhere('t IN (:teams)')
+            ->setParameter('teams', $teams)
             ->groupBy('a.name, t.name, t.id')
             ->orderBy('assists', 'DESC')
             ->getQuery()

@@ -12,7 +12,7 @@
                             <div class="col">
                                 {{ league.name }}
                             </div>
-                            <div class="btn-group col col-md col-lg-2">
+                            <div class="btn-group col col-md col-lg-3">
                                 <a class="btn btn-info btn-sm news-item"
                                    href="{{ path('app.admin.league.edit', {'league': league.id}) }}"
                                    data-toggle="tooltip"
@@ -29,6 +29,15 @@
                                 >
                                     <i class="fas fa-trash"></i>
                                 </a>
+                                <a class="btn btn-warning btn-sm"
+                                   href="{{ path('app.admin.league.finish', {'league': league.id}) }}"
+                                   data-toggle="tooltip"
+                                   data-placement="right"
+                                   title="Zakończ ligę"
+                                >
+                                    <i class="fa fa-ban" aria-hidden="true"></i>
+                                </a>
+
                             </div>
                         </div>
                     </li>

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -27,6 +28,8 @@ class Player
     /**
      * @Assert\NotNull(message="Proszę podać imię i nazwisko zawodnika.")
      * @ORM\Column(type="string", length=255, nullable=false)
+     *
+     * @Groups({"standings"})
      */
     private $name;
 

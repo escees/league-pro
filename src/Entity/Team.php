@@ -5,8 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
+use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Serializer\SerializerAwareTrait;
+use Symfony\Component\Serializer\Tests\Normalizer\Features\CircularReferenceTestTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Entity\File as EmbeddedFile;
@@ -35,6 +41,8 @@ class Team
     /**
      * @Assert\NotNull(message="Proszę podać nazwę drużyny.")
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"standings"})
      */
     private $name;
 
@@ -56,6 +64,7 @@ class Team
      * )
      *
      * @var File
+     * @Groups({"standings"})
      */
     private $crestFile;
 
@@ -63,6 +72,7 @@ class Team
      * @ORM\Embedded(class="Vich\UploaderBundle\Entity\File")
      *
      * @var EmbeddedFile
+     * @Groups({"standings"})
      */
     private $crest;
 
@@ -101,16 +111,22 @@ class Team
 
     /**
      * @ORM\Column(type="integer", nullable=false)
+     *
+     * @Groups({"standings"})
      */
     private $points = 0;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
+     *
+     * @Groups({"standings"})
      */
     private $goalsScored = 0;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
+     *
+     * @Groups({"standings"})
      */
     private $goalsConceded = 0;
 
@@ -390,7 +406,10 @@ class Team
         return $this->getAwayFootballMatch()->isEmpty() && $this->getHomeFootballMatch()->isEmpty();
     }
 
-    public function goalsDiff(): int
+    /**
+     * @Groups({"standings"})
+     */
+    public function getGoalsDiff(): int
     {
         return $this->goalsScored - $this->goalsConceded;
     }
@@ -401,6 +420,14 @@ class Team
     public function getMatchesWon(): Collection
     {
         return $this->matchesWon;
+    }
+
+    /**
+     * @Groups({"standings"})
+     */
+    public function getMatchesWonCount(): int
+    {
+        return $this->matchesWon->count();
     }
 
     public function addMatchesWon(FootballMatch $matchesWon): self
@@ -434,6 +461,14 @@ class Team
         return $this->matchesLost;
     }
 
+    /**
+     * @Groups({"standings"})
+     */
+    public function getMatchesLostCount(): int
+    {
+        return $this->matchesLost->count();
+    }
+
     public function addMatchesLost(FootballMatch $matchesLost): self
     {
         if (!$this->matchesLost->contains($matchesLost)) {
@@ -465,6 +500,14 @@ class Team
         return $this->matchesTied;
     }
 
+    /**
+     * @Groups({"standings"})
+     */
+    public function getMatchesTiedCount(): int
+    {
+        return $this->matchesTied->count();
+    }
+
     public function addMatchesTied(FootballMatch $matchesTied): self
     {
         if (!$this->matchesTied->contains($matchesTied)) {
@@ -493,6 +536,11 @@ class Team
         return $winsPoints + $tiePoints;
     }
 
+    public function setPoints(int $points): void
+    {
+        $this->points = $points;
+    }
+
     /**
      * @ORM\PreFlush()
      */
@@ -501,7 +549,7 @@ class Team
         $this->points = $this->getPoints();
     }
 
-    public function playedMatches(): int
+    public function getPlayedMatches(): int
     {
         return $this->matchesTied->count() + $this->matchesWon->count() + $this->matchesLost->count();
     }

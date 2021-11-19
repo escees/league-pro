@@ -55,10 +55,11 @@ class MatchResultEventListener implements EventSubscriberInterface
             $match->addDrawer($awayTeam);
         }
 
-
         $this->entityManager->persist($homeTeam);
         $this->entityManager->persist($awayTeam);
         $this->entityManager->persist($match);
+
+        $this->entityManager->flush();
 
         $homeTeam->setGoalsScored($this->goalsUpdater->countGoalsScored($homeTeam));
         $awayTeam->setGoalsScored($this->goalsUpdater->countGoalsScored($awayTeam));

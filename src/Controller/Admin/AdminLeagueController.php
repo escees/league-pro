@@ -13,6 +13,7 @@ use App\Repository\LeagueRepository;
 use App\Repository\NewsRepository;
 use App\Repository\PlayerRepository;
 use App\Repository\TeamRepository;
+use App\Service\LeagueStateSaver;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -104,6 +105,30 @@ class AdminLeagueController extends AbstractController
         $this->entityManager->flush();
 
         $this->addFlash(FlashType::DANGER, 'Liga została usunięta!');
+
+        return $this->redirectToRoute('app.admin.league.dashboard');
+    }
+
+    /**
+     * @Route(
+     *     "/{league}/finish",
+     *     name="app.admin.league.finish",
+     * )
+     */
+    public function finish(Request $request, League $league, LeagueStateSaver $leagueStateSaver): Response
+    {
+        if (!$league->isFinished()) {
+            $leagueStateSaver->saveStandings($league);
+            $league->setIsFinished(true);
+        } else {
+            $league->setIsFinished(false);
+            $league->setMainRoundStandings(null);
+        }
+
+        $this->entityManager->persist($league);
+        $this->entityManager->flush();
+
+        $this->addFlash(FlashType::WARNING, sprintf('Liga została %s', $league->isFinished() ? 'zakończona!' : 'wznowiona!'));
 
         return $this->redirectToRoute('app.admin.league.dashboard');
     }

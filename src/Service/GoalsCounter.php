@@ -11,55 +11,85 @@ class GoalsCounter
 {
     public function countGoalsScored(Team $team): int
     {
-        $goalsFromWon = array_sum($team->getMatchesWon()->map(function (FootballMatch $match) use ($team) {
-            $matchDetails = $match->getMatchDetails();
-            if ($team === $match->getHomeTeam()) {
-                return $matchDetails->getHomeTeamGoals();
-            }
+        $goalsFromWon = $this->countGoalsScoredFromWonGames($team);
 
-            return $matchDetails->getAwayTeamGoals();
-        })->toArray());
+        $goalsFromTies = $this->countGoalsFromTies($team);
 
-        $goalsFromTies = array_sum($team->getMatchesTied()->map(function (FootballMatch $match) {
-            return $match->getMatchDetails()->getHomeTeamGoals(); // @todo no matter which team goals we will choose
-        })->toArray());
-
-        $goalsFromLost = array_sum($team->getMatchesLost()->map(function (FootballMatch $match) use ($team) {
-            $matchDetails = $match->getMatchDetails();
-            if ($team === $match->getHomeTeam()) {
-                return $matchDetails->getHomeTeamGoals();
-            }
-
-            return $matchDetails->getAwayTeamGoals();
-        })->toArray());
+        $goalsFromLost = $this->countGoalsFromLostGames($team);
 
         return $goalsFromLost + $goalsFromTies + $goalsFromWon;
     }
 
     public function countGoalsConceded(Team $team): int
     {
-        $goalsFromWon = array_sum($team->getMatchesWon()->map(function (FootballMatch $match) use ($team) {
-            $matchDetails = $match->getMatchDetails();
-            if ($team === $match->getHomeTeam()) {
-                return $matchDetails->getAwayTeamGoals();
-            }
+        $goalsFromWon = $this->countGoalsConcededFromWonGames($team);
 
-            return $matchDetails->getHomeTeamGoals();
-        })->toArray());
+        $goalsFromTies = $this->countGoalsConcededFromTies($team);
 
-        $goalsFromTies = array_sum($team->getMatchesTied()->map(function (FootballMatch $match) {
-            return $match->getMatchDetails()->getHomeTeamGoals(); // @todo no matter which team goals we will choose
-        })->toArray());
-
-        $goalsFromLost = array_sum($team->getMatchesLost()->map(function (FootballMatch $match) use ($team) {
-            $matchDetails = $match->getMatchDetails();
-            if ($team === $match->getHomeTeam()) {
-                return $matchDetails->getAwayTeamGoals();
-            }
-
-            return $matchDetails->getHomeTeamGoals();
-        })->toArray());
+        $goalsFromLost = $this->countGoalsConcededFromLostGames($team);
 
         return $goalsFromLost + $goalsFromTies + $goalsFromWon;
+    }
+
+    private function countGoalsScoredFromWonGames(Team $team): int
+    {
+        return array_sum($team->getMatchesWon()->map(function (FootballMatch $match) use ($team) {
+            $matchDetails = $match->getMatchDetails();
+            if ($team === $match->getHomeTeam()) {
+                return $matchDetails->getHomeTeamGoals();
+            }
+
+            return $matchDetails->getAwayTeamGoals();
+        })->toArray());
+    }
+
+    private function countGoalsFromTies(Team $team): int
+    {
+        return array_sum($team->getMatchesTied()->map(function (FootballMatch $match) {
+            return $match->getMatchDetails()->getHomeTeamGoals(); // @todo no matter which team goals we will choose
+        })->toArray());
+    }
+
+    private function countGoalsFromLostGames(Team $team): int
+    {
+        return array_sum($team->getMatchesLost()->map(function (FootballMatch $match) use ($team) {
+            $matchDetails = $match->getMatchDetails();
+            if ($team === $match->getHomeTeam()) {
+                return $matchDetails->getHomeTeamGoals();
+            }
+
+            return $matchDetails->getAwayTeamGoals();
+        })->toArray());
+    }
+
+    private function countGoalsConcededFromWonGames(Team $team): int
+    {
+        return array_sum($team->getMatchesWon()->map(function (FootballMatch $match) use ($team) {
+            $matchDetails = $match->getMatchDetails();
+            if ($team === $match->getHomeTeam()) {
+                return $matchDetails->getAwayTeamGoals();
+            }
+
+            return $matchDetails->getHomeTeamGoals();
+        })->toArray());
+    }
+
+    private function countGoalsConcededFromTies(Team $team): int
+    {
+        return array_sum($team->getMatchesTied()->map(function (FootballMatch $match) {
+            return $match->getMatchDetails()->getHomeTeamGoals(); // @todo no matter which team goals we will choose
+        })->toArray());
+    }
+
+    private function countGoalsConcededFromLostGames(Team $team): int
+    {
+        return array_sum($team->getMatchesLost()->map(function (FootballMatch $match) use ($team) {
+            $matchDetails = $match->getMatchDetails();
+            if ($team === $match->getHomeTeam()) {
+                return $matchDetails->getAwayTeamGoals();
+            }
+
+            return $matchDetails->getHomeTeamGoals();
+        })->toArray());
     }
 }

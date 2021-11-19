@@ -25,11 +25,11 @@
                                 {% set team = team.team %}
                                 <tr>
                                     <td>{{ loop.index }}</td>
-                                    <td><img src="{{ team.crest.name ? asset('images/team/crest/' ~ team.crest.name) : asset('build/img/clubs-logos/pol.png') }}"> {{ team.name }}</td>
+                                    <td><img src="{{ team.crest.name is defined and team.crest.name ? asset('images/team/crest/' ~ team.crest.name) : asset('build/img/clubs-logos/pol.png') }}"> {{ team.name }}</td>
                                     <td>{{ team.playedMatches }}</td>
-                                    <td>{{ team.matchesWon|length }}</td>
-                                    <td>{{ team.matchesTied|length }}</td>
-                                    <td>{{ team.matchesLost|length }}</td>
+                                    <td>{{ team.matchesWonCount }}</td>
+                                    <td>{{ team.matchesTiedCount }}</td>
+                                    <td>{{ team.matchesLostCount }}</td>
                                     <td>{{ team.goalsScored }}</td>
                                     <td>{{ team.goalsConceded }}</td>
                                     <td>{{ team.goalsDiff }}</td>

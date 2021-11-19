@@ -21,8 +21,21 @@ class StatisticsController extends AbstractController
         LeagueRepository $leagueRepository,
         League $league
     ): Response {
-        $bestScorers = $goalRepository->getBestScorersForLeagueEntity($league);
-        $bestAssistants = $goalRepository->getBestAssistantsForLeagueEntity($league);
+        $bestScorers = [];
+        $bestAssistants = [];
+        $teams = $league->getSeasons()->first()->getTeams();
+        if ($league->getName() === 'Grupa Mistrzowska' || $league->getName() === 'Grupa Spadkowa') {
+            $bestScorers = $goalRepository->getBestScorersForTeams($teams->toArray());
+            $bestAssistants = $goalRepository->getBestAssistantsForTeams($teams->toArray());
+        } else if ($league->isFinished()) {
+            $statistics = json_decode($league->getMainRoundStatistics(), true);
+            $bestScorers = $statistics['best_scorers'];
+            $bestAssistants = $statistics['best_assistants'];
+        } else {
+            $bestScorers = $goalRepository->getBestScorersForLeagueEntity($league);
+            $bestAssistants = $goalRepository->getBestAssistantsForLeagueEntity($league);
+        }
+
 
         return $this->render(
             'statistics/dashboard.html.twig',

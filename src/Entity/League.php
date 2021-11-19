@@ -28,6 +28,31 @@ class League
      */
     private $seasons;
 
+//    /**
+//     * @ORM\Column(type="boolean")
+//     */
+//    private $isPlayOff = false;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $mainRoundStandings;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFinished = false;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $mainRoundStatistics;
+
+//    /**
+//     * @ORM\OneToOne(targetEntity="App\Entity\League", cascade={"persist", "remove"})
+//     */
+//    private $playOffLeague;
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();
@@ -90,5 +115,39 @@ class League
         }
 
         return false;
+    }
+
+    public function getMainRoundStandings(): ?string
+    {
+        return $this->mainRoundStandings;
+    }
+
+    public function setMainRoundStandings(?string $mainRoundStandings): self
+    {
+        $this->mainRoundStandings = $mainRoundStandings;
+
+        return $this;
+    }
+
+    public function isFinished(): bool
+    {
+        return $this->isFinished;
+    }
+
+    public function setIsFinished(bool $isFinished): void
+    {
+        $this->isFinished = $isFinished;
+    }
+
+    public function getMainRoundStatistics(): ?string
+    {
+        return $this->mainRoundStatistics;
+    }
+
+    public function setMainRoundStatistics(?string $mainRoundStatistics): self
+    {
+        $this->mainRoundStatistics = $mainRoundStatistics;
+
+        return $this;
     }
 }

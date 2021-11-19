@@ -47,8 +47,20 @@ $(document).ready(function () {
         });
     };
 
+    LeaguePro.League.handlePlayoffSelect = function () {
+        $('#league_isPlayOff').change(function() {
+            if (this.checked) {
+                $('.playoff-league-select').removeClass('hide')
+            }
+            if (!this.checked) {
+                $('.playoff-league-select').addClass('hide')
+            }
+        });
+    }
+
     LeaguePro.League.init = function () {
         LeaguePro.League.handleTeamsMultiselect();
+        LeaguePro.League.handlePlayoffSelect();
     };
 
     LeaguePro.League.init();

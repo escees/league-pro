@@ -6,6 +6,26 @@
         {{ form_errors(form.name) }}
     </div>
 </div>
+{#<div class="row">#}
+{#    <div class="form-group col-sm-6">#}
+{#        <div class="form-inline">#}
+{#            <div class="pr-3">#}
+{#                {{ form_label(form.isPlayOff) }}#}
+{#            </div>#}
+{#            <div>#}
+{#                {{ form_widget(form.isPlayOff) }}#}
+{#            </div>#}
+{#        </div>#}
+{#        {{ form_errors(form.isPlayOff) }}#}
+{#    </div>#}
+{#</div>#}
+{#<div class="row playoff-league-select hide">#}
+{#    <div class="form-group col-sm-6">#}
+{#        {{ form_label(form.playOffLeague) }}#}
+{#        {{ form_widget(form.playOffLeague) }}#}
+{#        {{ form_errors(form.playOffLeague) }}#}
+{#    </div>#}
+{#</div>#}
 <a class="btn btn-sm btn-outline-secondary" href="{{ path('app.admin.league.dashboard') }}">
     <i class="material-icons">save</i> Wróć
 </a>
