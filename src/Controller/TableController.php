@@ -24,24 +24,10 @@ class TableController extends AbstractController
         SerializerInterface $serializer
     )
     {
-        if (!$league->isFinished()) {
-            if($league->getName() === 'Grupa Mistrzowska') {
-                $standings = $teamRepository->getTeamStandingsForLeagueAndDate($league, new \DateTime('2021-10-25 18:00:00'));
-            }
-
-            if($league->getName() === 'Grupa Spadkowa') {
-                $standings = $teamRepository->getTeamStandingsForLeagueAndDate($league, new \DateTime('2021-10-25 18:00:00'));
-            }
-        }
-
-        if ($league->isFinished()) {
-            $standings = json_decode($league->getMainRoundStandings(), true);
-        }
-
         return $this->render(
             'table-point.html.twig',
             [
-                'teams' => $standings, //@todo serwis ktory ma dwie strategie dla dwóch druzyn i wiecej ilosci druzyn, punkty mnozone razy 1000 i przy sprawdzeniu wyniku dodanie jakichś małych punktów które zmienią kolejność na poprawną wg meczy bezposrednich
+                'teams' => $teamRepository->getTeamStandingsForLeague($league), //@todo serwis ktory ma dwie strategie dla dwóch druzyn i wiecej ilosci druzyn, punkty mnozone razy 1000 i przy sprawdzeniu wyniku dodanie jakichś małych punktów które zmienią kolejność na poprawną wg meczy bezposrednich
                 'leagues' => $leagueRepository->findAll()
             ]
         );

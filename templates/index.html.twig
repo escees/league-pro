@@ -24,187 +24,187 @@
                 <div class="row">
                     <div class="col-xl-9 col-md-12">
                         <ul class="nav nav-tabs" id="myTab">
-                           <li><a href="#masters" data-toggle="tab" class="active">Grupa Mistrzowska</a></li>
-                           <li><a href="#losers" data-toggle="tab">Grupa Spadkowa</a></li>
-                           <li><a href="#extraclass" data-toggle="tab">Grupa A</a></li>
-                           <li><a href="#first-league" data-toggle="tab">Grupa B</a></li>
+{#                           <li><a href="#masters" data-toggle="tab" class="active">Grupa Mistrzowska</a></li>#}
+{#                           <li><a href="#losers" data-toggle="tab">Grupa Spadkowa</a></li>#}
+                           <li><a href="#extraclass" data-toggle="tab">Ekstraklasa</a></li>
+                           <li><a href="#first-league" data-toggle="tab">I Liga</a></li>
 {#                           <li><a href="#description" data-toggle="tab">DESCRIPTION</a></li>#}
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane active" id="masters">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="club-ranking">
-                                            <h5><a href="#">Skrócona tabela</a></h5>
-                                            <div class="info-ranking">
-                                                <ul>
-                                                    {% for team in masters %}
-                                                        {% set team = team.team %}
-                                                        <li>
-                                                            <span class="position">
-                                                                {{ loop.index }}
-                                                            </span>
-                                                            <a href="{{ path('app.team.view', {'team': team.id}) }}">
-                                                                <img src="{{ team.crest is defined and team.crest.name ? asset('images/team/crest/' ~ team.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                                                {{ team.name }}
-                                                            </a>
-                                                            <span class="points">
-                                                                {{ team.points }} pkt
-                                                            </span>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="recent-results">
-                                            <h5><a href="#">Ostatnie wyniki</a></h5>
-                                            <div class="info-results">
-                                                <ul>
-                                                    {% for result in resultsMasters %}
-                                                        <li>
-                                                            <span class="head d-flex flex-column align-items-center">
-                                                                <small>{{ result.homeTeam.name }} vs. {{ result.awayTeam.name }}  </small>
-                                                                <small><span class="teal-color">{{ result.startDate|date('d/m/Y H:i') }}</span></small>
+{#                            <div class="tab-pane active" id="masters">#}
+{#                                <div class="row">#}
+{#                                    <div class="col-lg-4">#}
+{#                                        <div class="club-ranking">#}
+{#                                            <h5><a href="#">Skrócona tabela</a></h5>#}
+{#                                            <div class="info-ranking">#}
+{#                                                <ul>#}
+{#                                                    {% for team in masters %}#}
+{#                                                        {% set team = team.team %}#}
+{#                                                        <li>#}
+{#                                                            <span class="position">#}
+{#                                                                {{ loop.index }}#}
+{#                                                            </span>#}
+{#                                                            <a href="{{ path('app.team.view', {'team': team.id}) }}">#}
+{#                                                                <img src="{{ team.crest is defined and team.crest.name ? asset('images/team/crest/' ~ team.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">#}
+{#                                                                {{ team.name }}#}
+{#                                                            </a>#}
+{#                                                            <span class="points">#}
+{#                                                                {{ team.points }} pkt#}
+{#                                                            </span>#}
+{#                                                        </li>#}
+{#                                                    {% endfor %}#}
+{#                                                </ul>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-4">#}
+{#                                        <div class="recent-results">#}
+{#                                            <h5><a href="#">Ostatnie wyniki</a></h5>#}
+{#                                            <div class="info-results">#}
+{#                                                <ul>#}
+{#                                                    {% for result in resultsMasters %}#}
+{#                                                        <li>#}
+{#                                                            <span class="head d-flex flex-column align-items-center">#}
+{#                                                                <small>{{ result.homeTeam.name }} vs. {{ result.awayTeam.name }}  </small>#}
+{#                                                                <small><span class="teal-color">{{ result.startDate|date('d/m/Y H:i') }}</span></small>#}
 
-                                                            </span>
-                                                            <div class="goals-result">
-                                                                <a href="{{ path('app.team.view', {'team': result.homeTeam.id}) }}">
-                                                                    <div class="truncate">
-                                                                        <img src="{{ result.homeTeam.crest is defined and result.homeTeam.crest.name ? asset('images/team/crest/' ~ result.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                                                        {{ result.homeTeam.name }}
-                                                                    </div>
-                                                                </a>
-                                                                <span class="goals">
-                                                                    <a href="{{ path('app.single_result', {'match': result.id}) }}">
-                                                                        <b>{{ result.matchDetails.homeTeamGoals }}</b> - <b>{{ result.matchDetails.awayTeamGoals }}</b>
-                                                                    </a>
-                                                                </span>
-                                                                <a href="{{ path('app.team.view', {'team': result.awayTeam.id}) }}">
-                                                                    <div class="truncate">
-                                                                        <img src="{{ result.awayTeam.crest is defined and result.awayTeam.crest.name ? asset('images/team/crest/' ~ result.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                                                        {{ result.awayTeam.name }}
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="player-ranking">
-                                            <h5><a href="#">Najlepsi strzelcy</a></h5>
-                                            <div class="info-player">
-                                                <ul>
-                                                    {% for scorer in bestScorersMasters|slice(0,8) %}
-                                                        <li>
-                                                            <span class="position">
-                                                              {{ loop.index }}
-                                                            </span>
-                                                            <a href="#">
-                                                                {{ scorer.name }}
-                                                            </a>
-                                                            <span class="points">
-                                                                {{ scorer.goals }}
-                                                            </span>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="losers">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="club-ranking">
-                                            <h5><a href="#">Skrócona tabela</a></h5>
-                                            <div class="info-ranking">
-                                                <ul>
-                                                    {% for team in losers %}
-                                                        {% set team = team.team %}
-                                                        <li>
-                                                            <span class="position">
-                                                                {{ loop.index }}
-                                                            </span>
-                                                            <a href="{{ path('app.team.view', {'team': team.id}) }}">
-                                                                <img src="{{ team.crest is defined and team.crest.name ? asset('images/team/crest/' ~ team.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                                                {{ team.name }}
-                                                            </a>
-                                                            <span class="points">
-                                                                {{ team.points }} pkt
-                                                            </span>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="recent-results">
-                                            <h5><a href="#">Ostatnie wyniki</a></h5>
-                                            <div class="info-results">
-                                                <ul>
-                                                    {% for result in resultsLosers %}
-                                                        <li>
-                                                            <span class="head d-flex flex-column align-items-center">
-                                                                <small>{{ result.homeTeam.name }} vs. {{ result.awayTeam.name }}  </small>
-                                                                <small><span class="teal-color">{{ result.startDate|date('d/m/Y H:i') }}</span></small>
+{#                                                            </span>#}
+{#                                                            <div class="goals-result">#}
+{#                                                                <a href="{{ path('app.team.view', {'team': result.homeTeam.id}) }}">#}
+{#                                                                    <div class="truncate">#}
+{#                                                                        <img src="{{ result.homeTeam.crest is defined and result.homeTeam.crest.name ? asset('images/team/crest/' ~ result.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">#}
+{#                                                                        {{ result.homeTeam.name }}#}
+{#                                                                    </div>#}
+{#                                                                </a>#}
+{#                                                                <span class="goals">#}
+{#                                                                    <a href="{{ path('app.single_result', {'match': result.id}) }}">#}
+{#                                                                        <b>{{ result.matchDetails.homeTeamGoals }}</b> - <b>{{ result.matchDetails.awayTeamGoals }}</b>#}
+{#                                                                    </a>#}
+{#                                                                </span>#}
+{#                                                                <a href="{{ path('app.team.view', {'team': result.awayTeam.id}) }}">#}
+{#                                                                    <div class="truncate">#}
+{#                                                                        <img src="{{ result.awayTeam.crest is defined and result.awayTeam.crest.name ? asset('images/team/crest/' ~ result.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">#}
+{#                                                                        {{ result.awayTeam.name }}#}
+{#                                                                    </div>#}
+{#                                                                </a>#}
+{#                                                            </div>#}
+{#                                                        </li>#}
+{#                                                    {% endfor %}#}
+{#                                                </ul>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-4">#}
+{#                                        <div class="player-ranking">#}
+{#                                            <h5><a href="#">Najlepsi strzelcy</a></h5>#}
+{#                                            <div class="info-player">#}
+{#                                                <ul>#}
+{#                                                    {% for scorer in bestScorersMasters|slice(0,8) %}#}
+{#                                                        <li>#}
+{#                                                            <span class="position">#}
+{#                                                              {{ loop.index }}#}
+{#                                                            </span>#}
+{#                                                            <a href="#">#}
+{#                                                                {{ scorer.name }}#}
+{#                                                            </a>#}
+{#                                                            <span class="points">#}
+{#                                                                {{ scorer.goals }}#}
+{#                                                            </span>#}
+{#                                                        </li>#}
+{#                                                    {% endfor %}#}
+{#                                                </ul>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="tab-pane" id="losers">#}
+{#                                <div class="row">#}
+{#                                    <div class="col-lg-4">#}
+{#                                        <div class="club-ranking">#}
+{#                                            <h5><a href="#">Skrócona tabela</a></h5>#}
+{#                                            <div class="info-ranking">#}
+{#                                                <ul>#}
+{#                                                    {% for team in losers %}#}
+{#                                                        {% set team = team.team %}#}
+{#                                                        <li>#}
+{#                                                            <span class="position">#}
+{#                                                                {{ loop.index }}#}
+{#                                                            </span>#}
+{#                                                            <a href="{{ path('app.team.view', {'team': team.id}) }}">#}
+{#                                                                <img src="{{ team.crest is defined and team.crest.name ? asset('images/team/crest/' ~ team.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">#}
+{#                                                                {{ team.name }}#}
+{#                                                            </a>#}
+{#                                                            <span class="points">#}
+{#                                                                {{ team.points }} pkt#}
+{#                                                            </span>#}
+{#                                                        </li>#}
+{#                                                    {% endfor %}#}
+{#                                                </ul>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-4">#}
+{#                                        <div class="recent-results">#}
+{#                                            <h5><a href="#">Ostatnie wyniki</a></h5>#}
+{#                                            <div class="info-results">#}
+{#                                                <ul>#}
+{#                                                    {% for result in resultsLosers %}#}
+{#                                                        <li>#}
+{#                                                            <span class="head d-flex flex-column align-items-center">#}
+{#                                                                <small>{{ result.homeTeam.name }} vs. {{ result.awayTeam.name }}  </small>#}
+{#                                                                <small><span class="teal-color">{{ result.startDate|date('d/m/Y H:i') }}</span></small>#}
 
-                                                            </span>
-                                                            <div class="goals-result">
-                                                                <a href="{{ path('app.team.view', {'team': result.homeTeam.id}) }}">
-                                                                    <div class="truncate">
-                                                                        <img src="{{ result.homeTeam.crest is defined and result.homeTeam.crest.name ? asset('images/team/crest/' ~ result.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                                                        {{ result.homeTeam.name }}
-                                                                    </div>
-                                                                </a>
-                                                                <span class="goals">
-                                                                    <a href="{{ path('app.single_result', {'match': result.id}) }}">
-                                                                        <b>{{ result.matchDetails.homeTeamGoals }}</b> - <b>{{ result.matchDetails.awayTeamGoals }}</b>
-                                                                    </a>
-                                                                </span>
-                                                                <a href="{{ path('app.team.view', {'team': result.awayTeam.id}) }}">
-                                                                    <div class="truncate">
-                                                                        <img src="{{ result.awayTeam.crest is defined and result.awayTeam.crest.name ? asset('images/team/crest/' ~ result.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">
-                                                                        {{ result.awayTeam.name }}
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="player-ranking">
-                                            <h5><a href="#">Najlepsi strzelcy</a></h5>
-                                            <div class="info-player">
-                                                <ul>
-                                                    {% for scorer in bestScorersLosers|slice(0,8) %}
-                                                        <li>
-                                                            <span class="position">
-                                                              {{ loop.index }}
-                                                            </span>
-                                                            <a href="#">
-                                                                {{ scorer.name }}
-                                                            </a>
-                                                            <span class="points">
-                                                                {{ scorer.goals }}
-                                                            </span>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+{#                                                            </span>#}
+{#                                                            <div class="goals-result">#}
+{#                                                                <a href="{{ path('app.team.view', {'team': result.homeTeam.id}) }}">#}
+{#                                                                    <div class="truncate">#}
+{#                                                                        <img src="{{ result.homeTeam.crest is defined and result.homeTeam.crest.name ? asset('images/team/crest/' ~ result.homeTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">#}
+{#                                                                        {{ result.homeTeam.name }}#}
+{#                                                                    </div>#}
+{#                                                                </a>#}
+{#                                                                <span class="goals">#}
+{#                                                                    <a href="{{ path('app.single_result', {'match': result.id}) }}">#}
+{#                                                                        <b>{{ result.matchDetails.homeTeamGoals }}</b> - <b>{{ result.matchDetails.awayTeamGoals }}</b>#}
+{#                                                                    </a>#}
+{#                                                                </span>#}
+{#                                                                <a href="{{ path('app.team.view', {'team': result.awayTeam.id}) }}">#}
+{#                                                                    <div class="truncate">#}
+{#                                                                        <img src="{{ result.awayTeam.crest is defined and result.awayTeam.crest.name ? asset('images/team/crest/' ~ result.awayTeam.crest.name) : asset('build/img/clubs-logos/pol.png') }}" alt="">#}
+{#                                                                        {{ result.awayTeam.name }}#}
+{#                                                                    </div>#}
+{#                                                                </a>#}
+{#                                                            </div>#}
+{#                                                        </li>#}
+{#                                                    {% endfor %}#}
+{#                                                </ul>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-4">#}
+{#                                        <div class="player-ranking">#}
+{#                                            <h5><a href="#">Najlepsi strzelcy</a></h5>#}
+{#                                            <div class="info-player">#}
+{#                                                <ul>#}
+{#                                                    {% for scorer in bestScorersLosers|slice(0,8) %}#}
+{#                                                        <li>#}
+{#                                                            <span class="position">#}
+{#                                                              {{ loop.index }}#}
+{#                                                            </span>#}
+{#                                                            <a href="#">#}
+{#                                                                {{ scorer.name }}#}
+{#                                                            </a>#}
+{#                                                            <span class="points">#}
+{#                                                                {{ scorer.goals }}#}
+{#                                                            </span>#}
+{#                                                        </li>#}
+{#                                                    {% endfor %}#}
+{#                                                </ul>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
                             <div class="tab-pane" id="extraclass">
                                 <div class="row">
                                    <div class="col-lg-4">
@@ -482,7 +482,6 @@
                     </div>
                 </aside>
             </div>
-            {% include 'sponsors.html.twig' %}
         </div>
     </section>
 {% endblock %}
