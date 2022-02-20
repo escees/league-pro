@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <section class="content-info mb-5">
+        <div class="container paddings-mini">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="clear-title">Partnerzy</h3>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="row">
+                    <div class="panel-box mr-4">
+                        <div class="info-panel">
+                            <a href="http://www.sportowy24h.pl" target="_blank"><img src="{{ asset('build/img/sponsors/sponsor_footbalfactory.png') }}" style="height: 200px"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="row">
+                    <div class="panel-box mr-4">
+                        <div class="info-panel">
+                            <a href="https://polpapier.pl" target="_blank"><img class="partners-img" src="{{ asset('build/img/sponsors/polpapier.png') }}" style="height: 200px"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

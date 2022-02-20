@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <section class="content-info mb-5">
+        <div class="container paddings-mini">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% for i in 1..21 %}
+                        <img src="{{ asset('build/img/regulamin_czl6/regulamin_'~i~'_res.jpeg') }}" alt="reg-{{ i }}">
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
