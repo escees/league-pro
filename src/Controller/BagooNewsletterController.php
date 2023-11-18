@@ -32,12 +32,12 @@ class BagooNewsletterController extends AbstractController
         $decodedParams = json_decode($request->getContent());
         $createContact = new CreateContact();
 
-        $createContact['email'] = $decodedParams['email'];
-        $createContact['attributes'] = ['FNAME'=> $decodedParams['firstName'], 'LNAME'=>$decodedParams['lastname']];
-        $createContact['listIds'] = [4];
-        $createContact['emailBlacklisted'] = false;
-        $createContact['smsBlacklisted'] = false;
-        $createContact['updateEnabled'] = false;
+        $createContact->setEmail($decodedParams['email']);
+        $createContact->setAttributes($this->toObject(['FNAME' => $decodedParams['firstName'] ?? null, 'LNAME' => $decodedParams['lastname'] ?? null]));
+        $createContact->setListIds([4]);
+        $createContact->setEmailBlacklisted(false);
+        $createContact->setSmsBlacklisted(false);
+        $createContact->setUpdateEnabled(false);
 
         try {
             $result = $apiInstance->createContact($createContact);
@@ -47,5 +47,17 @@ class BagooNewsletterController extends AbstractController
         }
 
         return $this->json(['success' => true]);
+    }
+
+    private function toObject(array $array)
+    {
+        $object = new \stdClass();
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $value = $this->toObject($value);
+            }
+            $object->$key = $value;
+        }
+        return $object;
     }
 }
