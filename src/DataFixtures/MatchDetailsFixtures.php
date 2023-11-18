@@ -7,7 +7,7 @@ namespace App\DataFixtures;
 use App\Entity\MatchDetails;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class MatchDetailsFixtures extends Fixture implements DependentFixtureInterface
 {

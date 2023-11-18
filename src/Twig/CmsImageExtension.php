@@ -5,6 +5,7 @@ namespace App\Twig;
 use App\Entity\Media;
 use App\Repository\MediaRepository;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 use Vich\UploaderBundle\Entity\File;
 
 class CmsImageExtension extends AbstractExtension
@@ -26,7 +27,7 @@ class CmsImageExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new \Twig_Function('cms_image_path', [$this, 'getImagePath']),
+            new TwigFunction('cms_image_path', [$this, 'getImagePath']),
         ];
     }
 

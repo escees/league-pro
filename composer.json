@@ -2,49 +2,63 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.2",
+        "php": "^8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "doctrine/doctrine-bundle": "^2.11",
+        "doctrine/doctrine-migrations-bundle": "^3.3",
+        "doctrine/orm": "^2.17",
         "easycorp/easyadmin-bundle": "^2.2",
+        "getbrevo/brevo-php": "1.x.x",
         "league/csv": "^9.6",
+        "phpdocumentor/reflection-docblock": "^5.3",
+        "phpstan/phpdoc-parser": "^1.24",
         "sensio/framework-extra-bundle": "^5.1",
-        "symfony/asset": "4.3.*",
-        "symfony/console": "4.3.*",
-        "symfony/dotenv": "4.3.*",
-        "symfony/expression-language": "4.3.*",
+        "symfony/asset": "^4.3|5.4.*",
+        "symfony/console": "^4.3|5.4.*",
+        "symfony/dotenv": "^4.3|5.4.*",
+        "symfony/expression-language": "^4.3|5.4.*",
         "symfony/flex": "^1.12",
-        "symfony/form": "4.3.*",
-        "symfony/framework-bundle": "4.3.*",
-        "symfony/http-client": "4.3.*",
-        "symfony/intl": "4.3.*",
+        "symfony/form": "^4.3|5.4.*",
+        "symfony/framework-bundle": "^4.3|5.4.*",
+        "symfony/http-client": "^4.3|5.4.*",
+        "symfony/intl": "^4.3|5.4.*",
         "symfony/monolog-bundle": "^3.1",
-        "symfony/orm-pack": "*",
-        "symfony/process": "4.3.*",
-        "symfony/security-bundle": "4.3.*",
-        "symfony/serializer-pack": "*",
+        "symfony/process": "^4.3|5.4.*",
+        "symfony/property-access": "5.4.*",
+        "symfony/property-info": "5.4.*",
+        "symfony/security-bundle": "^4.3|5.4.*",
+        "symfony/serializer": "5.4.*",
         "symfony/swiftmailer-bundle": "^3.1",
-        "symfony/translation": "4.3.*",
-        "symfony/twig-bundle": "4.3.*",
-        "symfony/validator": "4.3.*",
-        "symfony/web-link": "4.3.*",
+        "symfony/translation": "^4.3|5.4.*",
+        "symfony/twig-bundle": "^4.3|5.4.*",
+        "symfony/validator": "^4.3|5.4.*",
+        "symfony/web-link": "^4.3|5.4.*",
         "symfony/webpack-encore-bundle": "^1.6",
-        "symfony/yaml": "4.3.*",
+        "symfony/yaml": "^4.3|5.4.*",
         "vich/uploader-bundle": "^1.10"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.2",
-        "symfony/debug-pack": "*",
+        "phpunit/phpunit": "^9.5",
+        "symfony/browser-kit": "5.4.*",
+        "symfony/css-selector": "5.4.*",
+        "symfony/debug-bundle": "5.4.*",
         "symfony/maker-bundle": "^1.0",
-        "symfony/profiler-pack": "*",
-        "symfony/test-pack": "*",
-        "symfony/var-dumper": "4.3.*",
-        "symfony/web-server-bundle": "4.3.*"
+        "symfony/phpunit-bridge": "^6.3",
+        "symfony/stopwatch": "5.4.*",
+        "symfony/var-dumper": "^4.3|5.4.*",
+        "symfony/web-profiler-bundle": "5.4.*",
+        "symfony/web-server-bundle": "^4.3|5.4.*"
     },
     "config": {
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true
+        }
     },
     "autoload": {
         "psr-4": {
@@ -82,7 +96,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.3.*"
+            "require": "5.4.*"
         }
     }
 }
