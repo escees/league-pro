@@ -6,7 +6,7 @@ use App\Entity\FootballMatch;
 use App\Entity\MatchDetails;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class MatchFixtures extends Fixture implements DependentFixtureInterface
 {

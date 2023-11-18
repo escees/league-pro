@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:8.1.16-fpm
 WORKDIR "/var/www/html"
 # Fix debconf warnings upon build
 ARG DEBIAN_FRONTEND=noninteractive
@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         gnupg \
         libssh2-1 \
         libssh2-1-dev \
-	libzip-dev 
+	libzip-dev
 RUN apt-get update && apt-get install -y --no-install-recommends \
         sudo \
         unzip \
@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libjpeg62-turbo-dev \
         libpng-dev \
         libicu-dev \
+        libonig-dev \
         g++ \
         libgd-dev \
         cron \
@@ -33,14 +34,14 @@ RUN docker-php-ext-install -j$(nproc) zip \
         mbstring \
         xml \
         intl \
-        gd 
+        gd
 # Install composer
 #RUN wget https://getcomposer.org/installer -O - -q | php -- --install-dir=/usr/local/bin --filename=composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 # Install nodejs, npm & yarn
-RUN curl -sL https://deb.nodesource.com/setup_11.x  | bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get -y install nodejs
-RUN npm install
+RUN #npm install
 RUN npm install -g gulp
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
